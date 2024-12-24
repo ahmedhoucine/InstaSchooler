@@ -32,5 +32,5 @@ export class UpdateProfileDto {
 
   @IsOptional()
   @IsString()
-  readonly profilePicture?: string;  // The profile picture URL or base64 encoded string
+   profilePicture?: string;  // The profile picture URL or base64 encoded string
 }

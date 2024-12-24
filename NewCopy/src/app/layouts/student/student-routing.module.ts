@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentComponent } from './student.component'; // Main layout component
-import { EditProfileComponent } from 'src/app/modules/edit-profile/edit-profil.component';
 
 const routes: Routes = [
   {
@@ -13,7 +12,7 @@ const routes: Routes = [
       { path: 'calendar', loadChildren: () => import('../../modules/calendar/calendar.module').then(m => m.CalendarModule) },
       { path: 'notifications', loadChildren: () => import('../../modules/notifications/notifications.module').then(m => m.NotificationsModule) },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // Default route
-      { path: 'edit-profile', component: EditProfileComponent } // Edit Profile
+      { path: 'edit-profile', loadChildren: () => import('../../modules/edit-profile/edit-profil.module').then(m => m.EditProfileModule) }
 
     ],
   },

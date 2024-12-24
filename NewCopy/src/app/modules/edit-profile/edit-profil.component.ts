@@ -14,13 +14,10 @@ export class EditProfileComponent implements OnInit {
     currentPassword: '',
     password: '',
     confirmPassword: '',
-    picture: ''
+    profilePicture: ''
   };
 
   defaultPicture = 'https://i.pinimg.com/736x/a4/8a/ca/a48aca275e3dbe9a00d8f90e095f25ae.jpg';
-  passwordsMatch = true; 
-  currentPasswordValid = false; 
-  saveButtonEnabled = false; 
   loading = false;
 
   constructor(private profileService: ProfileService) {}
@@ -36,7 +33,6 @@ export class EditProfileComponent implements OnInit {
       (data) => {
         this.profile = { ...data };
         this.loading = false;
-        this.checkPasswordMatch();
       },
       (error) => {
         console.error('Error fetching profile:', error);
@@ -45,76 +41,39 @@ export class EditProfileComponent implements OnInit {
     );
   }
 
-  validateCurrentPassword(): void {
-    if (!this.profile.currentPassword.trim()) {
-      this.currentPasswordValid = false;
-      this.updateSaveButtonState(this.profile); // Pass profile here
-      return;
-    }
-
-    this.profileService.validateCurrentPassword(this.profile.currentPassword).subscribe(
-      (isValid) => {
-        this.currentPasswordValid = isValid;
-        this.updateSaveButtonState(this.profile); // Pass profile here
-      },
-      (error) => {
-        console.error('Error validating current password:', error);
-        this.currentPasswordValid = false;
-        this.updateSaveButtonState(this.profile); // Pass profile here
-      }
-    );
-  }
-
-  checkPasswordMatch(): void {
-    this.passwordsMatch = this.profile.password === this.profile.confirmPassword;
-    this.updateSaveButtonState(this.profile); // Pass profile here
-  }
-
-  updateSaveButtonState(profile: any): void {
-    const picture = profile.picture;
-    this.saveButtonEnabled = picture && picture.trim().length > 0;
-  }
-
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
+      const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (!validImageTypes.includes(file.type)) {
+        alert('Invalid file type. Please select a JPEG, PNG, or GIF image.');
+        return;
+      }
+
       const reader = new FileReader();
-
       reader.onload = () => {
-        this.profile = this.profile || {
-          userId: '',
-          username: '',
-          email: '',
-          currentPassword: '',
-          password: '',
-          confirmPassword: '',
-          picture: ''
-        };
-
-        this.profile.picture = reader.result as string;
-
-        console.log('Selected file as base64:', this.profile.picture);
-
-        this.updateSaveButtonState(this.profile); // Pass profile here
+        this.profile.profilePicture = reader.result as string;
+        console.log('New profile picture:', this.profile.profilePicture);
       };
-
       reader.readAsDataURL(file);
     }
   }
 
   onSubmit(): void {
-    if (!this.saveButtonEnabled) {
-      alert('Please fix the errors before saving.');
-      return;
-    }
-
+    // Envoi des données au backend
     this.profileService.updateProfile(this.profile).subscribe(
-      () => {
+      (response) => {
         alert('Profile updated successfully!');
       },
       (error) => {
         console.error('Error updating profile:', error);
-        alert('Failed to update profile. Please try again.');
+
+        // Gestion des erreurs renvoyées par le backend
+        if (error.error?.message) {
+          alert(`Error: ${error.error.message}`);
+        } else {
+          alert('Failed to update profile. Please try again.');
+        }
       }
     );
   }

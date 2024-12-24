@@ -2,7 +2,7 @@
   width: 20cm; /* Ensure the container is responsive */
   padding: 20px;
   font-family: 'Roboto', sans-serif;
-  background-color: white;
+  background: white; /* Modern gradient */
   
   
   margin-top: 120px;

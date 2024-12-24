@@ -1,9 +1,9 @@
 <div class="edit-profile-container">
-  <form (ngSubmit)="onSubmit()" #profileForm="ngForm" class="form-container">
+  <form (ngSubmit)="onSubmit()" class="form-container">
     <mat-card class="profile-card">
       <div class="profile-picture-container">
-        <img [src]="profile.picture || defaultPicture" alt="Profile Picture" class="profile-img" />
-        <input type="file" class="file-input" (change)="onFileSelected($event)" />
+        <img [src]="profile.profilePicture || defaultPicture" alt="Profile Picture" class="profile-img" />
+        <input type="file" class="file-input" (change)="onFileSelected($event)" accept="image/*" />
       </div>
 
       <mat-form-field class="form-field" appearance="fill">
@@ -13,24 +13,17 @@
           type="text" 
           [(ngModel)]="profile.username" 
           name="username" 
-          required 
         />
-        <mat-error *ngIf="profileForm.controls['username']?.invalid && profileForm.controls['username']?.touched">
-          Username is required.
-        </mat-error>
       </mat-form-field>
-      <mat-form-field class="form-field" >
+
+      <mat-form-field class="form-field">
         <mat-label>Current Password</mat-label>
         <input
           matInput
           type="password"
           [(ngModel)]="profile.currentPassword"
           name="currentPassword"
-          #currentPassword="ngModel"
-          
-          required
         />
-        <mat-error *ngIf="!currentPasswordValid && currentPassword.touched">Current password is incorrect</mat-error>
       </mat-form-field>
 
       <mat-form-field class="form-field" appearance="fill">
@@ -40,7 +33,6 @@
           type="password" 
           [(ngModel)]="profile.password" 
           name="password" 
-          (ngModelChange)="checkPasswordMatch()"
         />
       </mat-form-field>
 
@@ -51,19 +43,14 @@
           type="password" 
           [(ngModel)]="profile.confirmPassword" 
           name="confirmPassword" 
-          (ngModelChange)="checkPasswordMatch()"
         />
-        <mat-error *ngIf="!passwordsMatch">
-          Passwords do not match.
-        </mat-error>
       </mat-form-field>
 
       <div class="buttons-container">
         <button 
           mat-raised-button 
           color="primary" 
-          type="submit" 
-          [disabled]="!saveButtonEnabled || !profileForm.valid">
+          type="submit">
           Save
         </button>
         <button 

@@ -4,9 +4,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';  // Import JwtModule
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core.module';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditProfileModule } from './modules/edit-profile/edit-profil.module';
+import { CoreModule } from './core/core.module';
+
 
 // Function to get the token from localStorage
 export function jwtTokenGetter() {

@@ -23,7 +23,7 @@
   }
   
   .course-header {
-    background-color: rgb(3, 19, 73); /* Accent color */
+    background: linear-gradient(135deg, #020e2f, #445573);
     color: #ffffff;
     padding: 10px;
     text-align: center;

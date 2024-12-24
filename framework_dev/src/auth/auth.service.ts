@@ -83,6 +83,7 @@ export class AuthService {
   
     if (updateProfileDto.password) {
       user.password = updateProfileDto.password; // Ensure this is the hashed password
+      console.log(updateProfileDto.profilePicture);
     }
   
     if (updateProfileDto.profilePicture) {

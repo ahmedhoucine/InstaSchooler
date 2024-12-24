@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+     import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/core/guards/auth.guard'; // Adjust the import path according to your project structure
 

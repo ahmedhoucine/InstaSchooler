@@ -46,8 +46,9 @@
 .logout-btn,
 .edit-profile-btn {
   background-color: transparent;
-  border: 1px solid white;
-  color: rgb(0, 0, 0);
+  border: 1px solid rgb(22, 18, 18);
+  color:Linear-gradient(135deg, #020e2f, #445573);
+
   padding: 8px 12px;
   border-radius: 25px;
   font-size: 14px;

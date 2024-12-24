@@ -9,6 +9,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { CalendarModule } from 'src/app/modules/calendar/calendar.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -23,6 +27,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatListModule, // Material list items
     MatIconModule, // Material icons
     MatButtonModule, // Ma // Import routing for student layout
+    CalendarModule,  MatFormFieldModule,
+    MatInputModule,
+    FormsModule, // 
   ],
   exports: [NavbarComponent, SidebarComponent, MainContentComponent],
 })
