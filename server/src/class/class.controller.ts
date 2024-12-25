@@ -2,11 +2,11 @@ import {Controller, Get, Post, Put, Delete, Param, Body, HttpException, HttpStat
 import { ClassService } from './class.service';
 import { CreateClassDto } from './dto/create-class.dto';
 import { UpdateClassDto } from './dto/update-class.dto';
-  
-  @Controller('admin-dashboard/classes')
+
+  @Controller('school-platform/classes')
   export class ClassController {
     constructor(private readonly classService: ClassService) {}
-  
+
     // Create a new class
     @Post('/add-class')
     async create(@Body() createClassDto: CreateClassDto) {
@@ -16,7 +16,7 @@ import { UpdateClassDto } from './dto/update-class.dto';
         throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
       }
     }
-  
+
     // Get all classes
     @Get('all-classes')
     async findAll() {
@@ -26,7 +26,7 @@ import { UpdateClassDto } from './dto/update-class.dto';
         throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
       }
     }
-  
+
     // Get a specific class by ID
     @Get(':id')
     async findOne(@Param('id') id: string) {
@@ -36,7 +36,7 @@ import { UpdateClassDto } from './dto/update-class.dto';
         throw new HttpException(error.message, HttpStatus.NOT_FOUND);
       }
     }
-  
+
     // Update a specific class by ID
     @Put(':id')
     async update(@Param('id') id: string, @Body() updateClassDto: UpdateClassDto) {
@@ -46,7 +46,7 @@ import { UpdateClassDto } from './dto/update-class.dto';
         throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
       }
     }
-  
+
     // Delete a specific class by ID
     @Delete(':id')
     async delete(@Param('id') id: string) {
@@ -58,4 +58,3 @@ import { UpdateClassDto } from './dto/update-class.dto';
       }
     }
   }
-  

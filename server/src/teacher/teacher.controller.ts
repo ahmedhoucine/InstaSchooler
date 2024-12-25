@@ -3,7 +3,7 @@ import { TeacherService } from './teacher.service';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
 
-@Controller('admin-dashboard/teacher')
+@Controller('school-platform/teacher')
 export class TeacherController {
   constructor(private readonly teacherService: TeacherService) {}
 
