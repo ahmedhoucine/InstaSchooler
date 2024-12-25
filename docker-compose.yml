@@ -13,9 +13,9 @@ services:
   client:
     build:
       context: ./client
+      dockerfile: Dockerfile
     ports:
       - "4200:4200"
     volumes:
-      - ./client/school-platform:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./client/school-platform:/usr/src/app/school-platform
     command: npm start
