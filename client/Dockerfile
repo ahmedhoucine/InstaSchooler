@@ -4,11 +4,11 @@ WORKDIR /usr/src/app/
 
 COPY school-platform/package*.json ./school-platform/
 WORKDIR /usr/src/app/school-platform
-RUN npm install
 
 COPY school-platform ./school-platform/
 
-RUN npm run build --prod
+RUN npm install
+RUN npm install -g @angular/cli
 
 EXPOSE 4200
 
