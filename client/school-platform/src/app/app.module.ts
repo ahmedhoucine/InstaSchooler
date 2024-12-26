@@ -13,6 +13,8 @@ import { AbsenceComponent } from './components/absence/absence.component';
 import { AddStudentComponent } from './pages/addstudent/addstudent.component';
 import { AddTeacherComponent } from './pages/addteacher/addteacher.component';
 import { AddClassComponent } from './pages/addclass/addclass.component';
+import { ListStudentsComponent } from './pages/liststudents/liststudents.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -28,12 +30,14 @@ import { AddClassComponent } from './pages/addclass/addclass.component';
     AddStudentComponent,
     AddTeacherComponent,
     AddClassComponent,
+    ListStudentsComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
