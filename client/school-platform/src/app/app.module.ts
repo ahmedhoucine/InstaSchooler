@@ -12,6 +12,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { AbsenceComponent } from './components/absence/absence.component';
 import { AddStudentComponent } from './pages/addstudent/addstudent.component';
 import { AddTeacherComponent } from './pages/addteacher/addteacher.component';
+import { AddClassComponent } from './pages/addclass/addclass.component';
 
 
 @NgModule({
@@ -26,6 +27,8 @@ import { AddTeacherComponent } from './pages/addteacher/addteacher.component';
     AbsenceComponent,
     AddStudentComponent,
     AddTeacherComponent,
+    AddClassComponent,
+
   ],
   imports: [
     BrowserModule,
