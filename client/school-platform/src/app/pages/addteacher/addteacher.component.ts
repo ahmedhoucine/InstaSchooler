@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Matiere } from '../../components/utils/matiere.enum';  // Assuming Matiere is an Enum
+import { Matiere } from '../../components/utils/matiere.enum';
 
 @Component({
   selector: 'app-add-teacher',
@@ -9,7 +9,7 @@ import { Matiere } from '../../components/utils/matiere.enum';  // Assuming Mati
 })
 export class AddTeacherComponent implements OnInit {
   teacherForm!: FormGroup;
-  matiereOptions = Object.values(Matiere); // This will hold the Matiere enum values
+  matiereOptions = Object.values(Matiere);
 
   constructor(private fb: FormBuilder) {}
 
@@ -36,14 +36,13 @@ export class AddTeacherComponent implements OnInit {
       ],
 
       // Classes (Array of class IDs)
-      classes: ['', [Validators.required]], // You may need a multi-select here
+      classes: ['', [Validators.required]],
     });
   }
 
   onSubmit(): void {
     if (this.teacherForm.valid) {
       console.log(this.teacherForm.value);
-      // Send the form data to your backend API for teacher creation
     } else {
       console.log('Form is invalid');
     }
