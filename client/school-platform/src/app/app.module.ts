@@ -11,6 +11,8 @@ import { FeatureCardsComponent } from './components/feature-card/feature-card.co
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { AbsenceComponent } from './components/absence/absence.component';
 import { AddStudentComponent } from './pages/addstudent/addstudent.component';
+import { AddTeacherComponent } from './pages/addteacher/addteacher.component';
+
 
 @NgModule({
   declarations: [
@@ -23,11 +25,12 @@ import { AddStudentComponent } from './pages/addstudent/addstudent.component';
     FeatureCardsComponent,
     AbsenceComponent,
     AddStudentComponent,
+    AddTeacherComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule, // Add this here
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
