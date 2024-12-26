@@ -12,4 +12,7 @@ export class FeatureCardsComponent {
   navigateToAddStudent(): void {
     this.router.navigate(['/student/add-student']);
   }
+  navigateToAddTeacher(): void {
+    this.router.navigate(['/teacher/add-teacher']);
+  }
 }
