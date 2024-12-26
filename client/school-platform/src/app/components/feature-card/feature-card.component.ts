@@ -15,4 +15,7 @@ export class FeatureCardsComponent {
   navigateToAddTeacher(): void {
     this.router.navigate(['/teacher/add-teacher']);
   }
+  navigateToAddClass(): void {
+    this.router.navigate(['/class/add-class']);
+  }
 }
