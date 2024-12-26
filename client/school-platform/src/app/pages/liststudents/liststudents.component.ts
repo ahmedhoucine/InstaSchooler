@@ -12,14 +12,13 @@ export class ListStudentsComponent implements OnInit {
   constructor(private studentService: StudentService) {}
 
   ngOnInit(): void {
-    this.getStudents(); // Fetch students when the component initializes
+    this.getStudents();
   }
 
-  // Fetch students from the backend
   getStudents(): void {
     this.studentService.getAllStudents().subscribe(
       (data) => {
-        this.students = data; // Assign the response data to the students array
+        this.students = data;
       },
       (error) => {
         console.error('Error fetching students', error);
@@ -27,13 +26,12 @@ export class ListStudentsComponent implements OnInit {
     );
   }
 
-  // Delete student by ID
   deleteStudent(index: number): void {
-    const studentId = this.students[index].id; // Assuming students have an 'id' property
+    const studentId = this.students[index].id;
     this.studentService.deleteStudent(studentId).subscribe(
       () => {
         console.log(`Student at index ${index} deleted`);
-        this.students.splice(index, 1); // Remove the student from the list
+        this.students.splice(index, 1);
       },
       (error) => {
         console.error('Error deleting student', error);
@@ -41,12 +39,10 @@ export class ListStudentsComponent implements OnInit {
     );
   }
 
-  // Optional: Edit student logic
   editStudent(index: number): void {
     console.log(`Editing student at index ${index}`);
   }
 
-  // Navigate to add student page (you can use routing here)
   goToAddStudentPage(): void {
     console.log('Navigating to Add Student page...');
   }
