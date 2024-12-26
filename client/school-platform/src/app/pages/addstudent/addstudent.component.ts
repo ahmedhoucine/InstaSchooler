@@ -19,10 +19,8 @@ export class AddStudentComponent implements OnInit {
       }),
       dateOfBirth: ['', Validators.required],
       gender: ['', Validators.required],
-      bloodGroup: ['', Validators.required],
       nationality: ['', Validators.required],
       category: ['', Validators.required],
-      religion: ['', Validators.required],
       contactDetails: this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         phone: [''],
@@ -46,7 +44,6 @@ export class AddStudentComponent implements OnInit {
         phone: [''],
         mobileNo: [''],
         parentAddress: [''],
-        sameAddress: [false],
       }),
     });
   }

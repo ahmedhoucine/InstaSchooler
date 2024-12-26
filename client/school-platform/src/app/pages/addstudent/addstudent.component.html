@@ -4,22 +4,14 @@
   <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
     <div class="section">
       <h2>Basic Information</h2>
-      <div class="form-group">
+      <div formGroupName="studentName" class="form-group">
         <div>
-          <label for="firstname">First Name *</label>
-          <input id="firstname" formControlName="firstname" />
+          <label for="firstName">First Name *</label>
+          <input id="firstName" formControlName="firstName" />
         </div>
         <div>
           <label for="lastName">Last Name *</label>
           <input id="lastName" formControlName="lastName" />
-        </div>
-        <div>
-          <label for="email">Email *</label>
-          <input type="email" id="email" formControlName="email" />
-        </div>
-        <div>
-          <label for="profilePicture">Profile Picture (Optional)</label>
-          <input type="file" id="profilePicture" />
         </div>
       </div>
     </div>
@@ -39,33 +31,93 @@
         </div>
 
         <div>
-          <label for="address">Address *</label>
-          <input id="address" formControlName="address" />
+          <label for="nationality">Nationality *</label>
+          <input id="nationality" formControlName="nationality" />
         </div>
-
-        <div class="checkbox-group">
-          <label>Has Paid *</label>
-          <label class="radio-label">Yes <input type="radio" name="hasPaid" value="Yes" formControlName="hasPaid" /></label>
-          <label class="radio-label">No <input type="radio" name="hasPaid" value="No" formControlName="hasPaid" /></label>
-        </div>
-
 
         <div>
-          <label for="parentEmail">Parent's Email *</label>
-          <input type="email" id="parentEmail" formControlName="parentEmail" />
-        </div>
-
-        <div class="phone-group">
-          <label for="phoneNumber">Parent's Phone *</label>
-          <div class="phone-field">
-            <img src="../../../assets/images/flag.png" alt="Tunisia Flag" class="flag" />
-            <span>+216</span>
-            <input id="phoneNumber" formControlName="phoneNumber" />
-          </div>
+          <label for="category">Category *</label>
+          <input id="category" formControlName="category" />
         </div>
       </div>
     </div>
 
-    <button type="submit" [disabled]="!studentForm.valid">Create Student</button>
+    <div class="section">
+      <h2>Contact Details</h2>
+      <div formGroupName="contactDetails" class="form-group">
+        <div>
+          <label for="email">Email *</label>
+          <input id="email" formControlName="email" />
+        </div>
+        <div>
+          <label for="phone">Phone</label>
+          <input id="phone" formControlName="phone" />
+        </div>
+        <div>
+          <label for="mobileNo">Mobile No *</label>
+          <input id="mobileNo" formControlName="mobileNo" />
+        </div>
+        <div>
+          <label for="address">Address</label>
+          <input id="address" formControlName="address" />
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Official Details</h2>
+      <div formGroupName="officialDetails" class="form-group">
+        <div>
+          <label for="admissionNo">Admission No *</label>
+          <input id="admissionNo" formControlName="admissionNo" />
+        </div>
+        <div>
+          <label for="joiningDate">Joining Date *</label>
+          <input type="date" id="joiningDate" formControlName="joiningDate" />
+        </div>
+        <div>
+          <label for="rollNo">Roll No *</label>
+          <input id="rollNo" formControlName="rollNo" />
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Parent Details</h2>
+      <div formGroupName="parentDetails" class="form-group">
+        <div formGroupName="parentName">
+          <div>
+            <label for="parentFirstName">Parent First Name *</label>
+            <input id="parentFirstName" formControlName="firstName" />
+          </div>
+          <div>
+            <label for="parentLastName">Parent Last Name *</label>
+            <input id="parentLastName" formControlName="lastName" />
+          </div>
+        </div>
+        <div>
+          <label for="relation">Relation *</label>
+          <input id="relation" formControlName="relation" />
+        </div>
+        <div>
+          <label for="email">Parent Email *</label>
+          <input type="email" id="email" formControlName="email" />
+        </div>
+        <div>
+          <label for="phone">Parent Phone</label>
+          <input id="phone" formControlName="phone" />
+        </div>
+        <div>
+          <label for="mobileNo">Parent Mobile No</label>
+          <input id="mobileNo" formControlName="mobileNo" />
+        </div>
+        <div>
+          <label for="parentAddress">Parent Address</label>
+          <input id="parentAddress" formControlName="parentAddress" />
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="studentForm.invalid">Create Student</button>
   </form>
 </div>
