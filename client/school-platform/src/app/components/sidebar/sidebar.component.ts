@@ -10,6 +10,7 @@ export class SidebarComponent {
   isSidebarHidden = false;
 
   constructor(private router: Router) {}
+
   toggleSidebar() {
     this.isSidebarHidden = !this.isSidebarHidden;
   }
@@ -24,5 +25,9 @@ export class SidebarComponent {
 
   navigateToDashboard() {
     this.router.navigate(['dashboard/overview']);
+  }
+
+  navigateToClasses() {
+    this.router.navigate(['dashboard/class/listclasses']);
   }
 }
