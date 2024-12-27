@@ -18,6 +18,10 @@ export class SidebarComponent {
     this.router.navigate(['dashboard/student/liststudents']);
   }
 
+  navigateToTeachers() {
+    this.router.navigate(['dashboard/teacher/listteachers']);
+  }
+
   navigateToDashboard() {
     this.router.navigate(['dashboard/overview']);
   }
