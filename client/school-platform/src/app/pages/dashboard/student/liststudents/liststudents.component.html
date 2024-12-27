@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>Student List</h1>
+
+  <button (click)="goToAddStudentPage()">Add Student</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Group</th>
+        <th>Paid</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students; let i = index">
+        <td>{{ student.firstname }} {{ student.lastName }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.group }}</td>
+        <td>{{ student.isPaid ? 'Yes' : 'No' }}</td>
+
+        <!-- Actions: Edit and Delete buttons inside the 'actions' div -->
+        <td class="actions">
+          <button (click)="editStudent(i)">Edit</button>
+          <button (click)="deleteStudent(i)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
