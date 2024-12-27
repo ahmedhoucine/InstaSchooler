@@ -1,140 +1,132 @@
-/* Container */
 .container {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 30px; /* Increased padding for more space around content */
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    position: relative;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Increased shadow for more emphasis */
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.table th,
+.table td {
+  padding: 15px 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.table th {
+  background-color: #f4f4f4;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+  width: 20%;
+}
+
+.table th:nth-child(5),
+.table td:nth-child(5) {
+  width: 15%;
+}
+
+button {
+  padding: 12px 25px;
+  background-color: #4caf50;
+  font-size: 1.1rem;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 15px;
+  text-align: center;
+}
+
+button:hover {
+  background-color: #338d33;
+}
+
+button:disabled {
+  background-color: #ccc;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.main-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 250px;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    margin-left: 0;
   }
 
-  /* Heading */
+  .container {
+    width: 90%;
+    padding: 25px;
+  }
+
   h1 {
-    text-align: center;
-    font-size: 28px; /* Increased font size for better readability */
-    color: #333;
-    margin-bottom: 30px; /* Increased margin for more space below the heading */
-  }
-
-  /* Table */
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 30px; /* Added margin at the bottom of the table */
+    font-size: 24px;
+    margin-bottom: 20px;
   }
 
   .table th,
   .table td {
-    padding: 15px 20px; /* Increased padding for more space inside cells */
-    text-align: center; /* Center align the content of both header and data */
-    border: 1px solid #ddd;
-    font-size: 16px; /* Increased font size for better readability */
+    padding: 12px 15px;
+    font-size: 14px;
   }
 
-  .table th {
-    background-color: #f4f4f4;
-    font-size: 18px; /* Increased font size for table headers */
-    font-weight: bold;
-  }
-
-  /* Increased width for 'Group' and 'Paid' columns */
-  .table th:nth-child(4),
-  .table td:nth-child(4) {
-    width: 20%; /* Increased width for the 'Group' column */
-  }
-
-  .table th:nth-child(5),
-  .table td:nth-child(5) {
-    width: 15%; /* Increased width for the 'Paid' column */
-  }
-
-  /* Button styles */
   button {
-    padding: 12px 25px; /* Increased padding for buttons */
-    background-color: #4caf50;
-    font-size: 1.1rem; /* Slightly larger font for the button */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-right: 15px; /* Increased space between buttons */
-    text-align: center;
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 95%;
+    margin-top: 20px;
+    padding: 20px;
   }
 
-  button:hover {
-    background-color: #338d33;
+  h1 {
+    font-size: 20px;
+    margin-bottom: 15px;
   }
 
-  button:disabled {
-    background-color: #ccc;
+  .table th,
+  .table td {
+    font-size: 13px;
+    padding: 10px 12px;
   }
 
-  /* Flex container for buttons */
-  .actions {
-    display: flex; /* Align buttons horizontally */
-    justify-content: flex-start; /* Align buttons to the left */
-    gap: 15px; /* Increased gap between buttons */
+  button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
   }
-
-  /* Flex container for moving component to the right */
-  .main-container {
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 250px; /* Adjust based on sidebar width */
-  }
-
-  /* Media Query for smaller screens (responsive behavior) */
-  @media (max-width: 768px) {
-    .main-container {
-      margin-left: 0;
-    }
-
-    .container {
-      width: 90%;
-      padding: 25px; /* Adjusted padding for smaller screens */
-    }
-
-    h1 {
-      font-size: 24px; /* Reduced size for small screens */
-      margin-bottom: 20px; /* Adjusted margin */
-    }
-
-    .table th,
-    .table td {
-      padding: 12px 15px; /* Reduced padding for smaller screens */
-      font-size: 14px; /* Smaller font size for smaller screens */
-    }
-
-    button {
-      width: 100%;
-      font-size: 1rem; /* Reduced font size for smaller screens */
-      padding: 10px 20px; /* Adjusted padding for smaller screens */
-    }
-  }
-
-  @media (max-width: 480px) {
-    .container {
-      width: 95%;
-      margin-top: 20px;
-      padding: 20px; /* Adjusted padding for extra small screens */
-    }
-
-    h1 {
-      font-size: 20px; /* Smaller font size for very small screens */
-      margin-bottom: 15px;
-    }
-
-    .table th,
-    .table td {
-      font-size: 13px; /* Further reduced font size for very small screens */
-      padding: 10px 12px; /* Reduced padding */
-    }
-
-    button {
-      font-size: 0.9rem; /* Reduced font size for extra small screens */
-      padding: 8px 16px; /* Reduced padding */
-    }
-  }
+}
