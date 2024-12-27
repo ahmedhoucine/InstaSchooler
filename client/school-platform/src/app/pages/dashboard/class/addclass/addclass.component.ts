@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { Matiere } from '../../components/utils/matiere.enum';  // Assuming Matiere is an Enum
+import { Matiere } from '../../../../components/utils/matiere.enum';  // Assuming Matiere is an Enum
 
 @Component({
   selector: 'app-add-class',

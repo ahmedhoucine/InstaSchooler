@@ -10,12 +10,14 @@ export class FeatureCardsComponent {
   constructor(private router: Router) {}
 
   navigateToAddStudent(): void {
-    this.router.navigate(['/student/add-student']);
+    this.router.navigate(['/dashboard/student/addstudent']);
   }
+
   navigateToAddTeacher(): void {
-    this.router.navigate(['/teacher/add-teacher']);
+    this.router.navigate(['/dashboard/teacher/addteacher']);
   }
+
   navigateToAddClass(): void {
-    this.router.navigate(['/class/add-class']);
+    this.router.navigate(['/dashboard/class/addclass']);
   }
 }

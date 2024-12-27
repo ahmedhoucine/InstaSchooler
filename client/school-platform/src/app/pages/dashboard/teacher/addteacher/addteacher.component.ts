@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Matiere } from '../../components/utils/matiere.enum';
+import { Matiere } from '../../../../components/utils/matiere.enum';
 
 @Component({
   selector: 'app-add-teacher',
