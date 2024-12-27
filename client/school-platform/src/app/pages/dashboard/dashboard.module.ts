@@ -9,6 +9,7 @@ import { AddClassComponent } from './class/addclass/addclass.component';
 import { AddStudentComponent } from './student/addstudent/addstudent.component';
 import { AddTeacherComponent } from './teacher/addteacher/addteacher.component';
 import { ListStudentsComponent } from './student/liststudents/liststudents.component';
+import { ListTeachersComponent } from './teacher/listteachers/listteachers.component';
 
 
 
@@ -20,6 +21,7 @@ import { ListStudentsComponent } from './student/liststudents/liststudents.compo
     AddStudentComponent,
     AddTeacherComponent,
     ListStudentsComponent,
+    ListTeachersComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { ListStudentsComponent } from './student/liststudents/liststudents.compo
     AddStudentComponent,
     AddTeacherComponent,
     ListStudentsComponent,
+    ListTeachersComponent,
   ]
 })
 export class DashboardModule { }

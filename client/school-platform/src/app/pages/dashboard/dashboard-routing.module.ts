@@ -6,6 +6,7 @@ import { AddClassComponent } from '../dashboard/class/addclass/addclass.componen
 import { AddStudentComponent } from './student/addstudent/addstudent.component';
 import { ListStudentsComponent } from '../dashboard/student/liststudents/liststudents.component';
 import { AddTeacherComponent } from './teacher/addteacher/addteacher.component';
+import { ListTeachersComponent } from './teacher/listteachers/listteachers.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,8 @@ const routes: Routes = [
       {
         path: 'teacher', children: [
           { path: 'addteacher', component: AddTeacherComponent },
+          { path: 'listteachers', component: ListTeachersComponent },
+
         ]
       },
     ]
