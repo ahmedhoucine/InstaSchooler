@@ -17,4 +17,8 @@ export class SidebarComponent {
   navigateToStudents() {
     this.router.navigate(['dashboard/student/liststudents']);
   }
+
+  navigateToDashboard() {
+    this.router.navigate(['dashboard/overview']);
+  }
 }
