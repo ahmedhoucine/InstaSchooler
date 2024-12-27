@@ -7,6 +7,7 @@ import { AddStudentComponent } from './student/addstudent/addstudent.component';
 import { ListStudentsComponent } from '../dashboard/student/liststudents/liststudents.component';
 import { AddTeacherComponent } from './teacher/addteacher/addteacher.component';
 import { ListTeachersComponent } from './teacher/listteachers/listteachers.component';
+import { ListClassesComponent } from './class/listclasses/listclasses.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,8 @@ const routes: Routes = [
       {
         path: 'class', children: [
           { path: 'addclass', component: AddClassComponent },
+          { path: 'listclasses', component: ListClassesComponent },
+
         ]
       },
 
