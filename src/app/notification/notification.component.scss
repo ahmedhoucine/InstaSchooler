@@ -1,0 +1,106 @@
+.notification-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  h2 {
+    color: #3f51b5;
+    font-weight: bold;
+    margin-top: 60px;
+    font-size: 40px;
+  }
+
+  .notification-ring {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: -40px; /* Positionne le ring au-dessus */
+    margin-top: -50px;
+
+    .ring-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #fff8e1; /* Jaune clair */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+      mat-icon {
+        font-size: 30px;
+        color: #f8b519; /* Jaune vif */
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: #ff5252; /* Rouge vif pour le badge */
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 50%;
+        padding: 4px 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  .task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .task-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .notification-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #fff8e1; /* Jaune clair */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      mat-icon {
+        font-size: 20px;
+        color: #f8b519; /* Jaune vif */
+      }
+    }
+
+    .task-details {
+      text-align: left;
+
+      h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        color: #3f51b5;
+      }
+
+      p {
+        margin: 5px 0;
+        color: #555;
+      }
+
+      strong {
+        color: #333;
+      }
+    }
+  }
+}

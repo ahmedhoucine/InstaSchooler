@@ -1,0 +1,33 @@
+<div class="form-container">
+  <h1>Ajouter un Cours</h1>
+  <form #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm)" enctype="multipart/form-data">
+    <!-- Champ pour le titre -->
+    <mat-form-field appearance="fill">
+      <mat-label>Titre</mat-label>
+      <input matInput name="title" ngModel placeholder="Titre du cours" required />
+    </mat-form-field>
+
+    <!-- Champ pour la description -->
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput name="description" ngModel placeholder="Description" required></textarea>
+    </mat-form-field>
+
+    <!-- Champ pour la durée -->
+    <mat-form-field appearance="fill">
+      <mat-label>Durée (en heures)</mat-label>
+      <input matInput type="number" name="duration" ngModel placeholder="Durée" required />
+    </mat-form-field>
+
+    <!-- Champ pour l'image -->
+    <mat-form-field appearance="fill">
+      <mat-label>URL de l'image</mat-label>
+      <input matInput name="image" ngModel placeholder="URL de l'image" />
+    </mat-form-field>
+
+    <!-- Champ pour le fichier PDF -->
+    <input type="file" name="pdf" #pdfInput />
+
+    <button mat-raised-button color="primary" type="submit">Ajouter le cours</button>
+  </form>
+</div>

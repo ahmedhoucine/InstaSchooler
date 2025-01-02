@@ -1,0 +1,21 @@
+<div class="courses-container">
+  <h2>Liste des Cours</h2>
+  <div class="card-grid">
+    <!-- Boucle pour afficher les cours -->
+    <div class="card" *ngFor="let course of courses">
+      <img [src]="course.image || 'https://via.placeholder.com/150'" alt="Image du cours" />
+      <div class="card-content">
+        <h3>{{ course.title }}</h3>
+        <p>{{ course.description }}</p>
+        <p><strong>Durée :</strong> {{ course.duration }} heures</p>
+        <a *ngIf="course.pdf" [href]="course.pdf" target="_blank" mat-raised-button color="primary">Voir PDF</a>
+      </div>
+    </div>
+  </div>
+  <!-- Bouton pour ajouter un cours -->
+  <button mat-raised-button color="primary" routerLink="/add-course">Ajouter un Cours</button>
+  <br>
+  <br><br><br><br><br><br>
+  <button mat-raised-button color="primary" routerLink="/add-task">Ajouter une Tâche</button>
+   
+</div>
