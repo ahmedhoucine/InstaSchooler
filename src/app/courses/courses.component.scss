@@ -49,3 +49,131 @@ button[mat-icon-button] {
   color: #721c24;
   border-radius: 50%;
 }
+.card {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 15px;
+  max-width: 250px; // Limiter la largeur maximale de chaque carte
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.courses-container {
+  padding: 20px;
+  text-align: center; // Centrer le contenu de la section
+}
+
+.niveau-title {
+  font-size: 2em;
+  margin: 20px 0;
+  color: #3f51b5;
+  text-transform: uppercase; // Mettre en majuscules
+  font-weight: bold;
+  text-align: center; // Centrer le titre
+  border-bottom: 2px solid #ddd; // Ligne en bas du titre
+  display: inline-block; // Pour limiter la largeur de la ligne
+  padding-bottom: 5px;
+}
+
+.card-grid {
+  display: flex; // Utilisation de Flexbox pour centrer
+  flex-wrap: wrap;
+  justify-content: center; // Centrer les cartes horizontalement
+  gap: 20px; // Espacement entre les cartes
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  max-width: 250px; // Limiter la largeur maximale de chaque carte
+  text-align: center; // Centrer le contenu de la carte
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: 150px; // Ajuster la hauteur de l'image
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-content h3 {
+  font-size: 1.2em;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.card-content p {
+  font-size: 0.9em;
+  margin: 5px 0;
+  color: #555;
+}
+
+.card-content a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #3f51b5;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.card-content a:hover {
+  background-color: #303f9f;
+}

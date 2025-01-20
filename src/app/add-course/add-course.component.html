@@ -1,10 +1,15 @@
 <div class="form-container">
   <h1>Ajouter un Cours</h1>
   <form #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm)" enctype="multipart/form-data">
-    <!-- Champ pour le titre -->
+    <!-- Champ pour le niveau -->
     <mat-form-field appearance="fill">
-      <mat-label>Titre</mat-label>
-      <input matInput name="title" ngModel placeholder="Titre du cours" required />
+      <mat-label>Niveau</mat-label>
+      <select matNativeControl name="niveau" ngModel required>
+        <option value="1">Niveau 1</option>
+        <option value="2">Niveau 2</option>
+        <option value="3">Niveau 3</option>
+        <option value="4">Niveau 4</option>
+      </select>
     </mat-form-field>
 
     <!-- Champ pour la description -->

@@ -1,0 +1,121 @@
+.settings-page {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .ticket-container,
+  .settings-container {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3f51b5;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    transition: border 0.3s, box-shadow 0.3s;
+  }
+  
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border: 1px solid #3f51b5;
+    box-shadow: 0px 0px 5px rgba(63, 81, 181, 0.3);
+  }
+  
+  .btn {
+    background-color: #3f51b5;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+  }
+  
+  .btn:hover {
+    background-color: #303f9f;
+    transform: scale(1.05);
+  }
+  
+  .btn-primary {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  textarea {
+    resize: none;
+  }
+  
+  @media (max-width: 768px) {
+    .settings-page {
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+  .general-settings {
+    max-width: 400px; /* Réduit la largeur du cadre */
+    margin: 20px auto; /* Centre horizontalement */
+    padding: 15px;
+    background: #f9f9f9; /* Couleur de fond plus claire */
+    border: 1px solid #ddd; /* Bordure subtile */
+    border-radius: 8px; /* Angles arrondis */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Légère ombre */
+  }
+  
+  .settings-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #3f51b5; /* Couleur pour faire ressortir le titre */
+    text-align: left; /* Aligne le titre à gauche */
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+    

@@ -185,3 +185,26 @@ mat-nav-list a:hover {
   color: #000;
   border-color: #000;
 }
+.sidebar {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar .logout-btn,
+.navbar .edit-profile-btn {
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+}
+
+.navbar .logout-btn:hover,
+.navbar .edit-profile-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

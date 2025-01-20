@@ -12,3 +12,55 @@ body {
   
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+.dark-theme {
+  --background-color: #121212;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+.dark-theme {
+  --background-color: #121212;
+  --text-color: #ffffff;
+}
+
+/* Appliquer les styles pour tout le corps */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Appliquer les variables aux composants de Material */
+.mat-sidenav-container,
+.mat-sidenav-content {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+}
+
+.mat-nav-list a {
+  color: var(--text-color);
+}
+
+button,
+input,
+select,
+textarea {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+}

@@ -15,7 +15,7 @@ export class AddCourseComponent {
       const formData = new FormData();
 
       // Ajout des données du formulaire
-      formData.append('title', courseForm.value.title);
+      formData.append('niveau', courseForm.value.niveau);
       formData.append('description', courseForm.value.description);
       formData.append('duration', courseForm.value.duration);
       formData.append('image', courseForm.value.image);

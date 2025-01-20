@@ -7,25 +7,35 @@ import { CourseService } from '../services/course.service';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
-  courses: any[] = []; // Liste des cours
+  groupedCourses: { [key: string]: any[] } = {}; // Cours regroupés par niveau
 
   constructor(private courseService: CourseService) {}
 
   ngOnInit(): void {
-    this.fetchCourses(); // Récupérer les cours au chargement
+    this.fetchCourses(); // Charger les cours dès l'initialisation
   }
 
   fetchCourses(): void {
     this.courseService.getCourses().subscribe(
       (response) => {
-        this.courses = response; // Mise à jour de la liste des cours
-       
+        // Regrouper les cours par niveau
+        this.groupedCourses = response.reduce((groups: any, course: any) => {
+          const niveau = course.niveau || 'Autre'; // Utiliser "Autre" si le niveau est manquant
+          if (!groups[niveau]) {
+            groups[niveau] = [];
+          }
+          groups[niveau].push(course);
+          return groups;
+        }, {});
       },
       (error) => {
         console.error('Erreur lors de la récupération des cours :', error);
-
       }
     );
   }
-}
 
+  // Helper pour obtenir les clés de groupedCourses
+  getNiveaux(): string[] {
+    return Object.keys(this.groupedCourses);
+  }
+}
