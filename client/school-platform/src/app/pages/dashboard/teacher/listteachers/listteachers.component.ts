@@ -32,6 +32,8 @@ export class ListTeachersComponent implements OnInit {
     this.teacherService.deleteTeacher(id).subscribe(
       () => {
         this.teachers = this.teachers.filter(teacher => teacher.id !== id);
+        this.getTeachers();
+
       },
       (error) => {
         console.error('Error deleting teacher', error);
