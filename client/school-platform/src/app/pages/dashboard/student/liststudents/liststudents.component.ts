@@ -27,7 +27,7 @@ export class ListStudentsComponent implements OnInit {
   }
 
   deleteStudent(index: number): void {
-    const studentId = this.students[index].id;
+    const studentId = this.students[index]._id;
     this.studentService.deleteStudent(studentId).subscribe(
       () => {
         console.log(`Student at index ${index} deleted`);

@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { StudentService } from 'src/app/services/student.service';
-import { ToastrService } from 'ngx-toastr';
-
-
 
 @Component({
   selector: 'app-add-student',
@@ -13,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AddStudentComponent implements OnInit {
   studentForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private studentService:StudentService, private toastr: ToastrService) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.studentForm = this.fb.group({
@@ -51,24 +47,11 @@ export class AddStudentComponent implements OnInit {
       }),
     });
   }
-  
 
   onSubmit(): void {
     if (this.studentForm.valid) {
       console.log(this.studentForm.value);
-      const studentData = this.studentForm.value;
-
-      this.studentService.createStudent(studentData).subscribe(
-        (response) => {
-          console.log('Student created successfully', response);
-          this.toastr.success('Student created successfully!');
-        },
-        (error) => {
-          console.error('Error creating student', error);
-          this.toastr.error('Error creating student!');
-        }
-      );
-    } 
+      // Traitement des données
+    }
   }
-  }
-
+}
