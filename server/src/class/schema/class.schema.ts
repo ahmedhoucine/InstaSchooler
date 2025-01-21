@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { Matiere } from '../../teacher/matiere.enum';  // Import the Matiere enum
+import { Matiere } from '../../teacher/matiere.enum'; // Import the Matiere enum
 
 export type ClassDocument = Class & Document;
 
@@ -14,7 +14,12 @@ export class Class {
   subjects: string[];
 
   // Define the structure of teachers with subject specialization
-  @Prop({ type: [{ subject: String, teacher: { type: Types.ObjectId, ref: 'Teacher' } }], required: true })
+  @Prop({
+    type: [
+      { subject: String, teacher: { type: Types.ObjectId, ref: 'Teacher' } },
+    ],
+    required: true,
+  })
   teachers: { subject: string; teacher: Types.ObjectId }[];
 
   // Define the structure of students

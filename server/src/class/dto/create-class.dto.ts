@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsString, IsArray, ValidateNested, IsMongoId } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsArray,
+  ValidateNested,
+  IsMongoId,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 import { Matiere } from '../../teacher/matiere.enum';
 

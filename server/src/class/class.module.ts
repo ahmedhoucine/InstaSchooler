@@ -4,7 +4,7 @@ import { Class, ClassSchema } from './schema/class.schema';
 import { ClassService } from './class.service';
 import { ClassController } from './class.controller';
 import { Teacher, TeacherSchema } from '../teacher/schema/teacher.schema';
-import { Student, StudentSchema } from '../student/schema/student.schema';  // Corrected import
+import { Student, StudentSchema } from '../student/schema/student.schema'; // Corrected import
 
 @Module({
   imports: [

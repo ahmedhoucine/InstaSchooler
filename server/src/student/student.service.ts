@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, ConflictException  } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
@@ -23,7 +27,7 @@ export class StudentService {
     if (existingStudent) {
       throw new ConflictException('A student with this email already exists.');
     }
-    
+
     const generatedPassword = `${createStudentDto.firstname.toLowerCase()}@${createStudentDto.lastName.toUpperCase()}`;
 
     const hashedPassword = await this.hashPassword(generatedPassword);
@@ -41,8 +45,8 @@ export class StudentService {
       generatedPassword,
     );
 
-  return savedStudent;
-}
+    return savedStudent;
+  }
 
   // Helper method to send the email
   private async sendWelcomeEmail(
@@ -86,12 +90,18 @@ export class StudentService {
     updateStudentDto: UpdateStudentDto,
   ): Promise<Student> {
     if (updateStudentDto.password) {
-      updateStudentDto.password = await this.hashPassword(updateStudentDto.password);
+      updateStudentDto.password = await this.hashPassword(
+        updateStudentDto.password,
+      );
     }
 
-    const student = await this.studentModel.findByIdAndUpdate(id, updateStudentDto, {
-      new: true,
-    });
+    const student = await this.studentModel.findByIdAndUpdate(
+      id,
+      updateStudentDto,
+      {
+        new: true,
+      },
+    );
 
     if (!student) {
       throw new NotFoundException(`Student with ID ${id} not found.`);

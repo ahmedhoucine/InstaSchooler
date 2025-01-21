@@ -1,4 +1,12 @@
-import { IsString, IsNotEmpty, IsEmail, IsBoolean, Matches, MinLength, IsOptional } from 'class-validator';
+import {
+  IsString,
+  IsNotEmpty,
+  IsEmail,
+  IsBoolean,
+  Matches,
+  MinLength,
+  IsOptional,
+} from 'class-validator';
 import * as bcrypt from 'bcrypt';
 
 export class CreateStudentDto {

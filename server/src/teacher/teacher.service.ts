@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, ConflictException} from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
@@ -24,10 +28,11 @@ export class TeacherService {
     });
 
     if (existingTeacher) {
-      throw new ConflictException('A teacher with this phone number or email already exists.');
+      throw new ConflictException(
+        'A teacher with this phone number or email already exists.',
+      );
     }
-    
-    
+
     // Automatically generate the password as 'firstname@LASTNAME'
     const generatedPassword = `${createTeacherDto.firstname.toLowerCase()}@${createTeacherDto.lastName.toUpperCase()}`;
 
@@ -93,12 +98,18 @@ export class TeacherService {
     updateTeacherDto: UpdateTeacherDto,
   ): Promise<Teacher> {
     if (updateTeacherDto.password) {
-      updateTeacherDto.password = await this.hashPassword(updateTeacherDto.password);
+      updateTeacherDto.password = await this.hashPassword(
+        updateTeacherDto.password,
+      );
     }
 
-    const teacher = await this.teacherModel.findByIdAndUpdate(id, updateTeacherDto, {
-      new: true,
-    });
+    const teacher = await this.teacherModel.findByIdAndUpdate(
+      id,
+      updateTeacherDto,
+      {
+        new: true,
+      },
+    );
 
     if (!teacher) {
       throw new NotFoundException(`Teacher with ID ${id} not found.`);

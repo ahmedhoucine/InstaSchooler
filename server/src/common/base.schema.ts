@@ -4,7 +4,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Schema({ timestamps: true, versionKey: false })
 export class BaseSchema extends Document {
-  @Prop({ type: String, unique: true, required: true, index: true, default: uuidv4 })
+  @Prop({
+    type: String,
+    unique: true,
+    required: true,
+    index: true,
+    default: uuidv4,
+  })
   id: string;
 
   @Prop({ type: String, required: true, maxlength: 255 })
@@ -13,7 +19,7 @@ export class BaseSchema extends Document {
   @Prop({ type: String, required: true })
   lastName: string;
 
-  @Prop({ type: String, required: true, unique:true })
+  @Prop({ type: String, required: true, unique: true })
   email: string;
 
   @Prop({ type: String, required: true })
