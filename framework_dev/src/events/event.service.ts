@@ -12,6 +12,8 @@ export class EventService {
 
   // Create an event
   async createEvent(createEventDto: CreateEventDto): Promise<MyEventDocument> {
+    console.log("i am here", createEventDto);
+    
     const event = new this.eventModel(createEventDto);
     return await event.save();
   }

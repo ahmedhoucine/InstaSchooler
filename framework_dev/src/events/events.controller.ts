@@ -10,6 +10,8 @@ export class EventsController {
   // POST /events - Create a new event
   @Post()
   async create(@Body() createEventDto: CreateEventDto): Promise<MyEvent> {
+    console.log("test ---------------");
+    
     return await this.eventService.createEvent(createEventDto);
   }
 
@@ -18,6 +20,7 @@ export class EventsController {
   async getAll(): Promise<MyEvent[]> {
     return await this.eventService.getAllEvents();
   }
+  
 
   // PUT /events/:id - Update an event
   @Put(':id')

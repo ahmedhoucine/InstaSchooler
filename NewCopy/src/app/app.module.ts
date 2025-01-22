@@ -17,7 +17,8 @@ export function jwtTokenGetter() {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [
     BrowserModule,

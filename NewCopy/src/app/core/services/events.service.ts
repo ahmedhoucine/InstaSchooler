@@ -1,31 +1,47 @@
-// src/app/core/services/events.service.ts
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Event } from 'src/app/modules/calendar/components/event-details-modal/event.model';
+
+export interface EventData {
+  id?: string;
+  title: string;
+  description: string;
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
+}
 
 @Injectable({
-  providedIn: 'root',  // This ensures the service is available application-wide
+  providedIn: 'root'
 })
-export class EventsService {
-  private apiUrl = 'https://api.example.com/events'; // Adjust API URL
+export class EventService {
+  private baseUrl = 'http://localhost:3000/events'; // Base URL of the backend
 
   constructor(private http: HttpClient) {}
 
-  getEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(this.apiUrl);
+  // Fetch a single event by ID
+  getEventById(id: string): Observable<EventData> {
+    return this.http.get<EventData>(`${this.baseUrl}/${id}`);
   }
 
-  createEvent(event: Event): Observable<Event> {
-    return this.http.post<Event>(this.apiUrl, event);
+  // Create a new event
+  createEvent(event: EventData): Observable<EventData> {
+    return this.http.post<EventData>(this.baseUrl, event);
   }
 
-  updateEvent(id: string, event: Event): Observable<Event> {
-    return this.http.put<Event>(`${this.apiUrl}/${id}`, event);
+  // Update an existing event
+  updateEvent(id: string, event: EventData): Observable<EventData> {
+    return this.http.put<EventData>(`${this.baseUrl}/${id}`, event);
   }
 
-  deleteEvent(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  // Fetch all events
+  getAllEvents(): Observable<EventData[]> {
+    return this.http.get<EventData[]>(this.baseUrl);
+  }
+
+  // Delete an event
+  deleteEvent(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 }

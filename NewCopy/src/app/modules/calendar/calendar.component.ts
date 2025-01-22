@@ -1,9 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CalendarOptions, EventInput } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';  // Import plugins used
+import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { MatDialog } from '@angular/material/dialog';
 import { EventDetailsModalComponent } from './components/event-details-modal/event-details-modal.component';
+import { EventService } from 'src/app/core/services/events.service';
 
 @Component({
   selector: 'app-calendar',
@@ -11,86 +12,100 @@ import { EventDetailsModalComponent } from './components/event-details-modal/eve
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  pinnedDates: EventInput[] = [];  // Array to hold all pinned events
+  pinnedDates: EventInput[] = [];
 
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
     selectable: true,
-    events: this.pinnedDates,  // Calendar events array
+    events: [],
     headerToolbar: {
       right: 'prev,next today',
       center: 'title',
       left: ''
     },
     dateClick: this.handleDateClick.bind(this),
-    eventClick: this.handleEventClick.bind(this),  // Handle event click to edit
+    select: this.handleDateRangeSelect.bind(this),
+    editable: false,
   };
 
-  constructor(private dialog: MatDialog, private cdRef: ChangeDetectorRef) {}
+  constructor(
+    private dialog: MatDialog,
+    private cdRef: ChangeDetectorRef,
+    private eventService: EventService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadEvents();
+  }
 
-  // Handle new event creation when clicking on a date
+  loadEvents(): void {
+    this.eventService.getAllEvents().subscribe(
+      (events) => {
+        this.pinnedDates = events.map((event) => ({
+          title: event.title,
+          start: event.startDate,
+          end: event.endDate,
+          extendedProps: { description: event.description },
+          color: this.getEventColor(event.endDate),
+        }));
+
+        this.calendarOptions.events = [...this.pinnedDates];
+        this.cdRef.detectChanges();
+      },
+      (error) => {
+        console.error('Error fetching events:', error);
+      }
+    );
+  }
+
+  getEventColor(endDate: string): string {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const eventEndDate = new Date(endDate);
+    eventEndDate.setHours(0, 0, 0, 0);
+
+    return eventEndDate < today ? 'rgba(255, 0, 0, 0.3)' : 'rgba(61, 123, 61, 0.5)';
+  }
+
   handleDateClick(arg: any): void {
     const newEvent = {
-      title: '',
+      title: 'EVENT',
       description: '',
-      location: '',
-      start: arg.dateStr,  // Starting date of the event
-      end: arg.dateStr,    // Ending date of the event (initially same as start)
+      startDate: arg.dateStr,
+      endDate: arg.dateStr,
     };
 
+    this.openEventModal(newEvent);
+  }
+
+  handleDateRangeSelect(arg: any): void {
+    const adjustedEndDate = new Date(arg.endStr);
+    adjustedEndDate.setDate(adjustedEndDate.getDate() - 1);
+
+    const newEvent = {
+      title: 'EVENT',
+      description: '',
+      startDate: arg.startStr,
+      endDate: adjustedEndDate.toISOString().split('T')[0],
+    };
+
+    this.openEventModal(newEvent);
+  }
+
+  openEventModal(eventData: any): void {
     const dialogRef = this.dialog.open(EventDetailsModalComponent, {
       width: '400px',
-      data: newEvent  // Pass the new event object to the modal
+      data: eventData,
     });
-
-    dialogRef.afterClosed().subscribe(result => {
+  
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const event: EventInput = {
-          title: result.title,
-          description: result.description,
-          location: result.location,
-          start: result.start,  // Make sure to pass the proper start date
-          end: result.end,      // Pass the correct end date
-          id: this.generateEventId(),  // Generate a unique event ID
-          color: '#3788d8'  // Default color for the event
-        };
-        this.pinnedDates.push(event);  // Add the event to the calendar
-        this.cdRef.detectChanges();  // Trigger change detection to update the view
+        console.log('Dialog closed with result:', result); // Handle the result if needed
+        // Optionally, reload events or update the UI
       }
     });
   }
-
-  // Handle event edit when an existing event is clicked
-  handleEventClick(arg: any): void {
-    const event = arg.event;
-    const dialogRef = this.dialog.open(EventDetailsModalComponent, {
-      width: '400px',
-      data: {
-        id: event.id,
-        title: event.title,
-        description: event.extendedProps.description,
-        location: event.extendedProps.location,
-        start: event.start.toISOString().substr(0, 16),  // Format date to match input type
-        end: event.end.toISOString().substr(0, 16)     // Format date to match input type
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        event.setProp('title', result.title);  // Update the event title
-        event.setExtendedProp('description', result.description);  // Update event description
-        event.setExtendedProp('location', result.location);  // Update event location
-        event.setStart(result.start);  // Update event start date
-        event.setEnd(result.end);      // Update event end date
-      }
-    });
-  }
-
-  // Generate a unique event ID (for new events)
-  generateEventId(): string {
-    return 'event-' + Math.random().toString(36).substr(2, 9);
-  }
+  
 }

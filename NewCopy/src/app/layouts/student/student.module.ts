@@ -27,7 +27,7 @@ import { FormsModule } from '@angular/forms';
     MatListModule, // Material list items
     MatIconModule, // Material icons
     MatButtonModule, // Ma // Import routing for student layout
-    CalendarModule,  MatFormFieldModule,
+      MatFormFieldModule,
     MatInputModule,
     FormsModule, // 
   ],
