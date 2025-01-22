@@ -18,9 +18,9 @@
           <tr *ngFor="let teacher of teachers">
             <td><img [src]="teacher.profilePicture" alt="Profile Picture" class="teacher-profile-img" /></td>
             <td>{{ teacher.firstname }} {{ teacher.lastName }}</td>
-            <td>{{ teacher.Matiere }}</td>
+            <td>{{ teacher.matiere }}</td>
             <td>{{ teacher.email }}</td>
-            <td>{{ teacher.Phone }}</td>
+            <td>{{ teacher.phone }}</td>
             <td class="actions">
               <button (click)="deleteTeacher(teacher._id)">Delete</button>
             </td>

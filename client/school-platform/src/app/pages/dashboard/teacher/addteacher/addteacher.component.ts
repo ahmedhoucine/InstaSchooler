@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Matiere } from '../../../../components/utils/matiere.enum';
 import { TeacherService } from 'src/app/services/teacher.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-teacher',
@@ -12,7 +13,7 @@ export class AddTeacherComponent implements OnInit {
   teacherForm!: FormGroup;
   matiereOptions = Object.values(Matiere);
 
-  constructor(private fb: FormBuilder,private teacherservice : TeacherService) {}
+  constructor(private router: Router,private fb: FormBuilder,private teacherservice : TeacherService) {}
 
   ngOnInit(): void {
     this.teacherForm = this.fb.group({
@@ -47,6 +48,8 @@ export class AddTeacherComponent implements OnInit {
       this.teacherservice.createTeacher(teachertData).subscribe(
         (response) => {
           console.log('Student created successfully', response);
+          this.router.navigate(['/dashboard/teacher/listteachers'] );
+
         },
         (error) => {
           console.error('Error creating student', error);
