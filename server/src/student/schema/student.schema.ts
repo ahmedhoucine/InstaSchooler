@@ -16,6 +16,45 @@ export class Student extends BaseSchema {
 
   @Prop({ type: String, required: true })
   parentPhone: string;
+
+  @Prop({ type: String, required: true })
+  dateOfBirth: string;
+
+  @Prop({ type: String, required: true })
+  gender: string;
+
+  @Prop({ type: String, required: true })
+  nationality: string;
+
+  @Prop({ type: String, required: true })
+  category: string;
+
+  @Prop({ type: String, required: true })
+  admissionNo: string;
+
+  @Prop({ type: Date, required: true })
+  joiningDate: Date;
+
+  @Prop({ type: String, required: true })
+  rollNo: string;
+
+  @Prop({ type: String, required: true })
+  parentFirstName: string;
+
+  @Prop({ type: String, required: true })
+  parentLastName: string;
+
+  @Prop({ type: String, required: true })
+  relation: string;
+
+  @Prop({ type: String, required: true })
+  parentMobileNo: string;
+
+  @Prop({ type: String })
+  address: string;
+
+  @Prop({ type: String })
+  parentAddress: string;
 }
 
 export const StudentSchema = SchemaFactory.createForClass(Student);
