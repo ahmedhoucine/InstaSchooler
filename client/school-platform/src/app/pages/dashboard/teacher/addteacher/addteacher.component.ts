@@ -21,8 +21,7 @@ export class AddTeacherComponent implements OnInit {
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
 
-      // Password (auto-generated)
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      
 
       // Matiere (Subject)
       matiere: ['', [Validators.required]],
@@ -36,8 +35,7 @@ export class AddTeacherComponent implements OnInit {
         [Validators.required, Validators.pattern(/^([2459])[0-9]{7}$/)],
       ],
 
-      // Classes (Array of class IDs)
-      classes: ['', [Validators.required]],
+      
     });
   }
 
@@ -57,6 +55,8 @@ export class AddTeacherComponent implements OnInit {
      
     } else {
       console.log('Form is invalid');
+      console.log(this.teacherForm.controls); 
+
     }
   
   }

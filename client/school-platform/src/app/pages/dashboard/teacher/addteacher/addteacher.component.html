@@ -19,14 +19,7 @@
       </div>
     </div>
 
-    <!-- Password Section -->
-    <div class="section">
-      <h2>Password</h2>
-      <div class="form-group">
-        <label for="password">Password *</label>
-        <input type="password" id="password" formControlName="password" />
-      </div>
-    </div>
+   
 
     <!-- Matiere Section -->
     <div class="section">
@@ -48,12 +41,13 @@
       <div class="radio-group">
         <label>Paid *</label>
         <label class="radio-label">Yes
-          <input type="radio" value="true" formControlName="isPaid" />
+          <input type="radio" [value]="true" formControlName="isPaid" />
         </label>
         <label class="radio-label">No
-          <input type="radio" value="false" formControlName="isPaid" />
+          <input type="radio" [value]="false" formControlName="isPaid" />
         </label>
       </div>
+      
     </div>
 
     <!-- Contact Information Section -->
@@ -65,15 +59,7 @@
       </div>
     </div>
 
-    <!-- Classes Section -->
-    <div class="section">
-      <h2>Classes</h2>
-      <div class="form-group">
-        <label for="classes">Classes *</label>
-        <input id="classes" formControlName="classes" placeholder="Enter class IDs (comma separated)" />
-      </div>
-    </div>
 
-    <button type="submit" [disabled]="teacherForm.invalid">Create Teacher</button>
+    <button type="submit" >Create Teacher</button>
   </form>
 </div>
