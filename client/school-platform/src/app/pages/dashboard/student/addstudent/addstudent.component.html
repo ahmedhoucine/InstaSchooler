@@ -4,10 +4,10 @@
   <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
     <div class="section">
       <h2>Basic Information</h2>
-      <div formGroupName="studentName" class="form-group">
+      <div  class="form-group">
         <div>
           <label for="firstName">First Name *</label>
-          <input id="firstName" formControlName="firstName" />
+          <input id="firstName" formControlName="firstname" />
         </div>
         <div>
           <label for="lastName">Last Name *</label>
@@ -44,18 +44,10 @@
 
     <div class="section">
       <h2>Contact Details</h2>
-      <div formGroupName="contactDetails" class="form-group">
+      <div  class="form-group">
         <div>
           <label for="email">Email *</label>
           <input id="email" formControlName="email" />
-        </div>
-        <div>
-          <label for="phone">Phone</label>
-          <input id="phone" formControlName="phone" />
-        </div>
-        <div>
-          <label for="mobileNo">Mobile No *</label>
-          <input id="mobileNo" formControlName="mobileNo" />
         </div>
         <div>
           <label for="address">Address</label>
@@ -66,7 +58,7 @@
 
     <div class="section">
       <h2>Official Details</h2>
-      <div formGroupName="officialDetails" class="form-group">
+      <div  class="form-group">
         <div>
           <label for="admissionNo">Admission No *</label>
           <input id="admissionNo" formControlName="admissionNo" />
@@ -79,20 +71,29 @@
           <label for="rollNo">Roll No *</label>
           <input id="rollNo" formControlName="rollNo" />
         </div>
+        <div>
+          <label for="class">Class *</label>
+          <input id="class" formControlName="class" />
+        </div>
+        <div class="radio-group">
+          <label>Is Paid *</label>
+          <label class="radio-label">Yes <input type="radio" [value]="true" formControlName="isPaid" /></label>
+          <label class="radio-label">No <input type="radio" [value]="false" formControlName="isPaid" /></label>
+        </div>
       </div>
     </div>
 
     <div class="section">
       <h2>Parent Details</h2>
-      <div formGroupName="parentDetails" class="form-group">
-        <div formGroupName="parentName">
+      <div  class="form-group">
+        <div >
           <div>
             <label for="parentFirstName">Parent First Name *</label>
-            <input id="parentFirstName" formControlName="firstName" />
+            <input id="parentFirstName" formControlName="parentFirstName" />
           </div>
           <div>
             <label for="parentLastName">Parent Last Name *</label>
-            <input id="parentLastName" formControlName="lastName" />
+            <input id="parentLastName" formControlName="parentLastName" />
           </div>
         </div>
         <div>
@@ -101,15 +102,15 @@
         </div>
         <div>
           <label for="email">Parent Email *</label>
-          <input type="email" id="email" formControlName="email" />
+          <input type="email" id="email" formControlName="parentEmail" />
         </div>
         <div>
           <label for="phone">Parent Phone</label>
-          <input id="phone" formControlName="phone" />
+          <input id="phone" formControlName="parentPhone" />
         </div>
         <div>
           <label for="mobileNo">Parent Mobile No</label>
-          <input id="mobileNo" formControlName="mobileNo" />
+          <input id="mobileNo" formControlName="parentMobileNo" />
         </div>
         <div>
           <label for="parentAddress">Parent Address</label>
@@ -118,6 +119,6 @@
       </div>
     </div>
 
-    <button type="submit" [disabled]="studentForm.invalid">Create Student</button>
+    <button type="submit" >Create Student</button>
   </form>
 </div>
