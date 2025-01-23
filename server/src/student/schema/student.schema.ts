@@ -20,8 +20,9 @@ export class Student extends BaseSchema {
   @Prop({ type: String, required: true })
   dateOfBirth: string;
 
-  @Prop({ type: String, required: true })
-  gender: string;
+  @Prop({ type: String, required: false })
+  username: string;
+
 
   @Prop({ type: String, required: true })
   nationality: string;
