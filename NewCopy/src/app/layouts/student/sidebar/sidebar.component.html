@@ -1,0 +1,56 @@
+<aside class="sidebar">
+  <!-- Modern collapse button with animation -->
+  <button class="sidebar-toggle" (click)="toggleSidebar()">
+    <span class="hamburger-icon" [class.collapsed]="isCollapsed">
+      <span class="line top"></span>
+      <span class="line middle"></span>
+      <span class="line bottom"></span>
+    </span>
+  </button>
+
+  <ul>
+    <li routerLinkActive="active">
+      <a routerLink="/student/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Courses</span>
+      </a>
+    </li>
+    <!--  
+    <li routerLinkActive="active">
+      <a routerLink="/student/notifications">
+        <mat-icon>schedule</mat-icon>
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Schedule</span>
+      </a>
+    </li>
+    -->
+
+    <!-- <li routerLinkActive="active"> 
+      <a routerLink="/student/planning">
+        <mat-icon>list_alt</mat-icon>
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Planning</span>
+      </a>
+    </li> -->
+
+
+
+    <li routerLinkActive="active">
+      <a routerLink="/student/calendar">
+        <mat-icon>calendar_today</mat-icon>
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Calendar</span>
+      </a>
+    </li>
+
+
+
+    <li routerLinkActive="active">
+      <a routerLink="/student/notifications">
+        <mat-icon>notifications</mat-icon>
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Notifications</span>
+      </a>
+    </li>
+
+
+
+    
+  </ul>
+</aside>
