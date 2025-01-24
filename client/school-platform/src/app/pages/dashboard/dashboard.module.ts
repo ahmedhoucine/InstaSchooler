@@ -43,7 +43,8 @@ import { DashboardLoginComponent } from './auth/login/dashboard-login.component'
     AddTeacherComponent,
     ListStudentsComponent,
     ListTeachersComponent,
-    ListClassesComponent
+    ListClassesComponent,
+    DashboardLoginComponent,
   ]
 })
 export class DashboardModule { }
