@@ -38,6 +38,11 @@ export class SettingsComponent implements OnInit {
 
   onSaveSettings(form: any): void {
     if (form.valid) {
+      if (!this.enseignant._id) {
+        console.error('ID de l\'enseignant manquant.');
+        alert('Impossible de mettre à jour sans ID.');
+        return;
+      }
       if (this.enseignant.newPassword) {
         this.enseignant.password = this.enseignant.newPassword; // Remplace l'ancien mot de passe
       }
@@ -54,6 +59,7 @@ export class SettingsComponent implements OnInit {
       alert('Veuillez remplir tous les champs correctement.');
     }
   }
+  
   
   
 

@@ -18,8 +18,10 @@ export class NotificationComponent implements OnInit {
   // Méthode pour récupérer uniquement les tâches du jour
   fetchTodayTasks(): void {
     const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
-    this.http.get<any[]>('http://localhost:5000/tasks').subscribe(
+
+    this.http.get<any[]>('http://localhost:3000/tasks').subscribe(
       (tasks) => {
+        // Filtrer les tâches du jour en comparant uniquement avec le champ `date`
         this.tasksToday = tasks.filter((task) => task.date === today);
       },
       (error) => {

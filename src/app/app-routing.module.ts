@@ -7,6 +7,8 @@ import { AddTaskComponent } from './add-task/add-task.component';
 import { NotificationComponent } from './notification/notification.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SettingsComponent } from './settings/settings.component'; // Importer le composant Settings
+import { StudentComponent } from './student/student.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboards', pathMatch: 'full' }, // Redirection par défaut vers le tableau de bord
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'notifications', component: NotificationComponent }, // Page des notifications
   { path: 'dashboards', component: DashboardComponent }, // Tableau de bord
   { path: 'settings', component: SettingsComponent }, // Page des paramètres
+  { path: 'students', component: StudentComponent }, // Route pour le composant étudiant
+
 ];
 
 @NgModule({

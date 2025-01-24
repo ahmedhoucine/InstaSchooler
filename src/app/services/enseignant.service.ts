@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EnseignantService {
-  private apiUrl = 'http://localhost:5000/enseignant'; // URL de l'API backend
+  private apiUrl = 'http://localhost:3000/enseignant'; // URL de l'API backend
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +21,7 @@ export class EnseignantService {
     return this.http.put<any>(url, enseignant);
   }
   sendTicket(ticket: any): Observable<any> {
-    const ticketApiUrl = 'http://localhost:5000/send-ticket';
+    const ticketApiUrl = 'http://localhost:3000/tickets';
     return this.http.post<any>(ticketApiUrl, ticket);
   }
   

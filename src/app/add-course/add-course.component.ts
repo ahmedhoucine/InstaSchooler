@@ -13,23 +13,24 @@ export class AddCourseComponent {
   onSubmit(courseForm: any): void {
     if (courseForm.valid) {
       const formData = new FormData();
-
+  
       // Ajout des données du formulaire
       formData.append('niveau', courseForm.value.niveau);
       formData.append('description', courseForm.value.description);
-      formData.append('duration', courseForm.value.duration);
-      formData.append('image', courseForm.value.image);
-
+      formData.append('duration', courseForm.value.duration.toString()); // Convertir en chaîne de caractères
+      formData.append('image', courseForm.value.image || '');
+  
       // Ajout du fichier PDF
       const pdfInput = document.querySelector('input[name="pdf"]');
       if (pdfInput && pdfInput instanceof HTMLInputElement) {
         const pdfFile = pdfInput.files?.[0];
-        formData.append('pdf', pdfFile as Blob);
+        if (pdfFile) {
+          formData.append('pdf', pdfFile as Blob);
+        }
       }
-      
-
+  
       // Envoi au backend
-      this.http.post('http://localhost:5000/add-course', formData).subscribe(
+      this.http.post('http://localhost:3000/courses', formData).subscribe(
         (response) => {
           alert('Cours ajouté avec succès !');
           this.router.navigate(['/courses']);
@@ -43,4 +44,4 @@ export class AddCourseComponent {
       alert('Veuillez remplir tous les champs obligatoires.');
     }
   }
-}
+}  

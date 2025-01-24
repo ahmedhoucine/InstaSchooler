@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CourseService {
-  private apiUrl = 'http://localhost:5000';
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 

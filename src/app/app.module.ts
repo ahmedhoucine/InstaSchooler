@@ -25,6 +25,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
 import { NotificationComponent } from './notification/notification.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
+import { StudentComponent } from './student/student.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { SettingsComponent } from './settings/settings.component';
     NotificationComponent,
     DashboardComponent,
     SettingsComponent,
+    StudentComponent,
   ],
   imports: [
     BrowserModule,
