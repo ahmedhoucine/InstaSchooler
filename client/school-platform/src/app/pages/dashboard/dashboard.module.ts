@@ -12,6 +12,7 @@ import { ListStudentsComponent } from './student/liststudents/liststudents.compo
 import { ListTeachersComponent } from './teacher/listteachers/listteachers.component';
 import { ListClassesComponent } from './class/listclasses/listclasses.component';
 import { EditstudentComponent } from './student/editstudent/editstudent.component';
+import { DashboardLoginComponent } from './auth/login/dashboard-login.component';
 
 
 
@@ -26,6 +27,7 @@ import { EditstudentComponent } from './student/editstudent/editstudent.componen
     ListTeachersComponent,
     ListClassesComponent,
     EditstudentComponent,
+    DashboardLoginComponent,
   ],
   imports: [
     CommonModule,

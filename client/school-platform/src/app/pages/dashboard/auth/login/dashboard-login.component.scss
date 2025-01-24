@@ -1,0 +1,102 @@
+/* login.component.css */
+
+/* Main container for centering */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4; /* Light gray background for subtle contrast */
+  }
+
+  /* Login form styling */
+  .login-form {
+    background-color: #fff; /* White background for the form */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px 30px; /* Padding around the form */
+    width: 100%;
+    max-width: 400px; /* Form width limit */
+    box-sizing: border-box;
+  }
+
+  /* Heading styling */
+  .login-form h1 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  /* Labels */
+  .login-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+
+  /* Input fields */
+  .login-form input[type="email"],
+  .login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  /* Submit button */
+  .login-form button {
+    width: 100%;
+    padding: 12px 0;
+    background-color: #4caf50; /* Green background */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Button hover effect */
+  .login-form button:hover {
+    background-color: #0c430f; /* Darker green on hover */
+  }
+
+  /* Footer link */
+  .login-form .form-footer {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+  }
+
+  .login-form .form-footer a {
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .login-form .form-footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .login-form {
+      padding: 15px 20px;
+    }
+
+    .login-form h1 {
+      font-size: 20px;
+    }
+
+    .login-form button {
+      font-size: 14px;
+    }
+  }
