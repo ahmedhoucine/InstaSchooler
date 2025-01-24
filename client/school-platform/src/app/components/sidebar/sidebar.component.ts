@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';  // Ensure this path is correct
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +10,10 @@ import { Router } from '@angular/router';
 export class SidebarComponent {
   isSidebarHidden = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService  // Inject AuthService
+  ) {}
 
   toggleSidebar() {
     this.isSidebarHidden = !this.isSidebarHidden;
@@ -29,5 +33,10 @@ export class SidebarComponent {
 
   navigateToClasses() {
     this.router.navigate(['dashboard/class/listclasses']);
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['dashboard/auth/login']);
   }
 }
