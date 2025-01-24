@@ -10,6 +10,7 @@ import { ClassModule } from './class/class.module';
 import { AuthModule } from './auth/auth.module';
 import { EventsModule } from './events/events.module';
 import { EventsController } from './events/events.controller';
+import { AuthAdminModule } from './auth/admin-auth/auth-admin.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { EventsController } from './events/events.controller';
     ClassModule,
     AuthModule,
     EventsModule,
+    AuthAdminModule,
   ],
   controllers: [AppController, EventsController],
   providers: [AppService],
