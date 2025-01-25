@@ -38,6 +38,8 @@ export class EditstudentComponent {
       parentPhone: [this.student.parentPhone],
       parentMobileNo: [this.student.parentMobileNo],
       parentAddress: [this.student.parentAddress],
+      niveau: [this.student.niveau,Validators.required]
+
         });
       }
 

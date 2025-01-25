@@ -35,6 +35,7 @@ export class AddStudentComponent implements OnInit {
       parentPhone: [''],
       parentMobileNo: [''],
       parentAddress: [''],
+      niveau: ['',Validators.required]
     });
   }
   
