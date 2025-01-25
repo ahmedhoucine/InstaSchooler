@@ -50,10 +50,21 @@
           <input
             type="text"
             id="name"
-            [(ngModel)]="enseignant.name"
+            [(ngModel)]="enseignant.lastName"
             name="name"
             required
             placeholder="Entrez votre nom"
+          />
+        </div>
+        <div class="form-group">
+          <label for="name">Prénom :</label>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="enseignant.firstname"
+            name="name"
+            required
+            placeholder="Entrez votre prénom"
           />
         </div>
         <div class="form-group">

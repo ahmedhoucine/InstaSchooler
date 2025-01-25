@@ -14,6 +14,7 @@ export class StudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchStudents(); // Charger les étudiants lors de l'initialisation
+    this.students
   }
 
   // Récupérer les étudiants par niveau
@@ -21,6 +22,7 @@ export class StudentComponent implements OnInit {
     this.studentService.getStudentsByNiveau(this.niveau).subscribe(
       (data) => {
         this.students = data;
+        console.log(data)
       },
       (error) => {
         console.error('Erreur lors de la récupération des étudiants :', error);

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EnseignantService {
-  private apiUrl = 'http://localhost:3000/enseignant'; // URL de l'API backend
+  private apiUrl = 'http://localhost:3000/school-platform/teacher'; // URL de l'API backend
 
   constructor(private http: HttpClient) {}
 
