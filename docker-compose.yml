@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: ./server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./client/school-platform:/usr/src/app/school-platform
+    command: npm start

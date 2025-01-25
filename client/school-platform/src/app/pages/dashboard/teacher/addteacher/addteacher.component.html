@@ -1,0 +1,65 @@
+<div class="container">
+  <h1>Teacher Registration</h1>
+  <div class="divider"></div>
+  <form [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
+    <!-- Personal Information Section -->
+    <div class="section">
+      <h2>Personal Information</h2>
+      <div class="form-group">
+        <label for="firstname">First Name *</label>
+        <input id="firstname" formControlName="firstname" />
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name *</label>
+        <input id="lastName" formControlName="lastName" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input id="email" type="email" formControlName="email" />
+      </div>
+    </div>
+
+   
+
+    <!-- Matiere Section -->
+    <div class="section">
+      <h2>Subject (Matiere)</h2>
+      <div class="form-group">
+        <label for="matiere">Subject *</label>
+        <select id="matiere" formControlName="matiere">
+          <option value="">Select Subject</option>
+          <option *ngFor="let subject of matiereOptions" [value]="subject">
+            {{ subject }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Employment Information -->
+    <div class="section">
+      <h2>Employment Information</h2>
+      <div class="radio-group">
+        <label>Paid *</label>
+        <label class="radio-label">Yes
+          <input type="radio" [value]="true" formControlName="isPaid" />
+        </label>
+        <label class="radio-label">No
+          <input type="radio" [value]="false" formControlName="isPaid" />
+        </label>
+      </div>
+      
+    </div>
+
+    <!-- Contact Information Section -->
+    <div class="section">
+      <h2>Contact Information</h2>
+      <div class="form-group">
+        <label for="phone">Phone *</label>
+        <input id="phone" formControlName="phone" />
+      </div>
+    </div>
+
+
+    <button type="submit" [disabled]="teacherForm.invalid">Create Teacher</button>
+  </form>
+</div>
