@@ -23,8 +23,8 @@ export class Student extends BaseSchema {
   @Prop({ type: String, required: false })
   username: string;
 
-  @Prop({ type: String, required: true })
-  niveau: string;
+  @Prop({ type: Number, required: true })
+  niveau: number;
 
 
   @Prop({ type: String, required: true })
@@ -59,6 +59,10 @@ export class Student extends BaseSchema {
 
   @Prop({ type: String })
   parentAddress: string;
+
+  @Prop({ type: String })
+  status: string;
+  
 }
 
 export const StudentSchema = SchemaFactory.createForClass(Student);

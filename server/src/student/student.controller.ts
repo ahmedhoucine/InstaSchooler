@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -6,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
@@ -20,7 +22,15 @@ export class StudentController {
   createStudent(@Body() createStudentDto: CreateStudentDto) {
     return this.studentService.createStudent(createStudentDto);
   }
-
+  //get by niveau
+  @Get()
+  async getStudentsByNiveau(@Query('niveau') niveau: string) {
+    const parsedNiveau = parseInt(niveau, 10);
+    if (isNaN(parsedNiveau)) {
+      throw new BadRequestException('Invalid niveau value');
+    }
+    return await this.studentService.getStudentsByNiveau(parsedNiveau);
+}
   // Récupérer tous les étudiants
   @Get('/all-students')
   getAllStudents() {
@@ -47,4 +57,6 @@ export class StudentController {
   deleteStudent(@Param('id') id: string) {
     return this.studentService.deleteStudent(id);
   }
+
+  
 }

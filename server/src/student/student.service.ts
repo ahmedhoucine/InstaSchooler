@@ -131,4 +131,7 @@ export class StudentService {
     }
     return student;
   }
+  async getStudentsByNiveau(niveau: number): Promise<Student[]> {
+    return await this.studentModel.find({ niveau });
+  }
 }
