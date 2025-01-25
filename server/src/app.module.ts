@@ -11,6 +11,9 @@ import { AuthModule } from './auth/auth.module';
 import { EventsModule } from './events/events.module';
 import { EventsController } from './events/events.controller';
 import { AuthAdminModule } from './auth/admin-auth/auth-admin.module';
+import { TaskModule } from './task/task.module';
+import { TicketModule } from './ticket/ticket.module';
+import { CourseModule } from './course/course.module';
 
 @Module({
   imports: [
@@ -26,6 +29,9 @@ import { AuthAdminModule } from './auth/admin-auth/auth-admin.module';
     AuthModule,
     EventsModule,
     AuthAdminModule,
+    TaskModule,
+    TicketModule,
+    CourseModule,
   ],
   controllers: [AppController, EventsController],
   providers: [AppService],
