@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { EventData } from 'src/app/modules/calendar/components/event-details-modal/event.model';
-
 
 @Injectable({
   providedIn: 'root'
@@ -17,17 +16,19 @@ export class EventService {
     return this.http.get<EventData>(`${this.baseUrl}/${id}`);
   }
 
-  // Create a new event
-  createEvent(event: EventData): Observable<EventData> {
-    return this.http.post<EventData>(this.baseUrl, event);
+ // Create a new event without fetching the profile
+createEvent(event: EventData): Observable<EventData> {
+  console.log('Event Data:', event); // Log the event data to check the studentId
+  console.log();
+  if (event.studentId) {
+    console.log('Creating event with studentId:', event.studentId);
+    return this.http.post<EventData>(this.baseUrl, event);  // Create the event
+  } else {
+    console.error('Student ID not found, cannot create event');
+    throw new Error('Student ID not found');  // Throw an error if no studentId found
   }
-
-  // Update an existing event
-  updateEvent(id: string, event: EventData): Observable<EventData> {
-console.log("---------------------------------",id);
-
-    return this.http.put<EventData>(`${this.baseUrl}/${id}` ,event);
-  }
+  
+}
 
   // Fetch all events
   getAllEvents(): Observable<EventData[]> {
@@ -38,4 +39,11 @@ console.log("---------------------------------",id);
   deleteEvent(id: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
+
+ 
+  // In events.service.ts
+updateEvent(id: string, eventData: EventData): Observable<EventData> {
+  return this.http.put<EventData>(`${this.baseUrl}/${id}`, eventData);
+}
+
 }

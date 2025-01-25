@@ -6,4 +6,6 @@ export interface EventData {
   startTime: string; // Time format (HH:mm)
   endDate: string;
   endTime: string;
+  studentId?: string;  // Add studentId as an optional property
+
 }

@@ -41,9 +41,11 @@ export class CalendarComponent implements OnInit {
   }
 
   loadEvents(): void {
+    console.log("helllllllllllllo",this.eventService);
     this.eventService.getAllEvents().subscribe(
       (events) => {
         console.log("events",events);
+        
         
         this.pinnedDates = events.map((event) => ({
           id: event._id,  // Assurez-vous que l'event a un id unique

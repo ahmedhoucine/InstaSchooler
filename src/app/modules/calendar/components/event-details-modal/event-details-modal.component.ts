@@ -1,6 +1,7 @@
-import { Component, Inject, NgZone } from '@angular/core';
+import { Component, Inject, NgZone, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EventService } from 'src/app/core/services/events.service';
+import { ProfileService } from 'src/app/core/services/profileEdit.service';
 import { EventData } from './event.model';
 
 @Component({
@@ -8,17 +9,47 @@ import { EventData } from './event.model';
   templateUrl: './event-details-modal.component.html',
   styleUrls: ['./event-details-modal.component.css']
 })
-export class EventDetailsModalComponent {
-  isLoading = false;
+export class EventDetailsModalComponent  implements OnInit {
+  profile = {
+    userId: '',
+    username: '',
+    email: '',
+    currentPassword: '',
+    password: '',
+    confirmPassword: '',
+    profilePicture: ''};
 
+  isLoading = false;
+  loading = false;
   constructor(
     public dialogRef: MatDialogRef<EventDetailsModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: EventData,
     private eventService: EventService,
-    private ngZone: NgZone // Inject Angular's NgZone service
+    private ngZone: NgZone ,// Inject Angular's NgZone service,
+    private profileService: ProfileService
   ) {}
+  ngOnInit(): void {
+    console.log('EditProfileComponent loaded');
+    this.fetchProfile();
+  }
+
+  fetchProfile(): void {
+    this.loading = true;
+    this.profileService.getProfile().subscribe(
+      (data) => {
+        this.profile = { ...data };
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching profile:', error);
+        this.loading = false;
+      }
+    );
+  }
 
   onSave(): void {
+    this.data.studentId=this.profile.userId;
+    console.log("tessssttt",this);
     if (this.isLoading) {
       console.warn('Save action is already in progress.');
       return;
