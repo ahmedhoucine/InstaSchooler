@@ -13,9 +13,11 @@
     <button routerLink="/student/edit-profile" class="edit-profile-btn">
       <mat-icon>edit</mat-icon> Edit Profile
     </button>
+
+    <!-- Profile Picture -->
     <img [src]="profile.profilePicture || defaultPicture" alt="Profile Picture" class="profile-pic" />
-
-    <span class="username">{{ profile.username }}</span>
-
+    
+    <!-- Username -->
+    <span class="username">{{ profile.username || 'Guest' }}</span>
   </div>
 </nav>

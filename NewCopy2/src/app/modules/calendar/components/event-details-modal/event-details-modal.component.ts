@@ -97,7 +97,22 @@ export class EventDetailsModalComponent  implements OnInit {
       });
     }
   }
-
+  onDelete(): void {
+    if (this.data._id) {
+      if (confirm('Are you sure you want to delete this event?')) {
+        this.eventService.deleteEvent(this.data._id).subscribe(
+          () => {
+            // Close the modal and send a delete action with the eventId back to the parent
+            this.dialogRef.close({ action: 'delete', eventId: this.data._id });
+          },
+          (error) => {
+            console.error('Error deleting event:', error);
+          }
+        );
+      }
+    }
+  }
+  
   onClose(): void {
     this.dialogRef.close(); // Close the dialog immediately
   }

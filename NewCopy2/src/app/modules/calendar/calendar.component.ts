@@ -140,30 +140,43 @@ export class CalendarComponent implements OnInit {
       width: '400px',
       data: eventData,
     });
-
+  
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const updatedEvent: EventInput = {
-          id: result._id,
-          title: result.title,
-          start: result.startDate,
-          end: result.endDate,
-          extendedProps: {
-            description: result.description,
-          },
-          color: this.getEventColor(result.endDate),
-        };
-
-        const eventIndex = this.pinnedDates.findIndex(event => event.id === updatedEvent.id);
-        if (eventIndex !== -1) {
-          this.pinnedDates[eventIndex] = updatedEvent;
+        if (result.action === 'delete') {
+          // Delete the event from pinnedDates
+          this.pinnedDates = this.pinnedDates.filter(event => event.id !== result.eventId);
+          // Update the calendar events after deletion
+          this.updateCalendarEvents();
         } else {
-          this.pinnedDates.push(updatedEvent);
+          const updatedEvent: EventInput = {
+            id: result._id,
+            title: result.title,
+            start: result.startDate,
+            end: result.endDate,
+            extendedProps: {
+              description: result.description,
+            },
+            color: this.getEventColor(result.endDate),
+          };
+  
+          const eventIndex = this.pinnedDates.findIndex(event => event.id === updatedEvent.id);
+          if (eventIndex !== -1) {
+            this.pinnedDates[eventIndex] = updatedEvent;
+          } else {
+            this.pinnedDates.push(updatedEvent);
+          }
+  
+          // Update the calendar events after update or addition
+          this.updateCalendarEvents();
         }
-
-        this.calendarOptions.events = [...this.pinnedDates];
-        this.cdRef.detectChanges(); 
       }
     });
   }
-}
+  
+  // Helper method to update the calendar events
+  updateCalendarEvents(): void {
+    this.calendarOptions.events = [...this.pinnedDates];
+    this.cdRef.detectChanges(); // Ensure the view is updated
+  }
+}  
