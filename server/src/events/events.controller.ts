@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete, Param, Query } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { MyEvent } from './schema/event.schema';
@@ -23,6 +23,13 @@ export class EventsController {
    }
  }
  
+ @Get('by-user')
+ async getEventsByUserId(@Query('userId') userId: string) {
+   if (!userId) {
+     throw new Error('userId is required');
+   }
+   return this.eventService.getEventsByUserId(userId);
+ }
   // GET /events - Retrieve all events
   @Get()
   async getAll(): Promise<MyEvent[]> {

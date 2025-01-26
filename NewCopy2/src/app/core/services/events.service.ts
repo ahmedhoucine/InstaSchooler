@@ -30,11 +30,16 @@ createEvent(event: EventData): Observable<EventData> {
   
 }
 
-  // Fetch all events
-  getAllEvents(): Observable<EventData[]> {
-    return this.http.get<EventData[]>(this.baseUrl);
-  }
+getEventsByUserId(userId: string): Observable<EventData[]> {
+  console.log('Fetching events for userId:', userId); 
+  return this.http.get<EventData[]>(`${this.baseUrl}/by-user?userId=${userId}`);
+}
 
+
+// Fetch all events
+getAllEvents(): Observable<EventData[]> {
+  return this.http.get<EventData[]>(this.baseUrl);  // Fetch all events
+}
   // Delete an event
   deleteEvent(id: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`);

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,35 +10,31 @@ export class ProfileService {
 
   constructor(private http: HttpClient) {}
 
+  private getAuthHeaders(): { Authorization: string } {
+    const token = localStorage.getItem('token') || '';
+    return { Authorization: `Bearer ${token}` };
+  }
+
   // Fetch the current user's profile
   getProfile(): Observable<any> {
-    const token = localStorage.getItem('token'); // Retrieve token
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+    return this.http.get(`${this.apiUrl}/profile`, {
+      headers: this.getAuthHeaders(),
     });
-
-    return this.http.get(`${this.apiUrl}/profile`, { headers });
   }
 
   // Update profile
   updateProfile(profile: any): Observable<any> {
-    const token = localStorage.getItem('token'); // Retrieve token
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
     return this.http.put(`${this.apiUrl}/profile/${profile.userId}`, profile, {
-      headers,
+      headers: this.getAuthHeaders(),
     });
   }
 
   // Validate current password
   validateCurrentPassword(currentPassword: string): Observable<boolean> {
-    const token = localStorage.getItem('token'); // Retrieve token
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.http.post<boolean>(`${this.apiUrl}/validate-password`, { currentPassword }, { headers });
+    return this.http.post<boolean>(
+      `${this.apiUrl}/validate-password`,
+      { currentPassword },
+      { headers: this.getAuthHeaders() }
+    );
   }
 }

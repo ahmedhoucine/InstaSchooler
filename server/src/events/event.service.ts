@@ -40,6 +40,17 @@ export class EventService {
 
     return savedEvent;
   }
+  // Get events by userId
+async getEventsByUserId(userId: string): Promise<MyEventDocument[]> {
+  const student = await this.studentModel.findById(userId).exec();
+  if (!student) {
+    throw new NotFoundException('Student not found');
+  }
+
+  // Fetch events associated with the student
+  return await this.eventModel.find({ student: userId }).exec();
+}
+
 
   // Get all events
   async getAllEvents(): Promise<MyEventDocument[]> {

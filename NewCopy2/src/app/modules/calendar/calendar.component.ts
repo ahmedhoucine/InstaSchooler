@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core'; 
 import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { MatDialog } from '@angular/material/dialog';
 import { EventDetailsModalComponent } from './components/event-details-modal/event-details-modal.component';
 import { EventService } from 'src/app/core/services/events.service';
+import { ProfileService } from 'src/app/core/services/profileEdit.service';
 
 @Component({
   selector: 'app-calendar',
@@ -13,6 +14,7 @@ import { EventService } from 'src/app/core/services/events.service';
 })
 export class CalendarComponent implements OnInit {
   pinnedDates: EventInput[] = [];
+  profile = { userId: '' }; // To store the userId from the profile
 
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
@@ -25,30 +27,50 @@ export class CalendarComponent implements OnInit {
       left: ''
     },
     select: this.handleDateRangeSelect.bind(this),
-    eventClick: this.handleEventClick.bind(this),  // Handler pour éditer les événements existants
+    eventClick: this.handleEventClick.bind(this),
     editable: true,
   };
 
   constructor(
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
-    private eventService: EventService
+    private eventService: EventService,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
-    this.loadEvents();
-    
+    this.fetchProfile();  // Fetch the profile on component init
   }
 
+  // Fetch the profile to get the userId dynamically
+  fetchProfile(): void {
+    this.profileService.getProfile().subscribe(
+      (data) => {
+        this.profile = { ...data };
+        this.loadEvents();  // After fetching profile, load events for the user
+      },
+      (error) => {
+        console.error('Error fetching profile:', error);
+      }
+    );
+  }
+
+  // Fetch events based on userId
   loadEvents(): void {
-    console.log("helllllllllllllo",this.eventService);
-    this.eventService.getAllEvents().subscribe(
+    const userId = this.profile.userId; // Get the userId from the profile
+
+    if (!userId) {
+      console.error('User ID is not available');
+      return; // Stop execution if userId is not found
+    }
+
+    console.log("Fetching events for userId:", userId);
+    
+    this.eventService.getEventsByUserId(userId).subscribe(
       (events) => {
-        console.log("events",events);
-        
-        
+        console.log("events", events);
         this.pinnedDates = events.map((event) => ({
-          id: event._id,  // Assurez-vous que l'event a un id unique
+          id: event._id,
           title: event.title,
           start: event.startDate,
           end: event.endDate,
@@ -57,10 +79,8 @@ export class CalendarComponent implements OnInit {
         }));
 
         console.log("pinnedDates", this.pinnedDates);
-        
-
         this.calendarOptions.events = [...this.pinnedDates];
-        this.cdRef.detectChanges();
+        this.cdRef.detectChanges(); // Ensure the view is updated
       },
       (error) => {
         console.error('Error fetching events:', error);
@@ -86,8 +106,6 @@ export class CalendarComponent implements OnInit {
       return 'rgba(61, 123, 61, 0.5)';
     }
   }
-  
-
 
   handleDateRangeSelect(arg: any): void {
     const adjustedEndDate = new Date(arg.endStr);
@@ -103,10 +121,9 @@ export class CalendarComponent implements OnInit {
     this.openEventModal(newEvent);
   }
 
-  // Handler pour éditer un événement existant
   handleEventClick(arg: any): void {
-    console.log("----arg",arg);
-    
+    console.log("----arg", arg);
+
     const eventToEdit = {
       _id: arg.event.id,
       title: arg.event.title,
@@ -119,37 +136,34 @@ export class CalendarComponent implements OnInit {
   }
 
   openEventModal(eventData: any): void {
-  const dialogRef = this.dialog.open(EventDetailsModalComponent, {
-    width: '400px',
-    data: eventData,
-  });
+    const dialogRef = this.dialog.open(EventDetailsModalComponent, {
+      width: '400px',
+      data: eventData,
+    });
 
-  dialogRef.afterClosed().subscribe((result) => {
-    if (result) {
-      const updatedEvent: EventInput = {
-        id: result._id,  // Conservez le même id pour mettre à jour l'événement
-        title: result.title,
-        start: result.startDate,
-        end: result.endDate,
-        extendedProps: {
-          description: result.description,
-        },
-        color: this.getEventColor(result.endDate), // Recalcule la couleur
-      };
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const updatedEvent: EventInput = {
+          id: result._id,
+          title: result.title,
+          start: result.startDate,
+          end: result.endDate,
+          extendedProps: {
+            description: result.description,
+          },
+          color: this.getEventColor(result.endDate),
+        };
 
-      // Mise à jour de l'événement dans le tableau des événements
-      const eventIndex = this.pinnedDates.findIndex(event => event.id === updatedEvent.id);
-      if (eventIndex !== -1) {
-        this.pinnedDates[eventIndex] = updatedEvent; // Remplace l'événement dans le tableau
-      } else {
-        this.pinnedDates.push(updatedEvent); // Ajoute un nouvel événement si nécessaire
+        const eventIndex = this.pinnedDates.findIndex(event => event.id === updatedEvent.id);
+        if (eventIndex !== -1) {
+          this.pinnedDates[eventIndex] = updatedEvent;
+        } else {
+          this.pinnedDates.push(updatedEvent);
+        }
+
+        this.calendarOptions.events = [...this.pinnedDates];
+        this.cdRef.detectChanges(); 
       }
-
-      // Rafraîchit les événements du calendrier
-      this.calendarOptions.events = [...this.pinnedDates];
-      this.cdRef.detectChanges(); // Assure la mise à jour immédiate de la vue
-    }
-  });
-}
-
+    });
+  }
 }
