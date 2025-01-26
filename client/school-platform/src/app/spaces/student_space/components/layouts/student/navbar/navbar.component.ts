@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfileService } from 'src/app/spaces/teacher_space/services/profileEdit.service';
+import { ProfileService } from 'src/app/spaces/student_space/services/profileEdit.service';
 
 @Component({
   selector: 'app-navbar',

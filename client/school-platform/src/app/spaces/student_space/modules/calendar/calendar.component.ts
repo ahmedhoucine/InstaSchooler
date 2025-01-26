@@ -1,11 +1,12 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core'; 
 import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { MatDialog } from '@angular/material/dialog';
 import { EventDetailsModalComponent } from './components/event-details-modal/event-details-modal.component';
-import { EventService } from 'src/app/spaces/teacher_space/services/events.service';
-import { ProfileService } from 'src/app/spaces/teacher_space/services/profileEdit.service';
+import { ProfileService } from '../../services/profileEdit.service';
+import { EventService } from '../../services/events.service';
+;
 
 @Component({
   selector: 'app-calendar',
@@ -65,7 +66,7 @@ export class CalendarComponent implements OnInit {
     }
 
     console.log("Fetching events for userId:", userId);
-
+    
     this.eventService.getEventsByUserId(userId).subscribe(
       (events) => {
         console.log("events", events);
@@ -91,13 +92,13 @@ export class CalendarComponent implements OnInit {
   getEventColor(endDate: string): string {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
+  
     const eventEndDate = new Date(endDate);
     eventEndDate.setHours(0, 0, 0, 0);
-
+  
     console.log('Today:', today);
     console.log('Event End Date:', eventEndDate);
-
+  
     if (eventEndDate < today) {
       console.log('Color: Red');
       return 'rgba(255, 0, 0, 0.3)';
@@ -140,30 +141,43 @@ export class CalendarComponent implements OnInit {
       width: '400px',
       data: eventData,
     });
-
+  
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const updatedEvent: EventInput = {
-          id: result._id,
-          title: result.title,
-          start: result.startDate,
-          end: result.endDate,
-          extendedProps: {
-            description: result.description,
-          },
-          color: this.getEventColor(result.endDate),
-        };
-
-        const eventIndex = this.pinnedDates.findIndex(event => event.id === updatedEvent.id);
-        if (eventIndex !== -1) {
-          this.pinnedDates[eventIndex] = updatedEvent;
+        if (result.action === 'delete') {
+          // Delete the event from pinnedDates
+          this.pinnedDates = this.pinnedDates.filter(event => event.id !== result.eventId);
+          // Update the calendar events after deletion
+          this.updateCalendarEvents();
         } else {
-          this.pinnedDates.push(updatedEvent);
+          const updatedEvent: EventInput = {
+            id: result._id,
+            title: result.title,
+            start: result.startDate,
+            end: result.endDate,
+            extendedProps: {
+              description: result.description,
+            },
+            color: this.getEventColor(result.endDate),
+          };
+  
+          const eventIndex = this.pinnedDates.findIndex(event => event.id === updatedEvent.id);
+          if (eventIndex !== -1) {
+            this.pinnedDates[eventIndex] = updatedEvent;
+          } else {
+            this.pinnedDates.push(updatedEvent);
+          }
+  
+          // Update the calendar events after update or addition
+          this.updateCalendarEvents();
         }
-
-        this.calendarOptions.events = [...this.pinnedDates];
-        this.cdRef.detectChanges();
       }
     });
   }
-}
+  
+  // Helper method to update the calendar events
+  updateCalendarEvents(): void {
+    this.calendarOptions.events = [...this.pinnedDates];
+    this.cdRef.detectChanges(); // Ensure the view is updated
+  }
+}  

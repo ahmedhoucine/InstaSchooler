@@ -1,8 +1,9 @@
 import { Component, Inject, NgZone, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { EventService } from 'src/app/spaces/teacher_space/services/events.service';
-import { ProfileService } from 'src/app/spaces/teacher_space/services/profileEdit.service';
+
 import { EventData } from './event.model';
+import { ProfileService } from 'src/app/spaces/student_space/services/profileEdit.service';
+import { EventService } from 'src/app/spaces/student_space/services/events.service';
 
 @Component({
   selector: 'app-event-details-modal',
@@ -55,7 +56,7 @@ export class EventDetailsModalComponent  implements OnInit {
       return;
     }
 
-
+    
 
     this.isLoading = true;
 
@@ -65,12 +66,12 @@ export class EventDetailsModalComponent  implements OnInit {
     });
 
     console.log("hello", this.data);
-
+    
 
     // If the event has an ID, update it; otherwise, create a new event
     if (this.data._id) {
       console.log("helloo ---",this.data);
-
+      
       this.eventService.updateEvent(this.data._id, this.data).subscribe({
         next: (response) => {
           console.log('Event updated successfully:', response);
@@ -97,7 +98,22 @@ export class EventDetailsModalComponent  implements OnInit {
       });
     }
   }
-
+  onDelete(): void {
+    if (this.data._id) {
+      if (confirm('Are you sure you want to delete this event?')) {
+        this.eventService.deleteEvent(this.data._id).subscribe(
+          () => {
+            // Close the modal and send a delete action with the eventId back to the parent
+            this.dialogRef.close({ action: 'delete', eventId: this.data._id });
+          },
+          (error) => {
+            console.error('Error deleting event:', error);
+          }
+        );
+      }
+    }
+  }
+  
   onClose(): void {
     this.dialogRef.close(); // Close the dialog immediately
   }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { EventData } from 'src/app/spaces/teacher_space/modules/calendar/components/event-details-modal/event.model';
+import { EventData } from 'src/app/spaces/student_space/modules/calendar/components/event-details-modal/event.model';
 import { environment } from 'src/environment';
 
 @Injectable({

@@ -6,6 +6,7 @@ import {
   Matches,
   MinLength,
   IsOptional,
+  IsNumber,
 } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 
@@ -37,6 +38,12 @@ export class CreateStudentDto {
   @IsEmail()
   @IsNotEmpty()
   parentEmail: string;
+
+  
+  @IsNumber()
+  @IsNotEmpty()
+  niveau: number; // Change to number
+  
 
   @IsNotEmpty()
   @Matches(/^([2459])[0-9]{7}$/, {

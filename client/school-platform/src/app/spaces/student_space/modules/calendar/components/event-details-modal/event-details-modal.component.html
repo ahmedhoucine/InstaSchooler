@@ -44,7 +44,11 @@
   </div>
 </div>
 
-<div mat-dialog-actions class="modal-actions">
+<div mat-dialog-actions align="end" class="modal-actions">
   <button mat-button class="cancel-button" (click)="onClose()">Cancel</button>
+  
+  <!-- Delete Button (shown only when editing an event) -->
+  <button *ngIf="data._id" mat-raised-button color="warn" (click)="onDelete()">Delete</button>
+
   <button mat-raised-button color="primary" (click)="onSave()">Save</button>
 </div>
