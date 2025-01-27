@@ -12,22 +12,33 @@ const routes: Routes = [
   // Student routes protected by AuthGuard
   {
     path: 'student',
-    loadChildren: () => import('./spaces/student_space/components/layouts/student/student.module').then(m => m.StudentModule),
-    canActivate: [AuthGuard]
+    loadChildren: () =>
+      import('./spaces/student_space/components/layouts/student/student.module').then(
+        m => m.StudentModule
+      ),
+    canActivate: [AuthGuard],
   },
 
-  // Lazy load the dashboard module
-  { path: 'dashboard', loadChildren: () => import('./spaces/dashboard/dashboard.module').then(m => m.DashboardModule) },
-
   // Student space routes
-  { path: 'student-space', loadChildren: () => import('./spaces/student_space/student.module').then(m => m.StudentModule) },
+  {
+    path: 'student-space',
+    loadChildren: () =>
+      import('./spaces/student_space/student.module').then(m => m.StudentModule)
+  },
+
+  // Teacher space routes
+  {
+    path: 'teacher-space',
+    loadChildren: () =>
+      import('./spaces/teacher_space/teacher.module').then(m => m.TeacherModule),
+  },
 
   // Fallback route for unmatched paths
-  { path: '**', redirectTo: 'auth/login' }
+  { path: '**', redirectTo: '/auth/login' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

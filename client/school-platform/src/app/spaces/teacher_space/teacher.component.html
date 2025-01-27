@@ -1,0 +1,70 @@
+<!-- Affichage principal si l'utilisateur n'est pas sur la page de connexion -->
+<mat-sidenav-container *ngIf="!isLoginPage" class="main-container">
+  <!-- Sidebar -->
+  <mat-sidenav mode="side" opened [class.collapsed]="isCollapsed" class="sidebar">
+    <div class="sidebar-header">
+      <img src="\assets\image.png" alt="Logo" class="logo" />
+      <span *ngIf="!isCollapsed"></span>
+    </div>
+
+    <!-- Collapse Button -->
+    <button class="sidebar-toggle" (click)="toggleSidebar()">
+      <span class="hamburger-icon" [class.collapsed]="isCollapsed">
+        <span class="line top"></span>
+        <span class="line middle"></span>
+        <span class="line bottom"></span>
+      </span>
+    </button>
+
+    <!-- Navigation List -->
+    <mat-nav-list>
+      <a mat-list-item routerLink="/courses">
+        <mat-icon>touch_app</mat-icon>
+        <span *ngIf="!isCollapsed">Cours</span>
+      </a>
+      <a mat-list-item routerLink="/dashboards">
+        <mat-icon>dashboard</mat-icon>
+        <span *ngIf="!isCollapsed">Tableau de bord</span>
+      </a>
+      <a mat-list-item routerLink="/liste">
+        <mat-icon>list</mat-icon>
+        <span *ngIf="!isCollapsed">Tasks</span>
+      </a>
+      <a mat-list-item routerLink="/notifications">
+        <mat-icon>notifications</mat-icon>
+        <span *ngIf="!isCollapsed">Notification</span>
+      </a>
+      <a mat-list-item routerLink="/students">
+        <mat-icon>group</mat-icon>
+        <span *ngIf="!isCollapsed">Étudiants</span>
+      </a>
+      <a mat-list-item routerLink="/settings">
+        <mat-icon>settings</mat-icon>
+        <span *ngIf="!isCollapsed">Paramètres</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="profile-actions">
+        <button class="logout-btn" (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon> Logout
+        </button>
+        <button routerLink="/settings" class="edit-profile-btn">
+          <mat-icon>edit</mat-icon> Edit Profile
+        </button>
+        <img [src]="enseignant.profileImage" alt="Profile" class="profile-pic" />
+      </div>
+    </nav>
+    <!-- Dynamic Content -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- Page de connexion autonome -->
+<div *ngIf="isLoginPage">
+  <router-outlet></router-outlet>
+</div>

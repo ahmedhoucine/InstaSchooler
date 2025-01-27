@@ -8,6 +8,7 @@ import { StudentComponent } from './student.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditProfileModule } from './modules/edit-profile/edit-profil.module';
 import { CoreModule } from '../../core/core.module';
+import { environment } from '../../../environment'; // Import environment
 
 
 // Function to get the token from localStorage
@@ -30,8 +31,8 @@ export function jwtTokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: jwtTokenGetter, // Set the function to get the JWT token
-        allowedDomains: ['localhost:3000'],  // Add your API's domains here
-        disallowedRoutes: ['localhost:3000/auth/login'],  // Add routes that shouldn't require JWT
+        allowedDomains: [new URL(environment.apiUrl).host],  // Add your API's domains here
+        disallowedRoutes: [`${environment.apiUrl}/auth/login`],  // Add routes that shouldn't require JWT
       }
     })
   ],

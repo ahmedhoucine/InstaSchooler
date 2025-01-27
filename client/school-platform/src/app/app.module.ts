@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { DashboardModule } from '../app/spaces/dashboard/dashboard.module';
+import { TeacherModule } from '../app/spaces/teacher_space/teacher.module';
+import { StudentModule } from '../app/spaces/student_space/student.module';
 import { SharedModule } from './shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { EditProfileModule } from './spaces/student_space/modules/edit-profile/edit-profil.module';
@@ -29,6 +31,8 @@ export function jwtTokenGetter() {
     BrowserAnimationsModule,  // Required for toastr and JWT functionality
     EditProfileModule,
     DashboardModule,
+    StudentModule,
+    TeacherModule,
     SharedModule,
     ToastrModule.forRoot({    // Make sure you call forRoot() in the app module
       timeOut: 3000,          // Default timeout for toasts
