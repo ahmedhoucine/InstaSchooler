@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'teacher-root',
+  selector: 'student-root',
   template: `<router-outlet></router-outlet>`, // Ensures child routes render here
-  styleUrls: ['./teacher.component.css'],
+  styleUrls: ['./student.component.css'],
 })
 export class StudentComponent implements OnInit {
   title: any;
