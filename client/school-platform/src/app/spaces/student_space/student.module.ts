@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';  // Import JwtModule
-import { TeacherRoutingModule } from './teacher-routing.module';
-import { TeacherComponent } from './teacher.component';
+import { StudentRoutingModule } from './student-routing.module';
+import { StudentComponent } from './student.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditProfileModule } from './modules/edit-profile/edit-profil.module';
@@ -17,12 +17,12 @@ export function jwtTokenGetter() {
 
 @NgModule({
   declarations: [
-    TeacherComponent,
+    StudentComponent,
 
   ],
   imports: [
     BrowserModule,
-    TeacherRoutingModule,
+    StudentRoutingModule,
     CoreModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -36,6 +36,6 @@ export function jwtTokenGetter() {
     })
   ],
   providers: [],  // No need to add JwtHelperService here
-  bootstrap: [TeacherComponent]
+  bootstrap: [StudentComponent]
 })
-export class TeacherModule { }
+export class StudentModule { }

@@ -5,9 +5,9 @@ import { Component, OnInit } from '@angular/core';
   template: `<router-outlet></router-outlet>`, // Ensures child routes render here
   styleUrls: ['./teacher.component.css'],
 })
-export class TeacherComponent implements OnInit {
+export class StudentComponent implements OnInit {
   title: any;
   ngOnInit() {
-    console.log('TeacherComponent initialized'); // Debug message
+    console.log('StudentComponent initialized'); // Debug message
   }
 }
