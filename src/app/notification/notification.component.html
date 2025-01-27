@@ -4,11 +4,10 @@
 <br>
 <br>
 <div class="notification-container">
-  <!-- Ring au-dessus -->
   <div class="notification-ring">
     <div class="ring-icon">
       <mat-icon>notifications</mat-icon>
-      <span class="notification-badge">1</span>
+      <span class="notification-badge">{{ tasksToday.length }}</span>
     </div>
   </div>
 
@@ -18,14 +17,9 @@
 
   <div *ngIf="tasksToday.length > 0" class="task-list">
     <div class="task-item" *ngFor="let task of tasksToday">
-      <div class="notification-icon">
-        <mat-icon>notifications</mat-icon>
-      </div>
-      <div class="task-details">
-        <h3>{{ task.title }}</h3>
-        <p>{{ task.description }}</p>
-        <p><strong>Date :</strong> {{ task.date }}</p>
-      </div>
+      <h3>{{ task.title }}</h3>
+      <p>{{ task.description }}</p>
+      <p><strong>Date :</strong> {{ task.date }}</p>
     </div>
   </div>
 </div>

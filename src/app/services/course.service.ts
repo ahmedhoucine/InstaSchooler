@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map } from 'rxjs/operators'; // Correction ici
 
 @Injectable({
   providedIn: 'root',
@@ -11,18 +11,20 @@ export class CourseService {
 
   constructor(private http: HttpClient) {}
 
-  // Ajouter un cours
-  addCourse(course: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/add-course`, course);
+  addCourse(course: any, token: string): Observable<any> {
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.post(`${this.apiUrl}/courses`, course, { headers });
   }
 
-  // Récupérer tous les cours
-  getCourses(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/courses`);
+  getCoursesByTeacher(token: string): Observable<any[]> {
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<any[]>(`${this.apiUrl}/courses/by-teacher`, { headers });
   }
 
-  // Récupérer le nombre de cours
-  getCourseCount(): Observable<number> {
-    return this.getCourses().pipe(map((courses) => courses.length));
+  getCourseCountByTeacher(token: string): Observable<number> {
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<{ count: number }>(`${this.apiUrl}/courses/count`, { headers }).pipe(
+      map((response: { count: number }) => response.count) // Correction ici
+    );
   }
 }

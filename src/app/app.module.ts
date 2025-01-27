@@ -26,6 +26,9 @@ import { NotificationComponent } from './notification/notification.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StudentComponent } from './student/student.component';
+import { LoginComponent } from './login/login.component';
+import { TeacherRegisterComponent } from './teacher-register/teacher-register.component';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { StudentComponent } from './student/student.component';
     DashboardComponent,
     SettingsComponent,
     StudentComponent,
+    LoginComponent,
+    TeacherRegisterComponent,
+ 
   ],
   imports: [
     BrowserModule,

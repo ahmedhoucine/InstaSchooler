@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-liste',
@@ -9,15 +9,15 @@ import { HttpClient } from '@angular/common/http';
 export class ListeComponent implements OnInit {
   tasks: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
     this.fetchTasks();
   }
 
   fetchTasks(): void {
-    this.http.get('http://localhost:3000/tasks').subscribe(
-      (response: any) => {
+    this.taskService.getTasks().subscribe(
+      (response) => {
         this.tasks = response;
       },
       (error) => {

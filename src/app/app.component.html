@@ -1,4 +1,5 @@
-<mat-sidenav-container class="main-container">
+<!-- Affichage principal si l'utilisateur n'est pas sur la page de connexion -->
+<mat-sidenav-container *ngIf="!isLoginPage" class="main-container">
   <!-- Sidebar -->
   <mat-sidenav mode="side" opened [class.collapsed]="isCollapsed" class="sidebar">
     <div class="sidebar-header">
@@ -48,20 +49,22 @@
   <mat-sidenav-content>
     <!-- Navbar -->
     <nav class="navbar">
-      <div class="logo">
-        <img src="" alt="Logo" />
-      </div>
       <div class="profile-actions">
-        <button class="logout-btn">
+        <button class="logout-btn" (click)="logout()">
           <mat-icon>exit_to_app</mat-icon> Logout
         </button>
         <button routerLink="/settings" class="edit-profile-btn">
           <mat-icon>edit</mat-icon> Edit Profile
         </button>
-        <img src="assets/image/OIP.jpg" alt="Profile" class="profile-pic" />
+        <img [src]="enseignant.profileImage" alt="Profile" class="profile-pic" />
       </div>
     </nav>
     <!-- Dynamic Content -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<!-- Page de connexion autonome -->
+<div *ngIf="isLoginPage">
+  <router-outlet></router-outlet>
+</div>

@@ -11,17 +11,12 @@ export class CourseService {
     const course = new this.courseModel(courseData);
     return course.save();
   }
-  
-  async findAll(): Promise<Course[]> {
-    return this.courseModel.find().exec();
+
+  async findByTeacher(teacherId: string): Promise<Course[]> {
+    return this.courseModel.find({ teacher: teacherId }).exec();
   }
 
-  async findById(id: string): Promise<Course | null> {
-    return this.courseModel.findById(id).exec();
+  async countByTeacher(teacherId: string): Promise<number> {
+    return this.courseModel.countDocuments({ teacher: teacherId }).exec();
   }
-  
-  async delete(id: string): Promise<Course | null> {
-    return this.courseModel.findByIdAndDelete(id).exec();
-  }
-  
 }

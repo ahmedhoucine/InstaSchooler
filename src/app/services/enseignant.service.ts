@@ -6,23 +6,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EnseignantService {
-  private apiUrl = 'http://localhost:3000/enseignant'; // URL de l'API backend
+  private apiUrl = 'http://localhost:3000/teachers';
 
   constructor(private http: HttpClient) {}
 
-  // Récupérer les données des enseignants
-  getEnseignants(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getEnseignantDetails(): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<any>(`${this.apiUrl}/me`, { headers });
   }
 
-  // Mettre à jour les données d'un enseignant
   updateEnseignant(enseignant: any): Observable<any> {
-    const url = `${this.apiUrl}/${enseignant._id}`;
-    return this.http.put<any>(url, enseignant);
+    const token = localStorage.getItem('authToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.put<any>(`${this.apiUrl}/me`, enseignant, { headers });
   }
+
   sendTicket(ticket: any): Observable<any> {
-    const ticketApiUrl = 'http://localhost:3000/tickets';
-    return this.http.post<any>(ticketApiUrl, ticket);
+    return this.http.post('http://localhost:3000/tickets', ticket);
   }
-  
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-notification',
@@ -9,23 +9,19 @@ import { HttpClient } from '@angular/common/http';
 export class NotificationComponent implements OnInit {
   tasksToday: any[] = []; // Liste des tâches du jour
 
-  constructor(private http: HttpClient) {}
+  constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
     this.fetchTodayTasks(); // Récupérer les tâches du jour au chargement
   }
 
-  // Méthode pour récupérer uniquement les tâches du jour
   fetchTodayTasks(): void {
-    const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
-
-    this.http.get<any[]>('http://localhost:3000/tasks').subscribe(
+    this.taskService.getTasksForToday().subscribe(
       (tasks) => {
-        // Filtrer les tâches du jour en comparant uniquement avec le champ `date`
-        this.tasksToday = tasks.filter((task) => task.date === today);
+        this.tasksToday = tasks;
       },
       (error) => {
-        console.error('Erreur lors de la récupération des tâches :', error);
+        console.error('Erreur lors de la récupération des tâches du jour :', error);
       }
     );
   }

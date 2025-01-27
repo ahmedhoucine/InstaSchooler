@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { TaskService } from '../services/task.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-task.component.scss'],
 })
 export class AddTaskComponent {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private taskService: TaskService, private router: Router) {}
 
   onSubmit(taskForm: any): void {
     if (taskForm.valid) {
@@ -18,8 +18,8 @@ export class AddTaskComponent {
         date: taskForm.value.date,
       };
 
-      this.http.post('http://localhost:3000/tasks', taskData).subscribe(
-        (response) => {
+      this.taskService.addTask(taskData).subscribe(
+        () => {
           alert('Tâche ajoutée avec succès !');
           this.router.navigate(['/tasks']);
         },

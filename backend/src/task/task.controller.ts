@@ -1,26 +1,29 @@
-import { Body, Controller, Get, Post, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards, Request } from '@nestjs/common';
+import { JwtAuthGuard } from '../teacher/teacher-jwt.guard';
 import { TaskService } from './task.service';
-import { Task } from './task.schema';
 
 @Controller('tasks')
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
-  // Ajouter une tâche
+  @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() taskData: Partial<Task>): Promise<Task> {
-    return this.taskService.create(taskData);
+  async create(@Request() req, @Body() taskData: any) {
+    const teacherId = req.user.id;
+    return this.taskService.create({ ...taskData, teacher: teacherId });
   }
 
-  // Récupérer toutes les tâches
+  @UseGuards(JwtAuthGuard)
   @Get()
-  async findAll(): Promise<Task[]> {
-    return this.taskService.findAll();
+  async findAllByTeacher(@Request() req) {
+    const teacherId = req.user.id;
+    return this.taskService.findAllByTeacher(teacherId);
   }
 
-  // Récupérer une tâche par ID
-  @Get(':id')
-  async findById(@Param('id') id: string): Promise<Task> {
-    return this.taskService.findById(id);
+  @UseGuards(JwtAuthGuard)
+  @Get('today')
+  async getTasksForToday(@Request() req) {
+    const teacherId = req.user.id;
+    return this.taskService.getTasksForToday(teacherId);
   }
 }

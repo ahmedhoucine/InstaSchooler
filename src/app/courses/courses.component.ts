@@ -1,26 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from '../services/course.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss']
+  styleUrls: ['./courses.component.scss'],
 })
 export class CoursesComponent implements OnInit {
-  groupedCourses: { [key: string]: any[] } = {}; // Cours regroupés par niveau
+  groupedCourses: { [key: string]: any[] } = {};
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit(): void {
-    this.fetchCourses(); // Charger les cours dès l'initialisation
+    this.fetchCourses();
   }
 
   fetchCourses(): void {
-    this.courseService.getCourses().subscribe(
-      (response) => {
-        // Regrouper les cours par niveau
+    const token = this.authService.getToken();
+    if (!token) {
+      alert('Vous devez être connecté pour voir vos cours.');
+      return;
+    }
+
+    this.courseService.getCoursesByTeacher(token).subscribe({
+      next: (response) => {
         this.groupedCourses = response.reduce((groups: any, course: any) => {
-          const niveau = course.niveau || 'Autre'; // Utiliser "Autre" si le niveau est manquant
+          const niveau = course.niveau || 'Autre';
           if (!groups[niveau]) {
             groups[niveau] = [];
           }
@@ -28,13 +37,12 @@ export class CoursesComponent implements OnInit {
           return groups;
         }, {});
       },
-      (error) => {
+      error: (error) => {
         console.error('Erreur lors de la récupération des cours :', error);
-      }
-    );
+      },
+    });
   }
 
-  // Helper pour obtenir les clés de groupedCourses
   getNiveaux(): string[] {
     return Object.keys(this.groupedCourses);
   }

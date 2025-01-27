@@ -8,6 +8,11 @@ import { NotificationComponent } from './notification/notification.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SettingsComponent } from './settings/settings.component'; // Importer le composant Settings
 import { StudentComponent } from './student/student.component';
+import { LoginComponent } from './login/login.component';
+import { TeacherRegisterComponent } from './teacher-register/teacher-register.component';
+
+
+
 
 
 const routes: Routes = [
@@ -20,6 +25,10 @@ const routes: Routes = [
   { path: 'dashboards', component: DashboardComponent }, // Tableau de bord
   { path: 'settings', component: SettingsComponent }, // Page des paramètres
   { path: 'students', component: StudentComponent }, // Route pour le composant étudiant
+  { path: 'login', component: LoginComponent },
+  { path: 'register-teacher', component: TeacherRegisterComponent },
+
+
 
 ];
 

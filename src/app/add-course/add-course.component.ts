@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-add-course',
@@ -8,40 +9,45 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-course.component.scss'],
 })
 export class AddCourseComponent {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService,
+  ) {}
 
   onSubmit(courseForm: any): void {
     if (courseForm.valid) {
+      const token = this.authService.getToken();
+      if (!token) {
+        alert('Vous devez être connecté pour ajouter un cours.');
+        return;
+      }
+
       const formData = new FormData();
-  
-      // Ajout des données du formulaire
       formData.append('niveau', courseForm.value.niveau);
       formData.append('description', courseForm.value.description);
-      formData.append('duration', courseForm.value.duration.toString()); // Convertir en chaîne de caractères
+      formData.append('duration', courseForm.value.duration.toString());
       formData.append('image', courseForm.value.image || '');
-  
-      // Ajout du fichier PDF
-      const pdfInput = document.querySelector('input[name="pdf"]');
-      if (pdfInput && pdfInput instanceof HTMLInputElement) {
-        const pdfFile = pdfInput.files?.[0];
-        if (pdfFile) {
-          formData.append('pdf', pdfFile as Blob);
-        }
+
+      const pdfInput = document.querySelector('input[name="pdf"]') as HTMLInputElement;
+      if (pdfInput?.files?.[0]) {
+        formData.append('pdf', pdfInput.files[0]);
       }
-  
-      // Envoi au backend
-      this.http.post('http://localhost:3000/courses', formData).subscribe(
-        (response) => {
+
+      this.http.post('http://localhost:3000/courses', formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).subscribe({
+        next: () => {
           alert('Cours ajouté avec succès !');
           this.router.navigate(['/courses']);
         },
-        (error) => {
+        error: (error) => {
           console.error('Erreur lors de l\'ajout du cours :', error);
           alert('Erreur lors de l\'ajout du cours.');
-        }
-      );
+        },
+      });
     } else {
       alert('Veuillez remplir tous les champs obligatoires.');
     }
   }
-}  
+}

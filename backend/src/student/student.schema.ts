@@ -13,7 +13,10 @@ export class Student {
   niveau: number;
 
   @Prop({ default: 'Absent' })
-  status: string; // Présent ou Absent
+  status: string;
+
+  @Prop({ required: true })
+  teacherId: string; // Ajout de l'ID de l'enseignant
 }
 
 export type StudentDocument = Student & Document;

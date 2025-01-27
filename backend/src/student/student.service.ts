@@ -9,8 +9,8 @@ export class StudentService {
     @InjectModel(Student.name) private readonly studentModel: Model<StudentDocument>,
   ) {}
 
-  async getStudentsByNiveau(niveau: number): Promise<Student[]> {
-    return this.studentModel.find({ niveau }).exec();
+  async getStudentsByNiveau(niveau: number, teacherId: string): Promise<Student[]> {
+    return this.studentModel.find({ niveau, teacher: teacherId }).exec();
   }
 
   async updateStudentsStatus(studentUpdates: { id: string; status: string }[]): Promise<void> {
@@ -19,8 +19,9 @@ export class StudentService {
     }
   }
 
-  async getAbsenceStats() {
+  async getAbsenceStats(teacherId: string) {
     const levels = await this.studentModel.aggregate([
+      { $match: { teacher: teacherId } },
       {
         $group: {
           _id: '$niveau',
@@ -42,7 +43,13 @@ export class StudentService {
 
     return levels;
   }
-  async getTotalStudents(): Promise<number> {
-    return this.studentModel.countDocuments().exec();
+
+  async getTotalStudents(teacherId: string): Promise<number> {
+    return this.studentModel.countDocuments({ teacher: teacherId }).exec();
+  }
+
+  async createStudent(studentData: Partial<Student>): Promise<Student> {
+    const student = new this.studentModel(studentData);
+    return student.save();
   }
 }

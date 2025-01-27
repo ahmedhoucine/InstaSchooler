@@ -10,27 +10,24 @@ export class SettingsComponent implements OnInit {
   enseignant: any = {
     name: '',
     email: '',
-    theme: 'light', // Valeur par défaut
     password: '', // Nouveau mot de passe
-
+    currentPassword: '', // Mot de passe actuel
+    newPassword: '', // Nouveau mot de passe
   };
 
   constructor(private enseignantService: EnseignantService) {}
 
   ngOnInit(): void {
     this.fetchEnseignant();
-    this.applyTheme(this.enseignant.theme);
   }
 
   fetchEnseignant(): void {
-    this.enseignantService.getEnseignants().subscribe(
-      (data) => {
-        if (data.length > 0) {
-          this.enseignant = data[0];
-          this.applyTheme(this.enseignant.theme);
-        }
+    this.enseignantService.getEnseignantDetails().subscribe(
+      (data: any) => {
+        this.enseignant.name = data.name;
+        this.enseignant.email = data.email;
       },
-      (error) => {
+      (error: any) => {
         console.error('Erreur lors de la récupération des données de l\'enseignant :', error);
       }
     );
@@ -38,13 +35,9 @@ export class SettingsComponent implements OnInit {
 
   onSaveSettings(form: any): void {
     if (form.valid) {
-      if (!this.enseignant._id) {
-        console.error('ID de l\'enseignant manquant.');
-        alert('Impossible de mettre à jour sans ID.');
+      if (!this.enseignant.currentPassword || !this.enseignant.newPassword) {
+        alert('Veuillez renseigner à la fois le mot de passe actuel et le nouveau mot de passe.');
         return;
-      }
-      if (this.enseignant.newPassword) {
-        this.enseignant.password = this.enseignant.newPassword; // Remplace l'ancien mot de passe
       }
       this.enseignantService.updateEnseignant(this.enseignant).subscribe(
         (response) => {
@@ -59,15 +52,12 @@ export class SettingsComponent implements OnInit {
       alert('Veuillez remplir tous les champs correctement.');
     }
   }
-  
-  
-  
 
   onSendTicket(form: any): void {
     if (form.valid) {
       const ticketData = form.value;
       this.enseignantService.sendTicket(ticketData).subscribe(
-        (response) => {
+        () => {
           alert('Ticket envoyé avec succès !');
           form.resetForm();
         },
@@ -76,15 +66,6 @@ export class SettingsComponent implements OnInit {
           alert('Erreur lors de l\'envoi du ticket.');
         }
       );
-    }
-  }
-  
-  applyTheme(theme: string): void {
-    const body = document.body;
-    if (theme === 'dark') {
-      body.classList.add('dark-theme');
-    } else {
-      body.classList.remove('dark-theme');
     }
   }
 }

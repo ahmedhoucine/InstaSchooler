@@ -1,0 +1,25 @@
+<div class="form-container">
+    <br>
+    <br>
+    <br>
+    <h2>Enregistrer un Enseignant</h2>
+    <form (submit)="registerTeacher()">
+      <label>Email :</label>
+      <input type="email" [(ngModel)]="teacher.email" name="email" required />
+  
+      <label>Mot de passe :</label>
+      <input type="password" [(ngModel)]="teacher.password" name="password" required />
+  
+      <label>Prénom :</label>
+      <input type="text" [(ngModel)]="teacher.firstname" name="firstname" required />
+  
+      <label>Nom :</label>
+      <input type="text" [(ngModel)]="teacher.lastName" name="lastName" required />
+  
+      <label>Matière :</label>
+      <input type="text" [(ngModel)]="teacher.matiere" name="matiere" required />
+  
+      <button type="submit">Enregistrer</button>
+    </form>
+  </div>
+  
