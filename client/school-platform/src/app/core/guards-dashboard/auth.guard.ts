@@ -6,18 +6,20 @@ import { AuthService } from '../../spaces/dashboard/services/auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuardDashboard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.authService.isAuthenticated()) {
-      return true;
-    } else {
-      this.router.navigate(['dashboard/auth/login']);
-      return false;
+  ): boolean {
+    const isAuthenticated = this.authService.isAuthenticated();
+    console.log('AuthGuardDashboard - Is Authenticated:', isAuthenticated);
+    if (!isAuthenticated) {
+      console.log('AuthGuardDashboard - Redirecting to /auth/login');
+      this.router.navigate(['/auth/login']);
     }
+    return isAuthenticated;
   }
+
 }

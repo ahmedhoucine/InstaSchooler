@@ -10,7 +10,7 @@ import { ListTeachersComponent } from './components/teacher/listteachers/listtea
 import { ListClassesComponent } from './components/class/listclasses/listclasses.component';
 import { EditstudentComponent } from './components/student/editstudent/editstudent.component';
 import { DashboardLoginComponent } from './components/auth/login/dashboard-login.component';
-import { AuthGuard } from '../../core/guards-dashboard/auth.guard';
+import { AuthGuardDashboard } from '../../core/guards-dashboard/auth.guard';
 
 const routes: Routes = [
   // Route for Login (no dashboard layout)
@@ -24,7 +24,7 @@ const routes: Routes = [
   // Main dashboard routes with the default layout (Header, Sidebar, etc.)
   {
     path: '',
-    canActivate: [AuthGuard], // Protect these routes
+    canActivate: [AuthGuardDashboard], // Protect these routes
     component: DashboardComponent,
     children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
@@ -33,7 +33,7 @@ const routes: Routes = [
       // Routes for Class - Protected by AuthGuard
       {
         path: 'class',
-        canActivate: [AuthGuard], // Protect these routes
+        canActivate: [AuthGuardDashboard], // Protect these routes
         children: [
           { path: 'addclass', component: AddClassComponent },
           { path: 'listclasses', component: ListClassesComponent },
@@ -43,7 +43,7 @@ const routes: Routes = [
       // Routes for Student - Protected by AuthGuard
       {
         path: 'student',
-        canActivate: [AuthGuard], // Protect these routes
+        canActivate: [AuthGuardDashboard], // Protect these routes
         children: [
           { path: 'addstudent', component: AddStudentComponent },
           { path: 'liststudents', component: ListStudentsComponent },
@@ -54,7 +54,7 @@ const routes: Routes = [
       // Routes for Teacher - Protected by AuthGuard
       {
         path: 'teacher',
-        canActivate: [AuthGuard], // Protect these routes
+        canActivate: [AuthGuardDashboard], // Protect these routes
         children: [
           { path: 'addteacher', component: AddTeacherComponent },
           { path: 'listteachers', component: ListTeachersComponent },

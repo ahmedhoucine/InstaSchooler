@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './core/guards-student/auth.guard';
+import { AuthGuardStudent } from './core/guards-student/auth.guard';
+import { AuthGuardDashboard } from './core/guards-dashboard/auth.guard';
+
 
 const routes: Routes = [
   // Redirect the root path to the dashboard
@@ -16,7 +18,7 @@ const routes: Routes = [
       import('./spaces/student_space/components/layouts/student/student.module').then(
         m => m.StudentModule
       ),
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuardStudent],
   },
 
   // Student space routes
