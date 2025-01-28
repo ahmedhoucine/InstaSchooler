@@ -16,7 +16,7 @@ import { TeacherRegisterComponent } from './teacher-register/teacher-register.co
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboards', pathMatch: 'full' }, // Redirection par défaut vers le tableau de bord
+  { path: 'teacher-space', redirectTo: 'dashboards', pathMatch: 'full' }, // Redirection par défaut vers le tableau de bord
   { path: 'courses', component: CoursesComponent }, // Page des cours
   { path: 'add-course', component: AddCourseComponent }, // Page pour ajouter un cours
   { path: 'liste', component: ListeComponent }, // Page Liste
@@ -33,7 +33,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class TeacherRoutingModule {}

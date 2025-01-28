@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -46,8 +45,7 @@ import { TeacherRegisterComponent } from './teacher-register/teacher-register.co
 
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    CommonModule,
     FormsModule,
     TeacherRoutingModule,
     HttpClientModule,
@@ -62,6 +60,6 @@ import { TeacherRegisterComponent } from './teacher-register/teacher-register.co
     MatListModule,
   ],
   providers: [],
-  //bootstrap: [TeacherComponent],
+  bootstrap: [TeacherComponent],
 })
 export class TeacherModule {}
