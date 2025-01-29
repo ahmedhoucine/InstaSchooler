@@ -1,0 +1,210 @@
+.main-container {
+  height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 250px;
+  background: linear-gradient(135deg, #020e2f, #445573);
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: fixed;
+  padding-top: 30px;
+  transition: width 0.3s ease;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.hamburger-icon {
+  width: 30px;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger-icon .line {
+  background-color: #fff;
+  height: 4px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  border-radius: 4px;
+}
+
+.hamburger-icon.collapsed .top {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-icon.collapsed .middle {
+  opacity: 0;
+}
+
+.hamburger-icon.collapsed .bottom {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Sidebar List Styling */
+mat-nav-list a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: #ffffff;
+  text-decoration: none;
+  gap: 15px;
+  transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+mat-nav-list a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding-left: 20px;
+}
+
+.sidebar ul li.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #1e2a47;
+  border-left: 4px solid #6a74d5;
+  transform: scale(1.05);
+}
+
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-right: 30px;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ffffff;
+}
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: white; /* Gradient background */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  z-index: 1000;
+}
+
+/* Profile Actions Section */
+.profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto; /* Push to the right */
+  margin-right: 30px;
+}
+
+/* Profile Picture */
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ffffff; /* Border around the image */
+}
+
+.logout-btn,
+.edit-profile-btn {
+  background-color: transparent;
+  border: 1px solid rgb(22, 18, 18);
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 25px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logout-btn:hover,
+.edit-profile-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #000;
+  border-color: #000;
+}
+.sidebar {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar .logout-btn,
+.navbar .edit-profile-btn {
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+}
+
+.navbar .logout-btn:hover,
+.navbar .edit-profile-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
