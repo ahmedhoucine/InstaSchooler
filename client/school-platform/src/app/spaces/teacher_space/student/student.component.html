@@ -24,8 +24,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let student of students">
-          <td>{{ student.name }}</td>
-          <td>{{ student.surname }}</td>
+          <td>{{ student.lastName }}</td>
+          <td>{{ student.firstname }}</td>
           <td>
             <select [(ngModel)]="student.status" class="status-select">
               <option value="Présent">Présent</option>
