@@ -13,6 +13,9 @@ export class Teacher {
   email: string;
 
   @Prop({ required: true })
+  phone: string;
+
+  @Prop({ required: true })
   password: string;
 
   @Prop({ default: '../../../assets/image.png' })

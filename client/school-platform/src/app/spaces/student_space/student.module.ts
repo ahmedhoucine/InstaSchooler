@@ -1,41 +1,35 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { JwtModule } from '@auth0/angular-jwt';  // Import JwtModule
-import { StudentRoutingModule } from './student-routing.module';
-import { StudentComponent } from './student.component';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditProfileModule } from './modules/edit-profile/edit-profil.module';
-import { CoreModule } from '../../core/core.module';
-
-
-// Function to get the token from localStorage
-export function jwtTokenGetter() {
-  return localStorage.getItem('authToken');  // Or wherever you're storing the token
-}
-
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from './components/layouts/student/navbar/navbar.component';
+import { SidebarComponent } from './components/layouts/student/sidebar/sidebar.component';
+import { MainContentComponent } from './components/layouts/student/main-content/main-content.component';
+import { StudentComponent } from './student.component'; // Main layout component
+import { StudentLayoutRoutingModule } from './student-routing.module'; // Routing module for student layout
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
+    NavbarComponent,
+    SidebarComponent,
+    MainContentComponent,
     StudentComponent,
-
   ],
   imports: [
-    BrowserModule,
-    StudentRoutingModule,
-    CoreModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    EditProfileModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: jwtTokenGetter, // Set the function to get the JWT token
-        allowedDomains: ['localhost:3000'],  // Add your API's domains here
-        disallowedRoutes: ['localhost:3000/auth/login'],  // Add routes that shouldn't require JWT
-      }
-    })
+    CommonModule,
+    StudentLayoutRoutingModule,
+    MatSidenavModule, // Angular Material sidenav
+    MatListModule, // Material list items
+    MatIconModule, // Material icons
+    MatButtonModule, // Ma // Import routing for student layout
+      MatFormFieldModule,
+    MatInputModule,
+    FormsModule, //
   ],
-  providers: [],  // No need to add JwtHelperService here
-  bootstrap: [StudentComponent]
+  exports: [NavbarComponent, SidebarComponent, MainContentComponent],
 })
 export class StudentModule { }

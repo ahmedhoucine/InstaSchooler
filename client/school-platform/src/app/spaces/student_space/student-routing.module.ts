@@ -1,21 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'src/app/core/guards-dashboard/auth.guard'; // Adjust the import path according to your project structure
+import { StudentComponent } from './student.component'; // Main layout component
 
 const routes: Routes = [
-  //{ path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
   {
-    path: 'student',
-    loadChildren: () => import('./components/layouts/student/student.module').then(m => m.StudentModule),
-    canActivate: [AuthGuard], // Add this line to protect the route with AuthGuard
+    path: '',
+    component: StudentComponent, // Main layout component
 
-     // Protect the route with AuthGuard
-  },  { path: '**', redirectTo: 'auth/login' }, // Default route if no match
+    children: [
+      { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: 'planning', loadChildren: () => import('./modules/planning/planning.module').then(m => m.PlanningModule) },
 
+      { path: 'calendar', loadChildren: () => import('./modules/calendar/calendar.module').then(m => m.CalendarModule) },
+      { path: 'notifications', loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule) },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // Default route
+      { path: 'edit-profile', loadChildren: () => import('./modules/edit-profile/edit-profil.module').then(m => m.EditProfileModule) }
+
+    ],
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class StudentRoutingModule { }
+export class StudentLayoutRoutingModule { }

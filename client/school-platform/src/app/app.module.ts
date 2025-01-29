@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
-import { DashboardModule } from '../app/spaces/dashboard/dashboard.module';
+import { DashboardModule } from './spaces/dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { EditProfileModule } from './spaces/student_space/modules/edit-profile/edit-profil.module';
@@ -24,6 +24,7 @@ export function jwtTokenGetter() {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    
     CoreModule,
     HttpClientModule,
     BrowserAnimationsModule,  // Required for toastr and JWT functionality
@@ -41,7 +42,8 @@ export function jwtTokenGetter() {
         allowedDomains: ['localhost:3000'],  // Add your API's domains here
         disallowedRoutes: ['localhost:3000/auth/login'],  // Add routes that shouldn't require JWT
       }
-    })
+    }),
+    
   ],
   bootstrap: [AppComponent]
 })
