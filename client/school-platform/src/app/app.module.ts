@@ -24,6 +24,7 @@ export function jwtTokenGetter() {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    
     CoreModule,
     HttpClientModule,
     BrowserAnimationsModule,  // Required for toastr and JWT functionality
@@ -41,7 +42,8 @@ export function jwtTokenGetter() {
         allowedDomains: ['localhost:3000'],  // Add your API's domains here
         disallowedRoutes: ['localhost:3000/auth/login'],  // Add routes that shouldn't require JWT
       }
-    })
+    }),
+    
   ],
   bootstrap: [AppComponent]
 })
