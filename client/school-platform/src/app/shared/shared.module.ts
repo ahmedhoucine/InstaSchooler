@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardComponent } from '../components/card/card.component';
-import { FeatureCardsComponent } from '../components/feature-card/feature-card.component';
-import { CalendarComponent } from '../components/calendar/calendar.component';
-import { AbsenceComponent } from '../components/absence/absence.component';
-import { HeaderComponent } from '../components/header/header.component';
-import { SidebarComponent } from '../components/sidebar/sidebar.component';
+import { CardComponent } from '../spaces/dashboard/components/layout/card/card.component';
+import { FeatureCardsComponent } from '../spaces/dashboard/components/layout/feature-card/feature-card.component';
+import { CalendarComponent } from '../spaces/dashboard/components/layout/calendar/calendar.component';
+import { AbsenceComponent } from '../spaces/dashboard/components/absence/absence.component';
+import { HeaderComponent } from '../spaces/dashboard/components/layout/header/header.component';
+import { SidebarComponent } from '../spaces/dashboard/components/layout/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
