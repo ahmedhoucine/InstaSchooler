@@ -1,0 +1,88 @@
+<br>
+<br> <br>
+<br> <br>
+<br>
+<div class="settings-page">
+
+  <!-- Formulaire de modification de profil -->
+  <div class="settings-container">
+    <h2>Paramètres du Profil</h2>
+    <form #settingsForm="ngForm" (ngSubmit)="onSaveSettings(settingsForm)">
+      <div class="form-group">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" [(ngModel)]="enseignant.name" name="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email :</label>
+        <input type="email" id="email" [(ngModel)]="enseignant.email" name="email" readonly />
+      </div>
+
+      <div class="form-group">
+        <label for="current-password">Mot de passe actuel :</label>
+        <input
+          type="password"
+          id="current-password"
+          [(ngModel)]="enseignant.currentPassword"
+          name="currentPassword"
+          placeholder="Entrez votre mot de passe actuel"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="new-password">Nouveau mot de passe :</label>
+        <input
+          type="password"
+          id="new-password"
+          [(ngModel)]="enseignant.newPassword"
+          name="newPassword"
+          placeholder="Entrez un nouveau mot de passe"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+  </div>
+
+  <!-- Formulaire de ticket -->
+  <div class="ticket-container">
+    <h2>Envoyer un Ticket</h2>
+    <form #ticketForm="ngForm" (ngSubmit)="onSendTicket(ticketForm)">
+      <div class="form-group">
+        <label for="subject">Sujet :</label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          ngModel
+          required
+          placeholder="Entrez le sujet du ticket"
+        />
+      </div>
+      <div class="form-group">
+        <label for="urgency">Urgence :</label>
+        <select id="urgency" name="urgency" ngModel required>
+          <option value="low">Faible</option>
+          <option value="medium">Moyenne</option>
+          <option value="high">Élevée</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message :</label>
+        <textarea
+          id="message"
+          name="message"
+          ngModel
+          rows="4"
+          required
+          placeholder="Expliquez votre problème"
+        ></textarea>
+      </div>
+      <br>
+      <br>
+      <button type="submit" class="btn btn-primary">Envoyer le Ticket</button>
+    </form>
+  </div>
+</div>

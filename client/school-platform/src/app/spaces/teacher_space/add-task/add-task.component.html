@@ -1,0 +1,28 @@
+<div class="form-container">
+    <h2>Ajouter une Tâche</h2>
+    <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
+      <!-- Champ pour le titre -->
+      <mat-form-field appearance="fill">
+        <mat-label>Titre</mat-label>
+        <input matInput name="title" ngModel placeholder="Titre de la tâche" required />
+      </mat-form-field>
+  
+      <!-- Champ pour la description -->
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput name="description" ngModel placeholder="Description de la tâche" required></textarea>
+      </mat-form-field>
+  
+      <!-- Champ pour la date -->
+      <mat-form-field appearance="fill">
+        <mat-label>Date</mat-label>
+        <input matInput type="date" name="date" ngModel required />
+      </mat-form-field>
+  
+      <!-- Bouton pour soumettre -->
+      <button mat-raised-button color="primary" type="submit" [disabled]="!taskForm.valid">
+        Soumettre
+      </button>
+    </form>
+  </div>
+  

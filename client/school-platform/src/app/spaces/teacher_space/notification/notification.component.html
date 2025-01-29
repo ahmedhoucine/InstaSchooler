@@ -1,0 +1,25 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="notification-container">
+  <div class="notification-ring">
+    <div class="ring-icon">
+      <mat-icon>notifications</mat-icon>
+      <span class="notification-badge">{{ tasksToday.length }}</span>
+    </div>
+  </div>
+
+  <h2>Notifications</h2>
+
+  <p *ngIf="tasksToday.length === 0">Aucune tâche pour aujourd'hui ! 🎉</p>
+
+  <div *ngIf="tasksToday.length > 0" class="task-list">
+    <div class="task-item" *ngFor="let task of tasksToday">
+      <h3>{{ task.title }}</h3>
+      <p>{{ task.description }}</p>
+      <p><strong>Date :</strong> {{ task.date }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f0f2f5; /* Fond gris clair */
+  }
+  
+  .login-container {
+    background: white; /* Fond blanc de la boîte */
+    padding: 40px; /* Espacement interne */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    width: 100%;
+    max-width: 400px; /* Largeur maximale */
+    text-align: center; /* Centrer le texte */
+  }
+  
+  h2 {
+    margin-bottom: 20px; /* Espacement sous le titre */
+    color: #333; /* Couleur du texte */
+  }
+  
+  label {
+    display: block; /* Forcer l'affichage en bloc */
+    margin-bottom: 8px; /* Espacement sous le label */
+    font-weight: bold; /* Texte en gras */
+  }
+  
+  input {
+    width: 100%; /* Occuper toute la largeur */
+    padding: 10px; /* Espacement interne */
+    margin-bottom: 20px; /* Espacement sous les champs */
+    border: 1px solid #ddd; /* Bordure grise */
+    border-radius: 5px; /* Coins arrondis */
+    font-size: 14px; /* Taille de police */
+  }
+  
+  button {
+    background-color: #3f51b5; /* Couleur de fond du bouton */
+    color: white; /* Texte en blanc */
+    padding: 10px 20px; /* Espacement interne */
+    border: none; /* Sans bordure */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur interactif */
+    font-size: 16px; /* Taille de police */
+    transition: background-color 0.3s; /* Transition douce */
+  }
+  
+  button:hover {
+    background-color: #303f9f; /* Couleur au survol */
+  }
+  
+  .error-message {
+    color: red; /* Couleur du message d'erreur */
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
