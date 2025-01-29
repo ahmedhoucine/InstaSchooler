@@ -6,7 +6,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CommonModule } from './common/common.module';
 import { StudentModule } from './student/student.module';
 import { TeacherModule } from './teacher/teacher.module';
-import { ClassModule } from './class/class.module';
 import { AuthModule } from './auth/auth.module';
 import { EventsModule } from './events/events.module';
 import { EventsController } from './events/events.controller';
@@ -25,7 +24,6 @@ import { CourseModule } from './course/course.module';
     CommonModule,
     StudentModule,
     TeacherModule,
-    ClassModule,
     AuthModule,
     EventsModule,
     AuthAdminModule,

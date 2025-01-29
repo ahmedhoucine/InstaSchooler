@@ -1,55 +1,52 @@
 import {
-    Controller,
-    Get,
-    Post,
-    Body,
-    Param,
-    Delete,
-    UseInterceptors,
-    UploadedFile,
-    BadRequestException,
-  } from '@nestjs/common';
-  import { FileInterceptor } from '@nestjs/platform-express';
-  import { CourseService } from './course.service';
-  import { Course } from './course.schema';
-  
-  @Controller('courses')
-  export class CourseController {
-    constructor(private readonly courseService: CourseService) {}
-  
-    @Post()
-    @UseInterceptors(FileInterceptor('pdf', { dest: './uploads' }))
-    async create(
-      @Body() courseData: Partial<Course>,
-      @UploadedFile() file?: Express.Multer.File,
-    ): Promise<Course> {
-      console.log('Données reçues :', courseData);
-  
-      if (!courseData.niveau || !courseData.description || !courseData.duration) {
-        throw new BadRequestException('Les champs niveau, description et duration sont obligatoires.');
-      }
-  
-      const pdfPath = file ? `http://localhost:3000/uploads/${file.filename}` : null;
-  
-      return this.courseService.create({
-        ...courseData,
-        pdf: pdfPath,
-      });
-    }
-  
-    @Get()
-    async findAll(): Promise<Course[]> {
-      return this.courseService.findAll();
-    }
-  
-    @Get(':id')
-    async findById(@Param('id') id: string): Promise<Course | null> {
-      return this.courseService.findById(id);
-    }
-  
-    @Delete(':id')
-    async delete(@Param('id') id: string): Promise<Course | null> {
-      return this.courseService.delete(id);
-    }
+  Controller,
+  Post,
+  Body,
+  UseGuards,
+  Request,
+  UseInterceptors,
+  UploadedFile,
+  Get,
+} from '@nestjs/common';
+import { JwtAuthGuard } from '../teacher/teacher-jwt.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { CourseService } from './course.service';
+
+@Controller('courses')
+export class CourseController {
+  constructor(private readonly courseService: CourseService) {}
+
+  @UseGuards(JwtAuthGuard)
+  @Post()
+  @UseInterceptors(FileInterceptor('pdf', { dest: './uploads' }))
+  async create(
+    @Request() req,
+    @Body() courseData: any,
+    @UploadedFile() file?: Express.Multer.File,
+  ) {
+    const teacherId = req.user.id;
+
+    const course = {
+      ...courseData,
+      teacher: teacherId,
+      pdf: file ? `http://localhost:3000/uploads/${file.filename}` : null,
+    };
+
+    return this.courseService.create(course);
   }
-  
+
+  @UseGuards(JwtAuthGuard)
+  @Get('count')
+  async getCourseCountByTeacher(@Request() req): Promise<{ count: number }> {
+    const teacherId = req.user.id;
+    const count = await this.courseService.countByTeacher(teacherId);
+    return { count };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('by-teacher')
+  async getCoursesByTeacher(@Request() req) {
+    const teacherId = req.user.id;
+    return this.courseService.findByTeacher(teacherId);
+  }
+}

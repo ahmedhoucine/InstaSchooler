@@ -1,22 +1,68 @@
 import {
   Injectable,
   NotFoundException,
+  UnauthorizedException,
+  BadRequestException,
   ConflictException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Teacher, TeacherDocument } from './teacher.schema';
 import * as bcrypt from 'bcrypt';
-import { Teacher } from './schema/teacher.schema';
+import { JwtService } from '@nestjs/jwt';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
 
 @Injectable()
 export class TeacherService {
   constructor(
-    @InjectModel('Teacher') // Make sure the Teacher model is defined with this name
-    private readonly teacherModel: Model<Teacher>,
+    @InjectModel(Teacher.name) private teacherModel: Model<TeacherDocument>,
+    private readonly jwtService: JwtService,
   ) {}
 
+  async register(teacherData: Partial<Teacher>): Promise<Teacher> {
+    if (!teacherData.password) {
+      throw new BadRequestException('Le mot de passe est obligatoire.');
+    }
+    const hashedPassword = await bcrypt.hash(teacherData.password, 10);
+    const teacher = new this.teacherModel({
+      ...teacherData,
+      password: hashedPassword,
+      profileImage: teacherData.profilePicture || 'assets/image1.png', // Valeur par défaut
+    });
+    return teacher.save();
+  }
+
+  async validateTeacher(email: string, plainPassword: string): Promise<TeacherDocument> {
+    const teacher = await this.teacherModel.findOne({ email }).exec();
+    if (!teacher) {
+      throw new NotFoundException('Email ou mot de passe incorrect.');
+    }
+
+    const isPasswordValid = await bcrypt.compare(plainPassword, teacher.password || '');
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Email ou mot de passe incorrect.');
+    }
+
+    return teacher;
+  }
+
+  
+
+  
+
+  generateToken(payload: any): string {
+    return this.jwtService.sign(payload);
+  }
+
+  async validatePassword(teacherId: string, plainPassword: string): Promise<boolean> {
+    const teacher = await this.teacherModel.findById(teacherId).exec();
+    if (!teacher) {
+      throw new NotFoundException('Enseignant non trouvé.');
+    }
+
+    return bcrypt.compare(plainPassword, teacher.password || '');
+  }
   // Create a teacher and send an email with credentials
   async createTeacher(createTeacherDto: CreateTeacherDto): Promise<Teacher> {
     // Check if the phone number or email already exists
