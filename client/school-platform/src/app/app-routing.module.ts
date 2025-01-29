@@ -20,7 +20,6 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./spaces/dashboard/dashboard.module').then(m => m.DashboardModule) },
 
   // Teacher space routes
-  { path: 'student-space', loadChildren: () => import('./spaces/student_space/teacher.module').then(m => m.TeacherModule) },
 
   // Fallback route for unmatched paths
   { path: '**', redirectTo: 'auth/login' }
