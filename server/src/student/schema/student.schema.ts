@@ -60,6 +60,9 @@ export class Student extends BaseSchema {
   @Prop({ type: String })
   parentAddress: string;
 
+  @Prop({ type: String })
+  status: string;
+
   // Add list of events associated with the student
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MyEvent' }] })
   events: Types.ObjectId[];
