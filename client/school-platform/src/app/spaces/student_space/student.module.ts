@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { MainContentComponent } from './main-content/main-content.component';
+import { NavbarComponent } from './components/layouts/student/navbar/navbar.component';
+import { SidebarComponent } from './components/layouts/student/sidebar/sidebar.component';
+import { MainContentComponent } from './components/layouts/student/main-content/main-content.component';
 import { StudentComponent } from './student.component'; // Main layout component
 import { StudentLayoutRoutingModule } from './student-routing.module'; // Routing module for student layout
 import { MatSidenavModule } from '@angular/material/sidenav';

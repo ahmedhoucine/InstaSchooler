@@ -12,7 +12,7 @@ const routes: Routes = [
   // Student routes protected by AuthGuard
   {
     path: 'student',
-    loadChildren: () => import('./spaces/student_space/components/layouts/student/student.module').then(m => m.StudentModule),
+    loadChildren: () => import('./spaces/student_space/student.module').then(m => m.StudentModule),
     canActivate: [AuthGuard]
   },
 
