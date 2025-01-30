@@ -24,7 +24,8 @@ export class SettingsComponent implements OnInit {
   fetchEnseignant(): void {
     this.enseignantService.getEnseignantDetails().subscribe(
       (data: any) => {
-        this.enseignant.name = data.name;
+        this.enseignant.firstname = data.firstname;
+        this.enseignant.lastName = data.lastName;
         this.enseignant.email = data.email;
       },
       (error: any) => {

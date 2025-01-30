@@ -18,7 +18,7 @@ export class LoginComponent {
     this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
         this.authService.saveToken(response.token);
-        this.router.navigate(['/dashboards']);
+        this.router.navigate(['/teacher-space/dashboards']);
       },
       error: (error) => {
         this.errorMessage = 'Email ou mot de passe incorrect.';

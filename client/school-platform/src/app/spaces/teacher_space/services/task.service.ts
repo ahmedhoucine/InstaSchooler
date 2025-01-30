@@ -17,6 +17,7 @@ export class TaskService {
 
   addTask(task: any): Observable<any> {
     const headers = this.getAuthHeaders();
+    console.log(headers)
     return this.http.post(this.apiUrl, task, { headers });
   }
 
@@ -26,7 +27,7 @@ export class TaskService {
   }
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('access_token');
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });

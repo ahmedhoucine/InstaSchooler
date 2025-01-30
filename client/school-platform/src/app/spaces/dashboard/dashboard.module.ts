@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardOverviewComponent } from './components/overview/dashboard-overview.component';
-import { DashboardRoutingModule } from '../dashboard/dashboard-routing.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AddClassComponent } from './components/class/addclass/addclass.component';

@@ -10,7 +10,11 @@
     <form #settingsForm="ngForm" (ngSubmit)="onSaveSettings(settingsForm)">
       <div class="form-group">
         <label for="name">Nom :</label>
-        <input type="text" id="name" [(ngModel)]="enseignant.name" name="name" required />
+        <input type="text" id="name" [(ngModel)]="enseignant.lastName" name="lastName" required />
+      </div>
+      <div class="form-group">
+        <label for="name">Prénom :</label>
+        <input type="text" id="name" [(ngModel)]="enseignant.firstname" name="firstname" required />
       </div>
 
       <div class="form-group">

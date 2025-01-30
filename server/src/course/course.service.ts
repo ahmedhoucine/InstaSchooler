@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Course, CourseDocument } from './course.schema';
@@ -44,18 +45,23 @@ export class CourseService {
     // Trouver les cours associés à l'étudiant (en utilisant les _id des cours)
     return this.courseModel.find({ _id: { $in: student.courses } }).exec();
   }
-  async findAll(): Promise<Course[]> {
+
+  async findByTeacher(teacherId: string): Promise<Course[]> {
+    return this.courseModel.find({ teacher: teacherId }).exec();
+  }
+
+  async countByTeacher(teacherId: string): Promise<number> {
+    return this.courseModel.countDocuments({ teacher: teacherId }).exec();
+  }
+
+  async allcourses(): Promise<Course[]> {
     return this.courseModel.find().exec();
   }
-
-  async findById(id: string): Promise<Course | null> {
-    return this.courseModel.findById(id).exec();
-  }
-
-  async countStudentsByLevel(niveau: string): Promise<number> {
-    return this.studentModel.countDocuments({ niveau }).exec();
-  }
-  async delete(id: string): Promise<Course | null> {
-    return this.courseModel.findByIdAndDelete(id).exec();
-  }
+  async deleteCourse(id: string): Promise<void> {
+      const result = await this.courseModel.deleteOne({ _id: id });
+      if (result.deletedCount === 0) {
+        throw new NotFoundException(`course with ID ${id} not found.`);
+      }
+    }
+  
 }

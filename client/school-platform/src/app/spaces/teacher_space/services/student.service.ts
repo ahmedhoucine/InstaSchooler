@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentService {
-  private apiUrl = 'http://localhost:3000/students';
+  private apiUrl = 'http://localhost:3000/school-platform/student';
 
   constructor(private http: HttpClient) {}
 
@@ -16,10 +16,13 @@ export class StudentService {
   }
 
   // Mettre à jour les statuts des étudiants
-  updateStudentsStatus(updates: { id: string; status: string }[]): Observable<any> {
-    return this.http.put(`${this.apiUrl}/update-status`, updates);
+  updateStudentsStatus(updates: { id: string; status: string }[]): Observable<any[]> {
+    return forkJoin(
+      updates.map(update => 
+        this.http.patch(`${this.apiUrl}/${update.id}`, update)
+      )
+    );
   }
-  
  
   getAbsenceStats(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/absence-stats`);
