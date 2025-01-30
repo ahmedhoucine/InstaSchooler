@@ -12,12 +12,17 @@ import { Router } from '@angular/router';
 })
 export class AddClassComponent implements OnInit {
   classForm!: FormGroup;
-  levels = [1, 2, 3, 4]; 
+  levels = [1, 2, 3, 4];
   matiereOptions = Object.values(Matiere);
   allTeachers: any[] = []; // Store all teachers
   teachers: any[] = []; // Filtered teachers based on selected subject
 
-  constructor(private teacherservice: TeacherService, private fb: FormBuilder,private classservice:ClassService,private router: Router) {}
+  constructor(
+    private teacherService: TeacherService,
+    private fb: FormBuilder,
+    private classService: ClassService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.classForm = this.fb.group({
@@ -25,7 +30,7 @@ export class AddClassComponent implements OnInit {
       subject: ['', Validators.required],
       niveau: [1, Validators.required],
       teacher: ['', Validators.required],
-      duration: ['', Validators.required]
+      duration: ['', [Validators.required, Validators.min(1)]]
     });
 
     this.getAllTeachers();
@@ -36,11 +41,11 @@ export class AddClassComponent implements OnInit {
   }
 
   getAllTeachers() {
-    this.teacherservice.getAllTeachers().subscribe(
+    this.teacherService.getAllTeachers().subscribe(
       (data) => {
-        this.allTeachers = data; // Store all teachers initially
-        this.teachers = []; // Reset teachers until subject is selected
-        console.log(data);
+        this.allTeachers = data;
+        this.teachers = [...this.allTeachers];
+        console.log("All teachers:", this.allTeachers);
       },
       (error) => {
         console.error('Error fetching teachers', error);
@@ -50,25 +55,23 @@ export class AddClassComponent implements OnInit {
 
   fetchTeachersBySubject(subject: string) {
     if (!subject) {
-      this.teachers = []; // Reset if no subject is selected
+      this.teachers = [...this.allTeachers];
       return;
     }
 
-    // Filter teachers based on selected subject
-    this.teachers = this.allTeachers.filter((teacher) =>
-      teacher.matiere.includes(subject)
+    this.teachers = this.allTeachers.filter(teacher =>
+      teacher.matiere && teacher.matiere.toLowerCase() === subject.toLowerCase()
     );
-    console.log(this.teachers)
+    console.log("Filtered Teachers:", this.teachers);
   }
 
   onSubmit(): void {
     if (this.classForm.valid) {
-        console.log(this.classForm.value)
-        this.classservice.createClass(this.classForm.value).subscribe(
+      console.log("Class Data:", this.classForm.value);
+      this.classService.createClass(this.classForm.value).subscribe(
         (response) => {
-          console.log('class created successfully', response);
-          this.router.navigate(['/dashboard/class/listclasses'] );
-  
+          console.log('Class created successfully:', response);
+          this.router.navigate(['/dashboard/class/listclasses']);
         },
         (error) => {
           console.error('Error creating class', error);
