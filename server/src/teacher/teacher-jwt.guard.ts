@@ -14,12 +14,14 @@ export class JwtAuthGuard implements CanActivate {
       throw new UnauthorizedException('Token manquant ou invalide');
     }
 
-    const token = authHeader.split(' ')[1];
+    const token = authHeader.replace(/\s+/g, ' ').split(' ')[1];
     try {
       const payload = this.jwtService.verify(token, { secret: process.env.JWT_SECRET || 'teacher-secret-key' });
+      console.log(payload)
       request.user = payload;
       return true;
     } catch (error) {
+      console.log(error)
       throw new UnauthorizedException('Token invalide ou expiré');
     }
   }

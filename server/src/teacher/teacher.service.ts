@@ -52,7 +52,7 @@ export class TeacherService {
   
 
   generateToken(payload: any): string {
-    return this.jwtService.sign(payload);
+    return this.jwtService.sign(payload, { secret: process.env.JWT_SECRET || 'teacher-secret-key' });
   }
 
   async validatePassword(teacherId: string, plainPassword: string): Promise<boolean> {
