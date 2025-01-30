@@ -39,7 +39,7 @@ export class AddCourseComponent {
       }).subscribe({
         next: () => {
           alert('Cours ajouté avec succès !');
-          this.router.navigate(['/courses']);
+          this.router.navigate(['/teacher-space/courses']);
         },
         error: (error) => {
           console.error('Erreur lors de l\'ajout du cours :', error);

@@ -21,7 +21,7 @@ export class AddTaskComponent {
       this.taskService.addTask(taskData).subscribe(
         () => {
           alert('Tâche ajoutée avec succès !');
-          this.router.navigate(['/tasks']);
+          this.router.navigate(['/teacher-space/tasks']);
         },
         (error) => {
           console.error('Erreur lors de l\'ajout de la tâche :', error);
