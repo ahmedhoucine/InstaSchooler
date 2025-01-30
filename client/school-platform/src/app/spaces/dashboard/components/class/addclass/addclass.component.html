@@ -4,21 +4,34 @@
 
     <!-- Class Description -->
     <div class="section">
-      <label for="name">Class Description</label>
-      <input id="name" formControlName="description" />
+      <label for="description">Class Description</label>
+      <input id="description" formControlName="description" />
+      <div *ngIf="classForm.get('description')?.touched && classForm.get('description')?.invalid">
+        <small class="error" *ngIf="classForm.get('description')?.hasError('required')">Description is required</small>
+      </div>
     </div>
+
     <!-- Duration Field -->
     <div class="section">
       <label for="duration">Duration (in hours)</label>
       <input id="duration" type="number" formControlName="duration" min="1" />
+      <div *ngIf="classForm.get('duration')?.touched && classForm.get('duration')?.invalid">
+        <small class="error" *ngIf="classForm.get('duration')?.hasError('required')">Duration is required</small>
+        <small class="error" *ngIf="classForm.get('duration')?.hasError('min')">Duration must be greater than 0</small>
+      </div>
     </div>
 
+    <!-- Niveau (Level) -->
     <div class="section">
       <label for="niveau">Niveau (Level)</label>
       <select id="niveau" formControlName="niveau">
-        <option *ngFor="let level of levels" [value]="level">Niveau:{{ level }}</option>
+        <option *ngFor="let level of levels" [value]="level">Niveau: {{ level }}</option>
       </select>
+      <div *ngIf="classForm.get('niveau')?.touched && classForm.get('niveau')?.invalid">
+        <small class="error" *ngIf="classForm.get('niveau')?.hasError('required')">Level is required</small>
+      </div>
     </div>
+
     <!-- Subject Selection -->
     <div class="section subject-assignment-section">
       <h2>Subject</h2>
@@ -26,6 +39,9 @@
       <select id="subject" formControlName="subject">
         <option *ngFor="let m of matiereOptions" [value]="m">{{ m }}</option>
       </select>
+      <div *ngIf="classForm.get('subject')?.touched && classForm.get('subject')?.invalid">
+        <small class="error" *ngIf="classForm.get('subject')?.hasError('required')">Subject is required</small>
+      </div>
     </div>
 
     <!-- Teacher Selection (Filtered by Subject) -->
@@ -37,6 +53,9 @@
           {{ teacher.firstname }} {{ teacher.lastName }}
         </option>
       </select>
+      <div *ngIf="classForm.get('teacher')?.touched && classForm.get('teacher')?.invalid">
+        <small class="error" *ngIf="classForm.get('teacher')?.hasError('required')">Teacher is required</small>
+      </div>
     </div>
 
     <button type="submit" [disabled]="classForm.invalid">Create Class</button>
