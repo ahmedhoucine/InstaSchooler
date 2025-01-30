@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
       return true;  // Token is valid
     } else {
       console.log('No valid token, redirecting to login.');
-      this.router.navigate(['/login']); // Redirect to login page if token is invalid or not present
+      this.router.navigate(['student/login']); // Redirect to login page if token is invalid or not present
       return false;
     }
   }
