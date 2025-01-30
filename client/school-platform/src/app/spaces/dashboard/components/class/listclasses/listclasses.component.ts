@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ClassService } from 'src/app/spaces/dashboard/services/class.service';
 import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
+import { TeacherService } from '../../../services/teacher.service';
 
 @Component({
   selector: 'app-list-classes',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 export class ListClassesComponent implements OnInit {
   classes: any[] = [];
 
-  constructor(private classService: ClassService, private router: Router) {}
+  constructor(private teacherService: TeacherService,private classService: ClassService, private router: Router) {}
 
   ngOnInit(): void {
     this.getClasses();
@@ -18,8 +20,22 @@ export class ListClassesComponent implements OnInit {
 
   getClasses(): void {
     this.classService.getAllClasses().subscribe(
-      (data) => {
-        this.classes = data;
+      (classes) => {
+        const teacherRequests = classes.map((classItem: any) =>
+          this.teacherService.getTeacherById(classItem.teacher) // Fetch teacher by ID
+        );
+  
+        forkJoin(teacherRequests).subscribe(
+          (teachers) => {
+            this.classes = classes.map((classItem, index) => ({
+              ...classItem,
+              teacher: teachers[index] // Replace ID with teacher object
+            }));
+          },
+          (error) => {
+            console.error('Error fetching teachers', error);
+          }
+        );
       },
       (error) => {
         console.error('Error fetching classes', error);

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   Controller,
   Post,
@@ -7,6 +8,8 @@ import {
   UseInterceptors,
   UploadedFile,
   Get,
+  Delete,
+  Param,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../teacher/teacher-jwt.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -48,5 +51,21 @@ export class CourseController {
   async getCoursesByTeacher(@Request() req) {
     const teacherId = req.user.id;
     return this.courseService.findByTeacher(teacherId);
+  }
+
+  @Get()
+  async getAllCourses() { 
+    return this.courseService.allcourses();
+  }
+  @Delete(':id')
+  async deleteCourse(@Param('id') id: string) {
+    return this.courseService.deleteCourse(id);
+  }
+
+  @Post('add-class')
+  async createe(
+     @Body() courseData: any,
+  ) {
+    return this.courseService.create(courseData);
   }
 }

@@ -2,47 +2,41 @@
   <h1>Create Class</h1>
   <form [formGroup]="classForm" (ngSubmit)="onSubmit()">
 
-    <!-- Class Name -->
+    <!-- Class Description -->
     <div class="section">
-      <label for="name">Class Name</label>
-      <input id="name" formControlName="name" />
+      <label for="name">Class Description</label>
+      <input id="name" formControlName="description" />
+    </div>
+    <!-- Duration Field -->
+    <div class="section">
+      <label for="duration">Duration (in hours)</label>
+      <input id="duration" type="number" formControlName="duration" min="1" />
     </div>
 
-    <!-- Subject Assignment Section -->
+    <div class="section">
+      <label for="niveau">Niveau (Level)</label>
+      <select id="niveau" formControlName="niveau">
+        <option *ngFor="let level of levels" [value]="level">Niveau:{{ level }}</option>
+      </select>
+    </div>
+    <!-- Subject Selection -->
     <div class="section subject-assignment-section">
-      <h2>Subject Assignments</h2>
-      <div formArrayName="subjects">
-        <div *ngFor="let subject of subjects.controls; let i = index" [formGroupName]="i" class="subject-group">
-          <label for="subject-{{i}}">Subject</label>
-          <select id="subject-{{i}}" formControlName="subject">
-            <option *ngFor="let m of matiereOptions" [value]="m">{{ m }}</option>
-          </select>
-
-          <button type="button" class="add-remove-button" (click)="removeSubject(i)">Remove Subject</button>
-        </div>
-      </div>
-
-      <button type="button" class="add-remove-button" (click)="addSubject()">Add Subject</button>
+      <h2>Subject</h2>
+      <label for="subject">Choose Subject</label>
+      <select id="subject" formControlName="subject">
+        <option *ngFor="let m of matiereOptions" [value]="m">{{ m }}</option>
+      </select>
     </div>
 
-    <!-- Teacher Assignments Section -->
+    <!-- Teacher Selection (Filtered by Subject) -->
     <div class="section teacher-assignment-section">
-      <h2>Teacher Assignments</h2>
-      <div formArrayName="teachers">
-        <div *ngFor="let teacher of teachers.controls; let i = index" [formGroupName]="i" class="teacher-group">
-          <label for="teacher-{{i}}">Teacher</label>
-          <input id="teacher-{{i}}" formControlName="teacher" placeholder="Teacher ID" />
-
-          <label for="subject-{{i}}">Subject</label>
-          <select id="subject-{{i}}" formControlName="subject">
-            <option *ngFor="let m of matiereOptions" [value]="m">{{ m }}</option>
-          </select>
-
-          <button type="button" class="add-remove-button" (click)="removeTeacher(i)">Remove Teacher</button>
-        </div>
-      </div>
-
-      <button type="button" class="add-remove-button" (click)="addTeacher()">Add Teacher</button>
+      <h2>Teacher</h2>
+      <label for="teacher">Choose Teacher</label>
+      <select id="teacher" formControlName="teacher">
+        <option *ngFor="let teacher of teachers" [value]="teacher._id">
+          {{ teacher.firstname }} {{ teacher.lastName }}
+        </option>
+      </select>
     </div>
 
     <button type="submit" [disabled]="classForm.invalid">Create Class</button>
