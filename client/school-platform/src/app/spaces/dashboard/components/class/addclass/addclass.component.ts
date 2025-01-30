@@ -15,6 +15,7 @@ export class AddClassComponent implements OnInit {
 
   ngOnInit(): void {
     this.classForm = this.fb.group({
+      name: ['', Validators.required], // Add this control
       teachers: this.fb.array([]),
       subjects: this.fb.array([]),
     });

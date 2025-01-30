@@ -29,8 +29,8 @@
   margin-top: 60px; /* Push content below navbar */
   height: calc(100vh - 20px); /* Fill remaining height */
   overflow: hidden; /* Prevent overflow from spilling out of the main content area */
-  
-  
+
+
 }
 
 /* Sidebar */
@@ -48,7 +48,6 @@
 
 /* Main Content Area */
 .main-content {
-  margin-left: 250px; /* Leave space for the sidebar */
   width: calc(100% - 20px); /* Adjust width */
   padding: 20px;
   display: flex;

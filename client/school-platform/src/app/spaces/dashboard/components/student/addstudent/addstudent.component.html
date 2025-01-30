@@ -1,21 +1,29 @@
+<!-- addstudent.component.html -->
+<div class="teachers-header">
+  <h2>Student Registration</h2>
+  <button mat-flat-button class="neumorphic-button" routerLink="/dashboard/student/liststudents">
+    <mat-icon>arrow_back</mat-icon>
+    Back to List
+  </button>
+</div>
+
 <div class="container">
-  <h1>Student Registration</h1>
-  <div class="divider"></div>
   <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
-    <div class="section">
-      <h2>Basic Information</h2>
-      <div  class="form-group">
-        <div>
+    <!-- Basic Information Section -->
+    <div class="form-section">
+      <h3 class="section-title">Basic Information</h3>
+      <div class="form-row">
+        <div class="form-group">
           <label for="firstName">First Name *</label>
-          <input id="firstName" formControlName="firstname" />
+          <input id="firstName" formControlName="firstname" class="neumorphic-input">
         </div>
-        <div>
+        <div class="form-group">
           <label for="lastName">Last Name *</label>
-          <input id="lastName" formControlName="lastName" />
+          <input id="lastName" formControlName="lastName" class="neumorphic-input">
         </div>
-        <div>
+        <div class="form-group">
           <label for="niveau">Niveau *</label>
-          <select id="niveau" formControlName="niveau">
+          <select id="niveau" formControlName="niveau" class="neumorphic-input">
             <option value="">Select Niveau</option>
             <option value="niveau1">Niveau 1</option>
             <option value="niveau2">Niveau 2</option>
@@ -26,109 +34,120 @@
       </div>
     </div>
 
-    <div class="section">
-      <h2>Additional Information</h2>
-      <div class="form-group">
-        <div>
+    <!-- Additional Information Section -->
+    <div class="form-section">
+      <h3 class="section-title">Additional Information</h3>
+      <div class="form-row">
+        <div class="form-group">
           <label for="dateOfBirth">Date of Birth *</label>
-          <input type="date" id="dateOfBirth" formControlName="dateOfBirth" />
+          <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="neumorphic-input">
         </div>
-
-        <div class="radio-group">
+        <div class="form-group radio-group">
           <label>Gender *</label>
-          <label class="radio-label">Male <input type="radio" value="Male" formControlName="gender" /></label>
-          <label class="radio-label">Female <input type="radio" value="Female" formControlName="gender" /></label>
+          <div class="radio-options">
+            <mat-radio-group formControlName="gender">
+              <mat-radio-button value="Male">Male</mat-radio-button>
+              <mat-radio-button value="Female">Female</mat-radio-button>
+            </mat-radio-group>
+          </div>
         </div>
-
-        <div>
+        <div class="form-group">
           <label for="nationality">Nationality *</label>
-          <input id="nationality" formControlName="nationality" />
+          <input id="nationality" formControlName="nationality" class="neumorphic-input">
         </div>
-
-        <div>
+        <div class="form-group">
           <label for="category">Category *</label>
-          <input id="category" formControlName="category" />
+          <input id="category" formControlName="category" class="neumorphic-input">
         </div>
       </div>
     </div>
 
-    <div class="section">
-      <h2>Contact Details</h2>
-      <div  class="form-group">
-        <div>
+    <!-- Contact Details Section -->
+    <div class="form-section">
+      <h3 class="section-title">Contact Details</h3>
+      <div class="form-row">
+        <div class="form-group">
           <label for="email">Email *</label>
-          <input id="email" formControlName="email" />
+          <input id="email" formControlName="email" class="neumorphic-input">
         </div>
-        <div>
+        <div class="form-group">
           <label for="address">Address</label>
-          <input id="address" formControlName="address" />
+          <input id="address" formControlName="address" class="neumorphic-input">
         </div>
       </div>
     </div>
 
-    <div class="section">
-      <h2>Official Details</h2>
-      <div  class="form-group">
-        <div>
+    <!-- Official Details Section -->
+    <div class="form-section">
+      <h3 class="section-title">Official Details</h3>
+      <div class="form-row">
+        <div class="form-group">
           <label for="admissionNo">Admission No *</label>
-          <input id="admissionNo" formControlName="admissionNo" />
+          <input id="admissionNo" formControlName="admissionNo" class="neumorphic-input">
         </div>
-        <div>
+        <div class="form-group">
           <label for="joiningDate">Joining Date *</label>
-          <input type="date" id="joiningDate" formControlName="joiningDate" />
+          <input type="date" id="joiningDate" formControlName="joiningDate" class="neumorphic-input">
         </div>
-        <div>
+        <div class="form-group">
           <label for="rollNo">Roll No *</label>
-          <input id="rollNo" formControlName="rollNo" />
+          <input id="rollNo" formControlName="rollNo" class="neumorphic-input">
         </div>
-        <div>
+        <div class="form-group">
           <label for="class">Class *</label>
-          <input id="class" formControlName="class" />
+          <input id="class" formControlName="class" class="neumorphic-input">
         </div>
-        <div class="radio-group">
+        <div class="form-group radio-group">
           <label>Is Paid *</label>
-          <label class="radio-label">Yes <input type="radio" [value]="true" formControlName="isPaid" /></label>
-          <label class="radio-label">No <input type="radio" [value]="false" formControlName="isPaid" /></label>
+          <div class="radio-options">
+            <mat-radio-group formControlName="isPaid">
+              <mat-radio-button [value]="true">Yes</mat-radio-button>
+              <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="section">
-      <h2>Parent Details</h2>
-      <div  class="form-group">
-        <div >
-          <div>
-            <label for="parentFirstName">Parent First Name *</label>
-            <input id="parentFirstName" formControlName="parentFirstName" />
-          </div>
-          <div>
-            <label for="parentLastName">Parent Last Name *</label>
-            <input id="parentLastName" formControlName="parentLastName" />
-          </div>
+    <!-- Parent Details Section -->
+    <div class="form-section">
+      <h3 class="section-title">Parent Details</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="parentFirstName">Parent First Name *</label>
+          <input id="parentFirstName" formControlName="parentFirstName" class="neumorphic-input">
         </div>
-        <div>
+        <div class="form-group">
+          <label for="parentLastName">Parent Last Name *</label>
+          <input id="parentLastName" formControlName="parentLastName" class="neumorphic-input">
+        </div>
+        <div class="form-group">
           <label for="relation">Relation *</label>
-          <input id="relation" formControlName="relation" />
+          <input id="relation" formControlName="relation" class="neumorphic-input">
         </div>
-        <div>
+        <div class="form-group">
           <label for="email">Parent Email *</label>
-          <input type="email" id="email" formControlName="parentEmail" />
+          <input type="email" id="email" formControlName="parentEmail" class="neumorphic-input">
         </div>
-        <div>
+        <div class="form-group">
           <label for="phone">Parent Phone</label>
-          <input id="phone" formControlName="parentPhone" />
+          <input id="phone" formControlName="parentPhone" class="neumorphic-input">
         </div>
-        <div>
+        <div class="form-group">
           <label for="mobileNo">Parent Mobile No</label>
-          <input id="mobileNo" formControlName="parentMobileNo" />
+          <input id="mobileNo" formControlName="parentMobileNo" class="neumorphic-input">
         </div>
-        <div>
+        <div class="form-group">
           <label for="parentAddress">Parent Address</label>
-          <input id="parentAddress" formControlName="parentAddress" />
+          <input id="parentAddress" formControlName="parentAddress" class="neumorphic-input">
         </div>
       </div>
     </div>
 
-    <button type="submit" [disabled]="studentForm.invalid">Create Student</button>
+    <div class="form-actions">
+      <button mat-flat-button type="submit" class="neumorphic-button" [disabled]="studentForm.invalid">
+        Create Student
+      </button>
+    </div>
   </form>
 </div>

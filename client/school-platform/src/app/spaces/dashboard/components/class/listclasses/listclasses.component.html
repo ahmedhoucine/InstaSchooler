@@ -1,54 +1,61 @@
+<div class="classes-header">
+  <h2>Class Management</h2>
+  <button mat-flat-button class="neumorphic-button" (click)="goToAddClassPage()">
+    <mat-icon>add</mat-icon>
+    Add New Class
+  </button>
+</div>
+
 <div class="container">
-    <h1>Classes</h1>
-    <table class="table">
+  <div class="table-wrapper"> <!-- Add a wrapper for horizontal scrolling -->
+    <table class="neumorphic-table">
       <thead>
-        <tr>
-          <th>Class Name</th>
-          <th>Subjects</th>
-          <th>Teachers</th>
-          <th>Students</th>
-          <th>Actions</th>
-        </tr>
+      <tr>
+        <th>Class Name</th>
+        <th>Subjects</th>
+        <th>Teachers</th>
+        <th>Students</th>
+        <th>Actions</th>
+      </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let classItem of classes">
-          <td>{{ classItem.name }}</td>
-          <td>
-            <!-- Loop through subjects array and display each subject -->
-            <ul>
-              <li *ngFor="let subject of classItem.subjects">{{ subject }}</li>
-            </ul>
-          </td>
-          <td>
-            <!-- Loop through teachers and display teacher name and their subject -->
-            <ul>
-              <li *ngFor="let teacher of classItem.teachers">
-                <div>
-                  <img
-                    [src]="teacher.teacher.profilePicture"
-                    alt="Teacher Profile Picture"
-                    width="40"
-                    height="40"
-                    style="border-radius: 50%;"
-                  />
-                  {{ teacher.teacher.firstname }} {{ teacher.teacher.lastName }} - {{ teacher.subject }}
-                </div>
-              </li>
-            </ul>
-          </td>
-          <td>
-            <!-- Display list of student IDs or names if available -->
-            <ul>
-              <li *ngFor="let studentId of classItem.students">
-                {{ studentId }}
-              </li>
-            </ul>
-          </td>
-          <td>
-            <button (click)="viewClass(classItem._id)">View</button>
-            <button (click)="deleteClass(classItem._id)">Delete</button>
-          </td>
-        </tr>
+      <tr *ngFor="let classItem of classes">
+        <td>{{ classItem.name }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let subject of classItem.subjects">{{ subject }}</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let teacher of classItem.teachers">
+              <div class="teacher-item">
+                <img [src]="teacher.teacher.profilePicture" alt="Teacher" class="profile-pic">
+                <span>{{ teacher.teacher.firstname }} {{ teacher.teacher.lastName }}</span>
+                <span class="subject-badge">{{ teacher.subject }}</span>
+              </div>
+            </li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let studentId of classItem.students">
+              {{ studentId }}
+            </li>
+          </ul>
+        </td>
+        <td>
+          <div class="actions">
+            <button mat-icon-button (click)="viewClass(classItem._id)" matTooltip="View Class">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteClass(classItem._id)" matTooltip="Delete Class">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
+</div>

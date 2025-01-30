@@ -1,36 +1,48 @@
 .card {
   display: flex;
   align-items: center;
-  color: rgb(107, 91, 91);
-  padding: 0.5rem;
-  border-radius: 10px;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-size: 1.2rem;
-  font-weight: bolder;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  justify-content: space-between; // Space between content and button
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Shadow for the card
+  max-width: 100%;
+  margin: 0;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.4);
+.content {
+  display: flex;
+  align-items: center; // Align icon and text horizontally
+  gap: 1rem; // Space between icon and text
 }
 
 .icon {
-  font-size: 2.5rem;
-  margin-right: 2rem;
+  font-size: 2rem; // Adjust icon size
+  width: auto; // Auto width for the icon
+  height: auto; // Auto height for the icon
+  color: #A50133; // Primary color
 }
 
 .info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: flex-start; // Align text to the left
 }
 
-.info h3 {
+.count {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #27274B; // Dark text color
 }
 
-.info p {
-  margin: 0.5rem 0 0;
+.title {
+  margin: 0.25rem 0 0; // Reduced margin for tighter spacing
+  font-size: 1rem;
+  color: #555; // Subtle text color
+}
+
+.action-button {
+  margin-left: auto; // Push the button to the right
+  color: #555; // Button color
 }
