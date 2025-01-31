@@ -1,31 +1,46 @@
+<div class="students-header">
+  <h2>Student Management</h2>
+  <button mat-flat-button class="neumorphic-button" (click)="goToAddStudentPage()">
+    <mat-icon>add</mat-icon>
+    Add New Student
+  </button>
+</div>
 <div class="container">
-  <h1>Student List</h1>
-
-  <button (click)="goToAddStudentPage()">Add Student</button>
-
-  <table>
+  <table class="neumorphic-table">
     <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Group</th>
-        <th>Paid</th>
-        <th>Actions</th>
-      </tr>
+    <tr>
+      <th>Profile</th>
+      <th>Name</th>
+      <th>Subject</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Actions</th>
+    </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students; let i = index">
-        <td>{{ student.firstname }} {{ student.lastName }}</td>
-        <td>{{ student.email }}</td>
-        <td>{{ student.group }}</td>
-        <td>{{ student.isPaid ? 'Yes' : 'No' }}</td>
-
-        <!-- Actions: Edit and Delete buttons inside the 'actions' div -->
-        <td class="actions">
-          <button (click)="editStudent(student)">Edit</button>
-          <button (click)="deleteStudent(i)">Delete</button>
-        </td>
-      </tr>
+    <tr *ngFor="let student of students">
+      <td><img [src]="student.profilePicture" alt="Profile Picture" class="student-profile-img" /></td>
+      <td>{{ student.firstname }} {{ student.lastName }}</td>
+      <td>{{ student.matiere }}</td>
+      <td>{{ student.email }}</td>
+      <td>{{ student.phone }}</td>
+      <!-- Actions: Edit and Delete buttons inside the 'actions' div -->
+      <td>
+        <div class="actions">
+        <button mat-icon-button (click)="editStudent(student)" matTooltip="Edit Student">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteStudent(student._id)" matTooltip="Delete Student">
+          <mat-icon>delete</mat-icon>
+        </button>
+        </div>
+      </td>
+    </tr>
     </tbody>
   </table>
+</div>
+
+<!-- If no teachers are available -->
+<div *ngIf="students.length === 0" class="no-students">
+  <p>No Students available.</p>
 </div>

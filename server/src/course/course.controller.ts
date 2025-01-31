@@ -18,7 +18,6 @@ import { CourseService } from './course.service';
 @Controller('courses')
 export class CourseController {
   constructor(private readonly courseService: CourseService) {}
-
   @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('pdf', { dest: './uploads' }))

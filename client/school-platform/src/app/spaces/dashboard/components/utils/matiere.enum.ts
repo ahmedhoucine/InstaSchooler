@@ -15,4 +15,4 @@ export enum Matiere {
     Technologie = 'Technologie',
     Arts = 'Arts',
     Sport = 'Sport',
-  }  
+  }

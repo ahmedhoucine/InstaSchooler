@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeacherService } from 'src/app/spaces/dashboard/services/teacher.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-listteachers',
@@ -9,7 +11,7 @@ import { TeacherService } from 'src/app/spaces/dashboard/services/teacher.servic
 export class ListTeachersComponent implements OnInit {
   teachers: any[] = [];
 
-  constructor(private teacherService: TeacherService) {}
+  constructor(private teacherService: TeacherService,private router: Router) {}
 
   ngOnInit(): void {
     this.getTeachers();
@@ -39,5 +41,9 @@ export class ListTeachersComponent implements OnInit {
         console.error('Error deleting teacher', error);
       }
     );
+  }
+  // Add new teacher (navigate to add teacher page)
+  goToAddTeacherPage(): void {
+    this.router.navigate(['/dashboard/teacher/addteacher']);
   }
 }

@@ -1,36 +1,43 @@
-.dashboard {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 1rem;
-  padding: 1rem;
-  margin-left: 15.625rem;
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px; // Match this with your header height
+  z-index: 1000;
 }
 
-app-card {
-  padding: 1.5rem;
-  text-align: center;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 2rem;
-  box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.1);
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 80px; // Below header
+  bottom: 0;
+  width: 250px;
+  transition: transform 0.3s ease;
+  z-index: 998;
 }
 
-app-calendar {
-  grid-column: span 3;
-  height: calc(100vh - 15rem);
-  background-color: #c4ba60;
-  border-radius: 8px;
+.content {
+  position: fixed;
+  top: 80px; // Below header
+  right: 0;
+  bottom: 0;
+  margin: 1rem;
+  overflow-y: auto;
+  //border: solid 2px #f77f00;
+  transition: left 0.3s ease;
+  background: white; // Add background to cover underlying content
 }
 
-app-feature-cards{
-  grid-row: 2;
-  grid-column: 4;
+.with-sidebar {
+  left: 250px; // Sidebar width
 }
 
-app-absence{
-  grid-row: 2;
-  grid-column: 4;
-  margin-top: 15rem;
+.without-sidebar {
+  left: 0;
+}
+
+// Hide sidebar when collapsed (alternative to toggling width)
+.sidebar.collapsed {
+  transform: translateX(-250px);
 }

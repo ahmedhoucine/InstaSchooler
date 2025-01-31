@@ -56,4 +56,7 @@ export class ListClassesComponent implements OnInit {
       });
     }
   }
+  goToAddClassPage(): void {
+    this.router.navigate(['/dashboard/class/addclass']);
+  }
 }

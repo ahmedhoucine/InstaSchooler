@@ -23,8 +23,6 @@ export class StudentService {
       )
     );
   }
-  
-  
  
   getAbsenceStats(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/absence-stats`);

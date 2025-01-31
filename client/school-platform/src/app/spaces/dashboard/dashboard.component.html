@@ -1,7 +1,9 @@
-<div class="dashboard-layout">
-  <app-sidebar></app-sidebar>
-    <div class="main-content">
-      <app-header></app-header>
-      <router-outlet></router-outlet>
-    </div>
+<div class="app-header">
+  <app-header></app-header>
+</div>
+
+<app-sidebar class="sidebar"></app-sidebar>
+
+<div class="content" [ngClass]="isSidebarVisible ? 'with-sidebar' : 'without-sidebar'">
+  <router-outlet></router-outlet>
 </div>

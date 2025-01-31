@@ -12,7 +12,6 @@ export class TaskService {
 
   getTasks(): Observable<any[]> {
     const headers = this.getAuthHeaders();
-    console.log(headers)
     return this.http.get<any[]>(this.apiUrl, { headers });
   }
 
