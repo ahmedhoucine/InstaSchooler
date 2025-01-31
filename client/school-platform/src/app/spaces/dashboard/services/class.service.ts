@@ -7,13 +7,13 @@ import { environment } from 'src/environment';
   providedIn: 'root',
 })
 export class ClassService {
-  private apiUrl = `${environment.apiUrl}/school-platform/classes`;
+  private apiUrl = `${environment.apiUrl}/courses`;
 
   constructor(private http: HttpClient) {}
 
   // Get all classes
   getAllClasses(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/all-classes`);
+    return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
   // Get class by ID

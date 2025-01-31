@@ -7,7 +7,7 @@ import { environment } from 'src/environment';
   providedIn: 'root',
 })
 export class TeacherService {
-  private apiUrl = `${environment.apiUrl}/school-platform/teacher`;
+  private apiUrl = `${environment.apiUrl}/teachers`;
 
   constructor(private http: HttpClient) {}
 

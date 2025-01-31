@@ -1,0 +1,44 @@
+<div class="student-container">
+  <br>
+<br>
+<br>
+  <h2>Étudiants du Niveau {{ niveau }}</h2>
+
+  <!-- Sélecteur de niveau -->
+  <div class="niveau-selector">
+    <label for="niveau">Sélectionnez le niveau :</label>
+    <select id="niveau" [(ngModel)]="niveau" (change)="fetchStudents()">
+      <option *ngFor="let n of [1, 2, 3, 4]" [value]="n">Niveau {{ n }}</option>
+    </select>
+  </div>
+
+  <!-- Liste des étudiants -->
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>État</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.lastName }}</td>
+          <td>{{ student.firstname }}</td>
+          <td>
+            <select [(ngModel)]="student.status" class="status-select">
+              <option value="Présent">Présent</option>
+              <option value="Absent">Absent</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bouton d'envoi -->
+  <button (click)="sendUpdates()" class="btn-primary">
+    Enregistrer les Statuts
+  </button>
+</div>

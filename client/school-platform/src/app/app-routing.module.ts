@@ -13,16 +13,20 @@ const routes: Routes = [
   {
     path: 'student',
     loadChildren: () => import('./spaces/student_space/student.module').then(m => m.StudentModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
 
   // Lazy load the dashboard module
   { path: 'dashboard', loadChildren: () => import('./spaces/dashboard/dashboard.module').then(m => m.DashboardModule) },
 
   // Teacher space routes
-
+// Student routes protected by AuthGuard
+{
+  path: 'teacher-space',
+  loadChildren: () => import('./spaces/teacher_space/teacher.module').then(m => m.TeacherModule),
+},
   // Fallback route for unmatched paths
-  { path: '**', redirectTo: 'auth/login' }
+  { path: '**', redirectTo: 'dashboard/auth/login' }
 ];
 
 @NgModule({
