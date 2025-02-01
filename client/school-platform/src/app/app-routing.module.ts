@@ -5,6 +5,7 @@ import { AuthGuard } from './core/guards-student/auth.guard';
 const routes: Routes = [
   // Redirect the root path to the dashboard
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'join', loadChildren: () => import('./spaces/join/join.module').then(m => m.JoinModule) },
 
   // Lazy load the auth module
   { path: 'auth', loadChildren: () => import('./spaces/student_space/modules/auth/auth.module').then(m => m.AuthModule) },

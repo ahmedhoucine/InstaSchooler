@@ -10,7 +10,7 @@ import { CourseService } from '../../services/course.service';
 })
 export class DashboardComponent implements OnInit {
   courses: any[] = []; // Liste des cours
-  profile = { userId: '' }; // Pour stocker l'ID de l'utilisateur
+  profile = { userId: '' }; // Stocker l'ID de l'utilisateur
 
   constructor(
     private http: HttpClient,
@@ -23,11 +23,10 @@ export class DashboardComponent implements OnInit {
     this.fetchProfile();  // Récupérer le profil au démarrage du composant
   }
 
-  // Récupérer dynamiquement l'ID de l'utilisateur à partir du ProfileService
   fetchProfile(): void {
     this.profileService.getProfile().subscribe(
       (data) => {
-        this.profile = { ...data }; // Mettre à jour le profil avec les données reçues
+        this.profile = { ...data }; 
         this.loadCourses();  // Charger les cours après avoir récupéré le profil
       },
       (error) => {
@@ -36,33 +35,34 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  // Charger les cours pour l'utilisateur
   loadCourses(): void {
-    const userId = this.profile.userId; // Récupérer l'ID de l'utilisateur
+    const userId = this.profile.userId; 
 
     if (!userId) {
       console.error('L\'ID de l\'utilisateur n\'est pas disponible');
-      return; // Arrêter l'exécution si l'ID n'est pas trouvé
+      return;
     }
 
     console.log("Récupération des cours pour l'utilisateur:", userId);
 
     this.courseService.getCoursesByUserId(userId).subscribe(
       (data) => {
-        this.courses = data; // Stocker les cours dans la variable
+        this.courses = data.map(course => ({ ...course, expanded: false })); // Ajout de la propriété "expanded"
         console.log('Cours récupérés:', this.courses);
-        this.cdRef.detectChanges(); // Assurer que la vue est mise à jour
+        this.cdRef.detectChanges(); 
       },
       (error) => {
+        
         console.error('Erreur lors de la récupération des cours', error);
       }
     );
   }
-
- // Fonction pour ouvrir le PDF local dans un nouvel onglet
-viewPdf(pdfUrl: string): void {
- 
+  toggleDescription(course: any): void {
+    course.expanded = !course.expanded; // Alterne l'état "expanded"
+  
+  }
+  
+  viewPdf(pdfUrl: string): void {
     window.open(pdfUrl, '_blank');
   }
 }
-

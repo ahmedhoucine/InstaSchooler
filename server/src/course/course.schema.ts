@@ -6,10 +6,12 @@ export type CourseDocument = Course & Document;
 @Schema()
 export class Course {
   @Prop({ required: true })
-  niveau: number;
+  niveau: string;
 
   @Prop({ required: true })
   description: string;
+  @Prop({ required: true })
+  title: string;
 
   @Prop({ required: true })
   duration: number;

@@ -11,6 +11,7 @@ import { DashboardModule } from '../app/spaces/dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { EditProfileModule } from './spaces/student_space/modules/edit-profile/edit-profil.module';
+import { JoinComponent } from './spaces/join/join.component';
 
 // Function to get the token from localStorage
 export function jwtTokenGetter() {
@@ -19,7 +20,8 @@ export function jwtTokenGetter() {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    JoinComponent
   ],
   imports: [
     BrowserModule,

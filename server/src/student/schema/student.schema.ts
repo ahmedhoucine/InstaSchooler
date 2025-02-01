@@ -49,7 +49,7 @@ export class Student extends BaseSchema {
 
   
   @Prop({ required: true })
-  niveau: number;
+  niveau: string;
 
   @Prop({ type: String, required: true })
   parentMobileNo: string;
