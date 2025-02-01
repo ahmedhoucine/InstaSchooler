@@ -1,9 +1,9 @@
 <div class="courses-container">
   <br>
-  <br>
-  <br>
-  <br>
-  <h2>Liste des Cours</h2>
+ 
+  <h2>Liste des Cours</h2>   
+  <button mat-raised-button color="primary" routerLink="/teacher-space/add-course">Ajouter un Cours</button>
+
 
   <!-- Boucle pour chaque groupe de niveau -->
   <div *ngFor="let niveau of getNiveaux()">
@@ -22,5 +22,4 @@
   </div>
 
   <!-- Bouton pour ajouter un cours -->
-  <button mat-raised-button color="primary" routerLink="/teacher-space/add-course">Ajouter un Cours</button>
 </div>

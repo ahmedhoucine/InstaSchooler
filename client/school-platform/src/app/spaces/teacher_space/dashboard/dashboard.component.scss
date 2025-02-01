@@ -1,12 +1,16 @@
 .dashboard-container {
   padding: 20px;
   font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Ajout d'un écart uniforme entre les sections */
 }
 
 .cards-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between; /* Écarte les cartes */
   margin-bottom: 20px;
+  gap: 15px; /* Ajout d'espacement entre les cartes */
 }
 
 .card {
@@ -43,8 +47,8 @@
 .main-content {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
   gap: 20px;
+  align-items: flex-start; /* Aligne le haut des conteneurs */
 }
 
 .absence-container {
@@ -52,11 +56,12 @@
   background: #f9f9f9;
   padding: 20px;
   border-radius: 10px;
-  width: 600px; /* Taille augmentée */
+  min-width: 600px; /* Ajustement pour une largeur minimale */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .absence-table {
-  width: 100%; /* Ajuste à la largeur du conteneur */
+  width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
   background-color: #ffffff;
@@ -88,6 +93,12 @@
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  width: 700px; /* Taille augmentée */
+  min-width: 300px; /* Largeur minimale pour éviter les débordements */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notifications-container h2 {
+  font-size: 1.5rem; /* Uniformisation avec le reste */
+  color: #333;
+  margin-bottom: 10px;
 }

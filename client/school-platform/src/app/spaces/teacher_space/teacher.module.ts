@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -26,12 +27,14 @@ import { SettingsComponent } from './settings/settings.component';
 import { StudentComponent } from './student/student.component';
 import { LoginComponent } from './login/login.component';
 import { TeacherRegisterComponent } from './teacher-register/teacher-register.component';
-import { CommonModule } from '@angular/common';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { NavbarComponent } from './navbar/navbar.component';
+
 
 
 @NgModule({
   declarations: [
-    TeacherComponent,
+    TeacherComponent, // Composant principal
     AddCourseComponent,
     CoursesComponent,
     ListeComponent,
@@ -42,24 +45,25 @@ import { CommonModule } from '@angular/common';
     StudentComponent,
     LoginComponent,
     TeacherRegisterComponent,
-
+    SidebarComponent, // Composant Sidebar
+    NavbarComponent, // Composant Navbar
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    TeacherRoutingModule,
-    HttpClientModule,
-
-    // Modules Angular Material
+    CommonModule, // Module commun pour Angular
+    FormsModule, // Pour les formulaires
+    HttpClientModule, // Pour les requêtes HTTP
+    TeacherRoutingModule, // Module de routage
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    MatListModule,
+    MatListModule, // Modules Angular Material
   ],
   providers: [],
-  bootstrap: [TeacherComponent],
+  bootstrap: [TeacherComponent], // Point d'entrée principal
+    exports: [NavbarComponent, SidebarComponent],
+  
 })
 export class TeacherModule {}
