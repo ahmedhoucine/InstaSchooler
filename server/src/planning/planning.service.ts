@@ -33,16 +33,23 @@ export class PlanningService {
   }
 
   // Update Planning by ID
-  async updatePlanning(id: string, level: number, file: Express.Multer.File): Promise<Planning> {
-    return this.planningModel.findOneAndUpdate(
+  async updatePlanning(id: string, niveau: number, file?: Express.Multer.File): Promise<Planning> {
+    const updateData: any = { niveau };
+    if (file) {
+      updateData.filename = file.filename;
+      updateData.path = file.path;
+    }
+
+    const updatedPlanning = await this.planningModel.findOneAndUpdate(
       { id },
-      {
-        niveau: level,
-        filename: file.filename,
-        path: `/uploads/${file.filename}`,
-      },
-      { new: true },
-    ).exec();
+      updateData,
+      { new: true }
+    );
+    if (!updatedPlanning) {
+      throw new Error(`Planning with ID ${id} not found`);
+    }
+
+    return updatedPlanning;
   }
 
   // Delete Planning by ID

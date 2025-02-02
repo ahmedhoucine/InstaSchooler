@@ -1,5 +1,14 @@
 import {
-  Controller, Post, Get, Put, Delete, Param, Body, UseInterceptors, UploadedFile
+  Controller,
+  Post,
+  Get,
+  Put,
+  Delete,
+  Param,
+  Body,
+  UseInterceptors,
+  UploadedFile,
+  Query,
 } from '@nestjs/common';
 import { PlanningService } from './planning.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -57,11 +66,18 @@ export class PlanningController {
   )
   async updatePlanning(
     @Param('id') id: string,
-    @Body('level') level: string,
-    @UploadedFile() file: Express.Multer.File,
+    @Body('niveau') niveau: string,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
-    const numericLevel = parseInt(level, 10);
-    return await this.planningService.updatePlanning(id, numericLevel, file);
+    const numericLevel = parseInt(niveau, 10);
+
+    if (isNaN(numericLevel)) {
+      throw new Error(`Invalid niveau: ${niveau}. It must be a valid number.`);
+    }
+    if (file) {
+      return await this.planningService.updatePlanning(id, numericLevel, file);
+    }
+    return await this.planningService.updatePlanning(id, numericLevel);
   }
 
   @Delete(':id')

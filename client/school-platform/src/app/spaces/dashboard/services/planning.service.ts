@@ -38,9 +38,11 @@ export class PlanningService {
   }
 
   // Update planning by ID
-  updatePlanning(id: string, level: number, file: File): Observable<Planning> {
+  updatePlanning(id: string, level: number, file?: File): Observable<Planning> {
     const formData = new FormData();
-    formData.append('planningImage', file);
+    if (file) {
+      formData.append('planningImage', file);
+    }
     formData.append('niveau', level.toString());
 
     return this.http.put<Planning>(`${this.apiUrl}/${id}`, formData);
@@ -50,5 +52,4 @@ export class PlanningService {
   deletePlanning(id: string): Observable<boolean> {
     return this.http.delete<boolean>(`${this.apiUrl}/${id}`);
   }
-
 }
