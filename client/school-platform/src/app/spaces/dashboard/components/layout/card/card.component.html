@@ -1,8 +1,13 @@
 <div class="card">
-    <div class="icon">{{ icon }}</div>
+  <div class="content">
+    <mat-icon class="icon">{{ icon }}</mat-icon>
     <div class="info">
-      <h3>{{ count }}</h3>
-      <p>{{ title }}</p>
+      <h3 class="count">{{ animatedCount }}</h3>
+      <p class="title">{{ title }}</p>
     </div>
+  </div>
+  <!-- Dedicated Button for Each Card Type -->
+  <button mat-icon-button class="action-button" (click)="handleButtonClick()">
+    <mat-icon>{{ buttonIcon }}</mat-icon>
+  </button>
 </div>
-  

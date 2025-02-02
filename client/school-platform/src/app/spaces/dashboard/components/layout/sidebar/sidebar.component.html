@@ -1,25 +1,90 @@
-<div class="sidebar" [ngClass]="{'hide': isSidebarHidden}">
-  <div class="admin">
-    <div class="admin-text">
-      <span class="admin-name">Admin</span>
-    </div>
-    <i class="toggle-icon" (click)="toggleSidebar()">☰</i>
-  </div>
-  <hr class="divider" />
-  <ul class="menu">
-    <li (click)="navigateToDashboard()"><i class="fas fa-users-cog"></i> Dashboard</li>
-    <li (click)="navigateToStudents()"><i class="fas fa-user-graduate"></i> Students</li>
-    <li (click)="navigateToTeachers()"><i class="fas fa-chalkboard-teacher"></i> Teachers</li>
-    <li><i class="fas fa-clipboard-list"></i> Assignments</li>
-    <li (click)="navigateToClasses()"><i class="fas fa-school"></i> Classes</li>
-    <li><i class="fas fa-chart-pie"></i> Reports</li>
-    <li><i class="fas fa-calendar-alt"></i> School Calendar</li>
+<!--<div class="sidebar" [ngClass]="{'hide': isSidebarHidden}">-->
+<!--  <div class="admin">-->
+<!--    <div class="admin-text">-->
+<!--      <span class="admin-name">Admin</span>-->
+<!--    </div>-->
+<!--    <i class="toggle-icon" (click)="toggleSidebar()">☰</i>-->
+<!--  </div>-->
+<!--  <hr class="divider" />-->
+<!--  <ul class="menu">-->
+<!--    <li (click)="navigateToDashboard()"><i class="fas fa-users-cog"></i> Dashboard</li>-->
+<!--    <li (click)="navigateToStudents()"><i class="fas fa-user-graduate"></i> Students</li>-->
+<!--    <li (click)="navigateToTeachers()"><i class="fas fa-chalkboard-teacher"></i> Teachers</li>-->
+<!--    <li><i class="fas fa-clipboard-list"></i> Assignments</li>-->
+<!--    <li (click)="navigateToClasses()"><i class="fas fa-school"></i> Classes</li>-->
+<!--    <li><i class="fas fa-chart-pie"></i> Reports</li>-->
+<!--    <li><i class="fas fa-calendar-alt"></i> School Calendar</li>-->
+<!--  </ul>-->
+<!--  <hr />-->
+<!--  <div class="menu-bottom">-->
+<!--    <ul class="menu">-->
+<!--      <li><i class="fas fa-cogs"></i> Admin Settings</li>-->
+<!--      <li (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="sidebar shadow-sm" [ngClass]="{ 'showSidebar': isSidebarVisible, 'hideSidebar': !isSidebarVisible }" [@fadeInOut]>
+
+  <!--  <span class="text-primary d-flex my-4 justify-content-center">-->
+  <!--    <img src="../../../assets/images/logo.png" width="100" height="80" alt="">-->
+  <!--  </span>-->
+  <ul>
+    <li (click)="navigateToDashboard()">
+      <a routerLinkActive="active">
+        <span class="menu-icon material-icons">dashboard</span>
+        <span class="menu-text">Overview</span>
+      </a>
+    </li>
+    <li (click)="navigateToStudents()">
+      <a routerLinkActive="active">
+        <span class="menu-icon material-icons">school</span>
+        <span class="menu-text">Students</span>
+      </a>
+    </li>
+    <li (click)="navigateToTeachers()">
+      <a routerLinkActive="active">
+        <span class="menu-icon material-icons">person</span>
+        <span class="menu-text">Teachers</span>
+      </a>
+    </li>
+    <li (click)="navigateToClasses()">
+      <a routerLinkActive="active">
+        <span class="menu-icon material-icons">class</span>
+        <span class="menu-text">Classes</span>
+      </a>
+    </li>
+    <li>
+      <a routerLinkActive="active">
+        <span class="menu-icon material-icons">assignment</span>
+        <span class="menu-text">Assignments</span>
+      </a>
+    </li>
+    <li>
+      <a routerLinkActive="active">
+        <span class="menu-icon material-icons">assessment</span>
+        <span class="menu-text">Reports</span>
+      </a>
+    </li>
+    <li>
+      <a routerLinkActive="active">
+        <span class="menu-icon material-icons">event</span>
+        <span class="menu-text">School Calendar</span>
+      </a>
+    </li>
+    <li>
+      <a routerLinkActive="active">
+        <span class="menu-icon material-icons">settings</span>
+        <span class="menu-text">Admin Settings</span>
+      </a>
+    </li>
+    <li (click)="logout()">
+      <a routerLinkActive="active">
+        <span class="menu-icon material-icons">exit_to_app</span>
+        <span class="menu-text">Logout</span>
+      </a>
+    </li>
   </ul>
-  <hr />
-  <div class="menu-bottom">
-    <ul class="menu">
-      <li><i class="fas fa-cogs"></i> Admin Settings</li>
-      <li (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</li>
-    </ul>
-  </div>
+
 </div>

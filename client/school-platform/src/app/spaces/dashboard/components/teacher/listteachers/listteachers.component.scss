@@ -1,132 +1,122 @@
+/* Teachers Header */
+.teachers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #A50133;
+  color: white;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.teachers-header h2 {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Main Container */
 .container {
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 30px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  position: relative;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-  text-align: center;
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 30px;
-}
-
-.table {
+/* Neumorphic Table */
+.neumorphic-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 30px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.table th,
-.table td {
+.neumorphic-table th, .neumorphic-table td {
   padding: 15px 20px;
-  text-align: center;
-  border: 1px solid #ddd;
-  font-size: 16px;
+  border-bottom: 2px solid #f0f0f0;
 }
 
-.table th {
-  background-color: #f4f4f4;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.table th:nth-child(4),
-.table td:nth-child(4) {
-  width: 20%;
-}
-
-.table th:nth-child(5),
-.table td:nth-child(5) {
-  width: 15%;
-}
-
-button {
-  padding: 12px 25px;
-  background-color: #4caf50;
-  font-size: 1.1rem;
+.neumorphic-table th {
+  background-color: #A50133;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-right: 15px;
-  text-align: center;
+  font-weight: 500;
 }
 
-button:hover {
-  background-color: #338d33;
+.neumorphic-table tr:hover {
+  background-color: #f9f9f9;
 }
 
-button:disabled {
-  background-color: #ccc;
+/* Profile Image */
+.teacher-profile-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 1rem;
 }
 
+/* Actions Button */
 .actions {
   display: flex;
-  justify-content: flex-start;
-  gap: 15px;
+  gap: 8px;
+  justify-content: center;
+
+  button {
+    color: #A50133;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+      background-color: rgba(165, 1, 51, 0.1);
+    }
+  }
 }
 
-.main-container {
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 250px;
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
-  .main-container {
-    margin-left: 0;
+  .teachers-header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
   }
 
   .container {
-    width: 90%;
-    padding: 25px;
+    padding: 1rem;
+    overflow-x: auto;
   }
 
-  h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+  .neumorphic-table {
+    min-width: 600px;
   }
 
-  .table th,
-  .table td {
-    padding: 12px 15px;
-    font-size: 14px;
+  .teacher-profile-img {
+    width: 30px;
+    height: 30px;
   }
 
-  button {
-    width: 100%;
-    font-size: 1rem;
-    padding: 10px 20px;
+  .actions button {
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
+  .teachers-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .container {
-    width: 95%;
-    margin-top: 20px;
-    padding: 20px;
+    padding: 1rem;
+    overflow-x: auto;
   }
 
-  h1 {
-    font-size: 20px;
-    margin-bottom: 15px;
+  .neumorphic-table {
+    min-width: 500px;
   }
 
-  .table th,
-  .table td {
-    font-size: 13px;
-    padding: 10px 12px;
-  }
-
-  button {
-    font-size: 0.9rem;
-    padding: 8px 16px;
+  .teacher-profile-img {
+    width: 25px;
+    height: 25px;
   }
 }

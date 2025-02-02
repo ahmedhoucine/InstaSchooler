@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 
   // Lazy load the auth module
-  //{ path: 'auth', loadChildren: () => import('./spaces/student_space/modules/auth/auth.module').then(m => m.AuthModule) },
+  // { path: 'auth', loadChildren: () => import('./spaces/student_space/modules/auth/auth.module').then(m => m.AuthModule) },
 
   // Student routes protected by AuthGuard
   {
@@ -21,10 +21,10 @@ const routes: Routes = [
 
   // Teacher space routes
 // Student routes protected by AuthGuard
-{
-  path: 'teacher-space',
-  loadChildren: () => import('./spaces/teacher_space/teacher.module').then(m => m.TeacherModule),
-},
+  {
+    path: 'teacher-space',
+    loadChildren: () => import('./spaces/teacher_space/teacher.module').then(m => m.TeacherModule),
+  },
   // Fallback route for unmatched paths
   { path: '**', redirectTo: 'dashboard/auth/login' }
 ];
