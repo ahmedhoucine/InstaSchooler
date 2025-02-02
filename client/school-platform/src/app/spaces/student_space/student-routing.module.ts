@@ -9,7 +9,7 @@ const routes: Routes = [
 
     children: [
       { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule) },
-      // { path: 'planning', loadChildren: () => import('./modules/planning/planning.module').then(m => m.PlanningModule) },
+      { path: 'planning', loadChildren: () => import('./modules/planning/planning.module').then(m => m.PlanningModule) },
 
       { path: 'calendar', loadChildren: () => import('./modules/calendar/calendar.module').then(m => m.CalendarModule) },
       // { path: 'notifications', loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule) },

@@ -9,6 +9,7 @@ import { StudentModule } from 'src/student/student.module';  // Import StudentMo
   imports: [
     MongooseModule.forFeature([{ name: MyEvent.name, schema: MyEventSchema }]),
     StudentModule,  // Import StudentModule here
+    
   ],
   controllers: [EventsController],
   providers: [EventService],
