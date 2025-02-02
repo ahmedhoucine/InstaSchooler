@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
 export class DashboardOverviewComponent {
   totalStudents = 2478;
   totalTeachers = 983;
-  totalClasses = 652;
+  totalCourses = 652;
   unpaidStudents = 1256;
 }
