@@ -12,19 +12,22 @@ export class TaskService {
 
   getTasks(): Observable<any[]> {
     const headers = this.getAuthHeaders();
-    console.log(headers)
     return this.http.get<any[]>(this.apiUrl, { headers });
   }
 
   addTask(task: any): Observable<any> {
     const headers = this.getAuthHeaders();
-    console.log(headers)
     return this.http.post(this.apiUrl, task, { headers });
   }
 
   getTasksForToday(): Observable<any[]> {
     const headers = this.getAuthHeaders();
     return this.http.get<any[]>(`${this.apiUrl}/today`, { headers });
+  }
+
+  deleteTask(taskId: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.apiUrl}/${taskId}`, { headers });
   }
 
   private getAuthHeaders(): HttpHeaders {

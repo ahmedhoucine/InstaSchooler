@@ -1,8 +1,6 @@
 <br>
 <br>
-<br>
-<br>
-<br>
+
 <div class="notification-container">
   <div class="notification-ring">
     <div class="ring-icon">
@@ -13,7 +11,7 @@
 
   <h2>Notifications</h2>
 
-  <p *ngIf="tasksToday.length === 0">Aucune tâche pour aujourd'hui ! 🎉</p>
+  <p *ngIf="tasksToday.length === 0">No tasks for today! 🎉</p>
 
   <div *ngIf="tasksToday.length > 0" class="task-list">
     <div class="task-item" *ngFor="let task of tasksToday">

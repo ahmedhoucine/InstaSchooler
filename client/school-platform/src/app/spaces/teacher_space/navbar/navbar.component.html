@@ -1,1 +1,16 @@
-hello
+<nav class="navbar">
+    <div class="navbar-left">
+        <!-- Logo ou photo en haut de la navbar -->
+        <img src="../../../../assets/images/logoo.png" alt="Logo" class="navbar-logo" />
+      </div>
+    <div class="profile-actions">
+      <button routerLink="/teacher-space/login" class="logout-btn" >
+        <mat-icon>exit_to_app</mat-icon> Logout
+      </button>
+      <button routerLink="./settings" class="edit-profile-btn">
+        <mat-icon>edit</mat-icon> Edit Profile
+      </button>
+      <!--img [src]="enseignant.profileImage" alt="Profile" class="profile-pic"/-->
+    </div>
+  </nav>
+  

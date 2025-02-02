@@ -1,92 +1,94 @@
 <br>
-<br> <br>
-<br> <br>
-<br>
+
 <div class="settings-page">
 
-  <!-- Formulaire de modification de profil -->
+  <!-- Profile Settings Form -->
   <div class="settings-container">
-    <h2>Paramètres du Profil</h2>
+    <h2>Profile Settings</h2>
     <form #settingsForm="ngForm" (ngSubmit)="onSaveSettings(settingsForm)">
       <div class="form-group">
-        <label for="name">Nom :</label>
+        <label for="name">Last Name:</label>
         <input type="text" id="name" [(ngModel)]="enseignant.lastName" name="lastName" required />
       </div>
       <div class="form-group">
-        <label for="name">Prénom :</label>
+        <label for="name">First Name:</label>
         <input type="text" id="name" [(ngModel)]="enseignant.firstname" name="firstname" required />
       </div>
 
       <div class="form-group">
-        <label for="email">Email :</label>
+        <label for="email">Email:</label>
         <input type="email" id="email" [(ngModel)]="enseignant.email" name="email" readonly />
       </div>
 
       <div class="form-group">
-        <label for="current-password">Mot de passe actuel :</label>
+        <label for="current-password">Current Password:</label>
         <input
           type="password"
           id="current-password"
           [(ngModel)]="enseignant.currentPassword"
           name="currentPassword"
-          placeholder="Entrez votre mot de passe actuel"
+          placeholder="Enter your current password"
           required
         />
       </div>
 
       <div class="form-group">
-        <label for="new-password">Nouveau mot de passe :</label>
+        <label for="new-password">New Password:</label>
         <input
           type="password"
           id="new-password"
           [(ngModel)]="enseignant.newPassword"
           name="newPassword"
-          placeholder="Entrez un nouveau mot de passe"
+          placeholder="Enter a new password"
           required
         />
       </div>
 
-      <button type="submit" class="btn btn-primary">Enregistrer</button>
+      <button type="submit" class="btn btn-primary">Save</button>
     </form>
   </div>
 
-  <!-- Formulaire de ticket -->
+  <!-- Ticket Form -->
   <div class="ticket-container">
-    <h2>Envoyer un Ticket</h2>
+    <h2>Send a Ticket</h2>
     <form #ticketForm="ngForm" (ngSubmit)="onSendTicket(ticketForm)">
       <div class="form-group">
-        <label for="subject">Sujet :</label>
+        <label for="subject">Subject:</label>
         <input
           type="text"
           id="subject"
           name="subject"
           ngModel
           required
-          placeholder="Entrez le sujet du ticket"
+          placeholder="Enter the ticket subject"
         />
       </div>
       <div class="form-group">
-        <label for="urgency">Urgence :</label>
+        <label for="urgency">Urgency:</label>
         <select id="urgency" name="urgency" ngModel required>
-          <option value="low">Faible</option>
-          <option value="medium">Moyenne</option>
-          <option value="high">Élevée</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="message">Message :</label>
+        <label for="message">Message:</label>
         <textarea
           id="message"
           name="message"
           ngModel
           rows="4"
           required
-          placeholder="Expliquez votre problème"
+          placeholder="Describe your issue"
         ></textarea>
       </div>
       <br>
       <br>
-      <button type="submit" class="btn btn-primary">Envoyer le Ticket</button>
+      <br>
+      <br>
+      <br>
+      <br>
+      <button type="submit" class="btn btn-primary">Send Ticket</button>
     </form>
   </div>
 </div>

@@ -112,8 +112,8 @@ button[mat-icon-button] {
   color: #3f51b5;
   text-transform: uppercase; // Mettre en majuscules
   font-weight: bold;
-  text-align: center; // Centrer le titre
-  border-bottom: 2px solid #ddd; // Ligne en bas du titre
+  text-align: center; // Centrer le title
+  border-bottom: 2px solid #ddd; // Ligne en bas du title
   display: inline-block; // Pour limiter la largeur de la ligne
   padding-bottom: 5px;
 }
@@ -176,4 +176,19 @@ button[mat-icon-button] {
 
 .card-content a:hover {
   background-color: #303f9f;
+}
+
+h2
+{
+  color: #303f9f;
+  font-size: 50px;
+}
+.card {
+  position: relative;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

@@ -23,6 +23,11 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!this.getToken();
+    const token = this.getToken();
+    return !!token; // Vérifie si un token existe
+  }
+
+  logout(): void {
+    localStorage.removeItem('authToken');
   }
 }

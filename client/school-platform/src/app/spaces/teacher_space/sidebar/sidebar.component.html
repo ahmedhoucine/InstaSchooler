@@ -1,24 +1,38 @@
-<div class="sidebar-logo">
-    <img src="image.png" alt="Logo" />
-    <h2>Teacher Panel</h2>
-  </div>
-  
+<mat-sidenav mode="side" opened [class.collapsed]="isCollapsed" class="sidebar">
+ 
+  <button class="sidebar-toggle" (click)="toggleSidebar()">
+    <span class="hamburger-icon">
+      <span class="line top"></span>
+      <span class="line middle"></span>
+      <span class="line bottom"></span>
+    </span>
+  </button>
+<br>
+<br>
   <mat-nav-list>
-    <a mat-list-item routerLink="/dashboard">
+    <a mat-list-item routerLink="./dashboards">
       <mat-icon>dashboard</mat-icon>
-      <span>Dashboard</span>
+      <span *ngIf="!isCollapsed">Dashboard</span>
     </a>
-    <a mat-list-item routerLink="/alert">
+    <a mat-list-item routerLink="./courses">
+      <mat-icon>library_books</mat-icon>
+      <span *ngIf="!isCollapsed">Courses</span>
+    </a>
+    <a mat-list-item routerLink="./liste">
+      <mat-icon>list</mat-icon>
+      <span *ngIf="!isCollapsed">Tasks</span>
+    </a>
+    <a mat-list-item routerLink="./notifications">
       <mat-icon>notifications</mat-icon>
-      <span>Alert</span>
+      <span *ngIf="!isCollapsed">Notifications</span>
     </a>
-    <a mat-list-item routerLink="/badges">
-      <mat-icon>star</mat-icon>
-      <span>Badges</span>
+    <a mat-list-item routerLink="./student">
+      <mat-icon>group</mat-icon>
+      <span *ngIf="!isCollapsed">Students</span>
     </a>
-    <a mat-list-item routerLink="/buttons">
-      <mat-icon>touch_app</mat-icon>
-      <span>Button</span>
+    <a mat-list-item routerLink="./settings">
+      <mat-icon>settings</mat-icon>
+      <span *ngIf="!isCollapsed">Settings</span>
     </a>
   </mat-nav-list>
-  
+</mat-sidenav>
