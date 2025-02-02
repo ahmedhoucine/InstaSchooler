@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard-overview.component.scss']
 })
 export class DashboardOverviewComponent {
-  totalStudents = 2478;
-  totalTeachers = 983;
-  totalClasses = 652;
-  unpaidStudents = 1256;
+  totalStudents =2478;
+  totalTeachers =983;
+  totalClasses =652;
+  unpaidStudents =1256;
 }

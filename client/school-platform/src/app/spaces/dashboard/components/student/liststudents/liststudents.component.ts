@@ -41,9 +41,9 @@ export class ListStudentsComponent implements OnInit {
     );
   }
 
-    editStudent(student: any) {
-      this.router.navigate(['/dashboard/student/editstudent'], { state: { student } });
-    }
+  editStudent(student: any) {
+    this.router.navigate(['/dashboard/student/editstudent'], { state: { student } });
+  }
 
   goToAddStudentPage(): void {
     this.router.navigate(['/dashboard/student/addstudent']);
