@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
 
     console.log("Récupération des cours pour l'utilisateur:", userId);
 
-    this.courseService.getCoursesByUserId(userId).subscribe(
+    this.courseService.getAvailableCourses(userId).subscribe(
       (data) => {
         this.courses = data.map(course => ({ ...course, expanded: false })); // Ajout de la propriété "expanded"
         console.log('Cours récupérés:', this.courses);
