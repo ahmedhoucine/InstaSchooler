@@ -24,7 +24,7 @@ export class ListClassesComponent implements OnInit {
         const teacherRequests = classes.map((classItem: any) =>
           this.teacherService.getTeacherById(classItem.teacher) // Fetch teacher by ID
         );
-  
+
         forkJoin(teacherRequests).subscribe(
           (teachers) => {
             this.classes = classes.map((classItem, index) => ({
@@ -55,5 +55,8 @@ export class ListClassesComponent implements OnInit {
         this.getClasses(); // Refresh class list after deletion
       });
     }
+  }
+  goToAddClassPage(): void {
+    this.router.navigate(['/dashboard/class/addclass']);
   }
 }
