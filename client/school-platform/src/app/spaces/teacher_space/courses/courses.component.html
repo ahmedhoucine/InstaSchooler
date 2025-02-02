@@ -1,9 +1,7 @@
 <div class="courses-container">
   <br>
- 
-  <h2>Liste des Cours</h2>   
+  <h2>Liste des Cours</h2>
   <button mat-raised-button color="primary" routerLink="/teacher-space/add-course">Ajouter un Cours</button>
-
 
   <!-- Boucle pour chaque groupe de niveau -->
   <div *ngFor="let niveau of getNiveaux()">
@@ -16,10 +14,10 @@
           <p>{{ course.description }}</p>
           <p><strong>Durée :</strong> {{ course.duration }} heures</p>
           <a *ngIf="course.pdf" [href]="course.pdf" target="_blank" mat-raised-button color="primary">Voir PDF</a>
+          <!-- Bouton pour supprimer un cours -->
+          <button mat-button color="warn" (click)="deleteCourse(course._id)">Supprimer</button>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Bouton pour ajouter un cours -->
 </div>

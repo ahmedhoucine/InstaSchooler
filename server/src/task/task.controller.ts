@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  UseGuards,
+  Request,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../teacher/teacher-jwt.guard';
 import { TaskService } from './task.service';
 
@@ -25,5 +34,12 @@ export class TaskController {
   async getTasksForToday(@Request() req) {
     const teacherId = req.user.id;
     return this.taskService.getTasksForToday(teacherId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  async deleteTask(@Param('id') taskId: string) {
+    await this.taskService.deleteTask(taskId);
+    return { message: 'Tâche supprimée avec succès.' };
   }
 }

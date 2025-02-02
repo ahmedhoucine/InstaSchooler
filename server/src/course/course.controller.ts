@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import {
   Controller,
   Post,
@@ -18,22 +17,21 @@ import { CourseService } from './course.service';
 @Controller('courses')
 export class CourseController {
   constructor(private readonly courseService: CourseService) {}
+
   @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('pdf', { dest: './uploads' }))
   async create(
     @Request() req,
     @Body() courseData: any,
-    @UploadedFile() file?: Express.Multer.File,
+    @UploadedFile() file?: Express.Multer.File
   ) {
     const teacherId = req.user.id;
-
     const course = {
       ...courseData,
       teacher: teacherId,
       pdf: file ? `http://localhost:3000/uploads/${file.filename}` : null,
     };
-
     return this.courseService.create(course);
   }
 
@@ -53,18 +51,13 @@ export class CourseController {
   }
 
   @Get()
-  async getAllCourses() { 
+  async getAllCourses() {
     return this.courseService.allcourses();
   }
-  @Delete(':id')
-  async deleteCourse(@Param('id') id: string) {
-    return this.courseService.deleteCourse(id);
-  }
 
-  @Post('add-class')
-  async createe(
-     @Body() courseData: any,
-  ) {
-    return this.courseService.create(courseData);
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  async deleteCourse(@Param('id') id: string): Promise<void> {
+    return this.courseService.deleteCourse(id);
   }
 }
