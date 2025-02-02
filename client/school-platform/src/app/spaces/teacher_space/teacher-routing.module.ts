@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component'; // Assurez-vous que ce
 import { AddCourseComponent } from './add-course/add-course.component'; // Ajouter le chemin vers AddCourseComponent
 import { AddTaskComponent } from './add-task/add-task.component'; // Ajouter le chemin vers AddTaskComponent
 import { TeacherRegisterComponent } from './teacher-register/teacher-register.component'; // Ajouter le chemin vers AddTaskComponent
+import { StudentComponent } from './student/student.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,8 @@ const routes: Routes = [
       { path: 'add-course', component: AddCourseComponent }, // Route pour ajouter un cours
       { path: 'add-task', component: AddTaskComponent }, // Route pour ajouter une tâche
       { path: 'teacher-register', component: TeacherRegisterComponent }, // Route pour ajouter une tâche
+      { path: 'student', component: StudentComponent }, // Route pour ajouter une tâche
+
 
     ],
   },
