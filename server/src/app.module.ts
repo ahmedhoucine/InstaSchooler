@@ -13,6 +13,8 @@ import { AuthAdminModule } from './auth/admin-auth/auth-admin.module';
 import { TaskModule } from './task/task.module';
 import { TicketModule } from './ticket/ticket.module';
 import { CourseModule } from './course/course.module';
+import { PlanningModule } from './planning/planning.module';
+
 
 @Module({
   imports: [
@@ -30,6 +32,7 @@ import { CourseModule } from './course/course.module';
     TaskModule,
     TicketModule,
     CourseModule,
+    PlanningModule,
   ],
   controllers: [AppController, EventsController],
   providers: [AppService],
