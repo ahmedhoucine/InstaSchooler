@@ -10,8 +10,13 @@ export class PlanningService {
     @InjectModel(Planning.name) private readonly planningModel: Model<PlanningDocument>,
   ) {}
 
-  // Create Planning
+  // Create Planning (Ensure only one planning per niveau)
   async createPlanning(level: number, file: Express.Multer.File): Promise<Planning> {
+    const existingPlanning = await this.planningModel.findOne({ niveau: level }).exec();
+    if (existingPlanning) {
+      throw new Error(`A planning already exists for niveau ${level}`);
+    }
+
     const planning = new this.planningModel({
       id: uuidv4(),
       niveau: level,
@@ -34,6 +39,12 @@ export class PlanningService {
 
   // Update Planning by ID
   async updatePlanning(id: string, niveau: number, file?: Express.Multer.File): Promise<Planning> {
+    // Check if the niveau already exists in another planning
+    const existingPlanningWithNewNiveau = await this.planningModel.findOne({ niveau }).exec();
+    if (existingPlanningWithNewNiveau) {
+      throw new Error(`A planning already exists for niveau ${niveau}. You cannot change to this niveau.`);
+    }
+
     const updateData: any = { niveau };
     if (file) {
       updateData.filename = file.filename;
