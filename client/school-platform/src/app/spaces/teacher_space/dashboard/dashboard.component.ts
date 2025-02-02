@@ -45,13 +45,16 @@ export class DashboardComponent implements OnInit {
   fetchStudentCount(): void {
     this.studentService.getTotalStudents().subscribe({
       next: (data) => {
-        this.numberOfStudents = data.count;
+        this.numberOfStudents = data; 
       },
       error: (error) => {
         console.error('Erreur lors de la récupération du nombre d\'étudiants :', error);
       },
     });
   }
+  
+  
+  
 
   loadAbsenceStats(): void {
     this.studentService.getAbsenceStats().subscribe({

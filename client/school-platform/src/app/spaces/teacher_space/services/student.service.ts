@@ -28,7 +28,7 @@ export class StudentService {
     return this.http.get<any[]>(`${this.apiUrl}/absence-stats`);
   }
   // Récupérer le total des étudiants
-  getTotalStudents(): Observable<{ count: number }> {
-    return this.http.get<{ count: number }>(`${this.apiUrl}/count`);
+  getTotalStudents(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/count`);
   }
 }

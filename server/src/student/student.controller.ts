@@ -36,7 +36,17 @@ export class StudentController {
   getAllStudents() {
     return this.studentService.getAllStudents();
   }
+  //absence stats 
+  @Get('/absence-stats')
+  async getAbsenceStats() {
+    return await this.studentService.getAbsenceStats();
+  }
 
+  //count of students
+  @Get('/count')
+  async getStudentsNumber() {
+  return await this.studentService.getStudentCount();
+  }
   // Récupérer un étudiant par son ID
   @Get(':id')
   getStudentById(@Param('id') id: string) {

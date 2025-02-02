@@ -110,6 +110,11 @@ export class StudentService {
     return student;
   }
 
+  //student count 
+  async getStudentCount(): Promise<number> {
+    return await this.studentModel.countDocuments();
+  }
+
   // Delete a student
   async deleteStudent(id: string): Promise<void> {
     const result = await this.studentModel.deleteOne({ _id: id });
@@ -133,5 +138,16 @@ export class StudentService {
   }
   async getStudentsByNiveau(niveau: number): Promise<Student[]> {
     return await this.studentModel.find({ niveau });
+  }
+  //absence stats
+  async getAbsenceStats(): Promise<{ niveau: number; absences: number }[]> {
+    const niveaux = [1, 2, 3, 4];
+    const stats = await Promise.all(
+      niveaux.map(async (niveau) => {
+        const absences = await this.studentModel.countDocuments({ niveau, status: 'Absent' });
+        return { niveau, absences };
+      }),
+    );
+    return stats;
   }
 }
