@@ -28,7 +28,6 @@ export function jwtTokenGetter() {
     CoreModule,
     HttpClientModule,
     BrowserAnimationsModule,  // Required for toastr and JWT functionality
-    EditProfileModule,
     DashboardModule,
     SharedModule,
     ToastrModule.forRoot({    // Make sure you call forRoot() in the app module

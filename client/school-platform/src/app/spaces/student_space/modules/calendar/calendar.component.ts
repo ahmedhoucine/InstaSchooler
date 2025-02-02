@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core'; 
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -6,16 +6,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { EventDetailsModalComponent } from './components/event-details-modal/event-details-modal.component';
 import { ProfileService } from '../../services/profileEdit.service';
 import { EventService } from '../../services/events.service';
-;
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.css'],
 })
 export class CalendarComponent implements OnInit {
   pinnedDates: EventInput[] = [];
-  profile = { userId: '' }; // To store the userId from the profile
+  profile: any = {}; // On initialise le profil comme un objet vide
 
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
@@ -40,36 +39,30 @@ export class CalendarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchProfile();  // Fetch the profile on component init
-  }
-
-  // Fetch the profile to get the userId dynamically
-  fetchProfile(): void {
-    this.profileService.getProfile().subscribe(
-      (data) => {
+    // S'abonner à l'Observable profile$ pour récupérer les données du profil
+    this.profileService.profile$.subscribe((data) => {
+      if (data) {
         this.profile = { ...data };
-        this.loadEvents();  // After fetching profile, load events for the user
-      },
-      (error) => {
-        console.error('Error fetching profile:', error);
+        this.loadEvents();  // Charger les événements lorsque le profil est disponible
       }
-    );
+    });
+
+    // Charger le profil dès que le composant est initialisé
+    this.profileService.loadProfile();
   }
 
-  // Fetch events based on userId
+  // Charge les événements en fonction de l'userId du profil
   loadEvents(): void {
-    const userId = this.profile.userId; // Get the userId from the profile
-
+    const userId = this.profile.userId;
     if (!userId) {
       console.error('User ID is not available');
-      return; // Stop execution if userId is not found
+      return;
     }
 
-    console.log("Fetching events for userId:", userId);
-    
+    console.log('Fetching events for userId:', userId);
+
     this.eventService.getEventsByUserId(userId).subscribe(
       (events) => {
-        console.log("events", events);
         this.pinnedDates = events.map((event) => ({
           id: event._id,
           title: event.title,
@@ -79,9 +72,8 @@ export class CalendarComponent implements OnInit {
           color: this.getEventColor(event.endDate),
         }));
 
-        console.log("pinnedDates", this.pinnedDates);
         this.calendarOptions.events = [...this.pinnedDates];
-        this.cdRef.detectChanges(); // Ensure the view is updated
+        this.cdRef.detectChanges();
       },
       (error) => {
         console.error('Error fetching events:', error);
@@ -92,18 +84,13 @@ export class CalendarComponent implements OnInit {
   getEventColor(endDate: string): string {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-  
+
     const eventEndDate = new Date(endDate);
     eventEndDate.setHours(0, 0, 0, 0);
-  
-    console.log('Today:', today);
-    console.log('Event End Date:', eventEndDate);
-  
+
     if (eventEndDate < today) {
-      console.log('Color: Red');
       return 'rgba(255, 0, 0, 0.3)';
     } else {
-      console.log('Color: Green');
       return 'rgba(61, 123, 61, 0.5)';
     }
   }
@@ -123,8 +110,6 @@ export class CalendarComponent implements OnInit {
   }
 
   handleEventClick(arg: any): void {
-    console.log("----arg", arg);
-
     const eventToEdit = {
       _id: arg.event.id,
       title: arg.event.title,
@@ -141,13 +126,11 @@ export class CalendarComponent implements OnInit {
       width: '400px',
       data: eventData,
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (result.action === 'delete') {
-          // Delete the event from pinnedDates
           this.pinnedDates = this.pinnedDates.filter(event => event.id !== result.eventId);
-          // Update the calendar events after deletion
           this.updateCalendarEvents();
         } else {
           const updatedEvent: EventInput = {
@@ -160,24 +143,22 @@ export class CalendarComponent implements OnInit {
             },
             color: this.getEventColor(result.endDate),
           };
-  
+
           const eventIndex = this.pinnedDates.findIndex(event => event.id === updatedEvent.id);
           if (eventIndex !== -1) {
             this.pinnedDates[eventIndex] = updatedEvent;
           } else {
             this.pinnedDates.push(updatedEvent);
           }
-  
-          // Update the calendar events after update or addition
+
           this.updateCalendarEvents();
         }
       }
     });
   }
-  
-  // Helper method to update the calendar events
+
   updateCalendarEvents(): void {
     this.calendarOptions.events = [...this.pinnedDates];
-    this.cdRef.detectChanges(); // Ensure the view is updated
+    this.cdRef.detectChanges();
   }
-}  
+}

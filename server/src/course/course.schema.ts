@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
+
+export type CourseDocument = Course & Document;
 
 @Schema()
 export class Course {
@@ -8,19 +10,22 @@ export class Course {
 
   @Prop({ required: true })
   description: string;
+  @Prop({ required: true })
+  title: string;
 
   @Prop({ required: true })
   duration: number;
 
-  @Prop({ default: '' })
-  image: string;
+  @Prop({ required: false, type: String, default: null }) // Déclarez explicitement le type
+  pdf?: string | null;
 
-  @Prop()
-  pdf: string;
+  @Prop({ required: false, type: String }) // Optionnel
+  image?: string;
 
-  @Prop({ required: true })
-  teacher: string; // ID de l'enseignant
+  @Prop({ default: Date.now })
+  createdAt: Date;
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Student' }] })
+  students: Types.ObjectId[];
 }
 
-export type CourseDocument = Course & Document;
 export const CourseSchema = SchemaFactory.createForClass(Course);
