@@ -7,7 +7,7 @@ export class Course {
   niveau: string;
 
   @Prop({ required: true })
-  description: string;
+  title: string;
 
   @Prop({ required: true })
   duration: number;

@@ -1,13 +1,13 @@
 <div class="container">
-  <h1>Create Class</h1>
+  <h1>Create Course</h1>
   <form [formGroup]="classForm" (ngSubmit)="onSubmit()">
 
-    <!-- Class Description -->
+    <!-- Class Title -->
     <div class="section">
-      <label for="description">Class Description</label>
-      <input id="description" formControlName="description" />
-      <div *ngIf="classForm.get('description')?.touched && classForm.get('description')?.invalid">
-        <small class="error" *ngIf="classForm.get('description')?.hasError('required')">Description is required</small>
+      <label for="title">Course Title</label>
+      <input id="title" formControlName="title" />
+      <div *ngIf="classForm.get('title')?.touched && classForm.get('title')?.invalid">
+        <small class="error" *ngIf="classForm.get('title')?.hasError('required')">Title is required</small>
       </div>
     </div>
 
