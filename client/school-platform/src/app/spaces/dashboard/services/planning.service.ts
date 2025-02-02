@@ -21,7 +21,7 @@ export class PlanningService {
   // Create planning
   createPlanning(level: number, file: File): Observable<Planning> {
     const formData = new FormData();
-    formData.append('planningImages', file);
+    formData.append('planningImage', file);
     formData.append('niveau', level.toString());
 
     return this.http.post<Planning>(`${this.apiUrl}/create/${level}`, formData);
@@ -40,7 +40,7 @@ export class PlanningService {
   // Update planning by ID
   updatePlanning(id: string, level: number, file: File): Observable<Planning> {
     const formData = new FormData();
-    formData.append('planningImages', file);
+    formData.append('planningImage', file);
     formData.append('niveau', level.toString());
 
     return this.http.put<Planning>(`${this.apiUrl}/update/${id}`, formData);

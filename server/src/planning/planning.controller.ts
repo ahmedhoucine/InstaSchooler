@@ -49,7 +49,7 @@ export class PlanningController {
         destination: './uploads',
         filename: (req, file, callback) => {
           const fileExtension = extname(file.originalname);
-          const fileName = `${uuidv4()}${fileExtension}`; 
+          const fileName = `${uuidv4()}${fileExtension}`;
           callback(null, fileName);
         },
       }),
@@ -57,10 +57,10 @@ export class PlanningController {
   )
   async updatePlanning(
     @Param('id') id: string,
-    @Body('level') level: string,  // ✅ Treat as string
+    @Body('level') level: string,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    const numericLevel = parseInt(level, 10);  // ✅ Convert to number
+    const numericLevel = parseInt(level, 10); 
     return await this.planningService.updatePlanning(id, numericLevel, file);
   }
 

@@ -11,7 +11,7 @@ interface Planning {
 @Component({
   selector: 'app-planning',
   templateUrl: './planning.component.html',
-  styleUrls: ['./planning.component.scss']
+  styleUrls: ['./planning.component.scss'],
 })
 export class PlanningComponent implements OnInit {
   plannings: Planning[] = [];
@@ -28,67 +28,73 @@ export class PlanningComponent implements OnInit {
 
   // Load all plannings
   loadPlannings(): void {
-    this.planningService.getAllPlannings().subscribe((data: Planning[]) => {
-      this.plannings = data;
-    });
+    this.planningService.getAllPlannings().subscribe(
+      (data: Planning[]) => {
+        this.plannings = data;
+      },
+      (error) => console.error('Error fetching plannings:', error)
+    );
   }
 
   // Handle file input change
   onFileSelected(event: any): void {
-    this.newPlanningFile = event.target.files[0];
+    if (event.target.files.length > 0) {
+      this.newPlanningFile = event.target.files[0];
+    }
   }
 
   // Create new planning
   createPlanning(): void {
-    if (this.newPlanningFile) {
-      this.loading = true;
-      this.planningService.createPlanning(this.newPlanningLevel, this.newPlanningFile).subscribe(
-        (newPlanning: Planning) => {
-          this.plannings.push(newPlanning);
-          this.newPlanningFile = null;
-          this.loading = false;
-        },
-        (error: any) => {
-          console.error('Error creating planning:', error);
-          this.loading = false;
-        }
-      );
+    if (!this.newPlanningFile) {
+      console.warn('No file selected');
+      return;
     }
+
+    this.loading = true;
+    this.planningService.createPlanning(this.newPlanningLevel, this.newPlanningFile).subscribe(
+      () => {
+        this.resetForm();
+        this.loadPlannings(); // Reload list
+      },
+      (error) => {
+        console.error('Error creating planning:', error);
+        this.loading = false;
+      }
+    );
   }
 
   // Update planning
   updatePlanning(): void {
-    if (this.selectedPlanning && this.newPlanningFile) {
-      this.loading = true;
-      this.planningService.updatePlanning(this.selectedPlanning.id, this.newPlanningLevel, this.newPlanningFile).subscribe(
-        (updatedPlanning: Planning) => {
-          const index = this.plannings.findIndex((p) => p.id === updatedPlanning.id);
-          if (index !== -1) {
-            this.plannings[index] = updatedPlanning;
-          }
-          this.selectedPlanning = null;
-          this.newPlanningFile = null;
-          this.loading = false;
+    if (!this.selectedPlanning) return;
+
+    this.loading = true;
+    this.planningService
+      .updatePlanning(
+        this.selectedPlanning.id,
+        this.newPlanningLevel,
+        this.newPlanningFile || new File([], '') // Keep existing file if not changed
+      )
+      .subscribe(
+        () => {
+          this.resetForm();
+          this.loadPlannings(); // Reload list
         },
-        (error: any) => {
+        (error) => {
           console.error('Error updating planning:', error);
           this.loading = false;
         }
       );
-    }
   }
 
   // Delete planning
   deletePlanning(id: string): void {
     this.loading = true;
     this.planningService.deletePlanning(id).subscribe(
-      (success: any) => {
-        if (success) {
-          this.plannings = this.plannings.filter((planning) => planning.id !== id);
-        }
+      (success) => {
+        if (success) this.loadPlannings(); // Reload list after delete
         this.loading = false;
       },
-      (error: any) => {
+      (error) => {
         console.error('Error deleting planning:', error);
         this.loading = false;
       }
@@ -106,5 +112,10 @@ export class PlanningComponent implements OnInit {
     this.selectedPlanning = null;
     this.newPlanningFile = null;
     this.newPlanningLevel = 1;
+    this.loading = false;
+
+    // Reset file input
+    const fileInput = document.querySelector<HTMLInputElement>('#fileInput');
+    if (fileInput) fileInput.value = '';
   }
 }
