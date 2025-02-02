@@ -13,6 +13,7 @@ import { ListTeachersComponent } from './components/teacher/listteachers/listtea
 import { ListClassesComponent } from './components/class/listclasses/listclasses.component';
 import { EditstudentComponent } from './components/student/editstudent/editstudent.component';
 import { DashboardLoginComponent } from './components/auth/login/dashboard-login.component';
+import { PlanningComponent } from './components/planning/planning.component';
 
 
 
@@ -28,6 +29,7 @@ import { DashboardLoginComponent } from './components/auth/login/dashboard-login
     ListClassesComponent,
     EditstudentComponent,
     DashboardLoginComponent,
+    PlanningComponent
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,7 @@ import { DashboardLoginComponent } from './components/auth/login/dashboard-login
     ListTeachersComponent,
     ListClassesComponent,
     DashboardLoginComponent,
+    PlanningComponent
   ]
 })
 export class DashboardModule { }
