@@ -60,7 +60,7 @@ export class PlanningController {
     @Body('level') level: string,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    const numericLevel = parseInt(level, 10); 
+    const numericLevel = parseInt(level, 10);
     return await this.planningService.updatePlanning(id, numericLevel, file);
   }
 

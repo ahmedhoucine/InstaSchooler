@@ -43,11 +43,12 @@ export class PlanningService {
     formData.append('planningImage', file);
     formData.append('niveau', level.toString());
 
-    return this.http.put<Planning>(`${this.apiUrl}/update/${id}`, formData);
+    return this.http.put<Planning>(`${this.apiUrl}/${id}`, formData);
   }
 
   // Delete planning by ID
   deletePlanning(id: string): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.apiUrl}/delete/${id}`);
+    return this.http.delete<boolean>(`${this.apiUrl}/${id}`);
   }
+
 }
