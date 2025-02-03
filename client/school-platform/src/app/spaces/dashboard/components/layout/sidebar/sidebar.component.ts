@@ -110,6 +110,10 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['dashboard/class/listclasses']);
   }
 
+  navigateToPlanning() {
+    this.router.navigate(['dashboard/planning/addplanning']);
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['dashboard/auth/login']);

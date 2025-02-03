@@ -1,0 +1,103 @@
+<!-- planning.component.html -->
+<div class="students-header">
+  <h2>Planning Management</h2>
+</div>
+
+<div class="container">
+  <!-- Create/Update Form -->
+  <div class="form-section">
+    <h3 class="section-title">{{ selectedPlanning ? 'Update Planning' : 'Create New Planning' }}</h3>
+    <form (ngSubmit)="selectedPlanning ? updatePlanning() : createPlanning()">
+      <div class="form-row">
+        <!-- Niveau Select -->
+        <div class="form-group">
+          <label for="niveau">Niveau *</label>
+          <select id="niveau"
+                  [(ngModel)]="newPlanningLevel"
+                  name="niveau"
+                  class="neumorphic-input"
+                  required>
+            <option value="">Select Niveau</option>
+            <option value="1">Niveau 1</option>
+            <option value="2">Niveau 2</option>
+            <option value="3">Niveau 3</option>
+            <option value="4">Niveau 4</option>
+          </select>
+        </div>
+
+        <!-- File Upload -->
+        <div class="form-group">
+          <label for="file">File *</label>
+          <div id="file" class="file-upload">
+            <input type="file" #fileInput
+                   (change)="onFileSelected($event)"
+                   hidden required>
+            <button mat-stroked-button
+                    type="button"
+                    (click)="fileInput.click()"
+                    class="neumorphic-input">
+              <mat-icon>upload</mat-icon>
+              {{ newPlanningFile?.name || 'Choose File' }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button mat-flat-button *ngIf="selectedPlanning"
+                type="button"
+                class="neumorphic-button"
+                (click)="resetForm()">
+          Cancel
+        </button>
+        <button mat-flat-button
+                color="primary"
+                type="submit"
+                class="neumorphic-button"
+                [disabled]="loading">
+          {{ selectedPlanning ? 'Update Planning' : 'Create Planning' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Planning List -->
+  <div class="table-header">
+    <h3 class="section-title">All Plannings</h3>
+  </div>
+
+  <table class="neumorphic-table">
+    <thead>
+    <tr>
+      <th>Filename</th>
+      <th>Niveau</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let planning of plannings">
+      <td>{{ planning.filename }}</td>
+      <td>Niveau {{ planning.niveau }}</td>
+      <td>
+        <div class="actions">
+          <button mat-icon-button
+                  (click)="selectPlanning(planning)"
+                  matTooltip="Edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button
+                  (click)="deletePlanning(planning.id)"
+                  matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="plannings.length === 0" class="no-data">
+    <p>No Plannings available</p>
+  </div>
+</div>
