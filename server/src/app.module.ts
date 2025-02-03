@@ -16,7 +16,7 @@ import { CourseModule } from './course/course.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
-// import { PlanningModule } from './planning/planning.module';
+import { PlanningModule } from './planning/planning.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -28,7 +28,7 @@ import { join } from 'path';
     StudentModule,
     TeacherModule,
     AuthModule,
-    // PlanningModule,
+    PlanningModule,
     EventsModule,
     AuthAdminModule,
     TaskModule,
