@@ -67,35 +67,33 @@
     <h3 class="section-title">All Plannings</h3>
   </div>
 
-  <table class="neumorphic-table">
-    <thead>
-    <tr>
-      <th>Filename</th>
-      <th>Niveau</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let planning of plannings">
-      <td>{{ planning.filename }}</td>
-      <td>Niveau {{ planning.niveau }}</td>
-      <td>
-        <div class="actions">
-          <button mat-icon-button
-                  (click)="selectPlanning(planning)"
-                  matTooltip="Edit">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button
-        (click)="deletePlanning(planning.id)"
-                  matTooltip="Delete">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+    <table class="neumorphic-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Niveau</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let planning of plannings">
+          <td>
+            <img [src]="'http://localhost:3000/uploads/' + planning.filename" alt="Planning Image" class="planning-image">
+          </td>
+          <td>Niveau {{ planning.niveau }}</td>
+          <td>
+            <div class="actions">
+              <button mat-icon-button (click)="selectPlanning(planning)" matTooltip="Edit">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deletePlanning(planning.id)" matTooltip="Delete">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
   <div *ngIf="plannings.length === 0" class="no-data">
     <p>No Plannings available</p>
