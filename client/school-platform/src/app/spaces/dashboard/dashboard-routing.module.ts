@@ -10,6 +10,7 @@ import { ListTeachersComponent } from './components/teacher/listteachers/listtea
 import { ListClassesComponent } from './components/class/listclasses/listclasses.component';
 import { EditstudentComponent } from './components/student/editstudent/editstudent.component';
 import { DashboardLoginComponent } from './components/auth/login/dashboard-login.component';
+import { PlanningComponent } from './components/planning/planning.component';
 import { AuthGuard } from '../../core/guards-dashboard/auth.guard';
 
 const routes: Routes = [
@@ -58,6 +59,13 @@ const routes: Routes = [
         children: [
           { path: 'addteacher', component: AddTeacherComponent },
           { path: 'listteachers', component: ListTeachersComponent },
+        ],
+      },
+      {
+        path: 'planning',
+        canActivate: [AuthGuard], // Protect these routes
+        children: [
+          { path: 'addplanning', component: PlanningComponent },
         ],
       },
     ],

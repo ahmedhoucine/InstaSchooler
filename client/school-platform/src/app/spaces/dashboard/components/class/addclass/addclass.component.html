@@ -1,79 +1,42 @@
-<!-- addclass.component.html -->
 <div class="teachers-header">
-  <h2>Create Class</h2>
+  <h2>Create Course</h2>
   <button mat-flat-button class="neumorphic-button" routerLink="/dashboard/class/listclasses">
     <mat-icon>arrow_back</mat-icon>
     Back to List
   </button>
 </div>
 
-<!--<div class="container">-->
-<!--  <form [formGroup]="classForm" (ngSubmit)="onSubmit()">-->
-<!--    &lt;!&ndash; Class Name &ndash;&gt;-->
-<!--    <div class="form-section">-->
-<!--      <h3 class="section-title">Class Information</h3>-->
-<!--      <div class="form-row">-->
-<!--        <div class="form-group">-->
-<!--          <label for="name">Class Name *</label>-->
-<!--          <input id="name" formControlName="name" class="neumorphic-input">-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+<div class="container">
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <!-- Course Information -->
+    <div class="form-section">
+      <h3 class="section-title">Course Details</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="niveau">Level *</label>
+          <select id="niveau" formControlName="niveau" class="neumorphic-input" required>
+            <option *ngFor="let level of levels" [value]="level">Niveau {{ level }}</option>
+          </select>
+        </div>
 
-<!--    &lt;!&ndash; Subject Assignment Section &ndash;&gt;-->
-<!--    <div class="form-section">-->
-<!--      <h3 class="section-title">Subject Assignments</h3>-->
-<!--      <div formArrayName="subjects">-->
-<!--        <div *ngFor="let subject of subjects.controls; let i = index" [formGroupName]="i" class="form-row">-->
-<!--          <div class="form-group">-->
-<!--            <label for="subject-{{i}}">Subject *</label>-->
-<!--            <select id="subject-{{i}}" formControlName="subject" class="neumorphic-input">-->
-<!--              <option *ngFor="let m of matiereOptions" [value]="m">{{ m }}</option>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--          <button type="button" mat-flat-button class="neumorphic-button danger" (click)="removeSubject(i)">-->
-<!--            Remove Subject-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="form-actions">-->
-<!--        <button type="button" mat-flat-button class="neumorphic-button" (click)="addSubject()">-->
-<!--          Add Subject-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
+        <div class="form-group">
+          <label for="duration">Duration (minutes) *</label>
+          <input id="duration" type="number" formControlName="duration" class="neumorphic-input" required>
+        </div>
+      </div>
 
-<!--    &lt;!&ndash; Teacher Assignments Section &ndash;&gt;-->
-<!--    <div class="form-section">-->
-<!--      <h3 class="section-title">Teacher Assignments</h3>-->
-<!--      <div formArrayName="teachers">-->
-<!--        <div *ngFor="let teacher of teachers.controls; let i = index" [formGroupName]="i" class="form-row">-->
-<!--          <div class="form-group">-->
-<!--            <label for="teacher-{{i}}">Teacher ID *</label>-->
-<!--            <input id="teacher-{{i}}" formControlName="teacher" class="neumorphic-input" placeholder="Teacher ID">-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <label for="subject-{{i}}">Subject *</label>-->
-<!--            <select id="subject-{{i}}" formControlName="subject" class="neumorphic-input">-->
-<!--              <option *ngFor="let m of matiereOptions" [value]="m">{{ m }}</option>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--          <button type="button" mat-flat-button class="neumorphic-button danger" (click)="removeTeacher(i)">-->
-<!--            Remove Teacher-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="form-actions">-->
-<!--        <button type="button" mat-flat-button class="neumorphic-button" (click)="addTeacher()">-->
-<!--          Add Teacher-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="description">Description *</label>
+          <textarea id="description" formControlName="description" class="neumorphic-input" required></textarea>
+        </div>
+      </div>
+    </div>
 
-<!--    <div class="form-actions">-->
-<!--      <button type="submit" mat-flat-button class="neumorphic-button" [disabled]="classForm.invalid">-->
-<!--        Create Class-->
-<!--      </button>-->
-<!--    </div>-->
-<!--  </form>-->
-<!--</div>-->
+    <div class="form-actions">
+      <button type="submit" mat-flat-button class="neumorphic-button" [disabled]="courseForm.invalid">
+        Create Course
+      </button>
+    </div>
+  </form>
+</div>

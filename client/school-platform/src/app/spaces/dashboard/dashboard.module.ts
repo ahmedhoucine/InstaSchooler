@@ -24,6 +24,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { PlanningComponent } from './components/planning/planning.component';
+
 
 
 
@@ -40,6 +46,7 @@ import {MatCardModule} from '@angular/material/card';
     ListClassesComponent,
     EditstudentComponent,
     DashboardLoginComponent,
+    PlanningComponent
   ],
   imports: [
     CommonModule,
@@ -59,6 +66,13 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonModule,
     MatCardModule,
     MatTableModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule
   ],
   exports: [
     DashboardComponent,
@@ -70,6 +84,7 @@ import {MatCardModule} from '@angular/material/card';
     ListTeachersComponent,
     ListClassesComponent,
     DashboardLoginComponent,
+    PlanningComponent
   ]
 })
 export class DashboardModule { }
