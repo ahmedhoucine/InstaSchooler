@@ -4,17 +4,17 @@ import { ProfileService } from 'src/app/spaces/student_space/services/profileEdi
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profil.component.html',
-  styleUrls: ['./edit-profil.component.css']
+  styleUrls: ['./edit-profil.component.css'],
 })
 export class EditProfileComponent implements OnInit {
-  profile = {
+  profile: any = {
     userId: '',
     username: '',
     email: '',
     currentPassword: '',
     password: '',
     confirmPassword: '',
-    profilePicture: ''
+    profilePicture: '',
   };
 
   defaultPicture = 'https://i.pinimg.com/736x/a4/8a/ca/a48aca275e3dbe9a00d8f90e095f25ae.jpg';
@@ -24,21 +24,9 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('EditProfileComponent loaded');
-    this.fetchProfile();
-  }
-
-  fetchProfile(): void {
-    this.loading = true;
-    this.profileService.getProfile().subscribe(
-      (data) => {
-        this.profile = { ...data };
-        this.loading = false;
-      },
-      (error) => {
-        console.error('Error fetching profile:', error);
-        this.loading = false;
-      }
-    );
+    this.profileService.profile$.subscribe((data) => {
+      if (data) this.profile = { ...data };
+    });
   }
 
   onFileSelected(event: any): void {
@@ -53,32 +41,22 @@ export class EditProfileComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.profile.profilePicture = reader.result as string;
-        console.log('New profile picture:', this.profile.profilePicture);
       };
       reader.readAsDataURL(file);
     }
   }
 
   onSubmit(): void {
-    // Envoi des données au backend
     this.profileService.updateProfile(this.profile).subscribe(
-      (response) => {
-        alert('Profile updated successfully!');
-      },
+      () => alert('Profile updated successfully!'),
       (error) => {
         console.error('Error updating profile:', error);
-
-        // Gestion des erreurs renvoyées par le backend
-        if (error.error?.message) {
-          alert(`Error: ${error.error.message}`);
-        } else {
-          alert('Failed to update profile. Please try again.');
-        }
+        alert(error.error?.message || 'Failed to update profile. Please try again.');
       }
     );
   }
 
   onCancel(): void {
-    this.fetchProfile();
+    this.profileService.loadProfile();
   }
 }

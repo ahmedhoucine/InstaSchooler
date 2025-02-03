@@ -8,7 +8,9 @@ export class Course {
 
   @Prop({ required: true })
   description: string;
-
+  
+  @Prop({ default: Date.now })
+  createdAt: Date;
   @Prop({ required: true })
   duration: number;
 

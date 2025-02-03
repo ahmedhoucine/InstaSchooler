@@ -5,7 +5,7 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as path from 'path';
-import { Express } from 'express';  // Vérifiez que ce type est correctement importé
+import { Express, response } from 'express';  // Vérifiez que ce type est correctement importé
 
 
 @Controller('auth')
@@ -15,7 +15,9 @@ export class AuthController {
 
   @Post('/login')
   async login(@Body() loginDto: LoginDto): Promise<{ token: string }> {
-    return this.authService.login(loginDto);
+    const response = await this.authService.login(loginDto);  // Récupère l'objet de réponse contenant le token
+    console.log(response.token);  // Affiche le token dans la console
+    return response;  // Renvoie l'objet avec le token au client
   }
 
   @UseGuards(JwtAuthGuard) // Protéger la route de mise à jour du profil

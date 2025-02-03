@@ -12,9 +12,10 @@ const routes: Routes = [
       { path: 'planning', loadChildren: () => import('./modules/planning/planning.module').then(m => m.PlanningModule) },
 
       { path: 'calendar', loadChildren: () => import('./modules/calendar/calendar.module').then(m => m.CalendarModule) },
-      { path: 'notifications', loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule) },
+      // { path: 'notifications', loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule) },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // Default route
-      { path: 'edit-profile', loadChildren: () => import('./modules/edit-profile/edit-profil.module').then(m => m.EditProfileModule) }
+      { path: 'edit-profile', loadChildren: () => import('./modules/edit-profile/edit-profil.module').then(m => m.EditProfileModule) },
+      { path: 'student', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) }
 
     ],
   },

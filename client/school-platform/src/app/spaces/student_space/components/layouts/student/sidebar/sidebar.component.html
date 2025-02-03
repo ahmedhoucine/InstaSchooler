@@ -24,12 +24,12 @@
     </li>
     -->
 
-    <!-- <li routerLinkActive="active"> 
+    <li routerLinkActive="active"> 
       <a routerLink="/student/planning">
         <mat-icon>list_alt</mat-icon>
         <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Planning</span>
       </a>
-    </li> -->
+    </li>
 
 
 
@@ -43,11 +43,13 @@
 
 
     <li routerLinkActive="active">
-      <a routerLink="/student/notifications">
-        <mat-icon>notifications</mat-icon>
-        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Notifications</span>
+      <a routerLink="/student/edit-profile">
+        <mat-icon>edit</mat-icon> <!-- Replace 'edit' with the desired icon name -->
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Settings
+        </span>
       </a>
     </li>
+    
 
 
 

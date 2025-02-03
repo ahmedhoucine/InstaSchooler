@@ -1,1 +1,10 @@
-<p>planning image uploaded by admin</p>
+<div *ngIf="planning; else noPlanning" class="planning-container">
+    <h2>Planning for Level: {{ planning.niveau }}</h2>
+    <img [src]="'http://localhost:3000' + planning.path" 
+         alt="Planning image for Niveau {{ planning.niveau }}" class="planning-image" />
+  </div>
+  
+  <ng-template #noPlanning>
+    <p>No planning available for your level.</p>
+  </ng-template>
+  
