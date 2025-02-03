@@ -1,18 +1,27 @@
-import { Component } from '@angular/core';
+import { Component , OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/spaces/dashboard/services/auth.service';
 import { Router } from '@angular/router';
+import { HeaderStateService } from 'src/app/spaces/dashboard/services/header-state.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './dashboard-login.component.html',
   styleUrls: ['./dashboard-login.component.scss'],
 })
-export class DashboardLoginComponent {
+export class DashboardLoginComponent implements OnDestroy {
   username = '';
   password = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private headerState: HeaderStateService, private authService:AuthService,private router: Router) {}
+
+  ngOnInit() {
+    this.headerState.setLoginViewState(true);
+  }
+
+  ngOnDestroy() {
+    this.headerState.setLoginViewState(false);
+  }
 
   onSubmit() {
     if (this.username && this.password) {
@@ -39,8 +48,6 @@ export class DashboardLoginComponent {
       this.errorMessage = 'Please enter both username and password.';
     }
   }
-
-  // Clear the error message when user starts typing
   onInputChange() {
     this.errorMessage = '';
   }

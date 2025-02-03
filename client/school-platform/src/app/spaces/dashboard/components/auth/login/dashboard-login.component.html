@@ -1,36 +1,61 @@
-<div class="login-container">
+<div class="content">
+  <mat-toolbar class="login-toolbar">
+    <div class="logo-section">
+      <img src="../../../assets/images/Logo white.png" alt="InstaSchooler Logo" class="logo" />
+      <span class="brand-name">InstaSchooler</span>
+    </div>
+    <span class="example-spacer"></span>
+    <span class="admin-title">Admin Dashboard Login</span>
+  </mat-toolbar>
+
+  <div class="container">
     <form class="login-form" (ngSubmit)="onSubmit()">
-      <h1>Login</h1>
+      <h1 class="section-title">Login</h1>
 
       <!-- Username Field -->
-      <label for="username">Username</label>
-      <input
-        type="text"
-        id="username"
-        placeholder="Enter your username"
-        [(ngModel)]="username"
-        name="username"
-        required
-        (input)="onInputChange()"
-      />
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          class="neumorphic-input"
+          placeholder="Enter your username"
+          [(ngModel)]="username"
+          name="username"
+          required
+          (input)="onInputChange()"
+        />
+      </div>
 
       <!-- Password Field -->
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        placeholder="Enter your password"
-        [(ngModel)]="password"
-        name="password"
-        required
-        (input)="onInputChange()"
-      />
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="neumorphic-input"
+          placeholder="Enter your password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          (input)="onInputChange()"
+        />
+      </div>
 
       <!-- Error Message -->
-      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
       <!-- Submit Button -->
-      <button type="submit" [disabled]="!username || !password">Login</button>
+      <div class="form-actions">
+        <button
+          mat-flat-button
+          type="submit"
+          class="neumorphic-button"
+          [disabled]="!username || !password"
+        >
+          Login
+        </button>
+      </div>
 
       <!-- Forgot Password Link -->
       <div class="form-footer">
@@ -38,3 +63,5 @@
       </div>
     </form>
   </div>
+
+</div>

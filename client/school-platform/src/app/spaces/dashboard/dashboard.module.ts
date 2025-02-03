@@ -85,6 +85,7 @@ import { PlanningComponent } from './components/planning/planning.component';
     ListClassesComponent,
     DashboardLoginComponent,
     PlanningComponent
-  ]
+  ],
+
 })
 export class DashboardModule { }

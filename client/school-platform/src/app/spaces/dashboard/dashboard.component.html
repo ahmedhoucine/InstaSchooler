@@ -2,7 +2,7 @@
   <app-header></app-header>
 </div>
 
-<app-sidebar class="sidebar"></app-sidebar>
+<app-sidebar class="sidebar" [ngClass]="{ 'showSidebar': isSidebarVisible, 'hideSidebar': !isSidebarVisible }"></app-sidebar>
 
 <div class="content" [ngClass]="isSidebarVisible ? 'with-sidebar' : 'without-sidebar'">
   <router-outlet></router-outlet>
