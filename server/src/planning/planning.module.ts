@@ -8,9 +8,11 @@ import { StudentModule } from 'src/student/student.module';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Planning.name, schema: PlanningSchema }]),
+
     StudentModule
   ],
   providers: [PlanningService],
   controllers: [PlanningController],
 })
 export class PlanningModule {}
+

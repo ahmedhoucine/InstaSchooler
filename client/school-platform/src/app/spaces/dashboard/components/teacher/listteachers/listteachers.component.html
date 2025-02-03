@@ -1,36 +1,43 @@
-<div class="main-container">
-    <div class="container">
-      <h1>List of Teachers</h1>
+<div class="teachers-header">
+  <h2>Teacher Management</h2>
+  <button mat-flat-button class="neumorphic-button" (click)="goToAddTeacherPage()">
+    <mat-icon>add</mat-icon>
+    Add New Teacher
+  </button>
+</div>
 
-      <!-- Table to display teachers -->
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Profile</th>
-            <th>Name</th>
-            <th>Subject</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let teacher of teachers">
-            <td><img [src]="teacher.profilePicture" alt="Profile Picture" class="teacher-profile-img" /></td>
-            <td>{{ teacher.firstname }} {{ teacher.lastName }}</td>
-            <td>{{ teacher.matiere }}</td>
-            <td>{{ teacher.email }}</td>
-            <td>{{ teacher.phone }}</td>
-            <td class="actions">
-              <button (click)="deleteTeacher(teacher._id)">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="container">
+  <table class="neumorphic-table">
+    <thead>
+    <tr>
+      <th>Profile</th>
+      <th>Name</th>
+      <th>Subject</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let teacher of teachers">
+      <td><img [src]="teacher.profilePicture" alt="Profile Picture" class="teacher-profile-img" /></td>
+      <td>{{ teacher.firstname }} {{ teacher.lastName }}</td>
+      <td>{{ teacher.matiere }}</td>
+      <td>{{ teacher.email }}</td>
+      <td>{{ teacher.phone }}</td>
+      <td>
+        <div class="actions">
+          <button mat-icon-button (click)="deleteTeacher(teacher._id)" matTooltip="Delete Teacher">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 
-      <!-- If no teachers are available -->
-      <div *ngIf="teachers.length === 0" class="no-teachers">
-        <p>No teachers available.</p>
-      </div>
-    </div>
-  </div>
+<!-- If no teachers are available -->
+<div *ngIf="teachers.length === 0" class="no-teachers">
+  <p>No teachers available.</p>
+</div>

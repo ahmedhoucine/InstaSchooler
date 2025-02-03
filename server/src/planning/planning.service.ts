@@ -1,3 +1,4 @@
+
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -9,6 +10,7 @@ import { Student, StudentDocument } from 'src/student/schema/student.schema';
 export class PlanningService {
   constructor(
     @InjectModel(Planning.name) private readonly planningModel: Model<PlanningDocument>,
+
         @InjectModel(Student.name) private studentModel: Model<StudentDocument>,
     
   ) {}
@@ -29,6 +31,7 @@ export class PlanningService {
 
     return await planning.save();
   }
+
   async getPlanningForStudent(studentId: string): Promise<Planning | null> {
     // Fetch the student by ID
     const student = await this.studentModel.findById(studentId);

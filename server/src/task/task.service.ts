@@ -20,4 +20,11 @@ export class TaskService {
     const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
     return this.taskModel.find({ teacher: teacherId, date: today }).exec();
   }
+
+  async deleteTask(taskId: string): Promise<void> {
+    const result = await this.taskModel.deleteOne({ _id: taskId });
+    if (result.deletedCount === 0) {
+      throw new Error(`Tâche avec l'ID ${taskId} introuvable.`);
+    }
+  }
 }

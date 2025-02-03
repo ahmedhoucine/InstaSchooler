@@ -1,210 +1,158 @@
 .main-container {
-  height: 100vh;
+  display: flex;
+  height: 100vh; /* Prend toute la hauteur de l'écran */
+  overflow: hidden; /* Évite tout débordement */
 }
 
-/* Sidebar Styles */
-.sidebar {
-  width: 250px;
-  background: linear-gradient(135deg, #020e2f, #445573);
-  color: #ffffff;
-  font-family: 'Roboto', sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+mat-sidenav {
   position: fixed;
-  padding-top: 30px;
-  transition: width 0.3s ease;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  top: 60px; /* Aligné sous la Navbar */
+  left: 0;
+  height: calc(100vh - 60px); /* Ajuste la hauteur pour exclure la Navbar */
+  width: 250px; /* Largeur par défaut */
+  background: linear-gradient(135deg, #020e2f, #445573); /* Style dégradé */
+  color: white;
+  transition: all 0.3s ease-in-out; /* Transition fluide pour le toggle */
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* S'assure que le sidenav est au-dessus des autres éléments */
+  overflow-y: auto; /* Permet le défilement vertical si le contenu est trop grand */
 }
 
-.sidebar.collapsed {
-  width: 70px;
+mat-sidenav.collapsed {
+  width: 70px; /* Largeur repliée */
 }
 
-.sidebar-header {
-  text-align: center;
-  margin-bottom: 20px;
+mat-sidenav-content {
+  margin-top: 60px; /* Espace pour la Navbar */
+  margin-left: 250px; /* Largeur par défaut de la Sidebar */
+  width: calc(100% - 250px); /* Ajuste la largeur du contenu principal */
+  transition: margin-left 0.3s ease-in-out; /* Transition fluide */
 }
 
-.logo {
-  width: 100px;
-  margin-bottom: 10px;
+mat-sidenav-content.collapsed {
+  margin-left: 70px; /* Largeur réduite si Sidebar repliée */
+  width: calc(100% - 70px);
 }
 
-/* Sidebar Toggle Button */
-.sidebar-toggle {
-  position: absolute;
-  top: 20px;
-  left: 15px;
-  background: transparent;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 30px;
-  height: 25px;
-  cursor: pointer;
-  z-index: 10;
-}
-
-.hamburger-icon {
-  width: 30px;
-  height: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.hamburger-icon .line {
-  background-color: #fff;
-  height: 4px;
-  width: 100%;
-  transition: all 0.3s ease-in-out;
-  border-radius: 4px;
-}
-
-.hamburger-icon.collapsed .top {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger-icon.collapsed .middle {
-  opacity: 0;
-}
-
-.hamburger-icon.collapsed .bottom {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* Sidebar List Styling */
+/* Sidebar Content */
 mat-nav-list a {
   display: flex;
   align-items: center;
   padding: 15px;
-  color: #ffffff;
+  color: white;
   text-decoration: none;
   gap: 15px;
-  transition: background-color 0.3s ease, padding-left 0.3s ease;
+  transition: padding-left 0.3s ease, background-color 0.3s ease;
 }
 
 mat-nav-list a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1); /* Fond en hover */
   padding-left: 20px;
 }
 
-.sidebar ul li.active {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #1e2a47;
-  border-left: 4px solid #6a74d5;
-  transform: scale(1.05);
-}
-
-/* Navbar Styles */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-.profile-actions {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-right: 30px;
-}
-
-.profile-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid #ffffff;
-}
-/* Navbar Styles */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background: white; /* Gradient background */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Optional shadow */
-  z-index: 1000;
-}
-
-/* Profile Actions Section */
-.profile-actions {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-left: auto; /* Push to the right */
-  margin-right: 30px;
-}
-
-/* Profile Picture */
-.profile-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid #ffffff; /* Border around the image */
-}
-
-.logout-btn,
-.edit-profile-btn {
-  background-color: transparent;
-  border: 1px solid rgb(22, 18, 18);
-  color: #333;
-  padding: 8px 12px;
-  border-radius: 25px;
-  font-size: 14px;
+.sidebar-toggle {
+  position: absolute;
+  top: 15px; /* Alignement amélioré */
+  left: 15px;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  z-index: 1100; /* S'assure que le bouton est au-dessus du sidenav */
+}
+
+.hamburger-icon {
   display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger-icon .line {
+  background-color: white;
+  height: 3px;
+  width: 20px;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out; /* Animation des lignes */
+}
+
+.hamburger-icon.collapsed .line {
+  background-color: #ff7043; /* Couleur différente si repliée */
+}
+
+/* Ajout d'une gestion des écrans responsives */
+@media (max-width: 768px) {
+  mat-sidenav {
+    width: 70px;
+  }
+
+  mat-sidenav-content {
+    margin-left: 70px;
+    width: calc(100% - 70px);
+  }
+}
+
+.main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  height: 100vh;
+}
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Utilisez toute la hauteur de l'écran */
+  background-color: #f5f5f5;
+}
+.main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.login-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Hauteur de l'écran */
+  background-color: #f5f5f5; /* Couleur de fond */
+}
+.main-container {
+  height: 100vh;
 }
 
-.logout-btn:hover,
-.edit-profile-btn:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  color: #000;
-  border-color: #000;
+.login-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Hauteur complète de l'écran */
+  background-color: #f5f5f5;
 }
-.sidebar {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.navbar {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, color 0.3s;
+.main-container {
+  height: 100vh;
 }
 
-.navbar .logout-btn,
-.navbar .edit-profile-btn {
-  border: 1px solid var(--text-color);
-  color: var(--text-color);
+/* Styles pour la page de login */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Hauteur complète de l'écran */
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Dégradé de couleurs */
+  color: white; /* Texte blanc pour contraster */
+}
+.main-container {
+  height: 100vh;
 }
 
-.navbar .logout-btn:hover,
-.navbar .edit-profile-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.no-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Exemple de fond personnalisé */
 }

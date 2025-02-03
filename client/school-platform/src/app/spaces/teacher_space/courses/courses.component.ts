@@ -12,7 +12,7 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private courseService: CourseService,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -45,5 +45,20 @@ export class CoursesComponent implements OnInit {
 
   getNiveaux(): string[] {
     return Object.keys(this.groupedCourses);
+  }
+
+  deleteCourse(courseId: string): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce cours ?')) {
+      this.courseService.deleteCourse(courseId).subscribe({
+        next: () => {
+          alert('Cours supprimé avec succès.');
+          this.fetchCourses(); // Recharger les cours après suppression
+        },
+        error: (error) => {
+          console.error('Erreur lors de la suppression du cours :', error);
+          alert('Une erreur est survenue lors de la suppression.');
+        },
+      });
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +14,15 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin(): void {
+  onLogin() {
     this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
-        this.authService.saveToken(response.token);
+        console.log('Connexion réussie', response);
+        this.authService.saveToken(response.token); // Stocke le token dans localStorage
         this.router.navigate(['/teacher-space/dashboards']);
       },
       error: (error) => {
+        console.error('Erreur de connexion', error);
         this.errorMessage = 'Email ou mot de passe incorrect.';
       },
     });

@@ -1,39 +1,42 @@
-<br>
-    <br>
-    <br>
-    <br>
-    <br>
+<br />
+
 <div class="liste-container">
-     <!-- Ring au-dessus -->
+  <!-- Ring au-dessus -->
   <div class="notification-ring">
     <div class="ring-icon">
       <mat-icon>checklist</mat-icon>
-     
     </div>
   </div>
-  <br>
-  <br>
-    <h2>Liste des Tâches</h2>
-    <p>Voici vos tâches à effectuer :</p>
-  
-    <div class="task-list">
-      <!-- Boucle pour afficher les tâches -->
-      <div class="task-item" *ngFor="let task of tasks">
-        <div class="task-icon">
-            <mat-icon >checklist</mat-icon>
-            <!-- Icône fixe pour toutes les tâches -->
-        </div>
-        <div class="task-details">
-          <h3>{{ task.title }}</h3>
-          <p>{{ task.description }}</p>
-        </div>
-        <div class="task-date">
-          <p><strong>Date :</strong> {{ task.date | date }}</p>
-        </div>
+  <br />
+  <br />
+  <h2>Task List</h2>
+  <p>Here are your tasks to complete:</p>
+
+  <div class="task-list">
+    <!-- Boucle pour afficher les tâches -->
+    <div class="task-item" *ngFor="let task of tasks">
+      <div class="task-icon">
+        <mat-icon>checklist</mat-icon>
+        <!-- Icône fixe pour toutes les tâches -->
+      </div>
+      <div class="task-details">
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+      </div>
+      <div class="task-date">
+        <p><strong>Date :</strong> {{ task.date | date }}</p>
+      </div>
+      <!-- Icône pour supprimer une tâche -->
+      <div class="task-actions">
+        <button mat-icon-button color="warn" (click)="deleteTask(task._id)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
     </div>
-  
-    <!-- Bouton pour ajouter une nouvelle tâche -->
-    <button mat-raised-button color="primary" routerLink="/teacher-space/add-task">Ajouter une Tâche</button>
   </div>
-  
+
+  <!-- Bouton pour ajouter une nouvelle tâche -->
+  <button mat-raised-button color="primary" routerLink="/teacher-space/add-task">
+    Add a Task
+  </button>
+</div>

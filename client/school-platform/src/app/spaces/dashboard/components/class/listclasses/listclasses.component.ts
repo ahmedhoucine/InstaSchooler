@@ -10,50 +10,57 @@ import { TeacherService } from '../../../services/teacher.service';
   styleUrls: ['./listclasses.component.scss']
 })
 export class ListClassesComponent implements OnInit {
-  classes: any[] = [];
+  courses: any[] = [];
 
-  constructor(private teacherService: TeacherService,private classService: ClassService, private router: Router) {}
+  // Temporary fix - replace with actual teacher ID from auth
+  tempTeacherId = 'TEMPORARY_TEACHER_ID';
+
+  constructor(
+    private classService: ClassService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.getClasses();
+    this.getCourses();
   }
 
-  getClasses(): void {
+  getCourses(): void {
     this.classService.getAllClasses().subscribe(
-      (classes) => {
-        const teacherRequests = classes.map((classItem: any) =>
-          this.teacherService.getTeacherById(classItem.teacher) // Fetch teacher by ID
-        );
-  
-        forkJoin(teacherRequests).subscribe(
-          (teachers) => {
-            this.classes = classes.map((classItem, index) => ({
-              ...classItem,
-              teacher: teachers[index] // Replace ID with teacher object
-            }));
-          },
-          (error) => {
-            console.error('Error fetching teachers', error);
-          }
-        );
-      },
-      (error) => {
-        console.error('Error fetching classes', error);
-      }
+      (courses) => this.courses = courses,
+      (error) => console.error('Error fetching courses', error)
     );
   }
 
-  // Navigate to view class details page
+  // Temporary view implementation
   viewClass(id: string): void {
-    this.router.navigate([`/dashboard/class/${id}`]); // Update with the appropriate route
+    const course = this.courses.find(c => c._id === id);
+    this.router.navigate(['/dashboard/course/view'], {
+      state: { course } // Pass data via navigation state
+    });
   }
 
-  // Delete class
+  // Updated delete method
   deleteClass(id: string): void {
-    if (confirm('Are you sure you want to delete this class?')) {
-      this.classService.deleteClass(id).subscribe(() => {
-        this.getClasses(); // Refresh class list after deletion
+    if (confirm('Are you sure you want to delete this course?')) {
+      this.classService.deleteClass(id).subscribe({
+        next: () => this.getCourses(),
+        error: (err) => console.error('Delete failed', err)
       });
     }
+  }
+
+  // Add new course with temporary teacher ID
+  addNewCourse(): void {
+    const newCourse = {
+      niveau: 'Sample Level',
+      description: 'Sample Description',
+      duration: 60,
+      teacher: this.tempTeacherId
+    };
+
+    this.classService.createClass(newCourse).subscribe({
+      next: () => this.getCourses(),
+      error: (err) => console.error('Create failed', err)
+    });
   }
 }

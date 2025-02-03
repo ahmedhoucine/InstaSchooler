@@ -1,63 +1,61 @@
+<div class="teachers-header">
+  <h2>Create Course</h2>
+  <button mat-flat-button class="neumorphic-button" routerLink="/dashboard/class/listclasses">
+    <mat-icon>arrow_back</mat-icon>
+    Back to List
+  </button>
+</div>
+
 <div class="container">
-  <h1>Create Class</h1>
   <form [formGroup]="classForm" (ngSubmit)="onSubmit()">
+    <!-- Course Information -->
+    <div class="form-section">
+      <h3 class="section-title">Course Details</h3>
 
-    <!-- Class Description -->
-    <div class="section">
-      <label for="description">Class Description</label>
-      <input id="description" formControlName="description" />
-      <div *ngIf="classForm.get('description')?.touched && classForm.get('description')?.invalid">
-        <small class="error" *ngIf="classForm.get('description')?.hasError('required')">Description is required</small>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="title">Title *</label>
+          <input id="title" type="text" formControlName="title" class="neumorphic-input" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <select id="subject" formControlName="subject" class="neumorphic-input" required>
+            <option *ngFor="let matiere of matiereOptions" [value]="matiere">{{ matiere }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="niveau">Level *</label>
+          <select id="niveau" formControlName="niveau" class="neumorphic-input" required>
+            <option *ngFor="let level of levels" [value]="level">Niveau {{ level }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="teacher">Teacher *</label>
+          <select id="teacher" formControlName="teacher" class="neumorphic-input" required>
+            <option *ngFor="let teacher of teachers" [value]="teacher.id">
+              {{ teacher.firstname }} {{ teacher.lastName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="duration">Duration (minutes) *</label>
+          <input id="duration" type="number" formControlName="duration" class="neumorphic-input" required>
+        </div>
       </div>
     </div>
 
-    <!-- Duration Field -->
-    <div class="section">
-      <label for="duration">Duration (in hours)</label>
-      <input id="duration" type="number" formControlName="duration" min="1" />
-      <div *ngIf="classForm.get('duration')?.touched && classForm.get('duration')?.invalid">
-        <small class="error" *ngIf="classForm.get('duration')?.hasError('required')">Duration is required</small>
-        <small class="error" *ngIf="classForm.get('duration')?.hasError('min')">Duration must be greater than 0</small>
-      </div>
+    <div class="form-actions">
+      <button type="submit" mat-flat-button class="neumorphic-button" [disabled]="classForm.invalid">
+        Create Course
+      </button>
     </div>
-
-    <!-- Niveau (Level) -->
-    <div class="section">
-      <label for="niveau">Niveau (Level)</label>
-      <select id="niveau" formControlName="niveau">
-        <option *ngFor="let level of levels" [value]="level">Niveau: {{ level }}</option>
-      </select>
-      <div *ngIf="classForm.get('niveau')?.touched && classForm.get('niveau')?.invalid">
-        <small class="error" *ngIf="classForm.get('niveau')?.hasError('required')">Level is required</small>
-      </div>
-    </div>
-
-    <!-- Subject Selection -->
-    <div class="section subject-assignment-section">
-      <h2>Subject</h2>
-      <label for="subject">Choose Subject</label>
-      <select id="subject" formControlName="subject">
-        <option *ngFor="let m of matiereOptions" [value]="m">{{ m }}</option>
-      </select>
-      <div *ngIf="classForm.get('subject')?.touched && classForm.get('subject')?.invalid">
-        <small class="error" *ngIf="classForm.get('subject')?.hasError('required')">Subject is required</small>
-      </div>
-    </div>
-
-    <!-- Teacher Selection (Filtered by Subject) -->
-    <div class="section teacher-assignment-section">
-      <h2>Teacher</h2>
-      <label for="teacher">Choose Teacher</label>
-      <select id="teacher" formControlName="teacher">
-        <option *ngFor="let teacher of teachers" [value]="teacher._id">
-          {{ teacher.firstname }} {{ teacher.lastName }}
-        </option>
-      </select>
-      <div *ngIf="classForm.get('teacher')?.touched && classForm.get('teacher')?.invalid">
-        <small class="error" *ngIf="classForm.get('teacher')?.hasError('required')">Teacher is required</small>
-      </div>
-    </div>
-
-    <button type="submit" [disabled]="classForm.invalid">Create Class</button>
   </form>
 </div>

@@ -1,30 +1,110 @@
 .sidebar {
-    background-color: #ffffff;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    width: 250px;
+  width: 250px;
+  background: linear-gradient(135deg, #020e2f, #445573);
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 60px; /* Place la Sidebar sous la Navbar */
+  left: 0;
+  height: calc(100vh - 60px); /* Ajuste la hauteur en fonction de la Navbar */
+  transition: width 0.3s ease;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+  &.collapsed {
+    width: 70px; /* Réduit la largeur */
   }
-  
-  .sidebar-header {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid #e9ecef;
-  }
-  
-  .sidebar-header .logo {
-    width: 40px;
-    margin-right: 10px;
-  }
-  
-  mat-nav-list a {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    font-size: 16px;
-    color: #495057;
-  }
-  
-  mat-nav-list a:hover {
-    background-color: #f8f9fa;
-  }
-  
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  position: relative;
+}
+
+.logo {
+  width: 100px;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 10px; /* Place le bouton en haut de l'image */
+  left: 15px;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.hamburger-icon {
+  width: 30px;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger-icon .line {
+  background-color: white;
+  height: 4px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  border-radius: 4px;
+}
+
+.hamburger-icon.collapsed .top {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-icon.collapsed .middle {
+  opacity: 0;
+}
+
+.hamburger-icon.collapsed .bottom {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+
+mat-nav-list a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: #ffffff;
+  text-decoration: none;
+  gap: 15px;
+  transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+mat-nav-list a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding-left: 20px;
+}
+
+mat-nav-list a mat-icon {
+  font-size: 24px;
+  min-width: 40px; /* Alignement des icônes */
+  text-align: center;
+  color: #ffff;
+}
+
+mat-nav-list a span {
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  color: #ffffff;
+
+}
+
+.sidebar.collapsed mat-nav-list a span {
+  opacity: 0; /* Cache le texte lorsque replié */
+  pointer-events: none;
+}

@@ -12,7 +12,7 @@ export class AddCourseComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   onSubmit(courseForm: any): void {
@@ -24,6 +24,7 @@ export class AddCourseComponent {
       }
 
       const formData = new FormData();
+      formData.append('title', courseForm.value.title);
       formData.append('niveau', courseForm.value.niveau);
       formData.append('description', courseForm.value.description);
       formData.append('duration', courseForm.value.duration.toString());

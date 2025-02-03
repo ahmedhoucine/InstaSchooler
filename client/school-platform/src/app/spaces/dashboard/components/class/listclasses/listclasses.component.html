@@ -1,43 +1,53 @@
+<!-- In your class list component HTML -->
+<div class="classes-header">
+  <h2>Course Management</h2>
+  <div class="header-actions">
+    <button mat-flat-button
+            class="neumorphic-button"
+            routerLink="/dashboard/class/addclass">
+      <mat-icon>add</mat-icon>
+      Add New Course
+    </button>
+  </div>
+</div>
+
 <div class="container">
-    <h1>Classes</h1>
-    <table class="table">
+  <div class="table-wrapper">
+    <table class="neumorphic-table">
       <thead>
-        <tr>
-          <th>Class Desxription</th>
-          <th>Subjects</th>
-          <th>Teachers</th>
-          <th>Students</th>
-          <th>Actions</th>
-        </tr>
+      <tr>
+        <th>Title</th>
+        <th>Duration</th>
+        <th>Teacher</th>
+        <th>Level</th>
+        <th>PDF</th>
+        <th>Actions</th>
+      </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let classItem of classes">
-          <td>{{ classItem.description }}</td>
-          <td>
-            <!-- Loop through subjects array and display each subject -->
-            {{ classItem.teacher.matiere }}
-          </td>
-          <td>
-            <!-- Loop through teachers and display teacher name and their subject -->
-           
-                <div>
-                  {{ classItem.teacher.firstname }} {{ classItem.teacher.lastName }} - {{ classItem.subject }}
-                </div>
-             
-          </td>
-          <td>
-            <!-- Display list of student IDs or names if available -->
-            
-              
-                niveau:{{ classItem.niveau }}
-              
-            
-          </td>
-          <td>
-            <button (click)="viewClass(classItem._id)">View</button>
-            <button (click)="deleteClass(classItem._id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
+      <tr *ngFor="let courseItem of courses">
+        <td>{{ courseItem.title }}</td>
+        <td>{{ courseItem.duration }} min</td>
+        <td>
+          {{ courseItem.teacher ? courseItem.teacher.firstname : 'Unknown' }}
+          {{ courseItem.teacher ? courseItem.teacher.lastName : '' }}
+        </td>
+        <td>{{ courseItem.niveau }}</td>
+        <td>
+          <a *ngIf="courseItem.pdf" [href]="courseItem.pdf" target="_blank" class="pdf-link">
+            <mat-icon>picture_as_pdf</mat-icon>
+          </a>
+          <span *ngIf="!courseItem.pdf" class="no-pdf">-</span>
+      <td>
+        <div class="actions">
+          <button mat-icon-button (click)="viewClass(courseItem._id)" matTooltip="View">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteClass(courseItem._id)" matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
     </table>
   </div>
+</div>

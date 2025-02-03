@@ -25,4 +25,16 @@ export class ListeComponent implements OnInit {
       }
     );
   }
+
+  deleteTask(taskId: string): void {
+    this.taskService.deleteTask(taskId).subscribe(
+      () => {
+        this.tasks = this.tasks.filter((task) => task._id !== taskId);
+        console.log('Tâche supprimée avec succès.');
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression de la tâche :', error);
+      }
+    );
+  }
 }

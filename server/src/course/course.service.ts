@@ -6,6 +6,7 @@ import { Student, StudentDocument } from '../student/schema/student.schema';
 @Injectable()
 export class CourseService {
   constructor(
+
     @InjectModel(Course.name) private courseModel: Model<CourseDocument>,
     @InjectModel(Student.name) private studentModel: Model<StudentDocument>
   ) {}
@@ -43,3 +44,4 @@ export class CourseService {
     }
   }
 }
+

@@ -19,12 +19,12 @@ export function jwtTokenGetter() {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    
+
     CoreModule,
     HttpClientModule,
     BrowserAnimationsModule,  // Required for toastr and JWT functionality
@@ -42,7 +42,7 @@ export function jwtTokenGetter() {
         disallowedRoutes: ['localhost:3000/auth/login'],  // Add routes that shouldn't require JWT
       }
     }),
-    
+
   ],
   bootstrap: [AppComponent]
 })

@@ -1,58 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { EnseignantService } from './services/enseignant.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'teacher-root',
   templateUrl: './teacher.component.html',
   styleUrls: ['./teacher.component.scss'],
 })
-export class TeacherComponent implements OnInit {
-  isCollapsed: boolean = false; // Propriété pour gérer l'état du menu latéral
-  enseignant: any = {
-    profileImage: '',
-    name: '',
-  };
-  isLoginPage: boolean = false; // Vérifie si l'utilisateur est sur la page de connexion
-  title: any;
+export class TeacherComponent implements OnInit, OnDestroy {
+  isCollapsed: boolean = false; // Gère l'état de la barre latérale
+  isLoginPage: boolean = false; // Indique si l'utilisateur est sur la page de connexion
+  private routerSubscription!: Subscription; // Pour gérer l'abonnement
 
-  constructor(private router: Router, private enseignantService: EnseignantService) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.detectCurrentRoute();
-    this.fetchEnseignantDetails();
-  }
-
-  // Détecte la route courante pour conditionner l'affichage du layout
-  detectCurrentRoute(): void {
-    this.router.events.subscribe((event) => {
+    // Abonnez-vous aux événements du routeur pour détecter les changements d'URL
+    this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isLoginPage = event.url === '/login';
+        // Vérifie si l'URL actuelle correspond à la page de connexion
+        this.isLoginPage = event.url.includes('/login');
       }
     });
   }
 
-  // Méthode pour basculer le menu latéral
+  // Bascule l'état de la barre latérale (ouverte/repliée)
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  // Récupérer les informations de l'enseignant connecté
-  fetchEnseignantDetails(): void {
-    this.enseignantService.getEnseignantDetails().subscribe(
-      (data) => {
-        this.enseignant.profileImage = data.profileImage || 'assets/default-profile.png';
-        this.enseignant.name = data.name || 'Utilisateur';
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des informations de l\'enseignant :', error);
-      }
-    );
+  ngOnDestroy(): void {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
   }
-
-  // Méthode pour la déconnexion
-  logout(): void {
-    localStorage.removeItem('authToken');
-    this.router.navigate(['/login']);
-  }
+  
 }
