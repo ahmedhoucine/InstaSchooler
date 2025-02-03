@@ -15,6 +15,7 @@ import { TicketModule } from './ticket/ticket.module';
 import { CourseModule } from './course/course.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { PlanningModule } from './planning/planning.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { join } from 'path';
     TaskModule,
     TicketModule,
     CourseModule,
+    PlanningModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),  // Path to your uploads folder
       serveRoot: '/uploads',  // URL endpoint for accessing the files
