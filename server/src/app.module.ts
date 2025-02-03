@@ -18,7 +18,6 @@ import { join } from 'path';
 import { PlanningModule } from './planning/planning.module';
 
 
-import { PlanningModule } from './planning/planning.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
