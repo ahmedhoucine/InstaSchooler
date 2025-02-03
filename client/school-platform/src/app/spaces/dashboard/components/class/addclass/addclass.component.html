@@ -7,15 +7,41 @@
 </div>
 
 <div class="container">
-  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="classForm" (ngSubmit)="onSubmit()">
     <!-- Course Information -->
     <div class="form-section">
       <h3 class="section-title">Course Details</h3>
+
       <div class="form-row">
+        <div class="form-group">
+          <label for="title">Title *</label>
+          <input id="title" type="text" formControlName="title" class="neumorphic-input" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <select id="subject" formControlName="subject" class="neumorphic-input" required>
+            <option *ngFor="let matiere of matiereOptions" [value]="matiere">{{ matiere }}</option>
+          </select>
+        </div>
+
         <div class="form-group">
           <label for="niveau">Level *</label>
           <select id="niveau" formControlName="niveau" class="neumorphic-input" required>
             <option *ngFor="let level of levels" [value]="level">Niveau {{ level }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="teacher">Teacher *</label>
+          <select id="teacher" formControlName="teacher" class="neumorphic-input" required>
+            <option *ngFor="let teacher of teachers" [value]="teacher.id">
+              {{ teacher.firstname }} {{ teacher.lastName }}
+            </option>
           </select>
         </div>
 
@@ -24,17 +50,10 @@
           <input id="duration" type="number" formControlName="duration" class="neumorphic-input" required>
         </div>
       </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="description">Description *</label>
-          <textarea id="description" formControlName="description" class="neumorphic-input" required></textarea>
-        </div>
-      </div>
     </div>
 
     <div class="form-actions">
-      <button type="submit" mat-flat-button class="neumorphic-button" [disabled]="courseForm.invalid">
+      <button type="submit" mat-flat-button class="neumorphic-button" [disabled]="classForm.invalid">
         Create Course
       </button>
     </div>
