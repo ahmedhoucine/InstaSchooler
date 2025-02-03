@@ -45,7 +45,7 @@ export class CardComponent implements OnInit {
       case 'Total Teachers':
         this.buttonIcon = 'person_add';
         break;
-      case 'Total Classes':
+      case 'Total Courses':
         this.buttonIcon = 'school';
         break;
       case 'Unpaid Students':
@@ -65,7 +65,7 @@ export class CardComponent implements OnInit {
       case 'Total Teachers':
         this.router.navigate(['/dashboard/teacher/addteacher']);
         break;
-      case 'Total Classes':
+      case 'Total Courses':
         this.router.navigate(['/dashboard/class/addclass']);
         break;
       case 'Unpaid Students':
