@@ -12,7 +12,9 @@ export class CourseService {
   constructor(private http: HttpClient) {}
 
   // Fetch courses for a specific user by userId
-  getCoursesByUserId(userId: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/student/${userId}`);
+  getAvailableCourses(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/available-courses`, {
+      headers: { 'user-id': userId } // Optionally, pass the userId in headers
+    });
   }
 }

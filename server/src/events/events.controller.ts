@@ -9,6 +9,7 @@ export class EventsController {
 
   // POST /events - Create a new event
  // EventsController
+ 
  @Post()
  async create(@Body() createEventDto: CreateEventDto): Promise<any> {
    console.log("Received data:", createEventDto);

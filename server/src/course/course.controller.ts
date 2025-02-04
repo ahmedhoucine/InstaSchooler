@@ -42,7 +42,13 @@ export class CourseController {
     const count = await this.courseService.countByTeacher(teacherId);
     return { count };
   }
-
+  @UseGuards(JwtAuthGuard) // Assurez-vous que l'étudiant est connecté
+  @Get('available-courses')
+  async getAvailableCourses(@Request() req) {
+    const studentId = req.user.id; // Récupère l'ID de l'étudiant depuis le JWT
+    return this.courseService.getCoursesForStudent(studentId);
+  }
+  
   @UseGuards(JwtAuthGuard)
   @Get('by-teacher')
   async getCoursesByTeacher(@Request() req) {
@@ -61,3 +67,4 @@ export class CourseController {
     return this.courseService.deleteCourse(id);
   }
 }
+

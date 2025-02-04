@@ -9,36 +9,28 @@ import { ProfileService } from 'src/app/spaces/student_space/services/profileEdi
 })
 export class NavbarComponent implements OnInit {
   defaultPicture = 'https://i.pinimg.com/736x/a4/8a/ca/a48aca275e3dbe9a00d8f90e095f25ae.jpg';
-  loading = false;
-  profile: any = {}; // Declare profile property with a default structure
+  profile: any = {}; // Stocke les infos du profil
+
+  profile$ = this.profileService.profile$; // Utilisation directe de l’Observable
 
   constructor(private router: Router, private profileService: ProfileService) {}
 
   ngOnInit(): void {
     console.log('NavbarComponent loaded');
-    this.fetchProfile();
-  }
-
-  fetchProfile(): void {
-    this.loading = true;
-    this.profileService.getProfile().subscribe(
-      (data) => {
-        this.profile = { ...data }; // Assume `data` contains profile details
-        this.loading = false;
-      },
-      (error) => {
-        console.error('Error fetching profile:', error);
-        this.loading = false;
+  
+    this.profileService.profile$.subscribe(profile => {
+      if (profile) {
+        this.profile = profile;
       }
-    );
+    });
+  
+    this.profileService.getProfile().subscribe(); // Initial fetch
   }
-
-  onEditProfile(): void {
-    this.router.navigate(['/edit-profile']);
-  }
+  
+  
 
   onLogout(): void {
-    localStorage.removeItem('authToken'); // Clear token or session
-    this.router.navigate(['/login']); // Redirect to login
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/auth/login']);
   }
 }

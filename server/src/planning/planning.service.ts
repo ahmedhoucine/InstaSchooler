@@ -1,13 +1,18 @@
-import { Injectable } from '@nestjs/common';
+
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Planning, PlanningDocument } from './planning.schema';
 import { v4 as uuidv4 } from 'uuid';
+import { Planning, PlanningDocument } from './schema/planning.schema';
+import { Student, StudentDocument } from 'src/student/schema/student.schema';
 
 @Injectable()
 export class PlanningService {
   constructor(
     @InjectModel(Planning.name) private readonly planningModel: Model<PlanningDocument>,
+
+        @InjectModel(Student.name) private studentModel: Model<StudentDocument>,
+    
   ) {}
 
   // Create Planning (Ensure only one planning per niveau)
@@ -27,6 +32,17 @@ export class PlanningService {
     return await planning.save();
   }
 
+  async getPlanningForStudent(studentId: string): Promise<Planning | null> {
+    // Fetch the student by ID
+    const student = await this.studentModel.findById(studentId);
+    if (!student) {
+      throw new NotFoundException('Student not found');
+    }
+  
+    // Find the planning that matches the student's niveau
+    return this.planningModel.findOne({ niveau: student.niveau }).exec();
+  }
+  
   // Get all Plannings
   async getAllPlannings(): Promise<Planning[]> {
     return this.planningModel.find().exec();
