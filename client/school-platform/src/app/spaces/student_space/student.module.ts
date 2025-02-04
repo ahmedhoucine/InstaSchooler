@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './components/layouts/student/navbar/navbar.component';
 import { SidebarComponent } from './components/layouts/student/sidebar/sidebar.component';
 import { MainContentComponent } from './components/layouts/student/main-content/main-content.component';
+//import { AlertComponent } from './components/layouts/student/alert/alert.component';
 import { StudentComponent } from './student.component'; // Main layout component
 import { StudentLayoutRoutingModule } from './student-routing.module'; // Routing module for student layout
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     SidebarComponent,
     MainContentComponent,
+    //AlertComponent,
     StudentComponent,
   ],
   imports: [
@@ -26,9 +28,9 @@ import { FormsModule } from '@angular/forms';
     MatListModule, // Material list items
     MatIconModule, // Material icons
     MatButtonModule, // Ma // Import routing for student layout
-      MatFormFieldModule,
+    MatFormFieldModule,
     MatInputModule,
-    FormsModule, //
+    FormsModule,
   ],
   exports: [NavbarComponent, SidebarComponent, MainContentComponent],
 })
