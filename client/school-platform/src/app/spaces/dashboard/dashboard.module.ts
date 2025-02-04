@@ -28,7 +28,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import { PlanningComponent } from './components/planning/planning.component';
+import { SuccessDialogComponent } from './components/layout/success-dialog/success-dialog.component';
+import { ErrorDialogComponent } from './components/layout/error-dialog/error-dialog.component';
+import { ConfirmationDialogComponent } from './components/layout/confirmation-dialog/confirmation-dialog.component';
 
 
 
@@ -46,7 +52,11 @@ import { PlanningComponent } from './components/planning/planning.component';
     ListClassesComponent,
     EditstudentComponent,
     DashboardLoginComponent,
-    PlanningComponent
+    PlanningComponent,
+    SuccessDialogComponent,
+    ErrorDialogComponent,
+    ConfirmationDialogComponent,
+
   ],
   imports: [
     CommonModule,
@@ -72,7 +82,9 @@ import { PlanningComponent } from './components/planning/planning.component';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   exports: [
     DashboardComponent,
