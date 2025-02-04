@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { AlertService } from '../shared/alert/alert.service';
 
 @Component({
   selector: 'app-add-course',
@@ -12,14 +13,15 @@ export class AddCourseComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private alertService: AlertService
   ) {}
 
   onSubmit(courseForm: any): void {
     if (courseForm.valid) {
       const token = this.authService.getToken();
       if (!token) {
-        alert('Vous devez être connecté pour ajouter un cours.');
+        this.alertService.showAlert('You must be logged in to add a course.', 'error');
         return;
       }
 
@@ -39,16 +41,16 @@ export class AddCourseComponent {
         headers: { Authorization: `Bearer ${token}` },
       }).subscribe({
         next: () => {
-          alert('Course added successfully  !');
+          this.alertService.showAlert('Course added successfully!', 'success');
           this.router.navigate(['/teacher-space/courses']);
         },
         error: (error) => {
-          console.error('Erreur lors de l\'ajout du cours :', error);
-          alert('Error adding the course.');
+          console.error('Error adding course:', error);
+          this.alertService.showAlert('Error adding the course.', 'error');
         },
       });
     } else {
-      alert(' Please fill in all required fields.');
+      this.alertService.showAlert('Please fill in all required fields.', 'error');
     }
   }
 }

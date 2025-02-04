@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { AlertService } from './alert.service';
 
 @Component({
   selector: 'app-alert',
@@ -6,10 +7,22 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./alert.component.css']
 })
 export class AlertComponent {
-  @Input() message: string = '';
-  @Input() type: 'success' | 'error' = 'error';
+  message: string = '';
+  type: 'success' | 'error' = 'error';
+  show = false;
 
-  show = true;
+  constructor(private alertService: AlertService) {
+    this.alertService.getAlert().subscribe(alert => {
+      if (alert) {
+        this.message = alert.message;
+        this.type = alert.type;
+        this.show = true;
+
+        // Auto-hide the alert after 3 seconds
+        setTimeout(() => this.show = false, 3000);
+      }
+    });
+  }
 
   closeAlert() {
     this.show = false;
