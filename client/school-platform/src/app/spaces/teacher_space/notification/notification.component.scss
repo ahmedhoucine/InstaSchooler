@@ -1,24 +1,44 @@
+/* Animation d'apparition */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .notification-container {
   max-width: 600px;
   margin: 20px auto;
   padding: 20px;
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #e3f2fd, #ffffff); /* Bleu clair vers blanc */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: fadeInScale 0.5s ease-in-out; /* Animation d'apparition */
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  }
 
   h2 {
-    color: #3f51b5;
-    font-weight: bold;
+    color: #0c2235; /* Bleu professionnel */
+    font-weight: 700;
     margin-top: 60px;
-    font-size: 40px;
+    font-size: 28px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   }
 
   .notification-ring {
     position: relative;
     display: flex;
     justify-content: center;
-    margin-bottom: -40px; /* Positionne le ring au-dessus */
+    margin-bottom: -40px;
     margin-top: -50px;
 
     .ring-icon {
@@ -26,28 +46,29 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
-      background: #fff8e1; /* Jaune clair */
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(135deg, #bbdefb, #041a2d); /* Bleu dégradé */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      animation: fadeInScale 0.8s ease-in-out; /* Animation du ring */
 
       mat-icon {
-        font-size: 30px;
-        color: #f8b519; /* Jaune vif */
+        font-size: 25px;
+        color: #ffffff;
       }
 
       .notification-badge {
         position: absolute;
-        top: 10px;
-        right: 12px;
-        background: #ff5252; /* Rouge vif pour le badge */
-        color: #fff;
+        top: 8px;
+        right: 8px;
+        background: #d32f2f; /* Rouge vif */
+        color: #ffffff;
         font-size: 14px;
         font-weight: bold;
         border-radius: 50%;
-        padding: 4px 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        padding: 6px 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
     }
   }
@@ -57,60 +78,40 @@
     flex-direction: column;
     gap: 15px;
     margin-top: 20px;
-  }
 
-  .task-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    .notification-icon {
+    .task-item {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: #fff8e1; /* Jaune clair */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      flex-direction: column;
+      gap: 10px;
+      padding: 15px;
+      background: #e3f2fd; /* Bleu très clair */
+      border-left: 4px solid #091b2b; /* Indicateur bleu foncé */
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeInScale 0.6s ease-in-out; /* Animation d'apparition */
 
-      mat-icon {
-        font-size: 20px;
-        color: #f8b519; /* Jaune vif */
+      &:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
       }
-    }
-
-    .task-details {
-      text-align: left;
 
       h3 {
         margin: 0;
         font-size: 1.2rem;
-        color: #3f51b5;
+        color: #0b1f37; /* Bleu foncé */
+        font-weight: 600;
       }
 
       p {
-        margin: 5px 0;
-        color: #555;
+        margin: 0;
+        font-size: 0.9rem;
+        color: #424242; /* Gris foncé */
       }
 
       strong {
-        color: #333;
+        color: #0d253a; /* Bleu pour les mots-clés */
       }
     }
   }
-}
-.notification-container{
-  background-color: var(--background-color);
-  color: var(--text-color);
-  border: 1px solid var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }

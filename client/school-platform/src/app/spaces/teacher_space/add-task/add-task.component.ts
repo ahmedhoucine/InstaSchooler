@@ -20,12 +20,12 @@ export class AddTaskComponent {
 
       this.taskService.addTask(taskData).subscribe(
         () => {
-          alert('Tâche ajoutée avec succès !');
+          alert('Task added successfully !');
           this.router.navigate(['/teacher-space/liste']);
         },
         (error) => {
           console.error('Erreur lors de l\'ajout de la tâche :', error);
-          alert('Erreur lors de l\'ajout de la tâche.');
+          alert(' Error adding the task.');
         }
       );
     }

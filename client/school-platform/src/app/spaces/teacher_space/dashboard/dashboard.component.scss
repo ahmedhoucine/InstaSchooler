@@ -3,61 +3,70 @@
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Ajout d'un écart uniforme entre les sections */
+  gap: 20px; /* Espacement uniforme */
 }
 
 .cards-container {
   display: flex;
-  justify-content: space-between; /* Écarte les cartes */
+  justify-content: space-between;
   margin-bottom: 20px;
-  gap: 15px; /* Ajout d'espacement entre les cartes */
+  gap: 15px; /* Espacement entre les cartes */
 }
 
 .card {
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(145deg, #1e3c72, #2a5298); /* Dégradé bleu professionnel */
+  border-radius: 15px; /* Coins arrondis plus subtils */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Ombre plus douce */
   padding: 20px;
   text-align: center;
   width: 200px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #fff; /* Texte en blanc */
 }
 
 .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05); /* Effet de zoom */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25); /* Accentuation de l'ombre */
 }
 
 .card-icon {
-  font-size: 20px;
-  color: #3f51b5;
+  font-size: 25px;
+  color: #ffd700; /* Couleur dorée pour les icônes */
+  margin-bottom: 10px;
 }
 
 .card h2 {
   font-size: 2.5rem;
   margin: 10px 0;
-  color: #333;
+  font-weight: bold;
 }
 
 .card p {
   font-size: 1.2rem;
-  color: #555;
+  margin: 0;
+  opacity: 0.85; /* Amélioration du contraste */
 }
 
 .main-content {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  align-items: flex-start; /* Aligne le haut des conteneurs */
+  align-items: flex-start;
 }
 
 .absence-container {
   flex: 2;
-  background: #f9f9f9;
+  background: #f3f6fb; /* Blanc légèrement teinté */
   padding: 20px;
-  border-radius: 10px;
-  min-width: 600px; /* Ajustement pour une largeur minimale */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+}
+
+.absence-container h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #1e3c72; /* Bleu foncé pour les titres */
+  text-align: center;
 }
 
 .absence-table {
@@ -65,7 +74,7 @@
   border-collapse: collapse;
   margin-top: 1rem;
   background-color: #ffffff;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -73,32 +82,57 @@
 .absence-table th,
 .absence-table td {
   border: 1px solid #ddd;
-  padding: 12px;
+  padding: 15px;
   text-align: center;
+  font-size: 1rem;
 }
 
 .absence-table th {
-  background-color: #3f51b5;
+  background: linear-gradient(145deg, #1e3c72, #2a5298);
   color: #ffffff;
   font-weight: bold;
 }
 
 .absence-table tr:nth-child(even) {
-  background-color: #f4f4f4;
+  background-color: #f9f9f9;
 }
 
 .notifications-container {
   flex: 1;
-  background: #f9f9f9;
+  background: linear-gradient(145deg, #ffd700, #ff4500); /* Dégradé doré vers orange */
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 15px;
   text-align: center;
-  min-width: 300px; /* Largeur minimale pour éviter les débordements */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #170000; /* Texte en blanc */
 }
 
 .notifications-container h2 {
-  font-size: 1.5rem; /* Uniformisation avec le reste */
-  color: #333;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.notification-item {
+  background: rgba(255, 255, 255, 0.15); /* Fond semi-transparent */
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 1rem;
   margin-bottom: 10px;
+  color: #150e0e; /* Texte blanc */
+}
+
+.notification-item:hover {
+  background: rgba(255, 255, 255, 0.25); /* Accentuation au survol */
+}
+
+.notification-item mat-icon {
+  margin-right: 10px;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.notification-item mat-icon:hover {
+  color: #ffd700; /* Icône dorée au survol */
 }

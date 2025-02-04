@@ -1,6 +1,6 @@
 <div class="login-wrapper">
   <div class="login-container">
-    <h2>Connexion Enseignant</h2>
+    <h2>Teacher Login</h2>
     <form #loginForm="ngForm" (ngSubmit)="onLogin()" novalidate>
       <div>
         <label for="email">Email</label>
@@ -12,11 +12,11 @@
           required
         />
         <div *ngIf="loginForm.submitted && !email" class="error-message">
-          Email requis
+          Email required
         </div>
       </div>
       <div>
-        <label for="password">Mot de passe</label>
+        <label for="password">Password</label>
         <input
           type="password"
           id="password"
@@ -25,11 +25,11 @@
           required
         />
         <div *ngIf="loginForm.submitted && !password" class="error-message">
-          Mot de passe requis
+          Password required
         </div>
       </div>
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-      <button type="submit">Se Connecter</button>
+      <button type="submit">Login</button>
     </form>
   </div>
 </div>

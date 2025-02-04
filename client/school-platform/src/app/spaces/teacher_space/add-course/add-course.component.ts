@@ -39,16 +39,16 @@ export class AddCourseComponent {
         headers: { Authorization: `Bearer ${token}` },
       }).subscribe({
         next: () => {
-          alert('Cours ajouté avec succès !');
+          alert('Course added successfully  !');
           this.router.navigate(['/teacher-space/courses']);
         },
         error: (error) => {
           console.error('Erreur lors de l\'ajout du cours :', error);
-          alert('Erreur lors de l\'ajout du cours.');
+          alert('Error adding the course.');
         },
       });
     } else {
-      alert('Veuillez remplir tous les champs obligatoires.');
+      alert(' Please fill in all required fields.');
     }
   }
 }

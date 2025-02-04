@@ -59,6 +59,10 @@ export class Student extends BaseSchema {
 
   @Prop({ type: String })
   parentAddress: string;
+  
+  @Prop({ type: String })
+  status: string;
+
 
   // Add list of events associated with the student
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MyEvent' }] })
@@ -66,8 +70,7 @@ export class Student extends BaseSchema {
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }] })
   courses: Types.ObjectId[];}
-
-
+ 
 
 // Ensure StudentDocument type is defined and exported
 export type StudentDocument = Student & mongoose.Document;

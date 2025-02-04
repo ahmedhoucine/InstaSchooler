@@ -37,11 +37,11 @@ export class StudentComponent implements OnInit {
 
     this.studentService.updateStudentsStatus(updates).subscribe(
       () => {
-        alert('Statuts des étudiants mis à jour avec succès.');
+        alert('Student statuses successfully updated.');
       },
       (error) => {
         console.error('Erreur lors de la mise à jour des statuts :', error);
-        alert('Erreur lors de la mise à jour des statuts.');
+        alert('Error while updating statuses.');
       }
     );
   }

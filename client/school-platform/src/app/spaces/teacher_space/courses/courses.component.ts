@@ -48,15 +48,15 @@ export class CoursesComponent implements OnInit {
   }
 
   deleteCourse(courseId: string): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer ce cours ?')) {
+    if (confirm('Are you sure you want to delete this course ?')) {
       this.courseService.deleteCourse(courseId).subscribe({
         next: () => {
-          alert('Cours supprimé avec succès.');
+          alert('Course successfully deleted.');
           this.fetchCourses(); // Recharger les cours après suppression
         },
         error: (error) => {
           console.error('Erreur lors de la suppression du cours :', error);
-          alert('Une erreur est survenue lors de la suppression.');
+          alert('An error occurred while deleting.');
         },
       });
     }

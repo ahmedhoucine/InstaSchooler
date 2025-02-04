@@ -1,59 +1,113 @@
+/* Arrière-plan avec un dégradé gris */
 .login-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #f0f2f5; /* Fond gris clair */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #e0e0e0, #f7f7f7); /* Dégradé gris clair */
+}
+
+/* Conteneur principal du formulaire */
+.login-container {
+  background: white;
+  padding: 40px;
+  border-radius: 15px; /* Coins plus arrondis */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Ombre douce */
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Animation au survol de la boîte */
+.login-container:hover {
+  transform: scale(1.02); /* Légère mise en avant */
+}
+
+/* Titre */
+h2 {
+  margin-bottom: 20px;
+  color: #3f51b5; /* Couleur bleu professionnelle */
+  font-weight: bold;
+  font-size: 28px;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Espacement entre les lettres */
+  border-bottom: 2px solid #3f51b5; /* Ligne décorative */
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Champs de saisie */
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Coins arrondis */
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Effet focus sur les champs */
+input:focus {
+  border-color: #3f51b5;
+  outline: none;
+  box-shadow: 0px 0px 8px rgba(63, 81, 181, 0.5); /* Effet lumineux */
+}
+
+/* Bouton de connexion */
+button {
+  background: #3f51b5;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+/* Effet au survol du bouton */
+button:hover {
+  background: #303f9f;
+  transform: translateY(-2px); /* Légère montée */
+}
+
+/* Animation du bouton lorsqu'on clique dessus */
+button:active {
+  transform: scale(0.98);
+}
+
+/* Messages d'erreur */
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Animation légère pour la boîte */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
   }
-  
-  .login-container {
-    background: white; /* Fond blanc de la boîte */
-    padding: 40px; /* Espacement interne */
-    border-radius: 10px; /* Coins arrondis */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
-    width: 100%;
-    max-width: 400px; /* Largeur maximale */
-    text-align: center; /* Centrer le texte */
+  to {
+      opacity: 1;
+      transform: translateY(0);
   }
-  
-  h2 {
-    margin-bottom: 20px; /* Espacement sous le title */
-    color: #333; /* Couleur du texte */
-  }
-  
-  label {
-    display: block; /* Forcer l'affichage en bloc */
-    margin-bottom: 8px; /* Espacement sous le label */
-    font-weight: bold; /* Texte en gras */
-  }
-  
-  input {
-    width: 100%; /* Occuper toute la largeur */
-    padding: 10px; /* Espacement interne */
-    margin-bottom: 20px; /* Espacement sous les champs */
-    border: 1px solid #ddd; /* Bordure grise */
-    border-radius: 5px; /* Coins arrondis */
-    font-size: 14px; /* Taille de police */
-  }
-  
-  button {
-    background-color: #3f51b5; /* Couleur de fond du bouton */
-    color: white; /* Texte en blanc */
-    padding: 10px 20px; /* Espacement interne */
-    border: none; /* Sans bordure */
-    border-radius: 5px; /* Coins arrondis */
-    cursor: pointer; /* Curseur interactif */
-    font-size: 16px; /* Taille de police */
-    transition: background-color 0.3s; /* Transition douce */
-  }
-  
-  button:hover {
-    background-color: #303f9f; /* Couleur au survol */
-  }
-  
-  .error-message {
-    color: red; /* Couleur du message d'erreur */
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-  
+}
+
+.login-container {
+  animation: fadeIn 0.6s ease-in-out;
+}

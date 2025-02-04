@@ -23,7 +23,7 @@ export class LoginComponent {
       },
       error: (error) => {
         console.error('Erreur de connexion', error);
-        this.errorMessage = 'Email ou mot de passe incorrect.';
+        this.errorMessage = ' Incorrect email or password.';
       },
     });
   }

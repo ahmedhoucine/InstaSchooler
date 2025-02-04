@@ -8,10 +8,10 @@
 .ticket-container,
 .settings-container {
   flex: 1;
-  background: #ffffff;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #eef7ff, #ffffff);
+  border-radius: 15px;
   padding: 30px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -38,10 +38,11 @@ select {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 16px;
   color: #333;
   transition: border 0.3s, box-shadow 0.3s;
+  background-color: #f9fcff;
 }
 
 input:focus,
@@ -49,7 +50,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border: 1px solid #3f51b5;
-  box-shadow: 0px 0px 5px rgba(63, 81, 181, 0.3);
+  box-shadow: 0px 0px 8px rgba(63, 81, 181, 0.3);
 }
 
 textarea {
@@ -58,19 +59,20 @@ textarea {
 
 /* Boutons */
 .btn {
-  background-color: #3f51b5;
+  background: linear-gradient(135deg, #3f51b5, #283593);
   color: #fff;
   padding: 12px 20px;
   font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s ease-in-out, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(63, 81, 181, 0.3);
+  transition: background 0.3s ease-in-out, transform 0.2s;
 }
 
 .btn:hover {
-  background-color: #303f9f;
+  background: linear-gradient(135deg, #5c6bc0, #3f51b5);
   transform: scale(1.05);
 }
 
@@ -108,10 +110,9 @@ textarea {
   max-width: 400px;
   margin: 20px auto;
   padding: 15px;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #eef7ff, #ffffff);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .settings-title {
@@ -145,4 +146,99 @@ select {
   justify-content: flex-start;
   gap: 15px;
   margin-top: 15px;
+}
+/* Animation d'apparition */
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Appliquer l'animation à chaque conteneur */
+.ticket-container,
+.settings-container {
+  animation: fadeInSlide 0.8s ease-in-out;
+  animation-fill-mode: both;
+}
+
+/* Style de la page */
+.settings-page {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Style des conteneurs */
+.ticket-container,
+.settings-container {
+  flex: 1;
+  background: linear-gradient(135deg, #eef7ff, #ffffff);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Initial opacity for animation */
+}
+
+/* Style des titres */
+h2 {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3f51b5;
+}
+
+/* Formulaire */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9fcff;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+/* Focus sur les champs */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border: 1px solid #3f51b5;
+  box-shadow: 0px 0px 8px rgba(63, 81, 181, 0.3);
+}
+
+/* Boutons */
+.btn {
+  background: linear-gradient(135deg, #3f51b5, #283593);
+  color: #fff;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(63, 81, 181, 0.3);
+  transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #5c6bc0, #3f51b5);
+  transform: scale(1.05);
+}
+
+/* Ajustement pour les petits écrans */
+@media (max-width: 768px) {
+  .settings-page {
+    flex-direction: column;
+    gap: 30px;
+  }
 }

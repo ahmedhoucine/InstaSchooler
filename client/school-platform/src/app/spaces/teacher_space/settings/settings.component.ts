@@ -37,20 +37,20 @@ export class SettingsComponent implements OnInit {
   onSaveSettings(form: any): void {
     if (form.valid) {
       if (!this.enseignant.currentPassword || !this.enseignant.newPassword) {
-        alert('Veuillez renseigner à la fois le mot de passe actuel et le nouveau mot de passe.');
+        alert('Please provide both the current password and the new password.');
         return;
       }
       this.enseignantService.updateEnseignant(this.enseignant).subscribe(
         (response) => {
-          alert('Paramètres enregistrés avec succès !');
+          alert('Settings saved successfully !');
         },
         (error) => {
           console.error('Erreur lors de la mise à jour des paramètres :', error);
-          alert('Erreur lors de la sauvegarde des paramètres.');
+          alert('Error saving the settings.');
         }
       );
     } else {
-      alert('Veuillez remplir tous les champs correctement.');
+      alert('Please fill in all fields correctly.');
     }
   }
 
@@ -59,12 +59,12 @@ export class SettingsComponent implements OnInit {
       const ticketData = form.value;
       this.enseignantService.sendTicket(ticketData).subscribe(
         () => {
-          alert('Ticket envoyé avec succès !');
+          alert('Ticket sent successfully !');
           form.resetForm();
         },
         (error) => {
           console.error('Erreur lors de l\'envoi du ticket :', error);
-          alert('Erreur lors de l\'envoi du ticket.');
+          alert('Error sending the ticket.');
         }
       );
     }
