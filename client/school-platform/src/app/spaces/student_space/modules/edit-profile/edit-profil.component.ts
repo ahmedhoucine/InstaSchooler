@@ -20,6 +20,10 @@ export class EditProfileComponent implements OnInit {
   defaultPicture = 'https://i.pinimg.com/736x/a4/8a/ca/a48aca275e3dbe9a00d8f90e095f25ae.jpg';
   loading = false;
 
+  alertMessage: string = '';
+  alertType: 'success' | 'error' = 'error';
+  showAlert: boolean = false;
+
   constructor(private profileService: ProfileService) {}
 
   ngOnInit(): void {
@@ -34,7 +38,7 @@ export class EditProfileComponent implements OnInit {
     if (file) {
       const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
       if (!validImageTypes.includes(file.type)) {
-        alert('Invalid file type. Please select a JPEG, PNG, or GIF image.');
+        this.showAlertMessage('Invalid file type. Please select a JPEG, PNG, or GIF image.', 'error');
         return;
       }
 
@@ -47,16 +51,29 @@ export class EditProfileComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.showAlert = false;
+
     this.profileService.updateProfile(this.profile).subscribe(
-      () => alert('Profile updated successfully!'),
+      () => {
+        this.showAlertMessage('Profile updated successfully!', 'success');
+      },
       (error) => {
         console.error('Error updating profile:', error);
-        alert(error.error?.message || 'Failed to update profile. Please try again.');
+        this.showAlertMessage(error.error?.message || 'Failed to update profile. Please try again.', 'error');
       }
     );
   }
 
   onCancel(): void {
     this.profileService.loadProfile();
+  }
+
+  private showAlertMessage(message: string, type: 'success' | 'error') {
+    this.alertMessage = message;
+    this.alertType = type;
+
+    setTimeout(() => {
+      this.showAlert = true;
+    }, 0);
   }
 }

@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
@@ -26,9 +27,10 @@ import { FormsModule } from '@angular/forms';
     MatListModule, // Material list items
     MatIconModule, // Material icons
     MatButtonModule, // Ma // Import routing for student layout
-      MatFormFieldModule,
+    MatFormFieldModule,
     MatInputModule,
-    FormsModule, //
+    SharedModule,
+    FormsModule,
   ],
   exports: [NavbarComponent, SidebarComponent, MainContentComponent],
 })

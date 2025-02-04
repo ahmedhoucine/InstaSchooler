@@ -11,6 +11,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { SharedModule } from './shared/shared.module';
+
 
 // Routing Module
 import { TeacherRoutingModule } from './teacher-routing.module';
@@ -60,10 +62,11 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatIconModule,
     MatSidenavModule,
     MatListModule, // Modules Angular Material
+    SharedModule
   ],
   providers: [],
   bootstrap: [TeacherComponent], // Point d'entrée principal
     exports: [NavbarComponent, SidebarComponent],
-  
+
 })
 export class TeacherModule {}
