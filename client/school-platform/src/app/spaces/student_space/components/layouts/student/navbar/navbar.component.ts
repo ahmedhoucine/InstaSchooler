@@ -17,20 +17,20 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('NavbarComponent loaded');
-  
+
     this.profileService.profile$.subscribe(profile => {
       if (profile) {
         this.profile = profile;
       }
     });
-  
+
     this.profileService.getProfile().subscribe(); // Initial fetch
   }
-  
-  
+
+
 
   onLogout(): void {
     localStorage.removeItem('authToken');
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['join/']);
   }
 }

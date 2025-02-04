@@ -27,7 +27,7 @@ export class AuthService {
   // Logout method
   logout(): void {
     localStorage.removeItem('access_token');
-    this.router.navigate(['dashboard/auth/login']); // Redirect to login page
+    this.router.navigate(['join/']); // Redirect to login page
   }
 
   isAuthenticated(): boolean {

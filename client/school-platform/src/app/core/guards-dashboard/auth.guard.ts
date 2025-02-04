@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
       this.headerState.setLoginViewState(false);
       return true;
     } else {
-      this.router.navigate(['dashboard/auth/login']);
+      this.router.navigate(['join/']);
       return false;
     }
   }
