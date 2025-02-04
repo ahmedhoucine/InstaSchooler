@@ -4,8 +4,10 @@ html, body {
   margin: 0;
   padding: 0;
   overflow: hidden; /* Prevent scrollbars */
+  font-family: Arial, sans-serif;
 }
 
+/* Flexbox container */
 .content {
   height: 100vh;
   display: flex;
@@ -20,6 +22,7 @@ html, body {
   align-items: center;
   padding: 1rem 2rem;
   max-height: 80px; /* Fixed header height */
+  width: 100%;
 
   .logo-section {
     display: flex;
@@ -48,25 +51,25 @@ html, body {
   }
 }
 
-/* Login Form Container */
+/* Centered Login Form Container */
 .container {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  background-color: #f5f5f5; /* Add background color */
+  background-color: #f5f5f5; /* Background color */
 }
 
-/* Form Styles */
+/* Login Form */
 .login-form {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   width: 100%;
   max-width: 400px;
-  margin: auto; /* Center the form vertically */
+  box-sizing: border-box; /* Ensure padding doesn't increase size */
 
   .section-title {
     color: #A50133;
@@ -77,7 +80,7 @@ html, body {
   }
 }
 
-/* Rest of your existing styles remain the same */
+/* Input Fields */
 .form-group {
   margin-bottom: 1.5rem;
 
@@ -87,23 +90,26 @@ html, body {
     margin-bottom: 0.5rem;
     display: block;
   }
-}
 
-.neumorphic-input {
-  width: 100%;
-  padding: 0.8rem 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: white;
-  transition: all 0.3s ease;
+  input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Ensure width includes padding */
+    font-size: 1rem;
+  }
 
-  &:focus {
+  input:focus {
     outline: none;
     border-color: #A50133;
     box-shadow: 0 0 0 2px rgba(165, 1, 51, 0.1);
   }
 }
 
+/* Error Message */
 .error-message {
   color: #d32f2f;
   margin: 1rem 0;
@@ -111,6 +117,7 @@ html, body {
   text-align: center;
 }
 
+/* Submit Button */
 .form-actions {
   margin: 2rem 0 1rem;
 }
@@ -124,6 +131,7 @@ html, body {
   border-radius: 10px;
   transition: all 0.3s ease;
   cursor: pointer;
+  font-size: 1rem;
 
   &:hover {
     background-color: darken(#A50133, 10%);
@@ -135,6 +143,7 @@ html, body {
   }
 }
 
+/* Forgot Password Link */
 .form-footer {
   text-align: center;
   margin-top: 1rem;
@@ -144,14 +153,15 @@ html, body {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
+  }
 
-    &:hover {
-      color: darken(#A50133, 10%);
-      text-decoration: underline;
-    }
+  a:hover {
+    color: darken(#A50133, 10%);
+    text-decoration: underline;
   }
 }
 
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
