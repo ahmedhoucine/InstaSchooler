@@ -68,7 +68,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="email">Email *</label>
-          <input id="email" formControlName="email" class="neumorphic-input">
+          <input id="email" formControlName="email" class="neumorphic-input" type="email">
+          <div class="error-messages" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            <div *ngIf="email?.errors?.['required']">Email is required</div>
+            <div *ngIf="email?.errors?.['email']">Please enter a valid email address</div>
+          </div>
         </div>
         <div class="form-group">
           <label for="address">Address</label>
@@ -145,7 +149,7 @@
     </div>
 
     <div class="form-actions">
-      <button mat-flat-button type="submit" class="neumorphic-button" [disabled]="studentForm.invalid">
+      <button mat-flat-button type="submit" class="neumorphic-button">
         Create Student
       </button>
     </div>

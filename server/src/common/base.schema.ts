@@ -36,7 +36,7 @@ export class BaseSchema extends Document {
 
   @Prop({
     type: String,
-    default: '../../../assets/default-profile-picture.jpg',
+    default: 'assets/images/default-profile-picture.png',
   })
   profilePicture: string;
 }
