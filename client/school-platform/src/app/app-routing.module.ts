@@ -30,7 +30,7 @@ const routes: Routes = [
 { path: 'join', loadChildren: () => import('./spaces/join/join.module').then(m => m.JoinModule) },
 
   // Fallback route for unmatched paths
-  { path: '**', redirectTo: 'dashboard/auth/login' }
+  { path: '**', redirectTo: '/join' }
 ];
 
 @NgModule({
