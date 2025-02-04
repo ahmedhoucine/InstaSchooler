@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c3e70e25-c501-41c1-a6a8-1326b28a09fc" name="Changes" comment="Changed admin dashboard front.">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Changes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Changes/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Changes1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Changes1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Changes2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Changes2/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Changes3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Changes3/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Changes4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Changes4/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/services/header-state.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/core/guards-dashboard/auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/core/guards-dashboard/auth.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/auth/login/dashboard-login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/auth/login/dashboard-login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/auth/login/dashboard-login.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/auth/login/dashboard-login.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/auth/login/dashboard-login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/auth/login/dashboard-login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/layout/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/layout/header/header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/layout/header/header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/layout/header/header.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/layout/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/layout/header/header.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/layout/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/layout/sidebar/sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/student/editstudent/editstudent.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/student/editstudent/editstudent.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/student/editstudent/editstudent.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/components/student/editstudent/editstudent.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/dashboard.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/dashboard.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/dashboard.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/dashboard.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/services/sidebar/sidebar.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/school-platform/src/app/spaces/dashboard/services/sidebar/sidebar.service.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Wael-Habib&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ahmedhoucine/InstaSchooler.git&quot;,
+    &quot;accountId&quot;: &quot;32d4ef63-3703-4f70-ad36-e620ba23571f&quot;
+  }
+}</component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/server/package.json" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2sCv5MunrG3VlTiHEaoniNzIu6W" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "editStudent-Login-Front-Upgrade",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Wael Habib/WebstormProjects/InstaSchooler",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Wael Habib\\WebstormProjects\\InstaSchooler\\server\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\Wael Habib\\WebstormProjects\\InstaSchooler\\server\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Wael Habib\WebstormProjects\InstaSchooler\client\school-platform\src\app\spaces\dashboard\services" />
+      <recent name="C:\Users\Wael Habib\WebstormProjects\InstaSchooler\client\school-platform\src\assets\images" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.157" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c3e70e25-c501-41c1-a6a8-1326b28a09fc" name="Changes" comment="" />
+      <created>1737972187736</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1737972187736</updated>
+      <workItem from="1737972189484" duration="6282000" />
+      <workItem from="1737979131364" duration="16810000" />
+      <workItem from="1738065131457" duration="3602000" />
+      <workItem from="1738144242761" duration="586000" />
+      <workItem from="1738144978689" duration="12345000" />
+      <workItem from="1738180120064" duration="9306000" />
+      <workItem from="1738235233166" duration="128000" />
+      <workItem from="1738235425684" duration="15136000" />
+      <workItem from="1738275651252" duration="8488000" />
+      <workItem from="1738340164563" duration="2543000" />
+      <workItem from="1738415748746" duration="18332000" />
+      <workItem from="1738600079146" duration="8043000" />
+    </task>
+    <task id="LOCAL-00001" summary="Fixed Student Niveau input value">
+      <option name="closed" value="true" />
+      <created>1738325205558</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1738325205558</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added Logo and images">
+      <option name="closed" value="true" />
+      <created>1738417245244</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1738417245246</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changed admin dashboard front.">
+      <option name="closed" value="true" />
+      <created>1738523558620</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1738523558621</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/feat/add-student-planning" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Front Upgrade" />
+    <MESSAGE value="Fixed Student Niveau input value" />
+    <MESSAGE value="Added Logo and images" />
+    <MESSAGE value="Changed admin dashboard front." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed admin dashboard front." />
+  </component>
+</project>

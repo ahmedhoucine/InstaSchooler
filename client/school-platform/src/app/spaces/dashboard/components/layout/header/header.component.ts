@@ -1,20 +1,27 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { SidebarService } from 'src/app/spaces/dashboard/services/sidebar/sidebar.service';
-import { SidebarComponent } from '../sidebar/sidebar.component';
+import { HeaderStateService } from 'src/app/spaces/dashboard/services/header-state.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent  {
+export class HeaderComponent implements OnInit {
+  isLoginView = false;
 
-  constructor(private sidebarService: SidebarService) {}
+  constructor(
+    private sidebarService: SidebarService,
+    private headerState: HeaderStateService
+  ) {}
+
+  ngOnInit() {
+    this.headerState.currentHeaderState.subscribe((state: boolean) => {
+      this.isLoginView = state;
+    });
+  }
 
   toggleSidebar() {
-    // Check if the button click event is registered
     this.sidebarService.toggleSidebar();
-    // Check if the visibility state is changing
   }
 }

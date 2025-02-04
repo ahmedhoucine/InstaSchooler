@@ -1,27 +1,34 @@
-<!-- toolbar.component.html -->
-<mat-toolbar class="custom-toolbar">
-  <button mat-icon-button aria-label="Menu icon" (click)="toggleSidebar()">
+<mat-toolbar class="custom-toolbar" [class.login-view]="isLoginView">
+  <button *ngIf="!isLoginView" mat-icon-button aria-label="Menu" (click)="toggleSidebar()">
     <mat-icon>menu</mat-icon>
   </button>
+
   <div class="logo-section">
     <img src="../../../assets/images/Logo white.png" alt="InstaSchooler Logo" class="logo" />
     <span class="brand-name">InstaSchooler</span>
   </div>
-  &nbsp;
+
   <span class="example-spacer"></span>
 
-  <button mat-icon-button class="notification-icon" aria-label="Notification icon button">
-    <mat-icon>notifications</mat-icon>
-  </button>
+  <div class="header-content">
+    <ng-container *ngIf="!isLoginView; else loginView">
+      <div class="header-buttons">
+        <button mat-icon-button class="notification-icon">
+          <mat-icon>notifications</mat-icon>
+        </button>
+        <button mat-button class="neumorphic-button">
+          <span class="menu-icon material-icons">assessment</span>
+          <span class="button-text">Generate Report</span>
+        </button>
+        <button mat-button class="neumorphic-button">
+          <span class="menu-icon material-icons">person</span>
+          <span class="button-text">Profile</span>
+        </button>
+      </div>
+    </ng-container>
 
-  <button mat-button routerLink="/profile" routerLinkActive="active" class="neumorphic-button">
-    <span class="menu-icon material-icons">assessment</span>
-    <span class="button-text">Generate Report</span>
-  </button>
-
-  <button mat-button routerLink="/profile" routerLinkActive="active" class="neumorphic-button">
-    <span class="menu-icon material-icons">person</span>
-    <span class="button-text">Profile</span>
-  </button>
-
+    <ng-template #loginView>
+      <span class="admin-title">Admin Dashboard Login</span>
+    </ng-template>
+  </div>
 </mat-toolbar>
