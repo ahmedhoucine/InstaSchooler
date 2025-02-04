@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditProfileComponent } from './edit-profil.component';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -9,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { EditProfileRoutingModule } from './edit-profil-routing.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [EditProfileComponent],
@@ -20,9 +20,10 @@ import { EditProfileRoutingModule } from './edit-profil-routing.module';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule,    ReactiveFormsModule // Ensure this is imported
-
+    MatIconModule,
+    ReactiveFormsModule,
+    SharedModule
   ],
-  exports: [EditProfileComponent]
+  exports: [EditProfileComponent],
 })
-export class EditProfileModule { }
+export class EditProfileModule {}

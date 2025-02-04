@@ -1,4 +1,7 @@
 <div class="edit-profile-container">
+  <!-- Alert Component -->
+  <app-alert *ngIf="showAlert" [message]="alertMessage" [type]="alertType"></app-alert>
+
   <form (ngSubmit)="onSubmit()" class="form-container">
     <mat-card class="profile-card">
       <div class="profile-picture-container">
@@ -8,11 +11,11 @@
 
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>Username</mat-label>
-        <input 
-          matInput 
-          type="text" 
-          [(ngModel)]="profile.username" 
-          name="username" 
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="profile.username"
+          name="username"
         />
       </mat-form-field>
 
@@ -28,38 +31,27 @@
 
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>New Password</mat-label>
-        <input 
-          matInput 
-          type="password" 
-          [(ngModel)]="profile.password" 
-          name="password" 
+        <input
+          matInput
+          type="password"
+          [(ngModel)]="profile.password"
+          name="password"
         />
       </mat-form-field>
 
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>Confirm Password</mat-label>
-        <input 
-          matInput 
-          type="password" 
-          [(ngModel)]="profile.confirmPassword" 
-          name="confirmPassword" 
+        <input
+          matInput
+          type="password"
+          [(ngModel)]="profile.confirmPassword"
+          name="confirmPassword"
         />
       </mat-form-field>
 
       <div class="buttons-container">
-        <button 
-          mat-raised-button 
-          color="primary" 
-          type="submit">
-          Save
-        </button>
-        <button 
-          mat-raised-button 
-          color="warn" 
-          type="button" 
-          (click)="onCancel()">
-          Cancel
-        </button>
+        <button mat-raised-button color="primary" type="submit">Save</button>
+        <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancel</button>
       </div>
     </mat-card>
   </form>
