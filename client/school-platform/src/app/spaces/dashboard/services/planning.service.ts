@@ -1,3 +1,4 @@
+// planning.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -18,37 +19,35 @@ export class PlanningService {
 
   constructor(private http: HttpClient) {}
 
-  // Create planning
+  // Create a new planning item
   createPlanning(level: number, file: File): Observable<Planning> {
     const formData = new FormData();
     formData.append('planningImage', file);
     formData.append('niveau', level.toString());
-
     return this.http.post<Planning>(`${this.apiUrl}/create/${level}`, formData);
   }
 
-  // Get all plannings
+  // Get all planning items
   getAllPlannings(): Observable<Planning[]> {
     return this.http.get<Planning[]>(`${this.apiUrl}`);
   }
 
-  // Get planning by ID
+  // Get a planning item by ID
   getPlanningById(id: string): Observable<Planning> {
     return this.http.get<Planning>(`${this.apiUrl}/${id}`);
   }
 
-  // Update planning by ID
+  // Update a planning item by ID
   updatePlanning(id: string, level: number, file?: File): Observable<Planning> {
     const formData = new FormData();
     if (file) {
       formData.append('planningImage', file);
     }
     formData.append('niveau', level.toString());
-
     return this.http.put<Planning>(`${this.apiUrl}/${id}`, formData);
   }
 
-  // Delete planning by ID
+  // Delete a planning item by ID
   deletePlanning(id: string): Observable<boolean> {
     return this.http.delete<boolean>(`${this.apiUrl}/${id}`);
   }
