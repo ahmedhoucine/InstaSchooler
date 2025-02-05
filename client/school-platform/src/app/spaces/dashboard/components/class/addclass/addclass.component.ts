@@ -27,10 +27,11 @@ export class AddClassComponent implements OnInit {
   ngOnInit(): void {
     this.classForm = this.fb.group({
       title: ['', Validators.required],
-      subject: ['', Validators.required],
-      niveau: [1, Validators.required],
+      subject: ['', Validators.required], 
+      description: ['', Validators.required], // Added
+      niveau: ['1', Validators.required], // Changed to string
       teacher: ['', Validators.required],
-      duration: ['', [Validators.required, Validators.min(1)]]
+      duration: [null, [Validators.required, Validators.min(1)]]
     });
 
     this.getAllTeachers();
@@ -60,26 +61,34 @@ export class AddClassComponent implements OnInit {
     }
 
     this.teachers = this.allTeachers.filter(teacher =>
-      teacher.matiere && teacher.matiere.toLowerCase() === subject.toLowerCase()
+      teacher.matiere &&
+      teacher.matiere.toLowerCase() === subject.toLowerCase()
     );
-    console.log("Filtered Teachers:", this.teachers);
+
+    // Reset teacher selection if no matching teachers
+    if (this.teachers.length === 0) {
+      this.classForm.get('teacher')?.reset();
+    }
   }
 
   onSubmit(): void {
     if (this.classForm.valid) {
-      console.log("Class Data:", this.classForm.value);
-      this.classService.createClass(this.classForm.value).subscribe(
-        (response) => {
-          console.log('Class created successfully:', response);
+      const formData = {
+        ...this.classForm.value,
+        niveau: this.classForm.value.niveau, // Now string
+        duration: Number(this.classForm.value.duration),
+        // Remove subject field
+      };
+
+      this.classService.createClass(formData).subscribe({
+        next: (response) => {
           this.router.navigate(['/dashboard/class/listclasses']);
         },
-        (error) => {
-          console.error('Error creating class', error);
+        error: (error) => {
+          console.error('Error:', error.error);
+          alert(`Error: ${error.error.message || 'Unknown error'}`);
         }
-      );
-
-    } else {
-      console.log('Form is invalid');
+      });
     }
   }
 }

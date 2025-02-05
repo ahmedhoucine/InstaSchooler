@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ClassService } from 'src/app/spaces/dashboard/services/class.service';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import { TeacherService } from '../../../services/teacher.service';
+import { TeacherService } from 'src/app/spaces/dashboard/services/teacher.service';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-classes',
@@ -17,18 +19,49 @@ export class ListClassesComponent implements OnInit {
 
   constructor(
     private classService: ClassService,
-    private router: Router
+    private router: Router,
+    private teacherService: TeacherService,
   ) {}
 
   ngOnInit(): void {
     this.getCourses();
   }
 
+  // getCourses(): void {
+  //   this.classService.getAllClasses().subscribe(
+  //     (courses) => {this.courses = courses;
+  //     console.log('API Response:', courses);}, // Add this line
+  //     (error) => console.error('Error fetching courses', error)
+  //   );
+  // }
+
   getCourses(): void {
-    this.classService.getAllClasses().subscribe(
-      (courses) => this.courses = courses,
-      (error) => console.error('Error fetching courses', error)
-    );
+    this.classService.getAllClasses().subscribe({
+      next: (courses) => {
+        // Filter out invalid teacher IDs
+        const teacherIds = [...new Set(courses
+          .map(c => c.teacher)
+          .filter(id => id && id !== 'undefined'))];
+
+        if (teacherIds.length === 0) {
+          this.courses = courses;
+          return;
+        }
+
+        forkJoin(teacherIds.map(id =>
+          this.teacherService.getTeacherById(id).pipe(
+            catchError(() => of(null)) // Handle missing teachers
+          )
+        )).subscribe(teachers => {
+          this.courses = courses.map(course => ({
+            ...course,
+            teacher: teachers.find(t => t?._id === course.teacher) || null
+          }));
+          console.log('Mapped courses:', this.courses); // Verify mapping
+        });
+      },
+      error: (error) => console.error('Error fetching courses', error)
+    });
   }
 
   // Temporary view implementation
