@@ -16,10 +16,20 @@
         <div class="form-group">
           <label for="firstName">First Name *</label>
           <input id="firstName" formControlName="firstname" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('firstname')!"
+            [fieldName]="'First Name'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
           <label for="lastName">Last Name *</label>
           <input id="lastName" formControlName="lastName" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('lastName')!"
+            [fieldName]="'Last Name'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
           <label for="niveau">Niveau *</label>
@@ -30,6 +40,11 @@
             <option value="3">Niveau 3</option>
             <option value="4">Niveau 4</option>
           </select>
+          <app-validation-messages
+            [control]="studentForm.get('niveau')!"
+            [fieldName]="'Niveau'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
       </div>
     </div>
@@ -41,6 +56,11 @@
         <div class="form-group">
           <label for="dateOfBirth">Date of Birth *</label>
           <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('dateOfBirth')!"
+            [fieldName]="'Date of Birth'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group radio-group">
           <label>Gender *</label>
@@ -50,14 +70,29 @@
               <mat-radio-button value="Female">Female</mat-radio-button>
             </mat-radio-group>
           </div>
+          <app-validation-messages
+            [control]="studentForm.get('gender')!"
+            [fieldName]="'Gender'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
           <label for="nationality">Nationality *</label>
           <input id="nationality" formControlName="nationality" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('nationality')!"
+            [fieldName]="'Nationality'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
           <label for="category">Category *</label>
           <input id="category" formControlName="category" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('category')!"
+            [fieldName]="'Category'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
       </div>
     </div>
@@ -69,10 +104,11 @@
         <div class="form-group">
           <label for="email">Email *</label>
           <input id="email" formControlName="email" class="neumorphic-input" type="email">
-          <div class="error-messages" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-            <div *ngIf="email?.errors?.['required']">Email is required</div>
-            <div *ngIf="email?.errors?.['email']">Please enter a valid email address</div>
-          </div>
+          <app-validation-messages
+            [control]="studentForm.get('email')!"
+            [fieldName]="'Email'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
           <label for="address">Address</label>
@@ -88,18 +124,38 @@
         <div class="form-group">
           <label for="admissionNo">Admission No *</label>
           <input id="admissionNo" formControlName="admissionNo" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('admissionNo')!"
+            [fieldName]="'Admission No'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
           <label for="joiningDate">Joining Date *</label>
           <input type="date" id="joiningDate" formControlName="joiningDate" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('joiningDate')!"
+            [fieldName]="'Joining Date'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
           <label for="rollNo">Roll No *</label>
           <input id="rollNo" formControlName="rollNo" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('rollNo')!"
+            [fieldName]="'Roll No'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
           <label for="class">Class *</label>
           <input id="class" formControlName="class" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('class')!"
+            [fieldName]="'Class'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group radio-group">
           <label>Is Paid *</label>
@@ -109,6 +165,11 @@
               <mat-radio-button [value]="false">No</mat-radio-button>
             </mat-radio-group>
           </div>
+          <app-validation-messages
+            [control]="studentForm.get('isPaid')!"
+            [fieldName]="'Is Paid'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
       </div>
     </div>
@@ -120,30 +181,65 @@
         <div class="form-group">
           <label for="parentFirstName">Parent First Name *</label>
           <input id="parentFirstName" formControlName="parentFirstName" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('parentFirstName')!"
+            [fieldName]="'Parent First Name'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
           <label for="parentLastName">Parent Last Name *</label>
           <input id="parentLastName" formControlName="parentLastName" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('parentLastName')!"
+            [fieldName]="'Parent Last Name'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
           <label for="relation">Relation *</label>
           <input id="relation" formControlName="relation" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('relation')!"
+            [fieldName]="'Relation'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
-          <label for="email">Parent Email *</label>
-          <input type="email" id="email" formControlName="parentEmail" class="neumorphic-input">
+          <label for="parentEmail">Parent Email *</label>
+          <input type="email" id="parentEmail" formControlName="parentEmail" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('parentEmail')!"
+            [fieldName]="'Parent Email'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
-          <label for="phone">Parent Phone</label>
-          <input id="phone" formControlName="parentPhone" class="neumorphic-input">
+          <label for="parentPhone">Parent Phone *</label>
+          <input id="parentPhone" formControlName="parentPhone" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('parentPhone')!"
+            [fieldName]="'Parent Phone'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
-          <label for="mobileNo">Parent Mobile No</label>
-          <input id="mobileNo" formControlName="parentMobileNo" class="neumorphic-input">
+          <label for="parentMobileNo">Parent Mobile No *</label>
+          <input id="parentMobileNo" formControlName="parentMobileNo" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('parentMobileNo')!"
+            [fieldName]="'Parent Mobile No'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
         <div class="form-group">
-          <label for="parentAddress">Parent Address</label>
+          <label for="parentAddress">Parent Address *</label>
           <input id="parentAddress" formControlName="parentAddress" class="neumorphic-input">
+          <app-validation-messages
+            [control]="studentForm.get('parentAddress')!"
+            [fieldName]="'Parent Address'"
+            [formSubmitted]="formSubmitted">
+          </app-validation-messages>
         </div>
       </div>
     </div>

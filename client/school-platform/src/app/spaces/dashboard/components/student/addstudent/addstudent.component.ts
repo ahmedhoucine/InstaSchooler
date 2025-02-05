@@ -1,3 +1,4 @@
+// addstudent.component.ts
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { StudentService } from 'src/app/spaces/dashboard/services/student.service';
 import { SuccessDialogComponent } from 'src/app/spaces/dashboard/components/layout/success-dialog/success-dialog.component';
 import { ErrorDialogComponent } from 'src/app/spaces/dashboard/components/layout/error-dialog/error-dialog.component';
-
+import {ValidationService} from "../../../services/validation.service";
 
 @Component({
   selector: 'app-add-student',
@@ -15,13 +16,15 @@ import { ErrorDialogComponent } from 'src/app/spaces/dashboard/components/layout
 })
 export class AddStudentComponent {
   studentForm!: FormGroup;
+  formSubmitted = false;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private studentService: StudentService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private validationService: ValidationService
   ) {
     this.initializeForm();
   }
@@ -45,25 +48,29 @@ export class AddStudentComponent {
       rollNo: ['', Validators.required],
       class: ['', Validators.required],
       isPaid: [false, Validators.required],
+      niveau: ['', Validators.required],
       parentFirstName: ['', Validators.required],
       parentLastName: ['', Validators.required],
       relation: ['', Validators.required],
       parentEmail: ['', [Validators.required, Validators.email]],
-      parentPhone: [''],
-      parentMobileNo: [''],
-      parentAddress: [''],
-      niveau: ['',Validators.required]
+      parentPhone: ['', Validators.required],
+      parentMobileNo: ['', Validators.required],
+      parentAddress: ['', Validators.required],
     });
   }
 
   onSubmit(): void {
+    this.formSubmitted = true;
+
     if (this.studentForm.invalid) {
+      this.validationService.markAllAsTouched(this.studentForm);
       this.dialog.open(ErrorDialogComponent, {
         data: { message: 'Please fill all required fields' },
         panelClass: 'custom-dialog-panel'
       });
       return;
     }
+
     this.studentService.createStudent(this.studentForm.value).subscribe({
       next: (response) => this.handleSuccess(response),
       error: (error) => this.handleError(error)
@@ -116,5 +123,4 @@ export class AddStudentComponent {
   get email() {
     return this.studentForm.get('email');
   }
-
 }
