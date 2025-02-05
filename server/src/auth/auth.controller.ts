@@ -1,41 +1,53 @@
-import { Body, Controller, Get, Param, Post, Put, Request, UseGuards, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Request,
+  UseGuards,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto, UpdateProfileDto } from './dto/login.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as path from 'path';
-import { Express, response } from 'express';  // Vérifiez que ce type est correctement importé
-
+import { Express, response } from 'express'; // Vérifiez que ce type est correctement importé
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-
   @Post('/login')
   async login(@Body() loginDto: LoginDto): Promise<{ token: string }> {
-    const response = await this.authService.login(loginDto);  // Récupère l'objet de réponse contenant le token
-    console.log(response.token);  // Affiche le token dans la console
-    return response;  // Renvoie l'objet avec le token au client
+    const response = await this.authService.login(loginDto); // Récupère l'objet de réponse contenant le token
+    console.log(response.token); // Affiche le token dans la console
+    return response; // Renvoie l'objet avec le token au client
   }
 
   @UseGuards(JwtAuthGuard) // Protéger la route de mise à jour du profil
   @Put('profile/:userId')
-  @UseInterceptors(FileInterceptor('picture', {
-    storage: diskStorage({
-      destination: './uploads', // Dossier où les fichiers seront stockés
-      filename: (req, file, callback) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        callback(null, uniqueSuffix + path.extname(file.originalname)); // Créer un nom de fichier unique
-      },
+  @UseInterceptors(
+    FileInterceptor('picture', {
+      storage: diskStorage({
+        destination: './uploads', // Dossier où les fichiers seront stockés
+        filename: (req, file, callback) => {
+          const uniqueSuffix =
+            Date.now() + '-' + Math.round(Math.random() * 1e9);
+          callback(null, uniqueSuffix + path.extname(file.originalname)); // Créer un nom de fichier unique
+        },
+      }),
     }),
-  }))
+  )
   async updateProfile(
     @Param('userId') userId: string,
     @Body() updateProfileDto: UpdateProfileDto,
     @UploadedFile() picture: Express.Multer.File, // Fichier téléchargé, vérifiez le type ici
-    @Request() req: any,  // Récupérer l'utilisateur authentifié depuis la requête
+    @Request() req: any, // Récupérer l'utilisateur authentifié depuis la requête
   ) {
     const authenticatedUserId = req.user.id;
 
@@ -44,8 +56,8 @@ export class AuthController {
       throw new Error('Unauthorized to update this profile');
     }
 
-    console.log('Received userId:', userId);  // Vérifier l'ID de l'utilisateur
-    console.log('Uploaded file:', picture);  // Vérifier le fichier téléchargé
+    console.log('Received userId:', userId); // Vérifier l'ID de l'utilisateur
+    console.log('Uploaded file:', picture); // Vérifier le fichier téléchargé
 
     // Si une image a été téléchargée, ajouter son URL au DTO
     if (picture) {
@@ -62,6 +74,4 @@ export class AuthController {
     const userId = req.user.id; // ID de l'utilisateur récupéré du token JWT
     return this.authService.getProfile(userId);
   }
-
-  
 }

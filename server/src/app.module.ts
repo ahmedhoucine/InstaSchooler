@@ -17,7 +17,6 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { PlanningModule } from './planning/planning.module';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -37,12 +36,11 @@ import { PlanningModule } from './planning/planning.module';
     CourseModule,
     PlanningModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'uploads'),  // Path to your uploads folder
-      serveRoot: '/uploads',  // URL endpoint for accessing the files
+      rootPath: join(__dirname, '..', 'uploads'), // Path to your uploads folder
+      serveRoot: '/uploads', // URL endpoint for accessing the files
     }),
-
   ],
-  
+
   controllers: [AppController],
   providers: [AppService],
 })

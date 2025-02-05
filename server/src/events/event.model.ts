@@ -6,5 +6,4 @@ export interface Event {
   startTime: string; // Time only
   endDate: Date | null; // Date only
   endTime: string; // Time only
-  
 }

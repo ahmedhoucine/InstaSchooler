@@ -5,9 +5,6 @@ import {
   IsEnum,
   IsBoolean,
   IsEmail,
-  MinLength,
-  IsArray,
-  IsMongoId,
 } from 'class-validator';
 import { Matiere } from '../matiere.enum';
 import * as bcrypt from 'bcrypt';
@@ -25,13 +22,8 @@ export class CreateTeacherDto {
   @IsNotEmpty()
   email: string;
 
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(8)
-  password: string;
-
   @IsEnum(Matiere)
-  matiere: Matiere; // Changed to camelCase
+  matiere: Matiere;
 
   @IsBoolean()
   isPaid: boolean;
@@ -39,15 +31,11 @@ export class CreateTeacherDto {
   @IsNotEmpty()
   @Matches(/^([2459])[0-9]{7}$/, {
     message:
-      'Numéro de téléphone invalide. Le numéro doit commencer par 2, 4, 5, ou 9 et avoir 8 chiffres.',
+        'Numéro de téléphone invalide. Le numéro doit commencer par 2, 4, 5, ou 9 et avoir 8 chiffres.',
   })
-  phone: string; // Changed to camelCase
+  phone: string;
 
-  @IsArray()
-  @IsMongoId({ each: true })
-  classes: string[]; // Array of class IDs (MongoDB ObjectIds)
-
-  // Method to generate password and hash it
+  // (Optional) If you ever need a generated password method
   async generateHashedPassword(): Promise<string> {
     const password = `${this.firstname}@${this.lastName.toUpperCase()}`;
     const saltRounds = 10;

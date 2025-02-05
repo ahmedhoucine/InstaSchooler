@@ -30,13 +30,13 @@ export class StudentController {
       throw new BadRequestException('Invalid niveau value');
     }
     return await this.studentService.getStudentsByNiveau(parsedNiveau);
-}
+  }
   // Récupérer tous les étudiants
   @Get('/all-students')
   getAllStudents() {
     return this.studentService.getAllStudents();
   }
-  //absence stats 
+  //absence stats
   @Get('/absence-stats')
   async getAbsenceStats() {
     return await this.studentService.getAbsenceStats();
@@ -45,7 +45,7 @@ export class StudentController {
   //count of students
   @Get('/count')
   async getStudentsNumber() {
-  return await this.studentService.getStudentCount();
+    return await this.studentService.getStudentCount();
   }
   // Récupérer un étudiant par son ID
   @Get(':id')
@@ -67,6 +67,4 @@ export class StudentController {
   deleteStudent(@Param('id') id: string) {
     return this.studentService.deleteStudent(id);
   }
-
-  
 }

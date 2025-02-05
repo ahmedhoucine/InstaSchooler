@@ -39,11 +39,9 @@ export class CreateStudentDto {
   @IsNotEmpty()
   parentEmail: string;
 
-  
   @IsNumber()
   @IsNotEmpty()
   niveau: number; // Change to number
-  
 
   @IsNotEmpty()
   @Matches(/^([2459])[0-9]{7}$/, {

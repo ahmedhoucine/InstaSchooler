@@ -10,7 +10,10 @@ export class AuthAdminService {
     private configService: ConfigService,
   ) {}
 
-  async adminLogin(username: string, password: string): Promise<{ token: string }> {
+  async adminLogin(
+    username: string,
+    password: string,
+  ): Promise<{ token: string }> {
     const adminUsername = this.configService.get<string>('ADMIN_USERNAME');
     const adminPassword = this.configService.get<string>('ADMIN_PASSWORD');
 
