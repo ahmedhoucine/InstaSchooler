@@ -26,6 +26,7 @@
     "@fullcalendar/core": "^6.1.15",
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/interaction": "^6.1.15",
+    "@nestjs/serve-static": "^5.0.1",
     "@types/fullcalendar": "^3.8.0",
     "angular-calendar": "^0.31.1",
     "font-awesome": "^4.7.0",

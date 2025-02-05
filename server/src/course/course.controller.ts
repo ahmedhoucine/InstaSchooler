@@ -13,6 +13,8 @@ import {
 import { JwtAuthGuard } from '../teacher/teacher-jwt.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CourseService } from './course.service';
+import { diskStorage } from 'multer';
+import * as path from 'path';
 
 @Controller('courses')
 export class CourseController {
@@ -20,7 +22,26 @@ export class CourseController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  @UseInterceptors(FileInterceptor('pdf', { dest: './uploads' }))
+  @UseInterceptors(
+    FileInterceptor('pdf', {
+      // Use diskStorage to configure the storage and filename
+      storage: diskStorage({
+        destination: './uploads', // Folder to save the file
+        filename: (req, file, callback) => {
+          // Ensure the file has a .pdf extension
+          const fileName = `${Date.now()}.pdf`; // You can customize this name
+          callback(null, fileName); // Pass the new filename
+        },
+      }),
+      fileFilter: (req, file, callback) => {
+        // Only allow PDF files
+        if (!file.originalname.match(/\.(pdf)$/)) {
+          return callback(new Error('Only PDF files are allowed'), false);
+        }
+        callback(null, true);
+      },
+    }),
+  )
   async create(
     @Request() req,
     @Body() courseData: any,
@@ -30,7 +51,7 @@ export class CourseController {
     const course = {
       ...courseData,
       teacher: teacherId,
-      pdf: file ? `http://localhost:3000/uploads/${file.filename}` : null,
+      pdf: file ? `http://localhost:3000/uploads/${file.filename}` : null, // PDF URL
     };
     return this.courseService.create(course);
   }
@@ -42,10 +63,11 @@ export class CourseController {
     const count = await this.courseService.countByTeacher(teacherId);
     return { count };
   }
-  @UseGuards(JwtAuthGuard) // Assurez-vous que l'étudiant est connecté
+
+  @UseGuards(JwtAuthGuard)
   @Get('available-courses')
   async getAvailableCourses(@Request() req) {
-    const studentId = req.user.id; // Récupère l'ID de l'étudiant depuis le JWT
+    const studentId = req.user.id;
     return this.courseService.getCoursesForStudent(studentId);
   }
 

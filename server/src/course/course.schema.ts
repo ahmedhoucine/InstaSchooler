@@ -5,6 +5,8 @@ import { Document, Types } from 'mongoose';
 export class Course {
   @Prop({ required: true })
   niveau: string;
+  @Prop({ required: true })
+  title: string;
 
   @Prop({ required: true })
   description: string;
