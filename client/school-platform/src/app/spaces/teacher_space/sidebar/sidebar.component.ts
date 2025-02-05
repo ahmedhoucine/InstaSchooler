@@ -1,3 +1,4 @@
+
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -8,7 +9,13 @@ import { Component, Input } from '@angular/core';
 export class SidebarComponent {
   @Input() isCollapsed: boolean = false;
 
-  toggleSidebar(): void {
+
+
+  toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+      sidebar.classList.toggle('collapsed', this.isCollapsed);
+    }
   }
 }

@@ -1,47 +1,52 @@
-<div class="login-container">
-  <!-- Alert Component -->
-  <app-alert *ngIf="showAlert" [message]="alertMessage" [type]="alertType"></app-alert>
+<div class="content">
+  <mat-toolbar class="login-toolbar">
+    <div class="logo-section">
+      <a routerLink="/join">
+        <img src="../../../assets/images/Logo white.png" alt="InstaSchooler Logo" class="logo" />
+      </a>
+      <span class="brand-name">InstaSchooler</span>
+    </div>
+    
+    <span class="example-spacer"></span>
+    <span class="student-title">Student Dashboard Login</span>
+  </mat-toolbar>
 
-  <div class="login-header">
-    <h1>Welcome Back</h1>
-    <p>Login to access your account</p>
+  <div class="login-wrapper">
+    <div class="login-container">
+      <h2>Student Login</h2>
+      <form #loginForm="ngForm" (ngSubmit)="onLogin()" novalidate>
+        <div>
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="email"
+            name="email"
+            required
+          />
+          <div *ngIf="loginForm.submitted && !email" class="error-message">
+            Email required
+          </div>
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+          <div *ngIf="loginForm.submitted && !password" class="error-message">
+            Password required
+          </div>
+        </div>
+        <!-- Display error message if login fails -->
+        <div *ngIf="showAlert" class="error-message">
+          {{ errorMessage }}
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
   </div>
-
-  <form (ngSubmit)="onLogin()">
-    <div class="input-group">
-      <label for="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        [(ngModel)]="email"
-        name="email"
-        required
-        placeholder="Enter your email"
-      />
-    </div>
-
-    <div class="input-group">
-      <label for="password">Password</label>
-      <div class="password-wrapper">
-        <input
-          id="password"
-          [type]="passwordVisible ? 'text' : 'password'"
-          [(ngModel)]="password"
-          name="password"
-          required
-          placeholder="Enter your password"
-        />
-        <button
-          type="button"
-          class="password-toggle"
-          (click)="togglePasswordVisibility()"
-          aria-label="Toggle password visibility"
-        >
-          {{ passwordVisible ? 'Hide' : 'Show' }}
-        </button>
-      </div>
-    </div>
-
-    <button type="submit" class="login-btn">Login</button>
-  </form>
 </div>

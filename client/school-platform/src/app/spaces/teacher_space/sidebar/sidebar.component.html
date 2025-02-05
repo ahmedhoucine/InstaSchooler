@@ -1,38 +1,64 @@
-<mat-sidenav mode="side" opened [class.collapsed]="isCollapsed" class="sidebar">
- 
+<aside class="sidebar">
+  <!-- Modern collapse button with animation -->
   <button class="sidebar-toggle" (click)="toggleSidebar()">
-    <span class="hamburger-icon">
+    <span class="hamburger-icon" [class.collapsed]="isCollapsed">
       <span class="line top"></span>
       <span class="line middle"></span>
       <span class="line bottom"></span>
     </span>
   </button>
-<br>
-<br>
-  <mat-nav-list>
-    <a mat-list-item routerLink="./dashboards">
-      <mat-icon>dashboard</mat-icon>
-      <span *ngIf="!isCollapsed">Dashboard</span>
-    </a>
-    <a mat-list-item routerLink="./courses">
-      <mat-icon>library_books</mat-icon>
-      <span *ngIf="!isCollapsed">Courses</span>
-    </a>
-    <a mat-list-item routerLink="./liste">
-      <mat-icon>list</mat-icon>
-      <span *ngIf="!isCollapsed">Tasks</span>
-    </a>
-    <a mat-list-item routerLink="./notifications">
-      <mat-icon>notifications</mat-icon>
-      <span *ngIf="!isCollapsed">Notifications</span>
-    </a>
-    <a mat-list-item routerLink="./student">
-      <mat-icon>group</mat-icon>
-      <span *ngIf="!isCollapsed">Students</span>
-    </a>
-    <a mat-list-item routerLink="./settings">
-      <mat-icon>settings</mat-icon>
-      <span *ngIf="!isCollapsed">Settings</span>
-    </a>
-  </mat-nav-list>
-</mat-sidenav>
+
+  <ul>
+    <li routerLinkActive="active">
+      <a routerLink="./dashboards">
+        <mat-icon>dashboard</mat-icon>
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Dashboard</span>
+      </a>
+    </li>
+   
+
+    <li routerLinkActive="active"> 
+      <a routerLink="./courses">
+        <mat-icon>library_books</mat-icon>
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Courses</span>
+      </a>
+    </li>
+
+
+    <li routerLinkActive="active"> 
+      <a routerLink="./liste">
+        <mat-icon>list</mat-icon>
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Tasks</span>
+      </a>
+    </li>
+    <li routerLinkActive="active"> 
+      <a routerLink="./notifications">
+        <mat-icon>notifications</mat-icon>
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Notifications</span>
+      </a>
+    </li>
+
+    <li routerLinkActive="active"> 
+      <a routerLink="./student">
+        <mat-icon>group</mat-icon>
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Students</span>
+      </a>
+    </li>
+
+
+    <li routerLinkActive="active"> 
+      <a routerLink="./settings">
+        <mat-icon>group</mat-icon>
+        <span class="sidebar-text" [ngClass]="{'collapsed': isCollapsed}">Settings</span>
+      </a>
+    </li>
+
+  
+    
+
+
+
+    
+  </ul>
+</aside>
+

@@ -80,6 +80,20 @@
 }
 
 .navbar .logo img {
-  max-width: 100px; /* Slightly larger logo */
+  max-width: 40px; /* Slightly larger logo */
   height: auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  gap: 8px; /* Space between logo and text */
+}
+
+.brand-name {
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: black;
+  display: flex;
+  align-items: center;
 }

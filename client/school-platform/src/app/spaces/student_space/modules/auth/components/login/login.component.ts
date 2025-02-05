@@ -11,14 +11,13 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   passwordVisible: boolean = false;
-  alertMessage: string = '';
-  alertType: 'success' | 'error' = 'error';
+  errorMessage: string = '';  // Declare errorMessage property
   showAlert: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
-    this.showAlert = false;
+    this.showAlert = false; // Hide previous alert
 
     this.authService.login({ email: this.email, password: this.password }).subscribe(
       (response) => {
@@ -26,12 +25,9 @@ export class LoginComponent {
         this.router.navigate(['/student']);
       },
       (error) => {
-        this.alertMessage = 'Login failed. Please check your credentials.';
-        this.alertType = 'error';
-        setTimeout(() => {
-          this.showAlert = true;
-        }, 0);
-
+        // Show error message on login failure
+        this.errorMessage = 'Login failed. Please check your credentials.';
+        this.showAlert = true; // Display the error message
         console.error(error);
       }
     );
