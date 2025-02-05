@@ -4,7 +4,7 @@
         <img src="../../../../assets/images/logoo.png" alt="Logo" class="navbar-logo" />
       </div>
     <div class="profile-actions">
-      <button routerLink="/join" class="logout-btn" >
+      <button routerLink="/join" class="logout-btn" (click)="logout()" >
         <mat-icon>exit_to_app</mat-icon> Logout
       </button>
       <button routerLink="./settings" class="edit-profile-btn">
