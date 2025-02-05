@@ -1,4 +1,109 @@
-/* Arrière-plan avec un dégradé gris */
+
+
+/* Flexbox container */
+.content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.login-toolbar {
+  background: linear-gradient(135deg, #020e2f, #445573);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-height: 80px; /* Fixed header height */
+  width: 100%;
+
+  .logo-section {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    width: 2.5rem;
+    height: auto;
+    margin-right: 1rem;
+  }
+
+  .brand-name {
+    font-weight: 500;
+    font-size: 1.25rem;
+  }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .teacher-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-right: 1rem;
+  }
+}
+
+
+
+.error-message {
+  color: #ffffff;
+  background-color: #f0746b;  /* Red background for error */
+  border-radius: 8px;
+  padding: 10px;
+  margin: 15px 0;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeInError 0.3s ease-in-out;
+}
+
+
+
+
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .login-form {
+    padding: 1.5rem;
+  }
+
+  .login-toolbar {
+    padding: 1rem;
+
+    .teacher-title {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    .brand-name {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .login-toolbar {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .teacher-title {
+      width: 100%;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .login-form {
+    margin: 0 1rem;
+  }
+}
+
+
 .login-wrapper {
   display: flex;
   justify-content: center;
@@ -27,12 +132,12 @@
 /* Titre */
 h2 {
   margin-bottom: 20px;
-  color: #3f51b5; /* Couleur bleu professionnelle */
+  color: #020e2f; /* Couleur bleu professionnelle */
   font-weight: bold;
   font-size: 28px;
   text-transform: uppercase;
   letter-spacing: 1px; /* Espacement entre les lettres */
-  border-bottom: 2px solid #3f51b5; /* Ligne décorative */
+  border-bottom: 2px solid #020e2f; /* Ligne décorative */
   display: inline-block;
   padding-bottom: 5px;
 }
@@ -66,7 +171,7 @@ input:focus {
 
 /* Bouton de connexion */
 button {
-  background: #3f51b5;
+  background: #020e2f;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -88,13 +193,6 @@ button:active {
   transform: scale(0.98);
 }
 
-/* Messages d'erreur */
-.error-message {
-  color: red;
-  margin-bottom: 10px;
-  font-size: 14px;
-  font-weight: bold;
-}
 
 /* Animation légère pour la boîte */
 @keyframes fadeIn {

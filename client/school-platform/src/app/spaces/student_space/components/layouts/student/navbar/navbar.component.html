@@ -1,21 +1,17 @@
 <nav class="navbar">
-  <div class="logo">
-    <a routerLink="/student/dashboard">
-      <img src="assets/images/logoo.png" alt="Logo" />
-    </a>
+  <div class="logo" routerLink="/student/dashboard" style="cursor: pointer;">
+    <img src="assets/images/output-onlinetools.png" alt="Logo" />
+    <span class="brand-name">InstaSchooler</span>
   </div>
-
+  
   <div class="profile-actions">
     <button (click)="onLogout()" class="logout-btn">
       <mat-icon>exit_to_app</mat-icon> Logout
     </button>
-    <!-- Edit Profile button to navigate to the Edit Profile route -->
     <button routerLink="/student/edit-profile" class="edit-profile-btn">
       <mat-icon>edit</mat-icon> Edit Profile
     </button>
     <img [src]="profile.profilePicture || defaultPicture" alt="Profile Picture" class="profile-pic" />
-
     <span class="username">{{ profile.username }}</span>
-
   </div>
 </nav>

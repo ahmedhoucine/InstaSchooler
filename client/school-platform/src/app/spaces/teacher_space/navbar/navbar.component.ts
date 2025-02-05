@@ -14,8 +14,8 @@ export class NavbarComponent {
 
   constructor(private router: Router) {}
 
-  logout(): void {
+  onLogout(): void {
     localStorage.removeItem('authToken');
-    this.router.navigate(['/login']);
+    this.router.navigate(['join/']);
   }
 }
