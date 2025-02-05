@@ -27,6 +27,7 @@ export class AddClassComponent implements OnInit {
   ngOnInit(): void {
     this.classForm = this.fb.group({
       title: ['', Validators.required],
+      subject: ['', Validators.required], 
       description: ['', Validators.required], // Added
       niveau: ['1', Validators.required], // Changed to string
       teacher: ['', Validators.required],
