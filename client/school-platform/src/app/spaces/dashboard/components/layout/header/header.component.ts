@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarService } from 'src/app/spaces/dashboard/services/sidebar/sidebar.service';
 import { HeaderStateService } from 'src/app/spaces/dashboard/services/header-state.service';
+import { ReportService } from 'src/app/spaces/dashboard/services/report.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private sidebarService: SidebarService,
-    private headerState: HeaderStateService
+    private headerState: HeaderStateService,
+    private reportService: ReportService
   ) {}
 
   ngOnInit() {
@@ -23,5 +25,8 @@ export class HeaderComponent implements OnInit {
 
   toggleSidebar() {
     this.sidebarService.toggleSidebar();
+  }
+  generateReport(): void {
+    this.reportService.triggerGenerateReport();
   }
 }
