@@ -63,9 +63,9 @@ export class PlanningService {
     niveau: number,
     file?: Express.Multer.File,
   ): Promise<Planning> {
-    // Check if the niveau already exists in another planning
+    // Exclude the planning with the given id from the duplicate check
     const existingPlanningWithNewNiveau = await this.planningModel
-      .findOne({ niveau })
+      .findOne({ niveau, id: { $ne: id } })
       .exec();
     if (existingPlanningWithNewNiveau) {
       throw new Error(

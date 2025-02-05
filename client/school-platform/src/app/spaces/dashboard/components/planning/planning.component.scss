@@ -1,3 +1,9 @@
+// planning.component.scss
+
+// Colors and variables
+$primary-color: #27274B;
+$secondary-color: #A50133;
+
 .planning-image {
   width: 300px;
   height: 200px;
@@ -5,8 +11,6 @@
   border-radius: 8px;
   border: 1px solid #e0e0e0;
 }
-$primary-color: #27274B;
-$secondary-color: #A50133;
 
 /* Header Styles */
 .students-header {
@@ -50,15 +54,15 @@ $secondary-color: #A50133;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   width: 100%;
   box-sizing: border-box;
-
-
 }
+
 .section-title {
   color: $secondary-color;
   margin-bottom: 1.5rem;
   font-weight: 500;
   font-size: 1.25rem;
 }
+
 .form-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -140,7 +144,7 @@ select.neumorphic-input {
   background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 
   th {
@@ -166,6 +170,7 @@ select.neumorphic-input {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
     img {
       display: block;
       margin: 0 auto;
