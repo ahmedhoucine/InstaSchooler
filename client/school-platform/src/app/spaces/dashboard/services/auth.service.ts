@@ -30,7 +30,13 @@ export class AuthService {
     this.router.navigate(['join/']); // Redirect to login page
   }
 
+  // Check if user is authenticated
   isAuthenticated(): boolean {
     return !!localStorage.getItem('access_token');
+  }
+
+  // Get the current token from localStorage
+  getToken(): string | null {
+    return localStorage.getItem('access_token');
   }
 }

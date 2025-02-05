@@ -43,7 +43,7 @@ export class StudentController {
   }
 
   //count of students
-  @Get('/count')
+  @Get('count')
   async getStudentsNumber() {
     return await this.studentService.getStudentCount();
   }

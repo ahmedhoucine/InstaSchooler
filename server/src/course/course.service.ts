@@ -31,6 +31,10 @@ export class CourseService {
     return this.courseModel.countDocuments({ teacher: teacherId }).exec();
   }
 
+  async countAllCourses(): Promise<number> {
+    return this.courseModel.countDocuments().exec();
+  }
+
   async allcourses(): Promise<Course[]> {
     return this.courseModel.find().exec();
   }

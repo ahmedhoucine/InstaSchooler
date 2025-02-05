@@ -83,6 +83,12 @@ export class CourseController {
     return this.courseService.allcourses();
   }
 
+  @Get('total-count')
+  async getTotalCourseCount(): Promise<{ count: number }> {
+    const count = await this.courseService.countAllCourses();
+    return { count };
+  }
+
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   async deleteCourse(@Param('id') id: string): Promise<void> {

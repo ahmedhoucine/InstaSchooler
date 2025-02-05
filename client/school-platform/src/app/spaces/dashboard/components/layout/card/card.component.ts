@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnInit, OnChanges {
   @Input() icon: string = '';
   @Input() count: number = 0;
   @Input() title: string = '';
@@ -18,8 +18,15 @@ export class CardComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.animateCount();
     this.setButtonIcon();
+    this.animateCount();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['count']) {
+      this.animatedCount = 0;
+      this.animateCount();
+    }
   }
 
   animateCount() {
@@ -70,7 +77,7 @@ export class CardComponent implements OnInit {
         break;
       case 'Unpaid Students':
         // this.router.navigate(['/dashboard/student/unpaid-students']);
-        console.log("Redirecting to warning form")
+        console.log("Redirecting to warning form");
         break;
       default:
         console.log('No action defined for this card.');

@@ -203,6 +203,10 @@ INSTASCHOOLER TEAM`,
     return await this.teacherModel.find().exec();
   }
 
+  async getTeacherCount(): Promise<number> {
+    return this.teacherModel.countDocuments();
+  }
+  
   async getTeacherById(id: string): Promise<Teacher> {
     const teacher = await this.teacherModel.findById(id).exec();
     if (!teacher) {

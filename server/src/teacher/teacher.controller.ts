@@ -84,6 +84,11 @@ export class TeacherController {
     createTeacher(@Body() createTeacherDto: CreateTeacherDto) {
         return this.teacherService.createTeacher(createTeacherDto);
     }
+    @Get('count')
+    async getTeacherCount(): Promise<number> {
+    return this.teacherService.getTeacherCount();
+    }
+
 
     // Récupérer tous les profs
     @Get('all-teachers')
