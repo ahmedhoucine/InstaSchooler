@@ -36,6 +36,7 @@ import { SuccessDialogComponent } from './components/layout/success-dialog/succe
 import { ErrorDialogComponent } from './components/layout/error-dialog/error-dialog.component';
 import { ConfirmationDialogComponent } from './components/layout/confirmation-dialog/confirmation-dialog.component';
 import { EditTeacherComponent } from './components/teacher/editteacher/editteacher.component';
+import { ValidationMessagesComponent } from './components/validation-messages/validation-messages.component';
 
 
 
@@ -58,6 +59,7 @@ import { EditTeacherComponent } from './components/teacher/editteacher/editteach
     ErrorDialogComponent,
     ConfirmationDialogComponent,
     EditTeacherComponent,
+    ValidationMessagesComponent,
 
   ],
   imports: [

@@ -5,3 +5,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.error-messages {
+  color: #d32f2f;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  min-height: 1.5em;
+}

@@ -99,7 +99,13 @@
   margin-top: 2rem;
 }
 
-/* Responsive Design */
+.error-messages {
+  color: #d32f2f;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  min-height: 1.5em;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
