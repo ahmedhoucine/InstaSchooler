@@ -19,13 +19,13 @@ export class CardComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.setButtonIcon();
-    this.animateCount();  // Trigger animation on init
+    this.animateCount();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['count']) {
-      this.animatedCount = 0;  // Reset animation
-      this.animateCount();      // Trigger animation again
+      this.animatedCount = 0;
+      this.animateCount();
     }
   }
 

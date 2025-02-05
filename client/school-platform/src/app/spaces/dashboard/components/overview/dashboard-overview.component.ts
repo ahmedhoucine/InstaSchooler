@@ -13,7 +13,7 @@ export class DashboardOverviewComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private changeDetectorRef: ChangeDetectorRef // Inject ChangeDetectorRef directly here
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class DashboardOverviewComponent implements OnInit {
     this.dashboardService.getCourseCount().subscribe({
       next: (count: number) => {
         this.numberOfCourses = count;
-        this.changeDetectorRef.detectChanges();  // Manually trigger change detection
+        this.changeDetectorRef.detectChanges();
       },
       error: (error: any) => console.error('Error fetching courses:', error),
     });
@@ -33,7 +33,7 @@ export class DashboardOverviewComponent implements OnInit {
     this.dashboardService.getStudentCount().subscribe({
       next: (count: number) => {
         this.numberOfStudents = count;
-        this.changeDetectorRef.detectChanges();  // Manually trigger change detection
+        this.changeDetectorRef.detectChanges();
       },
       error: (error: any) => console.error('Error fetching students:', error),
     });
@@ -41,7 +41,7 @@ export class DashboardOverviewComponent implements OnInit {
     this.dashboardService.getTeacherCount().subscribe({
       next: (count: number) => {
         this.numberOfTeachers = count;
-        this.changeDetectorRef.detectChanges();  // Manually trigger change detection
+        this.changeDetectorRef.detectChanges();
       },
       error: (error: any) => console.error('Error fetching teachers:', error),
     });
