@@ -16,6 +16,6 @@ export class NavbarComponent {
 
   onLogout(): void {
     localStorage.removeItem('authToken');
-    this.router.navigate(['join/']);
+    this.router.navigate(['/join']);
   }
 }
