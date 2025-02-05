@@ -1,7 +1,17 @@
 <div class="absence-container">
-    <h3>Absentees (Current Month)</h3>
-    <div class="absence">
-      <p>Display the absence</p>
-    </div>
-  </div>
-  
+  <h3>Absence Statistics</h3>
+  <table class="absence-table">
+    <thead>
+      <tr>
+        <th>Level</th>
+        <th>Number of Absences</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stat of absenceStats">
+        <td>Level {{ stat.niveau }}</td>
+        <td>{{ stat.absences }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

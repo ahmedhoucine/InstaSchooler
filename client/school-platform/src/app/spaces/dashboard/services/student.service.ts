@@ -31,4 +31,7 @@ export class StudentService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  getAbsenceStats(): Observable<{ niveau: number; absences: number }[]> {
+    return this.http.get<{ niveau: number; absences: number }[]>(`${this.apiUrl}/absence-stats`);
+  }
 }
