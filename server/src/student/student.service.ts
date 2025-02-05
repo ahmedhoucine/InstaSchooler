@@ -110,7 +110,7 @@ export class StudentService {
     return student;
   }
 
-  //student count 
+  //student count
   async getStudentCount(): Promise<number> {
     return await this.studentModel.countDocuments();
   }
@@ -144,7 +144,10 @@ export class StudentService {
     const niveaux = [1, 2, 3, 4];
     const stats = await Promise.all(
       niveaux.map(async (niveau) => {
-        const absences = await this.studentModel.countDocuments({ niveau, status: 'Absent' });
+        const absences = await this.studentModel.countDocuments({
+          niveau,
+          status: 'Absent',
+        });
         return { niveau, absences };
       }),
     );

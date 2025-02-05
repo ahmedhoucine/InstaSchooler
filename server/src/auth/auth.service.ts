@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Student } from 'src/student/schema/student.schema';
@@ -11,14 +15,12 @@ import { AdminLoginDto } from './dto/admin-login.dto';
 @Injectable()
 export class AuthService {
   adminLogin(loginDto: AdminLoginDto) {
-      throw new Error('Method not implemented.');
+    throw new Error('Method not implemented.');
   }
   constructor(
     @InjectModel(Student.name) private userModel: Model<Student>,
     private jwtService: JwtService,
   ) {}
-
-
 
   async login(loginDto: LoginDto): Promise<{ token: string }> {
     const { email, password } = loginDto;
@@ -34,14 +36,17 @@ export class AuthService {
     const isPasswordMatched = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatched) {
-      console.log('Password mismatch for email:', email);  // Add logging here
+      console.log('Password mismatch for email:', email); // Add logging here
       throw new UnauthorizedException('Invalid email or password');
     }
 
     const token = this.jwtService.sign({ id: user._id });
     return { token };
   }
-  async updateProfile(userId: string, updateProfileDto: UpdateProfileDto): Promise<ProfileResponseDto> {
+  async updateProfile(
+    userId: string,
+    updateProfileDto: UpdateProfileDto,
+  ): Promise<ProfileResponseDto> {
     const user = await this.userModel.findById(userId).exec();
 
     if (!user) {
@@ -50,19 +55,27 @@ export class AuthService {
 
     // Ensure the new password and confirm password match
     if (updateProfileDto.password !== updateProfileDto.confirmPassword) {
-      throw new BadRequestException('Password and confirm password do not match');
+      throw new BadRequestException(
+        'Password and confirm password do not match',
+      );
     }
 
     // Check if current password is provided and valid
     if (updateProfileDto.currentPassword) {
-      const isPasswordValid = await bcrypt.compare(updateProfileDto.currentPassword, user.password);
+      const isPasswordValid = await bcrypt.compare(
+        updateProfileDto.currentPassword,
+        user.password,
+      );
 
       if (!isPasswordValid) {
         throw new BadRequestException('Current password is incorrect');
       }
 
       // If current password is valid, hash the new password
-      updateProfileDto.password = await bcrypt.hash(updateProfileDto.password, 10);
+      updateProfileDto.password = await bcrypt.hash(
+        updateProfileDto.password,
+        10,
+      );
     }
 
     // Proceed to update fields
@@ -106,6 +119,4 @@ export class AuthService {
       profilePicture: user.profilePicture,
     };
   }
-
-
 }

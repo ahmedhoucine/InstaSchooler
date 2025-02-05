@@ -6,7 +6,9 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class TeacherSeeder {
-  constructor(@InjectModel(Teacher.name) private teacherModel: Model<TeacherDocument>) {}
+  constructor(
+    @InjectModel(Teacher.name) private teacherModel: Model<TeacherDocument>,
+  ) {}
 
   async seed(): Promise<void> {
     try {

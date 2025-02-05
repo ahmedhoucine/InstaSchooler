@@ -1,5 +1,5 @@
 <div class="teachers-header">
-  <h2>Teacher Registration</h2>
+  <h2>Edit Teacher</h2>
   <button mat-flat-button class="neumorphic-button" routerLink="/dashboard/teacher/listteachers">
     <mat-icon>arrow_back</mat-icon>
     Back to List
@@ -21,6 +21,11 @@
           <input id="lastName" formControlName="lastName" class="neumorphic-input">
         </div>
       </div>
+    </div>
+
+    <!-- Contact Details Section -->
+    <div class="form-section">
+      <h3 class="section-title">Contact Details</h3>
       <div class="form-row">
         <div class="form-group">
           <label for="email">Email *</label>
@@ -33,12 +38,12 @@
       </div>
     </div>
 
-    <!-- Subject Section -->
+    <!-- Professional Details Section -->
     <div class="form-section">
-      <h3 class="section-title">Subject (Matiere)</h3>
+      <h3 class="section-title">Professional Details</h3>
       <div class="form-row">
         <div class="form-group">
-          <label for="matiere">Subject *</label>
+          <label for="matiere">Subject (Matiere) *</label>
           <select id="matiere" formControlName="matiere" class="neumorphic-input">
             <option value="">Select Subject</option>
             <option *ngFor="let subject of matiereOptions" [value]="subject">
@@ -46,13 +51,6 @@
             </option>
           </select>
         </div>
-      </div>
-    </div>
-
-    <!-- Employment Information -->
-    <div class="form-section">
-      <h3 class="section-title">Employment Information</h3>
-      <div class="form-row">
         <div class="form-group radio-group">
           <label>Paid *</label>
           <div class="radio-options">
@@ -65,9 +63,10 @@
       </div>
     </div>
 
+    <!-- Submit Button Section -->
     <div class="form-actions">
       <button mat-flat-button type="submit" class="neumorphic-button">
-        Create Teacher
+        Update Teacher
       </button>
     </div>
   </form>

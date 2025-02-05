@@ -7,6 +7,7 @@ import { AddStudentComponent } from './components/student/addstudent/addstudent.
 import { ListStudentsComponent } from './components/student/liststudents/liststudents.component';
 import { AddTeacherComponent } from './components/teacher/addteacher/addteacher.component';
 import { ListTeachersComponent } from './components/teacher/listteachers/listteachers.component';
+import { EditTeacherComponent } from './components/teacher/editteacher/editteacher.component';
 import { ListClassesComponent } from './components/class/listclasses/listclasses.component';
 import { EditstudentComponent } from './components/student/editstudent/editstudent.component';
 import { DashboardLoginComponent } from './components/auth/login/dashboard-login.component';
@@ -59,6 +60,7 @@ const routes: Routes = [
         children: [
           { path: 'addteacher', component: AddTeacherComponent },
           { path: 'listteachers', component: ListTeachersComponent },
+          { path: 'editteacher', component: EditTeacherComponent },
         ],
       },
       {

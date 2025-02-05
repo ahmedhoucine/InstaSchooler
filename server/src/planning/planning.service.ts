@@ -1,4 +1,3 @@
-
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -9,15 +8,20 @@ import { Student, StudentDocument } from 'src/student/schema/student.schema';
 @Injectable()
 export class PlanningService {
   constructor(
-    @InjectModel(Planning.name) private readonly planningModel: Model<PlanningDocument>,
+    @InjectModel(Planning.name)
+    private readonly planningModel: Model<PlanningDocument>,
 
-        @InjectModel(Student.name) private studentModel: Model<StudentDocument>,
-    
+    @InjectModel(Student.name) private studentModel: Model<StudentDocument>,
   ) {}
 
   // Create Planning (Ensure only one planning per niveau)
-  async createPlanning(level: number, file: Express.Multer.File): Promise<Planning> {
-    const existingPlanning = await this.planningModel.findOne({ niveau: level }).exec();
+  async createPlanning(
+    level: number,
+    file: Express.Multer.File,
+  ): Promise<Planning> {
+    const existingPlanning = await this.planningModel
+      .findOne({ niveau: level })
+      .exec();
     if (existingPlanning) {
       throw new Error(`A planning already exists for niveau ${level}`);
     }
@@ -38,11 +42,11 @@ export class PlanningService {
     if (!student) {
       throw new NotFoundException('Student not found');
     }
-  
+
     // Find the planning that matches the student's niveau
     return this.planningModel.findOne({ niveau: student.niveau }).exec();
   }
-  
+
   // Get all Plannings
   async getAllPlannings(): Promise<Planning[]> {
     return this.planningModel.find().exec();
@@ -54,11 +58,19 @@ export class PlanningService {
   }
 
   // Update Planning by ID
-  async updatePlanning(id: string, niveau: number, file?: Express.Multer.File): Promise<Planning> {
+  async updatePlanning(
+    id: string,
+    niveau: number,
+    file?: Express.Multer.File,
+  ): Promise<Planning> {
     // Check if the niveau already exists in another planning
-    const existingPlanningWithNewNiveau = await this.planningModel.findOne({ niveau }).exec();
+    const existingPlanningWithNewNiveau = await this.planningModel
+      .findOne({ niveau })
+      .exec();
     if (existingPlanningWithNewNiveau) {
-      throw new Error(`A planning already exists for niveau ${niveau}. You cannot change to this niveau.`);
+      throw new Error(
+        `A planning already exists for niveau ${niveau}. You cannot change to this niveau.`,
+      );
     }
 
     const updateData: any = { niveau };
@@ -70,7 +82,7 @@ export class PlanningService {
     const updatedPlanning = await this.planningModel.findOneAndUpdate(
       { id },
       updateData,
-      { new: true }
+      { new: true },
     );
     if (!updatedPlanning) {
       throw new Error(`Planning with ID ${id} not found`);

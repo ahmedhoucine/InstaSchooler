@@ -2,13 +2,13 @@ import {
   Injectable,
   NotFoundException,
   UnauthorizedException,
-  BadRequestException,
   ConflictException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Teacher, TeacherDocument } from './teacher.schema';
 import * as bcrypt from 'bcrypt';
+import * as nodemailer from 'nodemailer';
+import { Teacher, TeacherDocument } from './teacher.schema';
 import { JwtService } from '@nestjs/jwt';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
@@ -16,121 +16,154 @@ import { UpdateTeacherDto } from './dto/update-teacher.dto';
 @Injectable()
 export class TeacherService {
   constructor(
-    @InjectModel(Teacher.name) private teacherModel: Model<TeacherDocument>,
-    private readonly jwtService: JwtService,
+      @InjectModel(Teacher.name) private teacherModel: Model<TeacherDocument>,
+      private readonly jwtService: JwtService,
   ) {}
 
   async register(teacherData: Partial<Teacher>): Promise<Teacher> {
-    if (!teacherData.password) {
-      throw new BadRequestException('Le mot de passe est obligatoire.');
-    }
-    const hashedPassword = await bcrypt.hash(teacherData.password, 10);
+    // Generate password if not provided
+    const password =
+        teacherData.password ||
+        `${teacherData.firstname}@${teacherData.lastName?.toUpperCase()}`;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const teacher = new this.teacherModel({
       ...teacherData,
       password: hashedPassword,
-      profileImage: teacherData.profilePicture || 'assets/image1.png', // Valeur par défaut
+      profilePicture:
+          teacherData.profilePicture ||
+          'assets/images/default-profile-picture.png',
     });
+
     return teacher.save();
   }
 
-  async validateTeacher(email: string, plainPassword: string): Promise<TeacherDocument> {
-    const teacher = await this.teacherModel.findOne({ email }).exec();
-    if (!teacher) {
-      throw new NotFoundException('Email ou mot de passe incorrect.');
+  async validateTeacher(
+      email: string,
+      plainPassword: string,
+  ): Promise<TeacherDocument> {
+    const teacher = await this.teacherModel
+        .findOne({ email })
+        .select('+password')
+        .exec();
+    if (!teacher || !(await bcrypt.compare(plainPassword, teacher.password))) {
+      throw new UnauthorizedException('Invalid credentials');
     }
-
-    const isPasswordValid = await bcrypt.compare(plainPassword, teacher.password || '');
-    if (!isPasswordValid) {
-      throw new UnauthorizedException('Email ou mot de passe incorrect.');
-    }
-
     return teacher;
   }
 
-  
-
-  
+  async validatePassword(
+      teacherId: string,
+      plainPassword: string,
+  ): Promise<boolean> {
+    const teacher = await this.teacherModel
+        .findById(teacherId)
+        .select('+password')
+        .exec();
+    return teacher ? bcrypt.compare(plainPassword, teacher.password) : false;
+  }
 
   generateToken(payload: any): string {
-    return this.jwtService.sign(payload, { secret: process.env.JWT_SECRET || 'teacher-secret-key' });
+    return this.jwtService.sign(payload, {
+      secret: process.env.JWT_SECRET || 'teacher-secret-key',
+    });
   }
 
-  async validatePassword(teacherId: string, plainPassword: string): Promise<boolean> {
-    const teacher = await this.teacherModel.findById(teacherId).exec();
-    if (!teacher) {
-      throw new NotFoundException('Enseignant non trouvé.');
-    }
-
-    return bcrypt.compare(plainPassword, teacher.password || '');
-  }
-  // Create a teacher and send an email with credentials
   async createTeacher(createTeacherDto: CreateTeacherDto): Promise<Teacher> {
-    // Check if the phone number or email already exists
+    // Normalize email to lowercase
+    const email = createTeacherDto.email.toLowerCase();
+
+    // Check for existing teacher by email or phone
     const existingTeacher = await this.teacherModel.findOne({
-      $or: [
-        { phone: createTeacherDto.phone },
-        { email: createTeacherDto.email },
-      ],
+      $or: [{ phone: createTeacherDto.phone }, { email }],
     });
 
     if (existingTeacher) {
-      throw new ConflictException(
-        'A teacher with this phone number or email already exists.',
-      );
+      // Compare the fields to determine the conflict
+      const emailConflict = existingTeacher.email === email;
+      const phoneConflict = existingTeacher.phone === createTeacherDto.phone;
+
+      if (emailConflict && phoneConflict) {
+        throw new ConflictException(
+            'Teacher with this email and phone number already exists.'
+        );
+      } else if (emailConflict) {
+        throw new ConflictException(
+            'Teacher with this email already exists.'
+        );
+      } else if (phoneConflict) {
+        throw new ConflictException(
+            'Teacher with this phone number already exists.'
+        );
+      } else {
+        // Fallback error message if somehow both conflict checks fail
+        throw new ConflictException(
+            'Teacher with this contact info already exists.'
+        );
+      }
     }
 
-    // Automatically generate the password as 'firstname@LASTNAME'
-    const generatedPassword = `${createTeacherDto.firstname.toLowerCase()}@${createTeacherDto.lastName.toUpperCase()}`;
+    // Generate a password based on teacher's first and last names
+    const generatedPassword = `${createTeacherDto.firstname}@${createTeacherDto.lastName.toUpperCase()}`;
+    const hashedPassword = await bcrypt.hash(generatedPassword, 10);
 
-    // Hash the generated password
-    const hashedPassword = await this.hashPassword(generatedPassword);
-
-    const teacher = new this.teacherModel({
+    const newTeacher = new this.teacherModel({
       ...createTeacherDto,
+      email,
       password: hashedPassword,
     });
 
-    const savedTeacher = await teacher.save();
+    const savedTeacher = await newTeacher.save();
 
-    // Optionally, send a welcome email with the generated password
-    // await this.sendWelcomeEmail(
-    //   createTeacherDto.email,
-    //   createTeacherDto.email,
-    //   generatedPassword,
-    // );
+    // Send welcome email with the generated credentials
+    await this.sendWelcomeEmail(
+        createTeacherDto.email,
+        createTeacherDto.email,
+        generatedPassword
+    );
 
     return savedTeacher;
   }
 
-  // Helper method to send the email
-  // private async sendWelcomeEmail(
-  //   recipient: string,
-  //   email: string,
-  //   password: string,
-  // ): Promise<void> {
-  //   const transporter = nodemailer.createTransport({
-  //     service: 'Gmail',
-  //     auth: {
-  //       user: 'instaschooler1@gmail.com',
-  //       pass: '',
-  //     },
-  //   });
+  // Helper method to send a welcome email with credentials
+  private async sendWelcomeEmail(
+      recipient: string,
+      email: string,
+      password: string,
+  ): Promise<void> {
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465, // secure SMTP port for Gmail
+      secure: true,
+      auth: {
+        user: 'evengbook@gmail.com',
+        pass: 'mzat hrtf uxro qczv',
+      },
+    });
 
-  //   const mailOptions = {
-  //     from: 'instaschooler1@gmail.com',
-  //     to: recipient,
-  //     subject: 'Welcome to Our Platform',
-  //     text: `Welcome to our platform!\n\nYour credentials are as follows:\nEmail: ${email}\nPassword: ${password}\n\nPlease keep your credentials secure.`,
-  //   };
+    const mailOptions = {
+      from: '"Instaschooler Team" <evengbook@gmail.com>',
+      to: recipient,
+      subject: 'Welcome to Our Platform',
+      text: `Welcome to our platform!
 
-  //   try {
-  //     await transporter.sendMail(mailOptions);
-  //     console.log('Email sent successfully!');
-  //   } catch (error) {
-  //     console.error('Error sending email:', error);
-  //     throw new Error('Failed to send welcome email.');
-  //   }
-  // }
+Your credentials are as follows:
+Email: ${email}
+Password: ${password}
+
+Please keep your credentials secure.
+
+INSTASCHOOLER TEAM`,
+    };
+
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      console.log('Email sent successfully!', info);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      throw new Error('Failed to send welcome email.');
+    }
+  }
 
   // Hash password using bcrypt
   private async hashPassword(password: string): Promise<string> {
@@ -138,24 +171,19 @@ export class TeacherService {
     return bcrypt.hash(password, salt);
   }
 
-  // Update a teacher
   async updateTeacher(
-    id: string,
-    updateTeacherDto: UpdateTeacherDto,
+      id: string,
+      updateTeacherDto: UpdateTeacherDto,
   ): Promise<Teacher> {
     if (updateTeacherDto.password) {
       updateTeacherDto.password = await this.hashPassword(
-        updateTeacherDto.password,
+          updateTeacherDto.password,
       );
     }
 
-    const teacher = await this.teacherModel.findByIdAndUpdate(
-      id,
-      updateTeacherDto,
-      {
-        new: true,
-      },
-    );
+    const teacher = await this.teacherModel
+        .findByIdAndUpdate(id, updateTeacherDto, { new: true })
+        .exec();
 
     if (!teacher) {
       throw new NotFoundException(`Teacher with ID ${id} not found.`);
@@ -164,7 +192,6 @@ export class TeacherService {
     return teacher;
   }
 
-  // Delete a teacher
   async deleteTeacher(id: string): Promise<void> {
     const result = await this.teacherModel.deleteOne({ _id: id });
     if (result.deletedCount === 0) {
@@ -172,12 +199,10 @@ export class TeacherService {
     }
   }
 
-  // Get all teachers
   async getAllTeachers(): Promise<Teacher[]> {
     return await this.teacherModel.find().exec();
   }
 
-  // Get a teacher by ID
   async getTeacherById(id: string): Promise<Teacher> {
     const teacher = await this.teacherModel.findById(id).exec();
     if (!teacher) {

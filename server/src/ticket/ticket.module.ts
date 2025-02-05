@@ -5,7 +5,9 @@ import { TicketService } from './ticket.service';
 import { Ticket, TicketSchema } from './ticket.schema';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Ticket.name, schema: TicketSchema }])],
+  imports: [
+    MongooseModule.forFeature([{ name: Ticket.name, schema: TicketSchema }]),
+  ],
   controllers: [TicketController],
   providers: [TicketService],
 })

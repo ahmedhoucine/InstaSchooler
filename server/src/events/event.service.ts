@@ -30,9 +30,10 @@ export class EventService {
     const savedEvent = await event.save();
 
     // Ensure _id is treated correctly as ObjectId (using .toString() for conversion to string)
-    const eventId = savedEvent._id instanceof Types.ObjectId
-      ? savedEvent._id
-      : new Types.ObjectId(savedEvent._id.toString());
+    const eventId =
+      savedEvent._id instanceof Types.ObjectId
+        ? savedEvent._id
+        : new Types.ObjectId(savedEvent._id.toString());
 
     // Add the event to the student's list of events
     student.events.push(eventId);
@@ -41,16 +42,15 @@ export class EventService {
     return savedEvent;
   }
   // Get events by userId
-async getEventsByUserId(userId: string): Promise<MyEventDocument[]> {
-  const student = await this.studentModel.findById(userId).exec();
-  if (!student) {
-    throw new NotFoundException('Student not found');
+  async getEventsByUserId(userId: string): Promise<MyEventDocument[]> {
+    const student = await this.studentModel.findById(userId).exec();
+    if (!student) {
+      throw new NotFoundException('Student not found');
+    }
+
+    // Fetch events associated with the student
+    return await this.eventModel.find({ student: userId }).exec();
   }
-
-  // Fetch events associated with the student
-  return await this.eventModel.find({ student: userId }).exec();
-}
-
 
   // Get all events
   async getAllEvents(): Promise<MyEventDocument[]> {
@@ -58,8 +58,15 @@ async getEventsByUserId(userId: string): Promise<MyEventDocument[]> {
   }
 
   // Update an event
-  async updateEvent(id: string, updateData: Partial<CreateEventDto>): Promise<MyEventDocument> {
-    const updatedEvent = await this.eventModel.findByIdAndUpdate(id, updateData, { new: true });
+  async updateEvent(
+    id: string,
+    updateData: Partial<CreateEventDto>,
+  ): Promise<MyEventDocument> {
+    const updatedEvent = await this.eventModel.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true },
+    );
     if (!updatedEvent) {
       throw new NotFoundException(`Event with ID ${id} not found.`);
     }

@@ -7,12 +7,10 @@ import { Student, StudentSchema } from '../student/schema/student.schema';
 import { CourseController } from './course.controller';
 import { StudentModule } from '../student/student.module'; // Import du module Student
 
-
 @Module({
   imports: [
-   
-      MongooseModule.forFeature([{ name: 'Course', schema: CourseSchema }]),
-      StudentModule, // Ajoutez StudentModule ici
+    MongooseModule.forFeature([{ name: 'Course', schema: CourseSchema }]),
+    StudentModule, // Ajoutez StudentModule ici
 
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'teacher-secret-key',

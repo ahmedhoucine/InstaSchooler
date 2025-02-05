@@ -6,7 +6,9 @@ import * as nodemailer from 'nodemailer';
 
 @Injectable()
 export class TicketService {
-  constructor(@InjectModel(Ticket.name) private ticketModel: Model<TicketDocument>) {}
+  constructor(
+    @InjectModel(Ticket.name) private ticketModel: Model<TicketDocument>,
+  ) {}
 
   async createTicket(ticketData: Partial<Ticket>): Promise<Ticket> {
     const newTicket = new this.ticketModel(ticketData);

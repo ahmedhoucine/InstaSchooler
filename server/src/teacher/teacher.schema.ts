@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-@Schema({ timestamps: true })
+@Schema({ timestamps: true, autoIndex: false })
 export class Teacher {
   @Prop({ required: true })
   firstname: string;
@@ -16,7 +16,7 @@ export class Teacher {
   phone: string;
 
   @Prop({ required: true })
-  password: string;
+  password: string; // <-- Ensure this exists
 
   @Prop({ default: 'assets/images/default-profile-picture.png' })
   profilePicture: string;
@@ -28,5 +28,5 @@ export class Teacher {
   isPaid: boolean;
 }
 
-export type TeacherDocument = Teacher & Document & { _id: string }; // Important pour le type _id
+export type TeacherDocument = Teacher & Document & { _id: string };
 export const TeacherSchema = SchemaFactory.createForClass(Teacher);

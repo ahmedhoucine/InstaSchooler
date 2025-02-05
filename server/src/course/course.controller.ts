@@ -24,7 +24,7 @@ export class CourseController {
   async create(
     @Request() req,
     @Body() courseData: any,
-    @UploadedFile() file?: Express.Multer.File
+    @UploadedFile() file?: Express.Multer.File,
   ) {
     const teacherId = req.user.id;
     const course = {
@@ -48,7 +48,7 @@ export class CourseController {
     const studentId = req.user.id; // Récupère l'ID de l'étudiant depuis le JWT
     return this.courseService.getCoursesForStudent(studentId);
   }
-  
+
   @UseGuards(JwtAuthGuard)
   @Get('by-teacher')
   async getCoursesByTeacher(@Request() req) {
@@ -67,4 +67,3 @@ export class CourseController {
     return this.courseService.deleteCourse(id);
   }
 }
-

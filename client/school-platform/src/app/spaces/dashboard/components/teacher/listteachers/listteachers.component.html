@@ -27,6 +27,9 @@
       <td>{{ teacher.phone }}</td>
       <td>
         <div class="actions">
+          <button mat-icon-button (click)="editTeacher(teacher)" matTooltip="Edit Teacher">
+            <mat-icon>edit</mat-icon>
+          </button>
           <button mat-icon-button (click)="deleteTeacher(teacher._id)" matTooltip="Delete Teacher">
             <mat-icon>delete</mat-icon>
           </button>
