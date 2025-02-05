@@ -1,38 +1,26 @@
+/* Sidebar Styling */
 .sidebar {
   width: 250px;
+  height: 100vh;
   background: linear-gradient(135deg, #020e2f, #445573);
   color: #ffffff;
   font-family: 'Roboto', sans-serif;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   position: fixed;
-  top: 60px; /* Place la Sidebar sous la Navbar */
-  left: 0;
-  height: calc(100vh - 60px); /* Ajuste la hauteur en fonction de la Navbar */
-  transition: width 0.3s ease;
+  padding-top: 30px;
+  transition: width 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-
-  &.collapsed {
-    width: 70px; /* Réduit la largeur */
-  }
+  border-radius: 10px;
+  margin-left: -250px;
 }
 
-.sidebar-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  position: relative;
-}
-
-.logo {
-  width: 100px;
-}
-
+/* Modern collapse button */
 .sidebar-toggle {
   position: absolute;
-  top: 10px; /* Place le bouton en haut de l'image */
+  top: 20px;
   left: 15px;
   background: transparent;
   border: none;
@@ -55,7 +43,7 @@
 }
 
 .hamburger-icon .line {
-  background-color: white;
+  background-color: #fff;
   height: 4px;
   width: 100%;
   transition: all 0.3s ease-in-out;
@@ -74,37 +62,84 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
+/* Sidebar List Styling */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  
+  margin-top: 50px; /* Increase the margin to move buttons down */
 
-mat-nav-list a {
+}
+
+.sidebar ul li {
+  padding: 15px 25px;
+  margin-bottom: 15px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
-  padding: 15px;
-  color: #ffffff;
+  transition: background-color 0.3s ease, transform 0.2s ease, padding-left 0.3s ease;
+}
+
+.sidebar ul li a {
   text-decoration: none;
-  gap: 15px;
-  transition: background-color 0.3s ease, padding-left 0.3s ease;
-}
-
-mat-nav-list a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding-left: 20px;
-}
-
-mat-nav-list a mat-icon {
-  font-size: 24px;
-  min-width: 40px; /* Alignement des icônes */
-  text-align: center;
-  color: #ffff;
-}
-
-mat-nav-list a span {
-  transition: opacity 0.3s ease;
-  opacity: 1;
   color: #ffffff;
-
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: color 0.3s ease;
+  
 }
 
-.sidebar.collapsed mat-nav-list a span {
-  opacity: 0; /* Cache le texte lorsque replié */
-  pointer-events: none;
+.sidebar ul li a mat-icon {
+  font-size: 25px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar ul li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(10px);
+  padding-left: 30px;
+}
+
+.sidebar ul li.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #1e2a47;
+  border-left: 4px solid #6a74d5;
+  transform: scale(1.05);
+}
+
+.sidebar ul li.active:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: none;
+}
+
+/* Sidebar collapsed state */
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.collapsed .sidebar-text {
+  display: none; /* Hide text when collapsed */
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+    padding: 15px;
+  }
+
+  .sidebar ul li {
+    padding: 10px 15px;
+  }
+
+  .sidebar ul li a {
+    font-size: 14px;
+    justify-content: center;
+  }
+
+  .sidebar ul li a mat-icon {
+    font-size: 24px;
+  }
 }
