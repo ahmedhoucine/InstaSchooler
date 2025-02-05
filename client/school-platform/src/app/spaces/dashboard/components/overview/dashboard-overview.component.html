@@ -1,27 +1,22 @@
 <div class="dashboard-overview">
-  <div class="dashboard-cards">
-    <app-card
-      [icon]="'people_outline'"
-      [count]="totalStudents"
-      [title]="'Total Students'">
-    </app-card>
-    <app-card
-      [icon]="'person_outline'"
-      [count]="totalTeachers"
-      [title]="'Total Teachers'">
-    </app-card>
-    <app-card
-      [icon]="'class'"
-      [count]="totalClasses"
-      [title]="'Total Courses'">
-    </app-card>
-    <app-card
-      [icon]="'money_off'"
-      [count]="unpaidStudents"
-      [title]="'Unpaid Students'">
-    </app-card>
-  </div>
+    <div class="dashboard-cards">
+      <app-card
+        [icon]="'people_outline'"
+        [count]="numberOfStudents"
+        [title]="'Total Students'">
+      </app-card>
+      <app-card
+        [icon]="'person_outline'"
+        [count]="numberOfTeachers"
+        [title]="'Total Teachers'">
+      </app-card>
+      <app-card
+        [icon]="'class'"
+        [count]="numberOfCourses"
+        [title]="'Total Courses'">
+      </app-card>
+    </div>
 
-  <app-calendar></app-calendar>
-  <app-absence></app-absence>
-</div>
+    <app-calendar></app-calendar>
+    <app-absence></app-absence>
+  </div>
