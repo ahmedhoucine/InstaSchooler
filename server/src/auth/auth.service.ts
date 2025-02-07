@@ -48,62 +48,50 @@ export class AuthService {
     updateProfileDto: UpdateProfileDto,
   ): Promise<ProfileResponseDto> {
     const user = await this.userModel.findById(userId).exec();
-
+  
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
-
-    // Ensure the new password and confirm password match
-    if (updateProfileDto.password !== updateProfileDto.confirmPassword) {
-      throw new BadRequestException(
-        'Password and confirm password do not match',
-      );
-    }
-
-    // Check if current password is provided and valid
-    if (updateProfileDto.currentPassword) {
-      const isPasswordValid = await bcrypt.compare(
-        updateProfileDto.currentPassword,
-        user.password,
-      );
-
+  
+    // Ensure password update only when current password is provided
+    if (updateProfileDto.password || updateProfileDto.confirmPassword) {
+      if (!updateProfileDto.currentPassword) {
+        throw new BadRequestException('Current password is required to update the password');
+      }
+  
+      if (updateProfileDto.password !== updateProfileDto.confirmPassword) {
+        throw new BadRequestException('Password and confirm password do not match');
+      }
+  
+      const isPasswordValid = await bcrypt.compare(updateProfileDto.currentPassword, user.password);
       if (!isPasswordValid) {
         throw new BadRequestException('Current password is incorrect');
       }
-
+  
       // If current password is valid, hash the new password
-      updateProfileDto.password = await bcrypt.hash(
-        updateProfileDto.password,
-        10,
-      );
+      user.password = await bcrypt.hash(updateProfileDto.password, 10);
     }
-
+  
     // Proceed to update fields
     if (updateProfileDto.username) {
       user.username = updateProfileDto.username;
     }
-
-    if (updateProfileDto.password) {
-      user.password = updateProfileDto.password; // Ensure this is the hashed password
-      console.log(updateProfileDto.profilePicture);
-    }
-
+  
     if (updateProfileDto.profilePicture) {
       user.profilePicture = updateProfileDto.profilePicture;
     }
-
+  
     // Save the updated user to the database
     await user.save();
-
-    // Return the updated profile as a ProfileResponseDto
+  
     return {
-      userId: user._id.toString(), // Return the MongoDB _id as userId
+      userId: user._id.toString(),
       username: user.username,
       email: user.email,
       profilePicture: user.profilePicture,
     };
   }
-
+  
   async getProfile(userId: string): Promise<ProfileResponseDto> {
     const user = await this.userModel.findById(userId).exec();
 
