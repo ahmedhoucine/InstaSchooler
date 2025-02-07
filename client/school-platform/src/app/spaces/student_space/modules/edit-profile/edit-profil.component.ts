@@ -20,9 +20,9 @@ export class EditProfileComponent implements OnInit {
   defaultPicture = 'https://i.pinimg.com/736x/a4/8a/ca/a48aca275e3dbe9a00d8f90e095f25ae.jpg';
   loading = false;
 
-  alertMessage: string = '';
-  alertType: 'success' | 'error' = 'error';
   showAlert: boolean = false;
+  alertMessage: string = '';
+  alertType: 'success' | 'error' = 'error'; // Fix: Restrict allowed values
 
   constructor(private profileService: ProfileService) {}
 
@@ -68,12 +68,15 @@ export class EditProfileComponent implements OnInit {
     this.profileService.loadProfile();
   }
 
-  private showAlertMessage(message: string, type: 'success' | 'error') {
+  // Fix: Keep only ONE showAlertMessage function
+  showAlertMessage(message: string, type: 'success' | 'error') {
     this.alertMessage = message;
     this.alertType = type;
+    this.showAlert = true;
 
+    // Hide alert after 3 seconds
     setTimeout(() => {
-      this.showAlert = true;
-    }, 0);
+      this.showAlert = false;
+    }, 3000);
   }
 }

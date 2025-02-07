@@ -1,9 +1,14 @@
 <div class="edit-profile-container">
-  <!-- Alert Component -->
-  <app-alert *ngIf="showAlert" [message]="alertMessage" [type]="alertType"></app-alert>
-
   <form (ngSubmit)="onSubmit()" class="form-container">
     <mat-card class="profile-card">
+      
+      <!-- Sticky Error Message -->
+      <!-- Sticky Error Message -->
+<div class="alert-container">
+  <app-alert *ngIf="showAlert" [message]="alertMessage" [type]="alertType"></app-alert>
+</div>
+
+
       <div class="profile-picture-container">
         <img [src]="profile.profilePicture || defaultPicture" alt="Profile Picture" class="profile-img" />
         <input type="file" class="file-input" (change)="onFileSelected($event)" accept="image/*" />
@@ -11,42 +16,22 @@
 
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>Username</mat-label>
-        <input
-          matInput
-          type="text"
-          [(ngModel)]="profile.username"
-          name="username"
-        />
+        <input matInput type="text" [(ngModel)]="profile.username" name="username" />
       </mat-form-field>
 
       <mat-form-field class="form-field">
         <mat-label>Current Password</mat-label>
-        <input
-          matInput
-          type="password"
-          [(ngModel)]="profile.currentPassword"
-          name="currentPassword"
-        />
+        <input matInput type="password" [(ngModel)]="profile.currentPassword" name="currentPassword" />
       </mat-form-field>
 
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>New Password</mat-label>
-        <input
-          matInput
-          type="password"
-          [(ngModel)]="profile.password"
-          name="password"
-        />
+        <input matInput type="password" [(ngModel)]="profile.password" name="password" />
       </mat-form-field>
 
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>Confirm Password</mat-label>
-        <input
-          matInput
-          type="password"
-          [(ngModel)]="profile.confirmPassword"
-          name="confirmPassword"
-        />
+        <input matInput type="password" [(ngModel)]="profile.confirmPassword" name="confirmPassword" />
       </mat-form-field>
 
       <div class="buttons-container">
