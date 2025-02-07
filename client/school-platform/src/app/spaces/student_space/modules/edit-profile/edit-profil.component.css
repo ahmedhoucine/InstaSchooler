@@ -11,6 +11,16 @@
  
 }
 
+/* Ensures the alert box stays visible when scrolling */
+.alert-container {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 10; /* Keeps it on top */
+  padding: 10px 0;
+  text-align: center;
+}
+
 
 
 .profile-card {
