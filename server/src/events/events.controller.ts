@@ -16,8 +16,7 @@ import { MyEvent } from './schema/event.schema';
 export class EventsController {
   constructor(private readonly eventService: EventService) {}
 
-  // POST /events - Create a new event
-  // EventsController
+  
 
   @Post()
   async create(@Body() createEventDto: CreateEventDto): Promise<any> {
@@ -40,22 +39,19 @@ export class EventsController {
     }
     return this.eventService.getEventsByUserId(userId);
   }
-  // GET /events - Retrieve all events
   @Get()
   async getAll(): Promise<MyEvent[]> {
     return await this.eventService.getAllEvents();
   }
 
-  // PUT /events/:id - Update an event
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateData: Partial<CreateEventDto>, // Partial DTO for flexibility
+    @Body() updateData: Partial<CreateEventDto>, 
   ): Promise<MyEvent> {
     return await this.eventService.updateEvent(id, updateData);
   }
 
-  // DELETE /events/:id - Delete an event
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<{ message: string }> {
     return await this.eventService.deleteEvent(id);

@@ -2,13 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
-import { Reflector } from '@nestjs/core';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
-    private reflector: Reflector,
   ) {}
 
   canActivate(
@@ -22,8 +20,8 @@ export class JwtAuthGuard implements CanActivate {
     }
 
     try {
-      const user = this.jwtService.verify(token); // Verify the token
-      request.user = user; // Attach user info to request
+      const user = this.jwtService.verify(token); 
+      request.user = user; 
       return true;
     } catch (error) {
       return false;

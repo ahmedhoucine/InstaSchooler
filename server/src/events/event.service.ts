@@ -8,56 +8,48 @@ import { Student, StudentDocument } from 'src/student/schema/student.schema';
 @Injectable()
 export class EventService {
   constructor(
-    @InjectModel(MyEvent.name) private eventModel: Model<MyEventDocument>, // Inject Event model
-    @InjectModel(Student.name) private studentModel: Model<StudentDocument>, // Inject Student model
+    @InjectModel(MyEvent.name) private eventModel: Model<MyEventDocument>, 
+    @InjectModel(Student.name) private studentModel: Model<StudentDocument>, 
   ) {}
 
-  // Create an event
   async createEvent(createEventDto: CreateEventDto): Promise<MyEvent> {
     const { studentId, ...eventData } = createEventDto;
 
-    // Ensure the student exists
+    
     const student = await this.studentModel.findById(studentId);
     if (!student) {
       throw new NotFoundException('Student not found');
     }
 
-    // Create the event
     const event = new this.eventModel({
       ...eventData,
       student: studentId,
     });
     const savedEvent = await event.save();
 
-    // Ensure _id is treated correctly as ObjectId (using .toString() for conversion to string)
     const eventId =
       savedEvent._id instanceof Types.ObjectId
         ? savedEvent._id
         : new Types.ObjectId(savedEvent._id.toString());
 
-    // Add the event to the student's list of events
     student.events.push(eventId);
     await student.save();
 
     return savedEvent;
   }
-  // Get events by userId
   async getEventsByUserId(userId: string): Promise<MyEventDocument[]> {
     const student = await this.studentModel.findById(userId).exec();
     if (!student) {
       throw new NotFoundException('Student not found');
     }
 
-    // Fetch events associated with the student
     return await this.eventModel.find({ student: userId }).exec();
   }
 
-  // Get all events
   async getAllEvents(): Promise<MyEventDocument[]> {
     return await this.eventModel.find().exec();
   }
 
-  // Update an event
   async updateEvent(
     id: string,
     updateData: Partial<CreateEventDto>,
@@ -73,7 +65,6 @@ export class EventService {
     return updatedEvent;
   }
 
-  // Delete an event
   async deleteEvent(id: string): Promise<{ message: string }> {
     const result = await this.eventModel.findByIdAndDelete(id);
     if (!result) {

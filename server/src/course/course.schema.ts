@@ -23,7 +23,7 @@ export class Course {
   pdf: string;
 
   @Prop({ required: true })
-  teacher: string; // ID de l'enseignant
+  teacher: string;
 }
 
 export type CourseDocument = Course & Document;

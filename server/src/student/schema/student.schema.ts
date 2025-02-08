@@ -66,8 +66,7 @@ export class Student extends BaseSchema {
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MyEvent' }] })
   events: Types.ObjectId[];
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }] })
-  courses: Types.ObjectId[];
+  
 }
 
 // Ensure StudentDocument type is defined and exported
