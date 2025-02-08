@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
 })
 export class CourseService {
 
-  private apiUrl = 'http://localhost:3000/courses'; // Adjust the base URL as needed
+  private apiUrl = 'http://localhost:3000/courses'; 
 
   constructor(private http: HttpClient) {}
 
-  // Fetch courses for a specific user by userId
+  
   getAvailableCourses(userId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/available-courses`, {
-      headers: { 'user-id': userId } // Optionally, pass the userId in headers
+      headers: { 'user-id': userId } 
     });
   }
 }

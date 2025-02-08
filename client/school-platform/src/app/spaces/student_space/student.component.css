@@ -1,65 +1,59 @@
-/* Student Layout Wrapper */
 .student-layout {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Full viewport height */
-  overflow: hidden; /* Prevents overflow outside the layout */
+  height: 100vh; 
+  overflow: hidden; 
 }
 
-/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px; /* Adjust as per design */
-  background-color: #f77f00; /* Orange color */
+  height: 60px; 
+  background-color: #f77f00; 
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
 
-/* Body Content Below Navbar */
 .student-body {
   display: flex;
-  margin-top: 60px; /* Push content below navbar */
-  height: calc(100vh - 20px); /* Fill remaining height */
-  overflow: hidden; /* Prevent overflow from spilling out of the main content area */
-  
+  margin-top: 60px; 
+  height: calc(100vh - 20px); 
+  overflow: hidden; 
   
 }
 
-/* Sidebar */
 .sidebar {
   position: fixed;
-  top: 60px; /* Below navbar */
+  top: 60px; 
   left: 0;
-  width: 250px; /* Sidebar width */
-  height: calc(100vh - 60px); /* Sidebar height */
+  width: 250px; 
+  height: calc(100vh - 60px); 
   background-color: #f77f00;
   color: white;
-  overflow-y: auto; /* Add scroll for long sidebar items */
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Optional shadow */
+  overflow-y: auto; 
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); 
 }
 
-/* Main Content Area */
+
 .main-content {
-  margin-left: 250px; /* Leave space for the sidebar */
-  width: calc(100% - 20px); /* Adjust width */
+  margin-left: 250px; 
+  width: calc(100% - 20px); 
   padding: 20px;
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: calc(100vh - 60px); /* Ensure it takes full height minus navbar */
-  overflow-y: auto; /* Scrollable if content overflows */
+  justify-content: center; 
+  align-items: center; 
+  height: calc(100vh - 60px); 
+  overflow-y: auto;
 }
 
-/* Hide scrollbar for the main content */
 .main-content::-webkit-scrollbar {
-  display: none; /* Hide scrollbar in webkit browsers */
+  display: none; 
 }
 

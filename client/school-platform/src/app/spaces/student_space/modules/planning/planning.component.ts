@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { PlanningService } from '../../services/planning.service';  // Assuming you have this service to handle planning
-import { ProfileService } from '../../services/profileEdit.service'; // If you need the profile information
+import { PlanningService } from '../../services/planning.service';  
+import { ProfileService } from '../../services/profileEdit.service'; 
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,22 +9,21 @@ import { Observable } from 'rxjs';
   styleUrls: ['./planning.component.css']
 })
 export class PlanningComponent implements OnInit {
-  planning: any;  // Store the planning object
-  profile$: Observable<any>;  // Profile observable
+  planning: any;  
+  profile$: Observable<any>;  
   
   constructor(
-    private planningService: PlanningService,  // Inject planning service
-    private profileService: ProfileService,  // Inject profile service (if needed)
-    private cdRef: ChangeDetectorRef  // Change detection to update the view
+    private planningService: PlanningService,  
+    private profileService: ProfileService,  
+    private cdRef: ChangeDetectorRef  
   ) {
-    this.profile$ = this.profileService.profile$;  // Observable for profile
+    this.profile$ = this.profileService.profile$; 
   }
 
   ngOnInit(): void {
-    // Subscribe to the profile observable to get the student info
     this.profile$.subscribe(profile => {
       if (profile && profile.userId) {
-        this.loadPlanning(profile.userId);  // Fetch planning using studentId once the profile is available
+        this.loadPlanning(profile.userId);  
       }
     });
   }
@@ -39,13 +38,12 @@ export class PlanningComponent implements OnInit {
 
     this.planningService.getPlanningForStudent(studentId).subscribe(
       (data) => {
-        this.planning = data;  // Store the fetched planning
+        this.planning = data;  
         console.log('Planning retrieved:', this.planning);
-        this.cdRef.detectChanges();  // Trigger view update
+        this.cdRef.detectChanges(); 
       },
       (error) => {
         console.error('Error fetching planning', error);
-        // Optionally, show a user-friendly message to the user
       }
     );
   }

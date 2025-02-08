@@ -36,7 +36,7 @@ export class AuthService {
     const isPasswordMatched = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatched) {
-      console.log('Password mismatch for email:', email); // Add logging here
+      console.log('Password mismatch for email:', email); 
       throw new UnauthorizedException('Invalid email or password');
     }
 
@@ -52,24 +52,29 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
-  
-    if (updateProfileDto.password || updateProfileDto.confirmPassword) {
-      if (!updateProfileDto.currentPassword) {
-        throw new BadRequestException('Current password is required to update the password');
-      }
-  
-      if (updateProfileDto.password !== updateProfileDto.confirmPassword) {
-        throw new BadRequestException('Password and confirm password do not match');
-      }
-  
-      const isPasswordValid = await bcrypt.compare(updateProfileDto.currentPassword, user.password);
+
+    if (updateProfileDto.password !== updateProfileDto.confirmPassword) {
+      throw new BadRequestException(
+        'Password and confirm password do not match',
+      );
+    }
+
+    if (updateProfileDto.currentPassword) {
+      const isPasswordValid = await bcrypt.compare(
+        updateProfileDto.currentPassword,
+        user.password,
+      );
+
       if (!isPasswordValid) {
         throw new BadRequestException('Current password is incorrect');
       }
-  
-      user.password = await bcrypt.hash(updateProfileDto.password, 10);
+
+      updateProfileDto.password = await bcrypt.hash(
+        updateProfileDto.password,
+        10,
+      );
     }
-  
+
     if (updateProfileDto.username) {
       user.username = updateProfileDto.username;
     }
@@ -77,7 +82,7 @@ export class AuthService {
     if (updateProfileDto.profilePicture) {
       user.profilePicture = updateProfileDto.profilePicture;
     }
-  
+
     await user.save();
   
     return {
