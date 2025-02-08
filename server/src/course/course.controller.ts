@@ -24,17 +24,14 @@ export class CourseController {
   @Post()
   @UseInterceptors(
     FileInterceptor('pdf', {
-      // Use diskStorage to configure the storage and filename
       storage: diskStorage({
-        destination: './uploads', // Folder to save the file
+        destination: './uploads', 
         filename: (req, file, callback) => {
-          // Ensure the file has a .pdf extension
-          const fileName = `${Date.now()}.pdf`; // You can customize this name
-          callback(null, fileName); // Pass the new filename
+          const fileName = `${Date.now()}.pdf`;
+          callback(null, fileName);
         },
       }),
       fileFilter: (req, file, callback) => {
-        // Only allow PDF files
         if (!file.originalname.match(/\.(pdf)$/)) {
           return callback(new Error('Only PDF files are allowed'), false);
         }
@@ -51,7 +48,7 @@ export class CourseController {
     const course = {
       ...courseData,
       teacher: teacherId,
-      pdf: file ? `http://localhost:3000/uploads/${file.filename}` : null, // PDF URL
+      pdf: file ? `http://localhost:3000/uploads/${file.filename}` : null, 
     };
     return this.courseService.create(course);
   }

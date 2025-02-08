@@ -24,7 +24,7 @@ export class AuthService {
 
   async login(loginDto: LoginDto): Promise<{ token: string }> {
     const { email, password } = loginDto;
-    console.log('Login attempt with email:', email); // Add logging here
+    console.log('Login attempt with email:', email); 
 
     const user = await this.userModel.findOne({ email });
 
@@ -36,7 +36,7 @@ export class AuthService {
     const isPasswordMatched = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatched) {
-      console.log('Password mismatch for email:', email); // Add logging here
+      console.log('Password mismatch for email:', email); 
       throw new UnauthorizedException('Invalid email or password');
     }
 
@@ -52,27 +52,29 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
-  
-    // Ensure password update only when current password is provided
-    if (updateProfileDto.password || updateProfileDto.confirmPassword) {
-      if (!updateProfileDto.currentPassword) {
-        throw new BadRequestException('Current password is required to update the password');
-      }
-  
-      if (updateProfileDto.password !== updateProfileDto.confirmPassword) {
-        throw new BadRequestException('Password and confirm password do not match');
-      }
-  
-      const isPasswordValid = await bcrypt.compare(updateProfileDto.currentPassword, user.password);
+
+    if (updateProfileDto.password !== updateProfileDto.confirmPassword) {
+      throw new BadRequestException(
+        'Password and confirm password do not match',
+      );
+    }
+
+    if (updateProfileDto.currentPassword) {
+      const isPasswordValid = await bcrypt.compare(
+        updateProfileDto.currentPassword,
+        user.password,
+      );
+
       if (!isPasswordValid) {
         throw new BadRequestException('Current password is incorrect');
       }
-  
-      // If current password is valid, hash the new password
-      user.password = await bcrypt.hash(updateProfileDto.password, 10);
+
+      updateProfileDto.password = await bcrypt.hash(
+        updateProfileDto.password,
+        10,
+      );
     }
-  
-    // Proceed to update fields
+
     if (updateProfileDto.username) {
       user.username = updateProfileDto.username;
     }
@@ -80,8 +82,7 @@ export class AuthService {
     if (updateProfileDto.profilePicture) {
       user.profilePicture = updateProfileDto.profilePicture;
     }
-  
-    // Save the updated user to the database
+
     await user.save();
   
     return {
@@ -99,9 +100,8 @@ export class AuthService {
       throw new UnauthorizedException('User not found');
     }
 
-    // Return necessary profile information as ProfileResponseDto
     return {
-      userId: user._id.toString(), // Return the MongoDB _id as userId
+      userId: user._id.toString(), 
       username: user.username,
       email: user.email,
       profilePicture: user.profilePicture,

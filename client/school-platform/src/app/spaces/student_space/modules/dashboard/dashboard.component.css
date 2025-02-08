@@ -8,6 +8,15 @@
   overflow: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.dashboard-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh; /* Full viewport height */
+  overflow-y: auto; /* Enables vertical scrolling when content overflows */
+}
 
 /* Dashboard Container */
 .dashboard-container {

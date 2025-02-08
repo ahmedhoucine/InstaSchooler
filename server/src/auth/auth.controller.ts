@@ -16,7 +16,7 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as path from 'path';
-import { Express, response } from 'express'; // Vérifiez que ce type est correctement importé
+import { Express, response } from 'express'; 
 
 @Controller('auth')
 export class AuthController {
@@ -24,21 +24,21 @@ export class AuthController {
 
   @Post('/login')
   async login(@Body() loginDto: LoginDto): Promise<{ token: string }> {
-    const response = await this.authService.login(loginDto); // Récupère l'objet de réponse contenant le token
-    console.log(response.token); // Affiche le token dans la console
-    return response; // Renvoie l'objet avec le token au client
+    const response = await this.authService.login(loginDto); 
+    console.log(response.token); 
+    return response; 
   }
 
-  @UseGuards(JwtAuthGuard) // Protéger la route de mise à jour du profil
+  @UseGuards(JwtAuthGuard) 
   @Put('profile/:userId')
   @UseInterceptors(
     FileInterceptor('picture', {
       storage: diskStorage({
-        destination: './uploads', // Dossier où les fichiers seront stockés
+        destination: './uploads', 
         filename: (req, file, callback) => {
           const uniqueSuffix =
             Date.now() + '-' + Math.round(Math.random() * 1e9);
-          callback(null, uniqueSuffix + path.extname(file.originalname)); // Créer un nom de fichier unique
+          callback(null, uniqueSuffix + path.extname(file.originalname));
         },
       }),
     }),
@@ -46,32 +46,29 @@ export class AuthController {
   async updateProfile(
     @Param('userId') userId: string,
     @Body() updateProfileDto: UpdateProfileDto,
-    @UploadedFile() picture: Express.Multer.File, // Fichier téléchargé, vérifiez le type ici
-    @Request() req: any, // Récupérer l'utilisateur authentifié depuis la requête
+    @UploadedFile() picture: Express.Multer.File, 
+    @Request() req: any, 
   ) {
     const authenticatedUserId = req.user.id;
 
-    // Vérifier si l'utilisateur authentifié essaie de mettre à jour son propre profil
     if (authenticatedUserId !== userId) {
       throw new Error('Unauthorized to update this profile');
     }
 
-    console.log('Received userId:', userId); // Vérifier l'ID de l'utilisateur
-    console.log('Uploaded file:', picture); // Vérifier le fichier téléchargé
+    console.log('Received userId:', userId); 
+    console.log('Uploaded file:', picture); 
 
-    // Si une image a été téléchargée, ajouter son URL au DTO
     if (picture) {
       updateProfileDto.profilePicture = `http://localhost:3000/uploads/${picture.filename}`;
     }
 
-    // Appeler le service pour mettre à jour le profil
     return await this.authService.updateProfile(userId, updateProfileDto);
   }
 
-  @UseGuards(JwtAuthGuard) // Protéger la route pour récupérer le profil
+  @UseGuards(JwtAuthGuard) 
   @Get('profile')
   async getProfile(@Request() req: any) {
-    const userId = req.user.id; // ID de l'utilisateur récupéré du token JWT
+    const userId = req.user.id;
     return this.authService.getProfile(userId);
   }
 }

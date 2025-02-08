@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CommonModule } from './common/common.module';
@@ -8,7 +7,6 @@ import { StudentModule } from './student/student.module';
 import { TeacherModule } from './teacher/teacher.module';
 import { AuthModule } from './auth/auth.module';
 import { EventsModule } from './events/events.module';
-import { EventsController } from './events/events.controller';
 import { AuthAdminModule } from './auth/admin-auth/auth-admin.module';
 import { TaskModule } from './task/task.module';
 import { TicketModule } from './ticket/ticket.module';
@@ -36,12 +34,12 @@ import { PlanningModule } from './planning/planning.module';
     CourseModule,
     PlanningModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'uploads'), // Path to your uploads folder
-      serveRoot: '/uploads', // URL endpoint for accessing the files
+      rootPath: join(__dirname, '..', 'uploads'), 
+      serveRoot: '/uploads', 
     }),
   ],
 
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}

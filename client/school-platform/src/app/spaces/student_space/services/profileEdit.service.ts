@@ -8,10 +8,10 @@ import { environment } from 'src/environment';
   providedIn: 'root',
 })
 export class ProfileService {
-  private apiUrl = `${environment.apiUrl}/auth`; // Base URL for backend
+  private apiUrl = `${environment.apiUrl}/auth`; 
 
-  private profileSubject = new BehaviorSubject<any>(null); // Stocke les données du profil
-  profile$ = this.profileSubject.asObservable(); // Observable exposé pour les composants
+  private profileSubject = new BehaviorSubject<any>(null); 
+  profile$ = this.profileSubject.asObservable(); 
 
   constructor(private http: HttpClient) {}
 
@@ -26,28 +26,25 @@ export class ProfileService {
     );
   }
 
-  // Fetch the current user's profile
   getProfile(): Observable<any> {
     return this.http.get(`${this.apiUrl}/profile`, {
       headers: this.getAuthHeaders(),
     }).pipe(
-      tap(profile => this.profileSubject.next(profile)) // Mise à jour du BehaviorSubject
+      tap(profile => this.profileSubject.next(profile)) 
     );
   }
 
-  // Update profile
   updateProfile(profile: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/profile/${profile.userId}`, profile, {
       headers: this.getAuthHeaders(),
     }).pipe(
       tap(updatedProfile => {
-        this.profileSubject.next(updatedProfile); // ✅ Push the latest profile update
+        this.profileSubject.next(updatedProfile); 
       })
     );
   }
   
 
-  // Validate current password
   validateCurrentPassword(currentPassword: string): Observable<boolean> {
     return this.http.post<boolean>(
       `${this.apiUrl}/validate-password`,

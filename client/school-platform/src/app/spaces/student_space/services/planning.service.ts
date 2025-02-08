@@ -6,11 +6,10 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class PlanningService {
-  private apiUrl = 'http://localhost:3000/planning'; // Update with your backend URL
+  private apiUrl = 'http://localhost:3000/planning'; 
 
   constructor(private http: HttpClient) {}
 
-  // Fetch planning for a specific student
   getPlanningForStudent(studentId: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/student/${studentId}`).pipe(
       catchError(error => {

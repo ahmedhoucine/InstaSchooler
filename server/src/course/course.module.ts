@@ -10,7 +10,7 @@ import { StudentModule } from '../student/student.module'; // Import du module S
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Course', schema: CourseSchema }]),
-    StudentModule, // Ajoutez StudentModule ici
+    StudentModule, 
 
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'teacher-secret-key',
